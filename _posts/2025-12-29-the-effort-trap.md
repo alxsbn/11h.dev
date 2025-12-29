@@ -8,9 +8,15 @@ excerpt: "AI doesn't just expose worthless tasks. It exposes our century-old con
 
 ## The Effort Illusion
 
-In [this video](https://www.youtube.com/live/y5ZkIDUuHAM?si=FOb7B9Oj-9lug93J), Scott Adams argues that laziness is a cognitive bug: we focus on cost rather than benefit. BJ Fogg's ["tiny habits"](https://www.youtube.com/watch?v=AdKUJxjn-R8) suggests reducing friction to trigger action.
+In [this video](https://www.youtube.com/live/y5ZkIDUuHAM?si=FOb7B9Oj-9lug93J), Scott Adams argues that laziness is a cognitive bug: we focus on cost rather than benefit.
 
-But here's what both miss: **AI doesn't just expose worthless tasks. It exposes our confusion between three fundamentally different things.**
+BJ Fogg's ["tiny habits"](https://www.youtube.com/watch?v=AdKUJxjn-R8) takes this further: reduce friction to trigger action. His classic example: want to floss daily? Start by flossing *one tooth* after brushing. The habit isn't flossing—it's starting. Once the toothbrush is in your hand, the marginal cost of flossing one tooth is near zero. Behavior follows.
+
+**Fogg's insight: friction prevents initiation. Remove friction, unlock behavior.**
+
+But here's the question neither Adams nor Fogg fully address: **What happens when friction drops to absolute zero?**
+
+AI just did that. And it doesn't just expose worthless tasks—it exposes our century-old confusion between three fundamentally different things.
 
 ## Three Things We Conflated
 
