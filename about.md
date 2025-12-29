@@ -21,7 +21,7 @@ Welcome to my personal blog where I write about passions and projects I'm workin
 Feel free to reach out or follow me:
 
 - GitHub: [@alxsbn](https://github.com/alxsbn)
-- Email: (mailto:alexis.blandin@gmail.com) 
+- Email: [alexis.blandin@gmail.com](mailto:alexis.blandin@gmail.com) 
 - LinkedIn: [@alexisblandin](https:://www.linkedin.com/in/alexisblandin)
 - Instagram: [@alxsblandin](https://www.instagram.com/alexisblandin) 
 
