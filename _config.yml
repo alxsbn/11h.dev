@@ -1,7 +1,8 @@
 # Site settings
 title: 11h.dev
-description: My personal blog
+description: Personal blog about tech, code, and ideas
 author: alxsbn
+email: your-email@example.com  # Update with your email
 
 # Build settings
 markdown: kramdown
@@ -14,6 +15,22 @@ url: "https://11h.dev"
 # Permalink structure
 permalink: /:year/:month/:day/:title/
 
+# Minima theme customization
+minima:
+  skin: auto  # auto, dark, classic, solarized, solarized-dark
+  social_links:
+    - { platform: github, user_url: "https://github.com/alxsbn" }
+    # - { platform: twitter, user_url: "https://twitter.com/your-username" }
+    # - { platform: linkedin, user_url: "https://linkedin.com/in/your-username" }
+
+# Show post excerpts on home page
+show_excerpts: true
+
+# Header pages (navigation)
+header_pages:
+  - about.md
+  - index.md
+
 # Exclude from processing
 exclude:
   - README.md
@@ -22,8 +39,14 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+  - .github
 
 # Plugins
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Feed settings
+feed:
+  path: feed.xml
