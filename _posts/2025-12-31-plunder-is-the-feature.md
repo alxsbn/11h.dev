@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Pike, Leonardo, and Eternal Plunder"
+title: "Plunder Is the Feature"
 date: 2025-12-31
 categories: ai history philosophy
 excerpt: "Rob Pike screams theft. History yawns."
