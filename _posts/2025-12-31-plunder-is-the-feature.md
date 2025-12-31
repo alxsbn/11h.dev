@@ -10,6 +10,8 @@ Christmas 2025. Rob Pike, co-creator of Go, UTF-8, Plan 9, [receives an email](h
 
 His response: "Fuck you people. Raping the planet while having your vile machines thank me."
 
+## The Louvre, 1885
+
 I was watching a documentary on Félix Vallotton the other day. In 1885, he's twenty years old. His father's pension has just been cut. To survive in Paris, he makes copies at the Louvre (Holbein, Dürer, Poussin) which he sells to collectors.
 
 In his Journal, after visiting the galleries: "I just saw Poussin's Coriolanus. It is splendid, a magnificent organ song; the colors, written in delimited forms, ring out like bells in full peal."
@@ -21,6 +23,8 @@ Leonardo was plundered by Raphael, Dürer, entire generations. We call it art hi
 Pike built Go on C, Pascal, Oberon. Plan 9 on Unix. Paid by Bell Labs, then Google for 17 years. He never sent a cent to Ken Thompson.
 
 The difference between Vallotton at the Louvre and GPT on GitHub? Leonardo was dead. Pike is alive. He can scream. That's all.
+
+## Not a Bug, a Feature
 
 Plunder isn't a bug. It's the engine of history.
 
@@ -37,6 +41,8 @@ What changes in history is never the plunder. It's who gets to plunder, and who 
 When monks copy manuscripts: noble preservation. When Google scans books: outright theft.
 
 Pike is outraged. Not because the rules have changed. Because he woke up on the wrong side of the table.
+
+## Follow the Money
 
 The real issue is money. When Pike copied, AT&T then Google captured the value. When AI copies, OpenAI and Anthropic capture the value. It's a war between capitalists disguised as an ethical debate.
 
