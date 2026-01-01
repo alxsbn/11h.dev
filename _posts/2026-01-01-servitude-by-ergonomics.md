@@ -22,7 +22,7 @@ Not understanding becomes rational. Ignorance is no longer a fault — it's an o
 
 You don't give up. You vibe.
 
-The "YOLO" mode of Claude Code is the sketch of this. You let the machine do it, you approve without reading, you trust by default. Not out of submission, but comfort. It's faster. And it works — until it doesn't. And that day, you no longer have the grip to diagnose.
+Claude Code's "YOLO" mode is the sketch of this. You let the machine do it, you approve without reading, you trust by default. Not out of submission, but comfort. It's faster. And it works — until it doesn't. And that day, you no longer have the grip to diagnose.
 
 The formative error disappears. If the machine gets it right the first time, you don't learn why. Error is what reveals reality — what resists, what jams. Without ever having broken a pipeline, you don't know why it holds.
 
