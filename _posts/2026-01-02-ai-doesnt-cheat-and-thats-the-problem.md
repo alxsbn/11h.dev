@@ -1,9 +1,15 @@
 ---
 layout: post
 title: "AI doesn't cheat (and that's the problem)"
-date: 2026-01-01
+date: 2026-01-02
 categories: [AI, philosophy, work, automation]
 excerpt: "AI does what it's told. That's its strength and its limit. It bridges the technical gap but the political gap — knowing when a rule is absurd — it doesn't see."
+header_image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1600&q=80"
+header_image_alt: "Computer screen displaying lines of code"
+header_image_credit: "Chris Ried"
+header_image_credit_url: "https://unsplash.com/@cdr6934"
+header_image_source: "Unsplash"
+header_image_source_url: "https://unsplash.com"
 ---
 
 AI does what it's told. That's its strength and its limit.
