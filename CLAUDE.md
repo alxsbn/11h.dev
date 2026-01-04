@@ -1,75 +1,74 @@
-# CLAUDE.md - Blog Information
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Overview
-**11h.dev** is a personal notes website and blog by Alexis Blandin (alxsbn) for sharing thoughts on ideas and passions.
 
-## Technical Stack
-- **Platform**: Jekyll static site generator
-- **Theme**: Minima (auto skin)
-- **Markdown**: Kramdown
-- **Hosting**: GitHub Pages
-- **Domain**: https://11h.dev
+**11h.dev** is a personal notes website and blog by Alexis Blandin (alxsbn). Jekyll static site hosted on GitHub Pages.
 
-## Blog Structure
+## Development Commands
 
-### Content Organization
-- **Posts**: Located in `_posts/` directory
-- **Naming Convention**: `YYYY-MM-DD-title-slug.md`
-- **Permalink Structure**: `/:year/:month/:day/:title/`
+```bash
+# Local development (requires Jekyll installed)
+bundle exec jekyll serve --livereload
 
-### Post Format
-All posts must include front matter with:
+# Build site locally
+bundle exec jekyll build
+
+# Check for Jekyll config issues
+bundle exec jekyll doctor
+```
+
+Deployment is automatic via GitHub Actions on push to `main`.
+
+## Creating Blog Posts
+
+### File Location & Naming
+- Posts go in `_posts/` directory
+- Filename format: `YYYY-MM-DD-title-slug-in-kebab-case.md`
+
+### Required Front Matter
 ```yaml
 ---
 layout: post
 title: "Post Title"
 date: YYYY-MM-DD
-categories: [category1, category2]
-excerpt: "Short description for preview"
+categories: category1 category2
+excerpt: "Short, punchy preview text"
 ---
 ```
 
-## Author Information
-- **Name**: Alexis Blandin (alxsbn)
-- **Email**: alexis.blandin@gmail.com
-- **GitHub**: https://github.com/alxsbn
-- **LinkedIn**: https://linkedin.com/in/alexisblandin
-- **Instagram**: https://www.instagram.com/alxisblandin
+### Key Rules
+- Headings start at `##` (h2) since title is h1
+- **Never use `---` separators** in article body (only in front matter)
+- Excerpt must match article language (English article → English excerpt)
+- Reuse existing categories: `ai`, `productivity`, `coding`, `data`, `testing`, `marketing`, `digital`, `work`, `tech`
 
-## Site Configuration
-- **Base URL**: ""
-- **URL**: https://11h.dev
-- **Excerpts**: Enabled on home page
-- **Social Links**: GitHub, Instagram, LinkedIn
+## Claude Skills
 
-## Navigation
-Header pages:
-- Home (index.md)
-- About (about.md)
+Three skills are available in `.claude/skills/`:
 
-## Plugins
-- jekyll-feed (RSS feed at /feed.xml)
-- jekyll-seo-tag (SEO optimization)
-- jekyll-sitemap (sitemap generation)
-
-## Content Guidelines
-- **Primary Language**: English
-- **Topics**: Ideas, passions, reflections, AI, productivity, philosophy
-- **Style**: Personal, thoughtful, analytical
+| Skill | Purpose |
+|-------|---------|
+| `jekyll-blog-post` | Create properly formatted posts with correct front matter |
+| `impactful-writing` | Polish articles for flow, punch, and impact |
+| `git-branch-management` | Handle branch naming and workflows |
 
 ## Git Workflow
-- **Main Branch**: (default branch for production)
-- **Feature Branches**: Use `claude/feature-name-sessionID` format
-- Always commit with descriptive messages
-- Push to feature branches before merging
 
-## Current Articles (as of 2025-12-29)
-1. "The Effort Trap: What AI Really Reveals About Work" (English)
-2. "Le piège de l'effort" (French version)
-3. "Laziness as a Revealer" (English, shorter version)
-4. "La flemme comme révélateur" (French, shorter version)
+- **Branch naming**: `claude/<descriptive-name>-<sessionID>`
+- **Main branch**: `main` (production)
+- Push to feature branches, then PR to main
 
-## Notes
-- Blog accepts both English and French content
-- Focus on quality over quantity
-- Articles explore philosophical and practical aspects of technology, work, and human behavior
+## Site Configuration
+
+- **URL**: https://11h.dev
+- **Theme**: Minima (auto skin)
+- **Markdown**: Kramdown
+- **Permalinks**: `/:year/:month/:day/:title/`
+
+## Content Guidelines
+
+- Primary language: English (French also accepted)
+- Style: Personal, thoughtful, analytical
+- Topics: AI, productivity, philosophy, technology, work culture

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "What Artists Know About AI"
-date: 2026-01-03
-categories: [art, ai, creativity]
+date: 2026-01-13
+categories: ai productivity work
 excerpt: "What urban sketching taught me about letting AI run for hours. The skill nobody talks about: letting go."
 ---
 
-Every Saturday morning in Orléans, a group gathers with sketchbooks. Some are architects. Some haven't drawn since high school. They're all here for [Urban Sketchers](https://urbansketchers.org/)—and they all face the same challenge.
+Twice a month in Orléans, a group gathers with sketchbooks. Some are artists. Some haven't drawn since elementary school. They're all here for [Urban Sketchers](https://urbansketchers.org/)—and they all face the same challenge.
 
 It's not perspective. It's not color mixing.
 
@@ -17,6 +17,10 @@ It's **letting go**.
 New sketchers want to control everything. They reach for the eraser. They restart when a line goes wrong. They freeze, pencil hovering, afraid to commit.
 
 The experienced sketcher? They embrace the "wrong" line. They work with accidents. They trust the process.
+
+Hokusai, at 75, after a lifetime of drawing:
+
+> "From the age of six, I had a passion for copying the form of things and since the age of fifty I have published many drawings, yet of all I drew by my seventieth year there is nothing worth taking into account."
 
 The difference isn't talent. It's **productive discomfort**—the ability to keep moving when you don't control the outcome.
 
@@ -79,19 +83,3 @@ It's something else: **human + autonomous AI as collaborative medium**.
 Like a jazz duo, but your partner has trained on everything ever written. Like contact improvisation, but your partner never tires and has infinite patience.
 
 The human role shifts from *executor* to *composer of constraints*. You design the system, set the boundaries, then... let go.
-
-## The skill issue
-
-In a [previous post](/2025/12/30/the-10x-is-here-its-a-skill-issue/), I argued the 10x developer boost from AI is real—but it's a skill issue.
-
-I now think the skill is simpler than I thought.
-
-It's not prompt engineering. It's not system design. It's not even taste.
-
-It's the same skill that separates the frozen beginner from the flowing sketcher:
-
-**The willingness to be productively uncomfortable.**
-
----
-
-*I organize [Urban Sketchers Orléans](https://www.instagram.com/uskorleans/). Every session reminds me that the best work happens when you stop trying to control everything. Turns out, that applies to code too.*
