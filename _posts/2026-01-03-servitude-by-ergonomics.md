@@ -1,9 +1,15 @@
 ---
 layout: post
 title: "Servitude by Ergonomics"
-date: 2026-01-01
+date: 2026-01-03
 categories: ai philosophy work
 excerpt: "Modern servitude no longer needs constraint. It works through comfort."
+header_image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1600&q=80"
+header_image_alt: "Minimal workspace with laptop on clean desk"
+header_image_credit: "Alejandro Escamilla"
+header_image_credit_url: "https://unsplash.com/@alejandroescamilla"
+header_image_source: "Unsplash"
+header_image_source_url: "https://unsplash.com"
 ---
 
 La Boétie asked a simple question: why do people obey tyrants they could overthrow? His answer: servitude is voluntary. The subject chooses to serve. Therefore, they can awaken.

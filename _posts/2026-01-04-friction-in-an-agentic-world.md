@@ -1,8 +1,15 @@
 ---
 layout: post
 title: "Friction in an Agentic World"
-date: 2026-01-01
+date: 2026-01-04
 categories: ai productivity philosophy
+excerpt: "Reintroducing friction isn't a bug. It's a political choice. The cost of friction is lower than the cost of fragility."
+header_image: "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=1600&q=80"
+header_image_alt: "Close-up of mechanical gears and clockwork mechanism"
+header_image_credit: "Laura Ockel"
+header_image_credit_url: "https://unsplash.com/@viazavier"
+header_image_source: "Unsplash"
+header_image_source_url: "https://unsplash.com"
 ---
 
 Reintroducing friction isn't a bug. It's a **political choice**.
