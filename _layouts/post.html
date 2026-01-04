@@ -3,25 +3,6 @@ layout: base
 ---
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-  {%- if page.header_image %}
-  <figure class="post-header-image">
-    <img src="{{ page.header_image }}" alt="{{ page.header_image_alt | default: page.title }}" itemprop="image">
-    {%- if page.header_image_credit %}
-    <figcaption>
-      Photo by
-      {%- if page.header_image_credit_url %}
-      <a href="{{ page.header_image_credit_url }}" target="_blank" rel="noopener">{{ page.header_image_credit }}</a>
-      {%- else %}
-      {{ page.header_image_credit }}
-      {%- endif %}
-      {%- if page.header_image_source %}
-      on <a href="{{ page.header_image_source_url | default: 'https://unsplash.com' }}" target="_blank" rel="noopener">{{ page.header_image_source | default: 'Unsplash' }}</a>
-      {%- endif %}
-    </figcaption>
-    {%- endif %}
-  </figure>
-  {%- endif %}
-
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <div class="post-meta">
@@ -50,6 +31,25 @@ layout: base
       {%- endif %}
     </div>
   </header>
+
+  {%- if page.header_image %}
+  <figure class="post-header-image">
+    <img src="{{ page.header_image }}" alt="{{ page.header_image_alt | default: page.title }}" itemprop="image">
+    {%- if page.header_image_credit %}
+    <figcaption>
+      Photo by
+      {%- if page.header_image_credit_url %}
+      <a href="{{ page.header_image_credit_url }}" target="_blank" rel="noopener">{{ page.header_image_credit }}</a>
+      {%- else %}
+      {{ page.header_image_credit }}
+      {%- endif %}
+      {%- if page.header_image_source %}
+      on <a href="{{ page.header_image_source_url | default: 'https://unsplash.com' }}" target="_blank" rel="noopener">{{ page.header_image_source }}</a>
+      {%- endif %}
+    </figcaption>
+    {%- endif %}
+  </figure>
+  {%- endif %}
 
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
