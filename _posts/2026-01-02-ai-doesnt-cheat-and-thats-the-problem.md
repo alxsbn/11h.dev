@@ -2,7 +2,7 @@
 layout: post
 title: "AI doesn't cheat (and that's the problem)"
 date: 2026-01-02
-categories: [AI, philosophy, work, automation]
+categories: ai philosophy work
 excerpt: "AI does what it's told. That's its strength and its limit. It bridges the technical gap but the political gap — knowing when a rule is absurd — it doesn't see."
 header_image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1600&q=80"
 header_image_alt: "Computer screen displaying lines of code"
