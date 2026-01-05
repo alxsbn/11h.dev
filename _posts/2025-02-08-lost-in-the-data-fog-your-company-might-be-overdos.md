@@ -3,7 +3,7 @@ layout: post
 title: "Lost in the Data Fog? Your Company Might Be Overdosing"
 date: 2025-02-08
 categories: [data, tech]
-excerpt: "Everyone wants to be "data-driven," but no one talks about the dangers of analytical overdose. Too much data, more confusion, zero impact…"
+excerpt: 'Everyone wants to be "data-driven," but no one talks about the dangers of analytical overdose. Too much data, more confusion, zero impact…'
 lang: en
 header_image: "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?w=1600&q=80"
 header_image_alt: "Fog over a landscape"

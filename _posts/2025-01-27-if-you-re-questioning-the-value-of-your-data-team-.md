@@ -3,7 +3,7 @@ layout: post
 title: "If You're Questioning the Value of Your Data Team, You're Asking the Wrong Question"
 date: 2025-01-27
 categories: [data, work, tech]
-excerpt: "If a colleague, a C-level or just you're (spoiler alert: it's a good News) is asking "What is the value of the data team?" it signals most…"
+excerpt: 'If a colleague, a C-level or just you''re (spoiler alert: it''s a good News) is asking "What is the value of the data team?" it signals most…'
 lang: en
 header_image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80"
 header_image_alt: "Team collaboration"
