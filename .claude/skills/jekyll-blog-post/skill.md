@@ -46,7 +46,44 @@ excerpt: "Short, punchy preview text for the home page"
   - If article is in English → excerpt in English
   - If article is in French → excerpt in French
   - Language of title is irrelevant, follow the content language
+  - **YAML QUOTING**: See "YAML String Quoting" section below
 - **lang**: Only if non-English (e.g., `lang: fr`)
+
+### YAML String Quoting (CRITICAL)
+
+**Problem**: YAML strings with quotes inside break parsing and cause posts to render without titles.
+
+**Rules for excerpts and titles containing quotes:**
+
+```yaml
+# ❌ BROKEN - Double quotes inside double quotes
+excerpt: "Everyone wants to be "data-driven," but..."
+
+# ✅ CORRECT - Single quotes outside, double quotes inside
+excerpt: 'Everyone wants to be "data-driven," but...'
+
+# ❌ BROKEN - Single quotes (apostrophes) inside single quotes
+excerpt: 'It's a problem when you're asking...'
+
+# ✅ CORRECT - Escape apostrophes by doubling them
+excerpt: 'It''s a problem when you''re asking...'
+```
+
+**Quick Reference:**
+
+| Content has... | Use outer... | Escape inner... |
+|----------------|--------------|-----------------|
+| Double quotes `"..."` | Single quotes `'...'` | Nothing needed |
+| Apostrophes `it's` | Single quotes `'...'` | Double them `''` |
+| Both quotes and apostrophes | Single quotes `'...'` | Double apostrophes `''` |
+
+**Example with both:**
+```yaml
+# Content: He said "it's fine" but you're wrong
+excerpt: 'He said "it''s fine" but you''re wrong'
+```
+
+**Validation**: Always validate YAML after creating front matter (see Workflow section).
 
 ### Category Format
 
@@ -240,11 +277,28 @@ Read these 5 posts and extract:
 
 Create the file with proper front matter based on user content.
 
-### Step 3: Validate Format
+### Step 3: Validate YAML
 
-After creation:
+**CRITICAL**: Always validate YAML syntax before committing. Use this Python snippet:
+
+```bash
+python3 -c "
+import yaml
+with open('_posts/YYYY-MM-DD-your-post.md', 'r') as f:
+    content = f.read()
+    parts = content.split('---', 2)
+    try:
+        fm = yaml.safe_load(parts[1])
+        print('✓ Valid YAML')
+        print(f'  title: {fm.get(\"title\", \"MISSING\")}')
+    except Exception as e:
+        print(f'✗ YAML ERROR: {e}')
+"
+```
+
+After validation:
 - Check filename matches pattern
-- Verify front matter parses correctly
+- Verify front matter parses correctly (title visible)
 - Ensure categories are consistent
 
 ### Step 4: Invoke Writing Skill
@@ -264,6 +318,7 @@ Use the impactful-writing skill to polish this article
 ❌ **Underscores in filename**: `my_post.md` instead of `my-post.md`
 ❌ **Wrong heading levels**: Starting with `#` instead of `##`
 ❌ **Unquoted YAML strings with colons**: Break parsing
+❌ **Unescaped quotes in excerpts**: `excerpt: "be "data-driven""` breaks YAML - use single quotes outside
 
 ## Jekyll-Specific Notes
 
