@@ -12,7 +12,7 @@ header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ---
 
-Work doesn't function as prescribed. It functions because people cheat—adapt, work around, interpret. This is what psychiatrist Christophe Dejours calls "living work." The work-to-rule strike proves it: follow the rules to the letter, everything stops.
+Work doesn't function as prescribed. It functions because people cheat, adapt, work around, interpret. This is what psychiatrist Christophe Dejours calls "living work." The work-to-rule strike proves it: follow the rules to the letter, everything stops.
 
 AI doesn't cheat. It executes. Perfectly.
 
