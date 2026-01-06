@@ -1,0 +1,77 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+
+      "WebFetch(domain:11h.dev)",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:images.unsplash.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:pages.github.com)",
+
+      "Skill(unsplash-header-images)",
+
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(curl:*)",
+      "Bash(xargs:*)",
+
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git fetch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git reset:*)",
+      "Bash(git stash:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git cherry-pick:*)",
+
+      "Bash(gh pr:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh repo:*)",
+
+      "Bash(jekyll:*)",
+      "Bash(bundle:*)",
+      "Bash(gem:*)",
+      "Bash(ruby:*)",
+
+      "Bash(python3:*)",
+      "Bash(python:*)"
+    ],
+
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(rm -r /*)",
+      "Bash(rm -rf /)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard HEAD~*)",
+      "Bash(git clean -fd:*)",
+      "Bash(git config:*)",
+      "Bash(chmod 777:*)",
+      "Bash(sudo:*)",
+      "Bash(curl * | bash)",
+      "Bash(curl * | sh)",
+      "Bash(wget * | bash)",
+      "Bash(> /dev/sda*)",
+      "Bash(mkfs:*)",
+      "Bash(dd if=*)",
+      "Bash(:(){ :|:& };:)",
+      "Bash(*> /etc/*)",
+      "Bash(cat /etc/passwd)",
+      "Bash(cat /etc/shadow)"
+    ]
+  }
+}
