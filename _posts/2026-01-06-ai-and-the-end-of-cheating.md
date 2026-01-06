@@ -22,7 +22,7 @@ This series explores what happens when you eliminate the spaces for intelligent 
 
 1. **[The Cheating That Makes the World Run](/2026/01/01/the-cheating-that-makes-the-world-run/)**: Why organizations hold together through what they officially forbid.
 
-2. **[AI Doesn't Cheat (And That's the Problem)](/2026/01/02/ai-doesnt-cheat-and-thats-the-problem/)** :Technical gap vs political gap. Who decides when the rule is absurd?
+2. **[AI Doesn't Cheat (And That's the Problem)](/2026/01/02/ai-doesnt-cheat-and-thats-the-problem/)**: Technical gap vs political gap. Who decides when the rule is absurd?
 
 3. **[Servitude by Ergonomics](/2026/01/03/servitude-by-ergonomics/)**: Beyond La Boétie: a servitude that no longer needs ideology.
 
