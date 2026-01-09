@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Apple Pie Test"
-date: 2026-01-09
+date: 2026-01-14
 categories: ai philosophy work series
 excerpt: "A consultant hid cooking recipes in technical documentation. No one ever noticed. AI agents would."
 header_image: "https://images.unsplash.com/photo-1568667256549-094345857637?w=1600&q=80"
@@ -12,13 +12,13 @@ header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ---
 
-Years ago, I met a Z-System guru during a mission at a bank. The man had spent decades writing technical documentation for mainframe systems—thousands of pages that the client paid handsomely for.
+Years ago, I met a Z-System guru who working for IBM during a mission at a bank. The man had spent decades writing technical documentation for mainframe systems. Thousands of pages that the client paid handsomely for.
 
-His trick? He buried cooking recipes in the middle of it. Apple pie. Beef bourguignon. Chocolate soufflé.
+His trick? He buried cooking recipes in the middle of it. Apple pie. Beef bourguignon. Crêpes. 
 
-No one ever mentioned them.
+Most of the time, no one ever mentioned them.
 
-Not once. Not in years. The documentation sat on shelves, referenced in contracts, cited in audits, but never actually *read*. The recipes were his private proof of a public lie: everyone pretended the work had been reviewed.
+The documentation sat on shelves, referenced in contracts, cited in audits, but never actually *read*. The recipes were his private proof of a public lie: everyone pretended the work had been reviewed.
 
 ## The universal cheat
 
@@ -44,7 +44,7 @@ This is its honesty. And it's devastating.
 
 ## What the recipe revealed
 
-The Z-System guru wasn't just testing whether people read. He was measuring the gap between what organizations say they do and what they actually do.
+The Z-System guy wasn't just testing whether people read. He was measuring the gap between what organizations say they do and what they actually do.
 
 That gap is where work happens. Where judgment lives. Where humans decide—collectively, implicitly—what matters and what doesn't. The apple pie test revealed that documentation review *didn't matter*. Not really. Whatever the official process said.
 
@@ -56,7 +56,7 @@ An AI agent reads the document, not the room.
 
 When the agent finds the recipe, it doesn't just flag a mistake. It exposes the cheat. It makes visible the informal agreement that kept the system stable.
 
-Suddenly, the client has to answer: *Why wasn't this caught before?* The answer—"because no one ever reads these"—is true but unspeakable. So instead there's blame, process revision, new controls. More theater to paper over the exposed gap.
+Suddenly, the client has to answer: *Why wasn't this caught before?* The answer will be "because no one ever reads these" = true but unspeakable. So instead there's blame, process revision, new controls. More theater to paper over the exposed gap.
 
 The agent didn't cheat. And in not cheating, it broke something that worked.
 
@@ -68,7 +68,7 @@ But humans still can. And still must.
 
 The question becomes: who manages the translation? Who teaches the agent which rules are real and which are ritual? Who decides when perfect compliance would be organizational suicide?
 
-The guru could hide recipes because he understood which documents were decorative. That knowledge was tacit, earned, unteachable. And now it's more valuable than ever—because someone needs to protect the organization from its own honest machines.
+The guru could hide recipes because he understood which documents were decorative. That knowledge was tacit, earned, unteachable. And now it's more valuable than ever because someone needs to protect the organization from its own honest machines.
 
 ## The recipe remains
 
@@ -77,5 +77,3 @@ Somewhere, in some archive, there's still a mainframe manual with instructions f
 It sits there as proof: systems have always run on selective blindness. On the agreement to not see what doesn't need to be seen.
 
 AI sees everything. Whether we're ready for that or not.
-
-*Part of a series on [AI and the End of Cheating](/2026/01/06/ai-and-the-end-of-cheating/).*
