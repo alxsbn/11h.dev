@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Transparency for Whom?"
-date: 2026-01-10
+date: 2026-01-15
 categories: ai philosophy work series
 excerpt: "AI agents can't lie. But who controls what they see? Honesty becomes mandatory for some, optional for others."
 header_image: "https://images.unsplash.com/photo-1509822929063-6b6cfc9b42f2?w=1600&q=80"
@@ -12,7 +12,7 @@ header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ---
 
-The [apple pie test](/2026/01/09/the-apple-pie-test/) worked because the cheat was symmetric. Everyone pretended. The consultant pretended to deliver useful documentation. The client pretended to read it. Both sides knew. Both sides benefited from not knowing officially.
+The [apple pie test](/2026/01/14/the-apple-pie-test/) worked because the cheat was symmetric. Everyone pretended. The consultant pretended to deliver useful documentation. The client pretended to read it. Both sides knew. Both sides benefited from not knowing officially.
 
 AI agents break this symmetry. They can't pretend. They read every page, flag every anomaly, report every discrepancy. They are radically, incorruptibly honest.
 
@@ -24,7 +24,7 @@ When an AI agent reviews your work, it sees everything. Every shortcut, every wo
 
 But you don't see the agent's instructions. You don't know what it was told to look for. You don't know what it reports, to whom, in what format. The agent is transparent *about* you, not *to* you.
 
-This is the new asymmetry. Operational workers become legible—their cheats exposed, their shortcuts flagged. But those who configure the agents remain opaque. They decide what counts as a discrepancy. They define what gets escalated and what gets ignored.
+This is the new asymmetry. Operational workers become legible. Their cheats exposed, their shortcuts flagged. But those who configure the agents remain opaque. They decide what counts as a discrepancy. They define what gets escalated and what gets ignored.
 
 The apple pie consultant could hide recipes because everyone was equally blind. Now, some people see everything while remaining unseen.
 
@@ -84,5 +84,3 @@ The new test is different: Can you hide the equivalent of a recipe in the *instr
 The answer, today, is yes. Easily.
 
 The agent can't cheat. But it can be aimed. And aiming is the new cheating—just for those who hold the compass.
-
-*Part of a series on [AI and the End of Cheating](/2026/01/06/ai-and-the-end-of-cheating/).*
