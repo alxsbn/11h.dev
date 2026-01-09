@@ -101,7 +101,7 @@ Header pages:
 - jekyll-sitemap (sitemap generation)
 
 ## Content Guidelines
-- **Primary Language**: English
+- **Language**: Always write blog posts in **English**, even if the user provides input in French. Translate and adapt the content.
 - **Topics**: Ideas, passions, reflections, AI, productivity, philosophy
 - **Style**: Personal, thoughtful, analytical
 
@@ -118,6 +118,5 @@ Header pages:
 4. "La flemme comme révélateur" (French, shorter version)
 
 ## Notes
-- Blog accepts both English and French content
 - Focus on quality over quantity
 - Articles explore philosophical and practical aspects of technology, work, and human behavior
