@@ -36,7 +36,7 @@ The data teams that survive will be those that switch to **direct value delivery
 
 ## Data Quality Becomes Critical
 
-With the inversion of the testing pyramid, data quality takes on a new dimension. We no longer test to validate columns—we test to guarantee **agent determinism**.
+With the [inversion of the testing pyramid](/2025/12/20/inverting-the-data-testing-pyramid-optimizing-for-time-to-insight/), data quality takes on a new dimension. We no longer test to validate columns—we test to guarantee **agent determinism**.
 
 An agent that responds differently to the same question depending on timing is an unusable agent. DQ is no longer a compliance or best practice topic. It's a functional prerequisite.
 
