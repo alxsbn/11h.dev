@@ -10,7 +10,7 @@ Twice a month in Orléans, a group gathers with sketchbooks for [Urban Sketchers
 
 New sketchers want to control everything. They reach for the eraser. They freeze, afraid to commit. The experienced sketcher? They embrace the "wrong" line. They work with accidents. They trust the process.
 
-Developers have the same problem. We want to see every line. The idea of letting an AI write code for hours, unsupervised? Terrifying. Yet Boris Cherny, creator of Claude Code, [shared his stats](https://x.com/bcherny/status/2004626064187031831): 259 PRs, 40k lines added in 30 days—all written by Claude running autonomously.
+Developers have the same problem. We want to see every line. The idea of letting an AI write code for hours, unsupervised? Terrifying. Yet Boris Cherny, creator of Claude Code, [shared his stats](https://x.com/bcherny/status/2004626064187031831): 259 PRs, 40k lines added in 30 days - all written by Claude running autonomously.
 
 The skill isn't prompting. It's **letting go**.
 
@@ -26,6 +26,6 @@ Jazz improvisation. Pollock's gesture painting. Cartier-Bresson's "decisive mome
 
 ## A new medium
 
-Each technology—photography, cinema, digital art—required artists to develop new relationships with control. What's emerging now isn't "AI makes art." It's **human + autonomous AI as collaborative medium**.
+Each technology - photography, cinema, digital art - required artists to develop new relationships with control. What's emerging now isn't "AI makes art." It's **human + autonomous AI as collaborative medium**.
 
 The human role shifts from *executor* to *composer of constraints*. You design the system, set the boundaries, then... let go.
