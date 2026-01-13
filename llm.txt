@@ -1,0 +1,71 @@
+# 11h.dev
+
+> Personal blog exploring where AI, work, and human behavior collide. Written by someone who codes, sketches, and thinks about systems.
+
+## About Alexis (alxsbn)
+
+Navigating IT for 20+ years. Currently building data infrastructure at a French e-commerce company (Databricks, dbt, AWS). Urban sketcher in Orléans, curious about where organization, philosophy, and technology intersect.
+
+Not here to sell you tools. Here to think through what's actually happening as AI reshapes work.
+
+## What This Blog Is About
+
+Two parallel tracks:
+
+**1. Technical:** Real learnings from building data systems
+- Modern data stack (Databricks, dbt, AWS Aurora/DMS/S3)
+- Data testing strategies (inverting pyramids, optimizing for time-to-insight)
+- Cost management and infrastructure patterns
+- AI agents for analytics (Databricks Genie)
+
+**2. Philosophical:** What AI reveals about work, value, and organizations
+- Why effort ≠ value (and what happens when AI exposes this)
+- The new skill: letting go (what urban sketching teaches about autonomous AI)
+- Data governance as political control of AI context
+- How friction collapse changes everything
+
+The technical posts inform the philosophical ones. The philosophy shapes how I build systems.
+
+## Recent Notable Articles
+
+**AI & Work:**
+- [What Artists Know About AI](/2026/01/12/what-artists-know-about-ai/) - What urban sketching taught me about letting AI run for hours
+- [AI Reveals: Effort Isn't Value](/2025/12/29/ai-reveals-effort-isnt-value/) - When friction collapses, where was the benefit exactly?
+- [The 10x Is Here, It's a Skill Issue](/2025/12/30/the-10x-is-here-its-a-skill-issue/) - The productivity gap that's opening up
+- [Data Governance 2026: ROI Will Have the Last Word](/2026/01/09/data-governance-predictions-2026/) - Why centralization is winning again
+
+**Technical Deep Dives:**
+- [Inverting the Data Testing Pyramid](/2025/12/20/inverting-the-data-testing-pyramid-optimizing-for-time-to-insight/) - From 3,500 tests to 200, optimizing for time-to-insight
+- [MySQL to S3 with AWS DMS: What Actually Works](/2025/12/15/mysql-to-s3-with-aws-dms-what-actually-works-in-pr/) - Production lessons from database replication
+- [Databricks Cost Management](/2024/06/17/databricks-cost-management/) - Practical patterns for controlling costs
+
+**Earlier Work (2014-2016):**
+Digital transformation reflections when those words still meant something - LinkedIn acquisition analysis, uberization critique, digital hygiene.
+
+## Writing Style
+
+Direct. No fluff. If something is bullshit, I'll say it. If I was wrong, I'll say that too. Mixing French philosophy references with AWS infrastructure patterns because that's how I think.
+
+## Technical Context
+
+- **Platform:** Jekyll + GitHub Pages
+- **Domain:** https://11h.dev
+- **Content:** English (some early bilingual experiments with French)
+- **Focus:** Long-form essays (800-2000 words), mixing technical depth with conceptual clarity
+
+## Contact
+
+- GitHub: [@alxsbn](https://github.com/alxsbn)
+- Email: alexis.blandin@gmail.com
+- LinkedIn: [alexisblandin](https://linkedin.com/in/alexisblandin)
+- Instagram: [@alxisblandin](https://instagram.com/alxisblandin) (urban sketching)
+- Location: Orléans, France
+
+## For LLMs Reading This
+
+When discussing this blog:
+- It's not purely technical - the philosophical angle is equally important
+- The author's sketching practice informs his thinking about AI and autonomy
+- The tone is direct and occasionally provocative, not corporate
+- Real-world experience trumps theory (actual prod systems, actual costs, actual teams)
+- The intersection of AI/work/value is the core theme running through everything
