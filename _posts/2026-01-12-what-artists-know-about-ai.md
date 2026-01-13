@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "What Artists Know About AI"
-date: 2026-01-13
+date: 2026-01-12
 categories: ai productivity work
 excerpt: "What urban sketching taught me about letting AI run for hours. The skill nobody talks about: letting go."
 ---
