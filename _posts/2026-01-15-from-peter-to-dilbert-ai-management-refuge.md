@@ -56,4 +56,4 @@ Peter described the rise toward incompetence. Adams, the refuge in incompetence.
 
 ---
 
-*In memoriam: Scott Adams (1957-2026). While copyright restrictions prevent including actual Dilbert comics, his decades of satirical work capturing the absurdities of corporate life leaves a lasting legacy. The Dilbert Principle, formulated in 1995, proved prescient—and now, as AI transforms management, his insights reveal yet another layer of truth.*
+*In memoriam: Scott Adams (1957-2026). His decades of satirical work capturing the absurdities of corporate life leaves a lasting legacy. The Dilbert Principle, formulated in 1995, proved prescient—and now, as AI transforms management, his insights reveal yet another layer of truth.*
