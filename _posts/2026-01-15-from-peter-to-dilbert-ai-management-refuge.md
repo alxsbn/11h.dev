@@ -12,6 +12,8 @@ header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ---
 
+*Scott Adams, creator of Dilbert, passed away yesterday. His satirical observations about corporate life remain more relevant than ever as we enter the age of AI management.*
+
 ## 1969: The Peter Principle
 
 **In a hierarchy, every employee rises to their level of incompetence.**
@@ -54,4 +56,4 @@ Peter described the rise toward incompetence. Adams, the refuge in incompetence.
 
 ---
 
-*Note: While I couldn't include an actual Dilbert comic due to copyright restrictions, the comic strip's satirical take on corporate management perfectly illustrates these principles. Scott Adams' work remains a cultural touchstone for understanding workplace dynamics.*
+*In memoriam: Scott Adams (1957-2026). While copyright restrictions prevent including actual Dilbert comics, his decades of satirical work capturing the absurdities of corporate life leaves a lasting legacy. The Dilbert Principle, formulated in 1995, proved prescient—and now, as AI transforms management, his insights reveal yet another layer of truth.*
