@@ -42,4 +42,131 @@
     border-radius: 4px;
   }
 }
+
+/* Notice/Alert Blocks (GitHub-style) */
+.notice {
+  padding: 1rem 1rem 1rem 3rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid;
+  border-radius: 4px;
+  position: relative;
+}
+
+.notice::before {
+  position: absolute;
+  left: 0.75rem;
+  top: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.notice p:first-child {
+  margin-top: 0;
+}
+
+.notice p:last-child {
+  margin-bottom: 0;
+}
+
+/* Note - Blue */
+.notice-note {
+  background-color: rgba(9, 105, 218, 0.1);
+  border-color: #0969da;
+}
+
+.notice-note::before {
+  content: "ℹ️";
+}
+
+/* Tip - Green */
+.notice-tip {
+  background-color: rgba(26, 127, 55, 0.1);
+  border-color: #1a7f37;
+}
+
+.notice-tip::before {
+  content: "💡";
+}
+
+/* Important - Purple */
+.notice-important {
+  background-color: rgba(130, 80, 223, 0.1);
+  border-color: #8250df;
+}
+
+.notice-important::before {
+  content: "❗";
+}
+
+/* Warning - Yellow/Orange */
+.notice-warning {
+  background-color: rgba(210, 153, 34, 0.1);
+  border-color: #d29922;
+}
+
+.notice-warning::before {
+  content: "⚠️";
+}
+
+/* Caution - Red */
+.notice-caution {
+  background-color: rgba(207, 34, 46, 0.1);
+  border-color: #cf222e;
+}
+
+.notice-caution::before {
+  content: "🛑";
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .notice-note {
+    background-color: rgba(56, 139, 253, 0.15);
+    border-color: #388bfd;
+  }
+  .notice-tip {
+    background-color: rgba(46, 160, 67, 0.15);
+    border-color: #2ea043;
+  }
+  .notice-important {
+    background-color: rgba(163, 113, 247, 0.15);
+    border-color: #a371f7;
+  }
+  .notice-warning {
+    background-color: rgba(210, 153, 34, 0.15);
+    border-color: #d29922;
+  }
+  .notice-caution {
+    background-color: rgba(248, 81, 73, 0.15);
+    border-color: #f85149;
+  }
+}
 </style>
+
+<!-- Notice blocks transformation script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const noticeTypes = {
+    'NOTE': 'note',
+    'TIP': 'tip',
+    'IMPORTANT': 'important',
+    'WARNING': 'warning',
+    'CAUTION': 'caution'
+  };
+
+  document.querySelectorAll('blockquote').forEach(function(blockquote) {
+    const firstP = blockquote.querySelector('p:first-child');
+    if (!firstP) return;
+
+    const html = firstP.innerHTML;
+    for (const [marker, className] of Object.entries(noticeTypes)) {
+      const pattern = new RegExp('^\\s*\\[!' + marker + '\\]\\s*', 'i');
+      if (pattern.test(firstP.textContent)) {
+        blockquote.classList.add('notice', 'notice-' + className);
+        firstP.innerHTML = html.replace(pattern, '');
+        break;
+      }
+    }
+  });
+});
+</script>
