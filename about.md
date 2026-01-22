@@ -4,6 +4,10 @@ title: About Me
 permalink: /about/
 ---
 
+<div class="about-profile">
+  <img src="https://avatars.githubusercontent.com/u/4458879?v=4" alt="Alexis Blandin">
+</div>
+
 Hi, I'm **Alexis** 👋
 
 Welcome to my personal blog where I write about passions and projects I'm working on.
