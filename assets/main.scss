@@ -35,7 +35,22 @@
 .home-container .post-card__excerpt,
 .home-container .post-card__link .post-card__excerpt,
 .home-container a.post-card__link .post-card__excerpt {
-  color: #6b6b6b !important;
+  color: #4a4a4a !important;
+}
+
+.home-container .post-card__date,
+.home-container .post-card__link .post-card__date {
+  color: #4a4a4a !important;
+}
+
+.home-container .post-card__read-more,
+.home-container .post-card__link .post-card__read-more {
+  color: #c9453c !important;
+}
+
+.home-container .home-intro,
+.home-container .home-intro p {
+  color: #4a4a4a !important;
 }
 
 .home-container .post-card:hover .post-card__title {
