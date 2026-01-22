@@ -6,53 +6,63 @@
 /* ===== Homepage Substack-inspired Styles ===== */
 
 /* Override Minima Link Colors for Post Cards */
+.home-container .post-card__link,
+.home-container .post-card__link:visited,
+.home-container .post-card__link:hover,
+.home-container .post-card__link:active,
 .home-container a.post-card__link,
 .home-container a.post-card__link:visited,
-.home-container a.post-card__link:active,
-a.post-card__link,
-a.post-card__link:visited,
-a.post-card__link:active {
+.home-container a.post-card__link:hover,
+.home-container a.post-card__link:active {
   color: #1a1a1a !important;
   text-decoration: none !important;
 }
 
-.post-card__title,
-a.post-card__link .post-card__title,
-h2.post-card__title,
-h3.post-card__title {
+/* Force all text inside post card links to inherit proper color */
+.home-container .post-card__link *,
+.home-container a.post-card__link * {
+  color: inherit !important;
+}
+
+.home-container .post-card__title,
+.home-container .post-card__link .post-card__title,
+.home-container a.post-card__link .post-card__title,
+.home-container h2.post-card__title,
+.home-container h3.post-card__title {
   color: #1a1a1a !important;
 }
 
-.post-card__excerpt,
-a.post-card__link .post-card__excerpt {
+.home-container .post-card__excerpt,
+.home-container .post-card__link .post-card__excerpt,
+.home-container a.post-card__link .post-card__excerpt {
   color: #6b6b6b !important;
 }
 
-.post-card:hover .post-card__title {
+.home-container .post-card:hover .post-card__title {
   color: #c9453c !important;
 }
 
 @media (prefers-color-scheme: dark) {
+  .home-container .post-card__link,
+  .home-container .post-card__link:visited,
   .home-container a.post-card__link,
-  .home-container a.post-card__link:visited,
-  a.post-card__link,
-  a.post-card__link:visited {
+  .home-container a.post-card__link:visited {
     color: #e8e8e8 !important;
   }
 
-  .post-card__title,
-  a.post-card__link .post-card__title,
-  h2.post-card__title,
-  h3.post-card__title {
+  .home-container .post-card__title,
+  .home-container .post-card__link .post-card__title,
+  .home-container h2.post-card__title,
+  .home-container h3.post-card__title {
     color: #e8e8e8 !important;
   }
 
-  .post-card__excerpt,
-  a.post-card__link .post-card__excerpt {
+  .home-container .post-card__excerpt,
+  .home-container .post-card__link .post-card__excerpt {
     color: #a0a0a0 !important;
   }
 
-  .post-card:hover .post-card__title {
+  .home-container .post-card:hover .post-card__title {
     color: #e07c74 !important;
   }
 }
