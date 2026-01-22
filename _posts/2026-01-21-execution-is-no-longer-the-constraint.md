@@ -15,8 +15,6 @@ header_image_source_url: "https://unsplash.com"
 > [!WARNING]
 > What follows happened under specific conditions. A small, senior team, twenty years of accumulated context, and infrastructure stable enough to absorb rapid change. This isn't a universal playbook. It's what happened when execution stopped being the bottleneck.
 
----
-
 For decades, software organizations were shaped by one dominant constraint: development was slow and expensive. Every process, every ritual, every layer of validation existed because shipping code took time, and mistakes were costly to fix.
 
 Roadmaps batched work into quarters and sprints batched it into weeks. Backlogs accumulated because there was always more to build than capacity to build it. Feasibility acted as a natural filter: if something was hard to implement, it often didn't happen.
