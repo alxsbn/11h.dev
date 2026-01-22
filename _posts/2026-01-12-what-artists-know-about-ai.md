@@ -4,6 +4,12 @@ title: "What Artists Know About AI"
 date: 2026-01-12
 categories: ai productivity work
 excerpt: "What urban sketching taught me about letting AI run for hours. The skill nobody talks about: letting go."
+header_image: "https://images.unsplash.com/photo-ee5yWSeHPuw?w=1600&q=80"
+header_image_alt: "Person sketching on notebook using pen"
+header_image_credit: "Kaizen Nguyễn"
+header_image_credit_url: "https://unsplash.com/@kaizennguyen"
+header_image_source: "Unsplash"
+header_image_source_url: "https://unsplash.com"
 ---
 
 Twice a month in Orléans, a group gathers with sketchbooks for [Urban Sketchers](https://urbansketchers.org/). The biggest challenge isn't perspective or color mixing. It's **letting go**.
