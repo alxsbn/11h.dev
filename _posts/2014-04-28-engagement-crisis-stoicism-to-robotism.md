@@ -5,10 +5,10 @@ date: 2014-04-28
 categories: [digital, work, tech]
 excerpt: "We are what we share. But here arises the question of the meaning of action, of sharing. What to do with those who don't want to, cannot, or don't wish to share?"
 lang: en
-header_image: "https://images.unsplash.com/photo-8gr6bObQLOI?w=1600&q=80"
-header_image_alt: "Factory filled with orange robotic machines on assembly line"
-header_image_credit: "Simon Kadula"
-header_image_credit_url: "https://unsplash.com/@simonkadula"
+header_image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&q=80"
+header_image_alt: "White humanoid robot representing the future of work and automation"
+header_image_credit: "Alex Knight"
+header_image_credit_url: "https://unsplash.com/@agk42"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ---
