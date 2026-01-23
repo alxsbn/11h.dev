@@ -4,12 +4,12 @@ title: "The Apple Pie Test"
 date: 2026-01-23`
 categories: ai philosophy work series
 excerpt: "A consultant hid cooking recipes in technical documentation. No one ever noticed. AI agents would—but who decides what they look for?"
-header_image: "https://images.unsplash.com/photo-1621769965633-dc6e277dd8cb?w=1600&q=80"
-header_image_alt: "Red apple beside a homemade brown pie"
-header_image_credit: "Kavya P K"
-header_image_credit_url: "https://unsplash.com/@_kavya_p_k_"
-header_image_source: "Unsplash"
-header_image_source_url: "https://unsplash.com"
+header_image: "https://images.pexels.com/photos/3065590/pexels-photo-3065590.jpeg?auto=compress&cs=tinysrgb&w=1600"
+header_image_alt: "Apple pie and raspberry pie on a table"
+header_image_credit: "Asya Vlasova"
+header_image_credit_url: "https://www.pexels.com/@asya-vlasova-1902604"
+header_image_source: "Pexels"
+header_image_source_url: "https://www.pexels.com"
 ---
 
 Years ago, I met a Z-System guru who was working for IBM during a mission at a bank. The man had spent decades writing technical documentation for mainframe systems. Thousands of pages that the client paid handsomely for.
