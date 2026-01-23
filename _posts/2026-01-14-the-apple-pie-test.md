@@ -26,7 +26,7 @@ This wasn't fraud. It was the normal functioning of organizations. The client pa
 
 Both sides knew the game. The apple pie was just making the implicit explicit.
 
-This is everywhere. Compliance checklists checked without checking. The gap between *prescribed work* and *real work* is held together by mutual pretense. Everyone cheats. Everyone knows. The system runs anyway.
+The gap between *prescribed work* and *real work* is held together by mutual pretense. Everyone cheats. Everyone knows. The system runs anyway.
 
 ## Enter the agent
 
@@ -34,7 +34,7 @@ An AI agent can't play this game.
 
 Ask it to review documentation, and it will actually review it. Every page. It would find the apple pie recipe on page 847 and flag it: *"This section appears to contain unrelated culinary content. Should this be removed?"*
 
-The agent is not smarter. It's just incapable of the wink. It doesn't know that some documents exist to exist, that some processes are theater. It takes the prescription at face value.
+The agent is not smarter. It's just incapable of the wink. It takes the prescription at face value.
 
 This is its honesty. And it's devastating.
 
@@ -58,11 +58,9 @@ The agent didn't cheat. And in not cheating, it broke something that worked.
 
 Here's what bothers me: the agent can't lie about what it finds. But it only finds what it's pointed at.
 
-The apple pie recipe would be caught instantly. But who decides which documents get reviewed? Who writes the prompt? Who defines what counts as a "discrepancy"?
+The apple pie recipe would be caught instantly. But who decides which documents get reviewed in the first place?
 
-The old cheat was symmetric. Both sides pretended. Both sides benefited from not knowing officially.
-
-The new world is asymmetric. The warehouse worker is tracked to the second. The manager who configured that tracking is not. The honest machine creates honest workers. It doesn't necessarily create honest organizations.
+The old cheat was symmetric—everyone pretended equally. The new world isn't. Those being watched become radically transparent. Those aiming the machine do not.
 
 ## The deeper question
 
@@ -76,7 +74,7 @@ So maybe that's all a constitution can be: the best moral intuitions of a group 
 
 The real question isn't "is this relativism?" It's: "is this a sincere effort to get closer to something real, or just a rationalization of cultural prejudices?"
 
-I don't have the answer. But I notice it's the same question we should ask about any AI system. Who aimed it? What did they assume? And are those assumptions visible—or buried like recipes in a manual no one reads?
+I don't have the answer. But I notice it's the same question we should ask about any AI system: are its assumptions visible, or buried like recipes in a manual no one reads?
 
 ## The recipe, relocated
 
