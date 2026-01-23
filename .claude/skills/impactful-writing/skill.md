@@ -67,6 +67,43 @@ We designed entire industries around effort-as-signal: lawyers bill by the hour,
 ❌ **Passive voice**: Unless intentional for effect
 ❌ **Bloat**: Unnecessary adjectives, filler phrases
 ❌ **Predictable structure**: Surprise the reader occasionally
+❌ **Example stacking**: Illustrating every point with 2-3 examples (see below)
+
+### 6. **Avoid the "Statement → Examples → Conclusion" Pattern**
+
+This is a common trap: making a point, then listing 2-3 examples, then restating the conclusion. It's didactic and treats readers like students who need proof.
+
+**The pattern looks like this:**
+```
+[Statement]. [Example 1]. [Example 2]. [Example 3]. [Conclusion restating statement].
+```
+
+**Trust the reader.** One strong image beats three mediocre examples. If your statement is clear, you don't need to prove it with a list.
+
+**Example Transformation:**
+
+❌ **Example stacking (didactic)**
+```
+The new world is asymmetric. The warehouse worker is tracked to the second.
+The manager who configured that tracking is not. The customer service agent's
+every response is evaluated. The executive who set the rules operates in
+ambiguity. The honest machine creates honest workers. It doesn't necessarily
+create honest organizations.
+```
+
+✅ **Single strong statement (trusts the reader)**
+```
+The old cheat was symmetric—everyone pretended equally. The new world isn't.
+Those being watched become radically transparent. Those aiming the machine do not.
+```
+
+**Why this matters:**
+- Multiple examples slow momentum
+- They signal you don't trust your own point
+- Readers get the idea after one example—the rest is noise
+- The conclusion often just restates what you already said
+
+**Rule of thumb:** If you catch yourself writing "Example 1. Example 2. Example 3."—stop. Pick the strongest one, cut the rest, and move on.
 
 ## The Flow Test
 
@@ -118,5 +155,6 @@ When invoked, analyze the text for:
 - Bloat and redundancy
 - Momentum loss
 - Unclear structure
+- **Example stacking** (statement → example 1, 2, 3 → conclusion pattern)
 
 Then rewrite to maximize fluidity and impact.
