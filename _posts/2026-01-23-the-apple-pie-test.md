@@ -4,7 +4,7 @@ title: "The Apple Pie Test"
 date: 2026-01-23`
 categories: ai philosophy work series
 excerpt: "A consultant hid cooking recipes in technical documentation. No one ever noticed. AI agents would—but who decides what they look for?"
-header_image: "https://images.unsplash.com/photo-1621769965633-dc6e277dd8cb?w=1600&q=80"
+header_image: "https://images.unsplash.com/photo-1621743478914-cc8a86d7e7b5?w=1600&q=80"
 header_image_alt: "Red apple beside a homemade brown pie"
 header_image_credit: "Kavya P K"
 header_image_credit_url: "https://unsplash.com/@_kavya_p_k_"
