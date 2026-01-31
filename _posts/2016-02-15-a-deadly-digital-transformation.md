@@ -5,10 +5,10 @@ date: 2016-02-15
 categories: [digital, work, tech]
 excerpt: "I hear a lot about digital transformation. In itself, and this angle is rarely addressed, digital is merely a matter of automation (robots + algorithms)..."
 lang: en
-header_image: "https://images.unsplash.com/photo-1535229839206-3c497169d60a?w=1600&q=80"
-header_image_alt: "Butterfly emerging from chrysalis, symbolizing transformation and metamorphosis"
-header_image_credit: "Suzanne D. Williams"
-header_image_credit_url: "https://unsplash.com/@scw1217"
+header_image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&q=80"
+header_image_alt: "White humanoid robot (Pepper) symbolizing automation and digital transformation"
+header_image_credit: "Alex Knight"
+header_image_credit_url: "https://unsplash.com/@agk42"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ---
