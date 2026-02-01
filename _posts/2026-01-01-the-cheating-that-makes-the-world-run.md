@@ -4,12 +4,10 @@ title: "The Cheating That Makes the World Run"
 date: 2026-01-01
 categories: work ai productivity series
 excerpt: "Real work is constant cheating. Tolerated. Necessary. Denied by the very people who benefit from it."
-header_image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=80"
-header_image_alt: "Industrial factory worker operating machinery"
-header_image_credit: "Ant Rozetsky"
-header_image_credit_url: "https://unsplash.com/@rozetsky"
-header_image_source: "Unsplash"
-header_image_source_url: "https://unsplash.com"
+header_image: "/assets/images/IMG_08853.jpg"
+header_image_alt: "Artist's hands drawing leaves in a sketchbook, surrounded by art supplies and coffee"
+header_image_credit: "Nata Shilo"
+header_image_credit_url: "https://www.natashilo.com"
 ---
 
 There's irrefutable proof that rules aren't enough to make an organization work: **work-to-rule** strikes (in French "grève du zèle").

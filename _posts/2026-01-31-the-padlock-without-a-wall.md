@@ -4,12 +4,10 @@ title: "The Padlock Without a Wall: Why the Open-Core Model Is Dead"
 date: 2026-01-31
 categories: tech business open-source
 excerpt: "A software vendor installs a padlock on their garden gate. But there's no wall around the garden anymore. Just the padlock, alone, planted in the void."
-header_image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1600&q=80"
-header_image_alt: "Golden padlock sitting on a computer keyboard"
-header_image_credit: "FlyD"
-header_image_credit_url: "https://unsplash.com/@flyd2069"
-header_image_source: "Unsplash"
-header_image_source_url: "https://unsplash.com"
+header_image: "/assets/images/IMG_9285-2.JPG"
+header_image_alt: "Majestic tree with trident-shaped branches reaching toward a deep blue sky"
+header_image_credit: "Nata Shilo"
+header_image_credit_url: "https://www.natashilo.com"
 ---
 
 There's an image I can't get out of my head. A software vendor carefully installing a padlock on their garden gate. A nice padlock, solid, with a "Pro/Enterprise" label. The problem is there's no wall around the garden anymore. Just the padlock, alone, planted in the void.
