@@ -129,25 +129,77 @@
   margin: 0 6px;
 }
 
-.post-share-button {
+/* Reading time */
+.reading-time {
+  font-style: italic;
+}
+
+/* Share buttons group */
+.post-share-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   flex-shrink: 0;
-  background: none;
-  border: 1px solid var(--color-border, #e6e6e6);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+}
+
+.share-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border, #e6e6e6);
+  background: none;
   color: var(--color-text-secondary, #4a4a4a);
+  text-decoration: none;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.post-share-button:hover {
-  background: var(--color-bg-hover, #f5f5f5);
-  color: var(--color-text, #1a1a1a);
-  border-color: #ccc;
+.share-button:hover {
+  border-color: transparent;
+}
+
+.share-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* LinkedIn - blue */
+.share-linkedin:hover {
+  background: #0077b5;
+  color: #ffffff;
+}
+
+/* Twitter/X - black */
+.share-twitter:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .share-twitter:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+}
+
+[data-theme="dark"] .share-twitter:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Copy link */
+.share-copy:hover {
+  background: var(--color-accent, #c9453c);
+  color: #ffffff;
+}
+
+.share-copy.copied {
+  background: #22c55e;
+  color: #ffffff;
+  border-color: transparent;
 }
 
 /* Dark mode handled via CSS variables in custom-head.html */

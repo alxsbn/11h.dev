@@ -4,12 +4,10 @@ title: "Servitude by Ergonomics"
 date: 2026-01-03
 categories: ai philosophy work series
 excerpt: "Modern servitude no longer needs constraint. It works through comfort."
-header_image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1600&q=80"
-header_image_alt: "Minimal workspace with laptop on clean desk"
-header_image_credit: "Alejandro Escamilla"
-header_image_credit_url: "https://unsplash.com/@alejandroescamilla"
-header_image_source: "Unsplash"
-header_image_source_url: "https://unsplash.com"
+header_image: "/assets/images/nata-shilo-tree-sunset-urban.jpg"
+header_image_alt: "Tree silhouette against an orange sunset with urban building in background"
+header_image_credit: "Nata Shilo"
+header_image_credit_url: "https://www.natashilo.com"
 ---
 
 Étienne de La Boétie (French political theorist famously known for his essay [Discourse on Voluntary Servitude](https://en.wikipedia.org/wiki/Discourse_on_Voluntary_Servitude)) asked a simple question: **why do people obey tyrants they could overthrow?** His answer: **servitude is voluntary**. The subject chooses to serve. Therefore, they can awaken.
