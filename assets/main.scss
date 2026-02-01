@@ -178,6 +178,7 @@
   color: #ffffff;
 }
 
+/* Dark mode: invert Twitter colors */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .share-twitter:hover {
     background: #ffffff;
@@ -200,6 +201,19 @@
   background: #22c55e;
   color: #ffffff;
   border-color: transparent;
+}
+
+/* Icon toggle for copy button */
+.share-copy .icon-check {
+  display: none;
+}
+
+.share-copy.copied .icon-link {
+  display: none;
+}
+
+.share-copy.copied .icon-check {
+  display: block;
 }
 
 /* Dark mode handled via CSS variables in custom-head.html */
