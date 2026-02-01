@@ -4,7 +4,7 @@ title: "Servitude by Ergonomics"
 date: 2026-01-03
 categories: ai philosophy work series
 excerpt: "Modern servitude no longer needs constraint. It works through comfort."
-header_image: "/assets/images/R6__7785.jpg"
+header_image: "/assets/images/nata-shilo-tree-sunset-urban.jpg"
 header_image_alt: "Tree silhouette against an orange sunset with urban building in background"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"

@@ -4,7 +4,7 @@ title: "The Cheating That Makes the World Run"
 date: 2026-01-01
 categories: work ai productivity series
 excerpt: "Real work is constant cheating. Tolerated. Necessary. Denied by the very people who benefit from it."
-header_image: "/assets/images/IMG_08853.jpg"
+header_image: "/assets/images/nata-shilo-artist-drawing-leaves.jpg"
 header_image_alt: "Artist's hands drawing leaves in a sketchbook, surrounded by art supplies and coffee"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"

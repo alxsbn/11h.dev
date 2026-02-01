@@ -4,7 +4,7 @@ title: "The 10X is here. It's a skill issue."
 date: 2025-12-30
 categories: ai productivity coding
 excerpt: "Two months from 'models aren't there' to 'not claiming the 10X boost is a skill issue.' The real skill isn't coding anymore. It's letting go."
-header_image: "/assets/images/IMG_0543.jpg"
+header_image: "/assets/images/nata-shilo-hand-paintbrush.jpg"
 header_image_alt: "Hand holding a well-worn artist's paintbrush against a beige background"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"

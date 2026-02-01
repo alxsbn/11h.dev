@@ -4,7 +4,7 @@ title: "Collapse through Obedience"
 date: 2026-01-04
 categories: ai philosophy organization series
 excerpt: "An army that obeys perfectly is a defeated army. AI realizes the old Taylorist dream: prescription perfectly executed. But complex systems hold together through their slack."
-header_image: "/assets/images/IMG_20210516_094850.jpg"
+header_image: "/assets/images/nata-shilo-stop-attention-sign.jpg"
 header_image_alt: "STOP sign with a hand-drawn 'ATTENTION' warning sign below it"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"

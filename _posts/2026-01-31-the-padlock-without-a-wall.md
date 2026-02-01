@@ -4,7 +4,7 @@ title: "The Padlock Without a Wall: Why the Open-Core Model Is Dead"
 date: 2026-01-31
 categories: tech business open-source
 excerpt: "A software vendor installs a padlock on their garden gate. But there's no wall around the garden anymore. Just the padlock, alone, planted in the void."
-header_image: "/assets/images/IMG_9285-2.JPG"
+header_image: "/assets/images/nata-shilo-tree-trident.jpg"
 header_image_alt: "Majestic tree with trident-shaped branches reaching toward a deep blue sky"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"
