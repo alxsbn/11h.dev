@@ -18,7 +18,7 @@ It's pure marketing.
 
 Everyone has legacy. Cost constraints, skill gaps, budget limits. The "by the book" approach changes every six months, and it's accelerating with AI. We always think someone else figured it out. No one did.
 
-At the core, we all have roughly the same setup: a warehouse, data in, data out, an analytics layer. AI agents and ML in production? A minority of companies. Let's stop pretending otherwise.
+At the core, we all have roughly the same setup: a warehouse, data in/out, an analytics layer. AI agents and ML in production? A minority of companies. Let's stop pretending otherwise.
 
 Here's seven years of evolution at [Jolimoi](https://www.jolimoi.com). Pivots, hacks, mistakes. Not an architecture to admire. A path to own.
 
@@ -36,13 +36,13 @@ At some point, growth explodes. Analytical queries start eating up database reso
 
 Timeouts appear, bottlenecks become impossible to trace.
 
-We were building a DRP at the time, with a read replica. Instead of letting the cluster sit idle, we plugged Metabase on it and prod breathed again. Two birds, one stone.
+We were building a DRP at the time, with a read replica. Instead of letting the cluster underused, we plugged Metabase on it and prod breathed again. Two birds, one stone.
 
 Lasts one year.
 
 ## 2022: The Limits
 
-The problem wasn't volume, it was the models. Metabase queries kept growing with more joins, more complexity.
+But the problem wasn't volume, it was models. Metabase queries kept growing with more joins, more complexity.
 
 We added a read-write cluster on top with minimal effort: a config change, a new schema for cache tables, and updated credentials. Existing queries remained untouched, and we drastically reduced refresh rate and sync risks for business users.
 
@@ -56,30 +56,30 @@ Just one problem remained: Metabase had no official Databricks driver. The commu
 
 We chose a temporary workaround by syncing the Gold layer to a PostgreSQL since the SQL syntax was close enough to Databricks. Not ideal, but functional while waiting for the official driver.
 
-Three months in, devs ditched their cron jobs for Airflow and the data platform started pulling the entire tech org upward.
+Six months in, devs ditched their cron jobs for Airflow and the data platform started pulling the entire tech org upward.
 
-## 2024: Maturity
+In addition we started to deploy Airbyte... 
 
-The official Databricks driver finally landed. We set a clear rule that official dashboards would only point to certified models, and query times dropped by a factor of 100.
+## 2024: The Maturity
 
-We also designed what we call the Metric Tree. The idea was to take all the metrics scattered across Metabase and recentralize them in Databricks. Every metric is now defined with its formula, naming convention, and exact scope. What we call an "active customer," what it actually means, how we calculate it. This is the unglamorous work that makes everything else possible.
+Then the official Databricks driver finally landed. We set a clear rule that official dashboards would only point to certified models running on Databricks, query times dropped by a factor of 100.
 
-## 2025: The Platform Disappears
+We also designed a Metric Tree. The idea was to take all the metrics scattered across Metabase and recentralize them in Databricks. Not yet and Semantic layer but a bold move. We got the conviction that the SL could lived on BI side.
 
-Migration is complete. Every legacy model now has a decommission date, and of the original 50 Metabase models, none survived.
+On infrastructure side, some Airbyte and Airflow discontinued their docker-compose support. We decide to migrate everything from ec2/compose to k8/helm. 
 
-We deployed a semantic layer on top of our certified models. The Metric Tree had already done the hard work of defining business concepts, so this was mostly a technical step. We then plugged Genie on top of it. Now, anyone can ask a question in plain language and get an answer. No SQL, no joins to understand.
+## 2025-2026: The Platform Disappears 
+
+Models and main dashboards migration is complete. Of the original 50 Metabase models, none survived. We just kept direct access to production for the devs/product team only.
+
+We ditch Airbyte, too tired by the limited support and drivers available. Same for some python notebooks and then we replaced both by Census and Fivetran.
+
+Finally we deployed a semantic layer on top of our certified models using Databricks Metric viewd. The Metric Tree had already done the hard work of defining business concepts, so this was mostly a technical step. 
+
+We then plugged Databricks Genie on top of it. Now, anyone can ask a question in plain language and get an answer. No SQL, no joins to understand.
 
 The platform becomes invisible, and that's exactly the point.
 
-## And Beyond
+We're now consolidating everything into a single Databricks repo everything is managed using Claude Code. 
 
-We're now consolidating everything into a single Databricks repo. Notebooks, workflows, dbt, Airflow. We develop with Claude Code.
-
-## The Mistakes
-
-We didn't say no often enough. We didn't set decommission dates from the start. We built too many models "just in case" for needs that never materialized.
-
-The forgotten rule is that every unused model still costs.
-
-One thing I haven't mentioned: team size varied drastically throughout this journey. That's probably a story for another time.
+And the story continue... 
