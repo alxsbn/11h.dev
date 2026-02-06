@@ -11,6 +11,40 @@
 <meta name="twitter:card" content="summary_large_image" />
 {% endif %}
 
+<!-- i18n: hreflang tags -->
+{%- assign page_lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.translations[page_lang] -%}
+<meta property="og:locale" content="{{ t.locale }}" />
+{%- if page.ref -%}
+  {%- for lang_post in site.posts -%}
+    {%- if lang_post.ref == page.ref -%}
+<link rel="alternate" hreflang="{{ lang_post.lang }}" href="{{ lang_post.url | absolute_url }}" />
+    {%- endif -%}
+  {%- endfor -%}
+{%- elsif page.permalink -%}
+  {%- if page_lang == "fr" -%}
+    {%- assign alt_url = page.url | replace: '/fr/', '/en/' -%}
+<link rel="alternate" hreflang="fr" href="{{ page.url | absolute_url }}" />
+<link rel="alternate" hreflang="en" href="{{ alt_url | absolute_url }}" />
+  {%- else -%}
+    {%- assign alt_url = page.url | replace: '/en/', '/fr/' -%}
+<link rel="alternate" hreflang="en" href="{{ page.url | absolute_url }}" />
+<link rel="alternate" hreflang="fr" href="{{ alt_url | absolute_url }}" />
+  {%- endif -%}
+{%- endif -%}
+
+<!-- Language preference storage -->
+<script>
+(function() {
+  var path = window.location.pathname;
+  if (path.indexOf('/fr/') === 0) {
+    localStorage.setItem('preferred_lang', 'fr');
+  } else if (path.indexOf('/en/') === 0) {
+    localStorage.setItem('preferred_lang', 'en');
+  }
+})();
+</script>
+
 <!-- Google Fonts - Substack-inspired typography -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1115,3 +1149,54 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+<!-- Language Toggle & Translation Link Styles -->
+<style>
+/* ===== Language Toggle Button ===== */
+.lang-toggle {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-secondary) !important;
+  text-decoration: none !important;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  letter-spacing: 0.05em;
+}
+
+.lang-toggle:hover {
+  color: var(--color-accent) !important;
+  border-color: var(--color-accent);
+  background-color: var(--color-bg-hover);
+}
+
+/* ===== Post Translation Link ===== */
+.post-translation-link {
+  margin: 0.5rem 0 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+}
+
+.post-translation-link a {
+  color: var(--color-accent) !important;
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-accent);
+  padding-bottom: 1px;
+  transition: border-bottom-style 0.2s ease;
+}
+
+.post-translation-link a:hover {
+  border-bottom-style: solid;
+}
+
+@media (max-width: 600px) {
+  .lang-toggle {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+    margin-right: 0.25rem;
+  }
+}
+</style>

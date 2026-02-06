@@ -1,9 +1,11 @@
+{%- assign form_lang = include.lang | default: page.lang | default: site.default_lang -%}
+{%- assign t = site.data.translations[form_lang] -%}
 <!-- Newsletter Subscription Form - Buttondown -->
 <div class="newsletter-box">
   <div class="newsletter-content">
-    <h3 class="newsletter-title">Stay in the loop</h3>
+    <h3 class="newsletter-title">{{ t.newsletter_title }}</h3>
     <p class="newsletter-description">
-      New posts and thoughts delivered to your inbox.
+      {{ t.newsletter_description }}
     </p>
   </div>
   <form
@@ -17,16 +19,16 @@
       <input
         type="email"
         name="email"
-        placeholder="your@email.com"
+        placeholder="{{ t.newsletter_placeholder }}"
         required
         class="newsletter-input"
       />
       <button type="submit" class="newsletter-button">
-        Subscribe
+        {{ t.newsletter_subscribe }}
       </button>
     </div>
     <p class="newsletter-note">
-      No spam, unsubscribe anytime.
+      {{ t.newsletter_note }}
     </p>
   </form>
 </div>

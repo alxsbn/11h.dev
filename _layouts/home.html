@@ -1,17 +1,19 @@
 ---
 layout: default
 ---
+{%- assign page_lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.translations[page_lang] -%}
 
 <div class="home-container">
-  {%- if page.title -%}
+  {%- if page.title and page.title != "" -%}
   <header class="home-header">
     <h1 class="home-title">{{ page.title }}</h1>
   </header>
   {%- endif -%}
 
-  {%- if site.description -%}
+  {%- if t.description -%}
   <div class="home-intro">
-    <p>{{ site.description }}</p>
+    <p>{{ t.description }}</p>
   </div>
   {%- endif -%}
 
@@ -22,17 +24,18 @@ layout: default
         <circle cx="6.18" cy="17.82" r="2.18"/>
         <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
       </svg>
-      RSS
+      {{ t.rss }}
     </a>
     <span class="subscribe-divider">|</span>
-    <a href="#newsletter" class="subscribe-newsletter">Newsletter</a>
+    <a href="#newsletter" class="subscribe-newsletter">{{ t.newsletter }}</a>
   </div>
 
   {{ content }}
 
-  {%- if site.posts.size > 0 -%}
+  {%- assign lang_posts = site.posts | where: "lang", page_lang -%}
+  {%- if lang_posts.size > 0 -%}
   <div class="posts-container">
-    {%- assign sorted_posts = site.posts | sort: 'date' | reverse -%}
+    {%- assign sorted_posts = lang_posts | sort: 'date' | reverse -%}
     {%- assign featured_post = sorted_posts.first -%}
 
     <!-- Featured Post -->
@@ -45,14 +48,14 @@ layout: default
         {%- endif -%}
         <div class="post-card__content">
           <h2 class="post-card__title">{{ featured_post.title | escape }}</h2>
-          {%- assign date_format = site.minima.date_format | default: "%B %-d, %Y" -%}
+          {%- assign date_format = t.date_format | default: "%B %-d, %Y" -%}
           <time class="post-card__date" datetime="{{ featured_post.date | date_to_xmlschema }}">
             {{ featured_post.date | date: date_format }}
           </time>
           {%- if featured_post.excerpt -%}
           <p class="post-card__excerpt">{{ featured_post.excerpt | strip_html | truncate: 200 }}</p>
           {%- endif -%}
-          <span class="post-card__read-more">Read more</span>
+          <span class="post-card__read-more">{{ t.read_more }}</span>
         </div>
       </a>
     </article>
@@ -85,6 +88,6 @@ layout: default
 
   <!-- Newsletter Box -->
   <div id="newsletter">
-    {% include newsletter-form.html %}
+    {% include newsletter-form.html lang=page_lang %}
   </div>
 </div>

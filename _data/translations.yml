@@ -1,0 +1,73 @@
+fr:
+  # Navigation
+  home: "Accueil"
+  about: "À propos"
+  # Post
+  read_more: "Lire la suite"
+  min_read: "min de lecture"
+  updated: "Mis à jour le"
+  photo_by: "Photo par"
+  on: "sur"
+  share_linkedin: "Partager sur LinkedIn"
+  share_twitter: "Partager sur X"
+  copy_link: "Copier le lien"
+  copied: "Copié !"
+  # Homepage
+  description: "Blog personnel sur les passions et les idées"
+  rss: "RSS"
+  newsletter: "Newsletter"
+  # Newsletter
+  newsletter_title: "Restez informé"
+  newsletter_description: "Nouveaux articles et réflexions livrés dans votre boîte mail."
+  newsletter_placeholder: "votre@email.com"
+  newsletter_subscribe: "S'abonner"
+  newsletter_note: "Pas de spam, désinscription à tout moment."
+  # About
+  about_title: "À propos"
+  # Language switcher
+  switch_lang: "EN"
+  switch_lang_label: "Read in English"
+  current_lang: "FR"
+  # SEO
+  locale: "fr_FR"
+  # Date formats
+  date_format: "%-d %B %Y"
+  # Read in other language
+  read_other_lang: "Read this article in English"
+
+en:
+  # Navigation
+  home: "Home"
+  about: "About"
+  # Post
+  read_more: "Read more"
+  min_read: "min read"
+  updated: "Updated"
+  photo_by: "Photo by"
+  on: "on"
+  share_linkedin: "Share on LinkedIn"
+  share_twitter: "Share on X"
+  copy_link: "Copy link"
+  copied: "Copied!"
+  # Homepage
+  description: "Personal blog about passions and ideas"
+  rss: "RSS"
+  newsletter: "Newsletter"
+  # Newsletter
+  newsletter_title: "Stay in the loop"
+  newsletter_description: "New posts and thoughts delivered to your inbox."
+  newsletter_placeholder: "your@email.com"
+  newsletter_subscribe: "Subscribe"
+  newsletter_note: "No spam, unsubscribe anytime."
+  # About
+  about_title: "About Me"
+  # Language switcher
+  switch_lang: "FR"
+  switch_lang_label: "Lire en français"
+  current_lang: "EN"
+  # SEO
+  locale: "en_US"
+  # Date formats
+  date_format: "%B %-d, %Y"
+  # Read in other language
+  read_other_lang: "Lire cet article en français"

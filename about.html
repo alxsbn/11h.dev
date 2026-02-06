@@ -1,0 +1,40 @@
+---
+layout: none
+permalink: /about/
+sitemap: false
+redirect_from:
+  - /about
+---
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>About - 11h.dev</title>
+  <script>
+    (function() {
+      var saved = localStorage.getItem('preferred_lang');
+      if (saved === 'en') {
+        window.location.replace('/en/about/');
+        return;
+      }
+      if (saved === 'fr') {
+        window.location.replace('/fr/about/');
+        return;
+      }
+      var lang = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
+      if (lang.indexOf('en') === 0) {
+        window.location.replace('/en/about/');
+      } else {
+        window.location.replace('/fr/about/');
+      }
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=/fr/about/">
+  </noscript>
+</head>
+<body>
+  <p>Redirecting... / Redirection en cours...</p>
+  <p><a href="/fr/about/">Français</a> | <a href="/en/about/">English</a></p>
+</body>
+</html>
