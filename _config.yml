@@ -13,8 +13,14 @@ baseurl: ""
 url: "https://11h.dev"
 google_analytics: G-2KBT4V4MS1
 
-# Permalink structure
+# Permalink structure (overridden per language via defaults)
 permalink: /:year/:month/:day/:title/
+
+# i18n - Bilingual support
+languages:
+  - fr
+  - en
+default_lang: fr
 
 # Minima theme customization
 minima:
@@ -27,10 +33,8 @@ minima:
 # Show post excerpts on home page
 show_excerpts: true
 
-# Header pages (navigation)
-header_pages:
-  - about.md
-  - index.md
+# Header pages (navigation) - now managed per-language in layouts
+header_pages: []
 
 # Exclude from processing
 exclude:
@@ -47,7 +51,21 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-redirect-from
 
 # Feed settings
 feed:
   path: feed.xml
+
+# Defaults - set language and permalink per language directory
+defaults:
+  - scope:
+      path: "_posts/en"
+    values:
+      lang: "en"
+      permalink: "/en/:year/:month/:day/:title/"
+  - scope:
+      path: "_posts/fr"
+    values:
+      lang: "fr"
+      permalink: "/fr/:year/:month/:day/:title/"

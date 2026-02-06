@@ -1,0 +1,37 @@
+---
+layout: none
+sitemap: false
+---
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>11h.dev</title>
+  <link rel="alternate" hreflang="fr" href="{{ '/fr/' | absolute_url }}" />
+  <link rel="alternate" hreflang="en" href="{{ '/en/' | absolute_url }}" />
+  <link rel="alternate" hreflang="x-default" href="{{ '/fr/' | absolute_url }}" />
+  <script>
+    (function() {
+      var saved = localStorage.getItem('preferred_lang');
+      if (saved === 'en' || saved === 'fr') {
+        window.location.replace('/' + saved + '/');
+        return;
+      }
+      var lang = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
+      if (lang.indexOf('en') === 0) {
+        window.location.replace('/en/');
+      } else {
+        window.location.replace('/fr/');
+      }
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=/fr/">
+  </noscript>
+</head>
+<body>
+  <p>Redirecting... / Redirection en cours...</p>
+  <p><a href="/fr/">Français</a> | <a href="/en/">English</a></p>
+</body>
+</html>
