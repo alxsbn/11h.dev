@@ -9,6 +9,26 @@
             "command": "python3 .claude/hooks/update-llm-txt.py"
           }
         ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/update-llm-txt.py"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/update-llm-txt.py"
+          }
+        ]
       }
     ]
   },

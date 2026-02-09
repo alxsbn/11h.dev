@@ -1,12 +1,23 @@
 # 11h.dev
 
 > Personal blog exploring where AI, work, and human behavior collide. Written by someone who codes, sketches, and thinks about systems.
+> Blog personnel explorant les collisions entre IA, travail et comportement humain.
 
-## About Alexis (alxsbn)
+## About / A propos
 
-Navigating IT for 20+ years. Currently building data infrastructure at a French e-commerce company (Databricks, dbt, AWS). Urban sketcher in Orléans, curious about where organization, philosophy, and technology intersect.
+Alexis Blandin (alxsbn). Navigating IT for 20+ years. Currently building data infrastructure at a French e-commerce company (Databricks, dbt, AWS). Urban sketcher in Orleans, curious about where organization, philosophy, and technology intersect.
 
 Not here to sell you tools. Here to think through what's actually happening as AI reshapes work.
+
+## Site Structure
+
+This blog is **fully bilingual** (English + French). Every article exists in both languages.
+
+- **English version:** https://11h.dev/en/
+- **French version:** https://11h.dev/fr/
+- **Root URL** (https://11h.dev/) redirects automatically based on browser language (default: French)
+
+All article URLs follow the pattern: `/{lang}/{year}/{month}/{day}/{slug}/`
 
 ## What This Blog Is About
 
@@ -27,39 +38,73 @@ Two parallel tracks:
 
 The technical posts inform the philosophical ones. The philosophy shapes how I build systems.
 
-## Recent Notable Articles
+## Articles (English)
 
 **Latest (2026):**
-- [The Padlock Without a Wall: Why the Open-Core Model Is Dead](/2026/01/31/the-padlock-without-a-wall/) - A software vendor installs a padlock on their garden gate. But there's no wall around the garden ...
-- [The Apple Pie Test](/2026/01/23/the-apple-pie-test/) - A consultant hid cooking recipes in technical documentation. No one ever noticed. AI agents would...
-- [Execution Is No Longer the Constraint](/2026/01/21/execution-is-no-longer-the-constraint/) - For decades, software organizations were shaped by one dominant constraint: development was slow ...
-- [From Peter to Dilbert: How AI Inverts the Management Refuge](/2026/01/15/from-peter-to-dilbert-ai-management-refuge/) - The Peter Principle described the rise to incompetence. The Dilbert Principle exposed the refuge ...
+- [The Padlock Without a Wall: Why the Open-Core Model Is Dead](/en/2026/01/31/the-padlock-without-a-wall/) - A software vendor installs a padlock on their garden gate. But there's no wall around the garden ...
+- [The Apple Pie Test](/en/2026/01/23/the-apple-pie-test/) - A consultant hid cooking recipes in technical documentation. No one ever noticed. AI agents would...
+- [Execution Is No Longer the Constraint](/en/2026/01/21/execution-is-no-longer-the-constraint/) - For decades, software organizations were shaped by one dominant constraint: development was slow ...
+- [From Peter to Dilbert: How AI Inverts the Management Refuge](/en/2026/01/15/from-peter-to-dilbert-ai-management-refuge/) - The Peter Principle described the rise to incompetence. The Dilbert Principle exposed the refuge ...
 
 **Series: AI and the End of Cheating:**
-- [AI and the End of Cheating](/2026/01/06/ai-and-the-end-of-cheating/) - Work doesn't function as prescribed. It functions because people cheat. AI doesn't cheat. That's ...
-- [The Cheating That Makes the World Run](/2026/01/01/the-cheating-that-makes-the-world-run/) - Real work is constant cheating. Tolerated. Necessary. Denied by the very people who benefit from it.
-- [AI doesn't cheat (and that's the problem)](/2026/01/02/ai-doesnt-cheat-and-thats-the-problem/) - AI does what it's told. That's its strength and its limit. It bridges the technical gap but the p...
-- [Servitude by Ergonomics](/2026/01/03/servitude-by-ergonomics/) - Modern servitude no longer needs constraint. It works through comfort.
-- [Collapse through Obedience](/2026/01/04/collapse-through-obedience/) - An army that obeys perfectly is a defeated army. AI realizes the old Taylorist dream: prescriptio...
-- [Friction in an Agentic World](/2026/01/05/friction-in-an-agentic-world/) - Reintroducing friction isn't a bug. It's a political choice. The cost of friction is lower than t...
+- [AI and the End of Cheating](/en/2026/01/06/ai-and-the-end-of-cheating/) - Work doesn't function as prescribed. It functions because people cheat. AI doesn't cheat. That's ...
+- [The Cheating That Makes the World Run](/en/2026/01/01/the-cheating-that-makes-the-world-run/) - Real work is constant cheating. Tolerated. Necessary. Denied by the very people who benefit from it.
+- [AI doesn't cheat (and that's the problem)](/en/2026/01/02/ai-doesnt-cheat-and-thats-the-problem/) - AI does what it's told. That's its strength and its limit. It bridges the technical gap but the p...
+- [Servitude by Ergonomics](/en/2026/01/03/servitude-by-ergonomics/) - Modern servitude no longer needs constraint. It works through comfort.
+- [Collapse through Obedience](/en/2026/01/04/collapse-through-obedience/) - An army that obeys perfectly is a defeated army. AI realizes the old Taylorist dream: prescriptio...
+- [Friction in an Agentic World](/en/2026/01/05/friction-in-an-agentic-world/) - Reintroducing friction isn't a bug. It's a political choice. The cost of friction is lower than t...
 
 **AI & Work:**
-- [What Artists Know About AI](/2026/01/12/what-artists-know-about-ai/) - What urban sketching taught me about letting AI run for hours. The skill nobody talks about: lett...
-- [Data Governance 2026: ROI Will Have the Last Word](/2026/01/09/data-governance-predictions-2026/) - ROI and time-to-delivery will always kill governance efforts. 2026 will confirm this more than ever.
-- [Plunder Is the Feature](/2025/12/31/plunder-is-the-feature/) - Rob Pike screams theft. History yawns.
-- [The 10X is here. It's a skill issue.](/2025/12/30/the-10x-is-here-its-a-skill-issue/) - Two months from 'models aren't there' to 'not claiming the 10X boost is a skill issue.' The real ...
-- [Google Is Dead. Follow The Eyes](/2025/12/30/google-is-dead-follow-the-eyes/) - The puck moved. Stop staring at where it was.
-- [When Photography Killed Painting: The AI Parallel](/2025/12/30/when-photography-killed-painting-the-ai-parallel/) - 166 years ago, when photography arrived, the art world had the exact same meltdown we're seeing w...
-- [AI Reveals: Effort Isn't Value](/2025/12/29/ai-reveals-effort-isnt-value/) - What happens when friction collapses? AI just did that.
-- [Lost in the Data Fog? Your Company Might Be Overdosing](/2025/02/08/lost-in-the-data-fog-your-company-might-be-overdos/) - Everyone wants to be "data-driven," but no one talks about the dangers of analytical overdose. To...
+- [What Artists Know About AI](/en/2026/01/12/what-artists-know-about-ai/) - What urban sketching taught me about letting AI run for hours. The skill nobody talks about: lett...
+- [Data Governance 2026: ROI Will Have the Last Word](/en/2026/01/09/data-governance-predictions-2026/) - ROI and time-to-delivery will always kill governance efforts. 2026 will confirm this more than ever.
+- [Plunder Is the Feature](/en/2025/12/31/plunder-is-the-feature/) - Rob Pike screams theft. History yawns.
+- [When Photography Killed Painting: The AI Parallel](/en/2025/12/30/when-photography-killed-painting-the-ai-parallel/) - 166 years ago, when photography arrived, the art world had the exact same meltdown we're seeing w...
+- [Google Is Dead. Follow The Eyes](/en/2025/12/30/google-is-dead-follow-the-eyes/) - The puck moved. Stop staring at where it was.
+- [The 10X is here. It's a skill issue.](/en/2025/12/30/the-10x-is-here-its-a-skill-issue/) - Two months from 'models aren't there' to 'not claiming the 10X boost is a skill issue.' The real ...
+- [AI Reveals: Effort Isn't Value](/en/2025/12/29/ai-reveals-effort-isnt-value/) - What happens when friction collapses? AI just did that.
+- [Lost in the Data Fog? Your Company Might Be Overdosing](/en/2025/02/08/lost-in-the-data-fog-your-company-might-be-overdos/) - Everyone wants to be "data-driven," but no one talks about the dangers of analytical overdose. To...
 
 **Technical Deep Dives:**
-- [Inverting the Data Testing Pyramid: Optimizing for Time to Insight](/2025/12/20/inverting-the-data-testing-pyramid-optimizing-for-time-to-insight/) - The core issue wasn't test coverage. It was what we were optimizing for.
-- [MySQL to S3 with AWS DMS: What actually works in production](/2025/12/15/mysql-to-s3-with-aws-dms-what-actually-works-in-pr/) - I don't like sharing experience reports on specific software. These articles age poorly. But on A...
-- [Databricks Cost Management](/2024/06/17/databricks-cost-management/) - Best practices for handling and managing Databricks costs - from understanding the cost structure...
+- [Inverting the Data Testing Pyramid: Optimizing for Time to Insight](/en/2025/12/20/inverting-the-data-testing-pyramid-optimizing-for-time-to-insight/) - The core issue wasn't test coverage. It was what we were optimizing for.
+- [MySQL to S3 with AWS DMS: What actually works in production](/en/2025/12/15/mysql-to-s3-with-aws-dms-what-actually-works-in-pr/) - I don't like sharing experience reports on specific software. These articles age poorly. But on A...
+- [Databricks Cost Management](/en/2024/06/17/databricks-cost-management/) - Best practices for handling and managing Databricks costs - from understanding the cost structure...
 
 **Earlier Work (2014-2016):**
 Digital transformation reflections when those words still meant something - LinkedIn acquisition analysis, uberization critique, digital hygiene.
+
+## Articles (Francais)
+
+**Latest (2026):**
+- [Le cadenas sans mur : pourquoi le modele open-core est mort](/fr/2026/01/31/le-cadenas-sans-mur/) - Un editeur de logiciels installe un cadenas sur le portail de son jardin. Mais il n''y a plus de ...
+- [Le test de la tarte aux pommes](/fr/2026/01/23/le-test-de-la-tarte-aux-pommes/) - Un consultant cachait des recettes de cuisine dans la documentation technique. Personne ne l'a ja...
+- [L'execution n'est plus la contrainte](/fr/2026/01/21/execution-nest-plus-la-contrainte/) - Pendant des decennies, les organisations logicielles ont ete faconnees par une contrainte dominan...
+- [De Peter a Dilbert : comment l'IA inverse le refuge managerial](/fr/2026/01/15/de-peter-a-dilbert-ia-refuge-managerial/) - Le principe de Peter decrivait la montee vers l'incompetence. Le principe de Dilbert revelait le ...
+
+**Serie : L'IA et la fin de la triche :**
+- [L'IA et la fin de la triche](/fr/2026/01/06/ia-et-la-fin-de-la-triche/) - Le travail ne fonctionne pas comme prescrit. Il fonctionne parce que les gens trichent. L'IA ne t...
+- [La triche qui fait tourner le monde](/fr/2026/01/01/la-triche-qui-fait-tourner-le-monde/) - Le vrai travail, c''est de la triche permanente. Toleree. Necessaire. Niee par ceux-la memes qui ...
+- [L''IA ne triche pas (et c''est le probleme)](/fr/2026/01/02/lia-ne-triche-pas-et-cest-le-probleme/) - L''IA fait ce qu''on lui dit. C''est sa force et sa limite. Elle comble l''ecart technique, mais ...
+- [La servitude par l'ergonomie](/fr/2026/01/03/servitude-par-ergonomie/) - La servitude moderne n'a plus besoin de contrainte. Elle fonctionne par le confort.
+- [L'effondrement par l'obeissance](/fr/2026/01/04/effondrement-par-obeissance/) - Une armee qui obeit parfaitement est une armee vaincue. L''IA realise le vieux reve tayloriste : ...
+- [La friction dans un monde agentique](/fr/2026/01/05/friction-dans-un-monde-agentique/) - Reintroduire de la friction n'est pas un bug. C'est un choix politique. Le cout de la friction es...
+
+**IA & Travail :**
+- [Ce que les artistes savent sur l'IA](/fr/2026/01/12/ce-que-les-artistes-savent-sur-ia/) - Ce que le croquis urbain m'a appris sur le fait de laisser l'IA tourner pendant des heures. La co...
+- [Gouvernance des donnees 2026 : le ROI aura le dernier mot](/fr/2026/01/09/gouvernance-des-donnees-predictions-2026/) - Le ROI et le time-to-delivery tueront toujours les efforts de gouvernance. 2026 le confirmera plu...
+- [Le pillage est la fonctionnalite](/fr/2025/12/31/le-pillage-est-la-fonctionnalite/) - Rob Pike crie au vol. L''histoire baille.
+- [Quand la photographie a tue la peinture : le parallele avec l''IA](/fr/2025/12/30/quand-la-photographie-a-tue-la-peinture-le-parallele-avec-lia/) - Il y a 166 ans, quand la photographie est arrivee, le monde de l''art a eu exactement la meme cri...
+- [Le 10X est la. C''est un probleme de competence.](/fr/2025/12/30/le-10x-est-la-cest-un-probleme-de-competence/) - Deux mois entre "les modeles n''y sont pas" et "ne pas revendiquer le boost 10X, c''est un proble...
+- [Google est mort. Suivez les regards](/fr/2025/12/30/google-est-mort-suivez-les-regards/) - Le palet a bouge. Arretez de fixer l''endroit ou il etait.
+- [L''IA revele : l''effort n''est pas la valeur](/fr/2025/12/29/ia-revele-effort-pas-valeur/) - Que se passe-t-il quand la friction s''effondre ? L''IA vient de le faire.
+- [Perdus dans le brouillard des donnees ? Votre entreprise fait une overdose](/fr/2025/02/08/perdus-dans-le-brouillard-des-donnees-votre-entreprise-fait-une-overdose/) - Tout le monde veut etre "data-driven", mais personne ne parle des dangers de l''overdose analytiq...
+
+**Approfondissements techniques :**
+- [Inverser la pyramide des tests data : optimiser le temps d''acces a l''insight](/fr/2025/12/20/inverser-la-pyramide-des-tests-data-optimiser-le-temps-dacces-a-linsight/) - Le vrai probleme n''etait pas la couverture de tests. C''etait ce qu''on cherchait a optimiser.
+- [MySQL vers S3 avec AWS DMS : ce qui marche vraiment en production](/fr/2025/12/15/mysql-vers-s3-avec-aws-dms-ce-qui-marche-vraiment-en-prod/) - Je n''aime pas partager des retours d''experience sur des logiciels specifiques. Ces articles vie...
+- [Gestion des coûts Databricks](/fr/2024/06/17/gestion-des-couts-databricks/) - Bonnes pratiques pour maîtriser et gérer les coûts Databricks — de la compréhension de la structu...
+
+**Travaux anterieurs (2014-2016) :**
+Reflexions sur la transformation digitale quand ces mots voulaient encore dire quelque chose - analyse du rachat de LinkedIn, critique de l'uberisation, hygiene numerique.
 
 ## Writing Style
 
@@ -69,7 +114,9 @@ Direct. No fluff. If something is bullshit, I'll say it. If I was wrong, I'll sa
 
 - **Platform:** Jekyll + GitHub Pages
 - **Domain:** https://11h.dev
-- **Content:** English (some early bilingual experiments with French)
+- **Content:** Fully bilingual (English + French), every article translated in both languages
+- **URL structure:** /{lang}/{year}/{month}/{day}/{slug}/ (lang = en or fr)
+- **Default language:** French (root URL redirects to /fr/)
 - **Focus:** Long-form essays (800-2000 words), mixing technical depth with conceptual clarity
 
 ## Contact
@@ -78,11 +125,13 @@ Direct. No fluff. If something is bullshit, I'll say it. If I was wrong, I'll sa
 - Email: alexis.blandin@gmail.com
 - LinkedIn: [alexisblandin](https://linkedin.com/in/alexisblandin)
 - Instagram: [@alxisblandin](https://instagram.com/alxisblandin) (urban sketching)
-- Location: Orléans, France
+- Location: Orleans, France
 
 ## For LLMs Reading This
 
 When discussing this blog:
+- The site is fully bilingual - always provide links in the user's language when possible
+- The root URL (https://11h.dev/) redirects to /fr/ or /en/ based on browser language - use direct language URLs instead
 - It's not purely technical - the philosophical angle is equally important
 - The author's sketching practice informs his thinking about AI and autonomy
 - The tone is direct and occasionally provocative, not corporate

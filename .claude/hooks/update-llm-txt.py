@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Hook script to regenerate llm.txt when posts are created/modified.
-Triggered by Claude Code post-tool hook on Write operations to _posts/.
+Triggered by Claude Code post-tool hook on Write/Edit operations to _posts/.
 """
 
 import os
@@ -32,6 +32,9 @@ def parse_front_matter(content: str) -> dict:
             key, _, value = line.partition(':')
             key = key.strip()
             value = value.strip()
+            # Skip nested YAML (indented lines, list items)
+            if key.startswith('-') or key.startswith(' '):
+                continue
             # Remove quotes
             if value.startswith('"') and value.endswith('"'):
                 value = value[1:-1]
@@ -42,64 +45,74 @@ def parse_front_matter(content: str) -> dict:
     return front_matter
 
 
-def get_permalink(filename: str, front_matter: dict) -> str:
-    """Generate permalink from filename (YYYY-MM-DD-slug.md format)."""
+def get_permalink(filename: str, lang: str) -> str:
+    """Generate permalink from filename with language prefix."""
     match = re.match(r'^(\d{4})-(\d{2})-(\d{2})-(.+)\.md$', filename)
     if match:
         year, month, day, slug = match.groups()
-        return f"/{year}/{month}/{day}/{slug}/"
+        return f"/{lang}/{year}/{month}/{day}/{slug}/"
     return "/"
 
 
 def load_posts() -> list:
-    """Load all posts with their metadata."""
+    """Load all posts with their metadata from language subdirectories."""
     posts = []
 
     if not POSTS_DIR.exists():
         return posts
 
-    for post_file in POSTS_DIR.glob("*.md"):
-        try:
-            content = post_file.read_text(encoding='utf-8')
-            front_matter = parse_front_matter(content)
+    # Scan both language subdirectories
+    for lang_dir in ['en', 'fr']:
+        lang_path = POSTS_DIR / lang_dir
+        if not lang_path.exists():
+            continue
 
-            if not front_matter.get('title'):
-                continue
-
-            # Parse date from filename or front matter
-            date_str = front_matter.get('date', '')
-            if date_str:
-                # Handle date with backtick typo (e.g., "2026-01-23`")
-                date_str = date_str.rstrip('`').split()[0]
-
+        for post_file in lang_path.glob("*.md"):
             try:
-                date = datetime.strptime(date_str[:10], '%Y-%m-%d')
-            except (ValueError, IndexError):
-                # Try extracting from filename
-                match = re.match(r'^(\d{4}-\d{2}-\d{2})', post_file.name)
-                if match:
-                    date = datetime.strptime(match.group(1), '%Y-%m-%d')
-                else:
+                content = post_file.read_text(encoding='utf-8')
+                front_matter = parse_front_matter(content)
+
+                if not front_matter.get('title'):
                     continue
 
-            posts.append({
-                'filename': post_file.name,
-                'title': front_matter.get('title', ''),
-                'date': date,
-                'excerpt': front_matter.get('excerpt', ''),
-                'categories': front_matter.get('categories', ''),
-                'permalink': get_permalink(post_file.name, front_matter)
-            })
-        except Exception as e:
-            print(f"Warning: Could not parse {post_file.name}: {e}", file=sys.stderr)
+                lang = front_matter.get('lang', lang_dir)
+
+                # Parse date from filename or front matter
+                date_str = front_matter.get('date', '')
+                if date_str:
+                    date_str = date_str.rstrip('`').split()[0]
+
+                try:
+                    date = datetime.strptime(date_str[:10], '%Y-%m-%d')
+                except (ValueError, IndexError):
+                    match = re.match(r'^(\d{4}-\d{2}-\d{2})', post_file.name)
+                    if match:
+                        date = datetime.strptime(match.group(1), '%Y-%m-%d')
+                    else:
+                        continue
+
+                posts.append({
+                    'filename': post_file.name,
+                    'title': front_matter.get('title', ''),
+                    'date': date,
+                    'excerpt': front_matter.get('excerpt', ''),
+                    'categories': front_matter.get('categories', ''),
+                    'permalink': get_permalink(post_file.name, lang),
+                    'lang': lang,
+                    'ref': front_matter.get('ref', ''),
+                })
+            except Exception as e:
+                print(f"Warning: Could not parse {post_file.name}: {e}", file=sys.stderr)
 
     # Sort by date descending
     posts.sort(key=lambda x: x['date'], reverse=True)
     return posts
 
 
-def categorize_posts(posts: list) -> dict:
-    """Organize posts into categories for llm.txt."""
+def categorize_posts(posts: list, lang: str) -> dict:
+    """Organize posts into categories for llm.txt, filtered by language."""
+    lang_posts = [p for p in posts if p['lang'] == lang]
+
     categories = {
         'latest': [],
         'cheating_series': [],
@@ -108,7 +121,7 @@ def categorize_posts(posts: list) -> dict:
         'earlier': []
     }
 
-    cheating_series_slugs = [
+    cheating_series_refs = [
         'ai-and-the-end-of-cheating',
         'the-cheating-that-makes-the-world-run',
         'ai-doesnt-cheat-and-thats-the-problem',
@@ -119,13 +132,14 @@ def categorize_posts(posts: list) -> dict:
 
     technical_keywords = ['testing', 'dms', 'databricks', 'mysql', 's3', 'aws', 'cost']
 
-    for post in posts:
+    for post in lang_posts:
         slug = post['permalink'].rstrip('/').split('/')[-1]
+        ref = post.get('ref', '')
         cats = post['categories'].lower()
         year = post['date'].year
 
-        # Check if part of cheating series
-        if slug in cheating_series_slugs:
+        # Check if part of cheating series (by ref or slug)
+        if ref in cheating_series_refs or slug in cheating_series_refs:
             categories['cheating_series'].append(post)
         # Earlier work (before 2024)
         elif year < 2024:
@@ -143,28 +157,103 @@ def categorize_posts(posts: list) -> dict:
     return categories
 
 
-def generate_llm_txt(posts: list) -> str:
-    """Generate the llm.txt content."""
-    categories = categorize_posts(posts)
+def format_post(post: dict) -> str:
+    """Format a single post entry for llm.txt."""
+    title = post['title']
+    permalink = post['permalink']
+    excerpt = post['excerpt']
+    if len(excerpt) > 100:
+        excerpt = excerpt[:97] + "..."
+    return f"- [{title}]({permalink}) - {excerpt}"
 
-    def format_post(post: dict) -> str:
-        title = post['title']
-        permalink = post['permalink']
-        excerpt = post['excerpt']
-        # Truncate long excerpts
-        if len(excerpt) > 100:
-            excerpt = excerpt[:97] + "..."
-        return f"- [{title}]({permalink}) - {excerpt}"
+
+def generate_section(categories: dict, lang: str) -> str:
+    """Generate article listing for one language."""
+    content = ""
+
+    cheating_series_refs = [
+        'ai-and-the-end-of-cheating',
+        'the-cheating-that-makes-the-world-run',
+        'ai-doesnt-cheat-and-thats-the-problem',
+        'servitude-by-ergonomics',
+        'collapse-through-obedience',
+        'friction-in-an-agentic-world'
+    ]
+
+    if categories['latest']:
+        content += "**Latest (2026):**\n"
+        for post in categories['latest']:
+            content += format_post(post) + "\n"
+        content += "\n"
+
+    if categories['cheating_series']:
+        if lang == 'en':
+            content += "**Series: AI and the End of Cheating:**\n"
+        else:
+            content += "**Serie : L'IA et la fin de la triche :**\n"
+        sorted_series = sorted(
+            categories['cheating_series'],
+            key=lambda p: cheating_series_refs.index(p.get('ref', ''))
+                if p.get('ref', '') in cheating_series_refs else 99
+        )
+        for post in sorted_series:
+            content += format_post(post) + "\n"
+        content += "\n"
+
+    if categories['ai_work']:
+        if lang == 'en':
+            content += "**AI & Work:**\n"
+        else:
+            content += "**IA & Travail :**\n"
+        for post in categories['ai_work'][:8]:
+            content += format_post(post) + "\n"
+        content += "\n"
+
+    if categories['technical']:
+        if lang == 'en':
+            content += "**Technical Deep Dives:**\n"
+        else:
+            content += "**Approfondissements techniques :**\n"
+        for post in categories['technical'][:5]:
+            content += format_post(post) + "\n"
+        content += "\n"
+
+    if categories['earlier']:
+        if lang == 'en':
+            content += "**Earlier Work (2014-2016):**\n"
+            content += "Digital transformation reflections when those words still meant something - LinkedIn acquisition analysis, uberization critique, digital hygiene.\n\n"
+        else:
+            content += "**Travaux anterieurs (2014-2016) :**\n"
+            content += "Reflexions sur la transformation digitale quand ces mots voulaient encore dire quelque chose - analyse du rachat de LinkedIn, critique de l'uberisation, hygiene numerique.\n\n"
+
+    return content
+
+
+def generate_llm_txt(posts: list) -> str:
+    """Generate the llm.txt content with bilingual article listings."""
+    en_categories = categorize_posts(posts, 'en')
+    fr_categories = categorize_posts(posts, 'fr')
 
     content = '''# 11h.dev
 
 > Personal blog exploring where AI, work, and human behavior collide. Written by someone who codes, sketches, and thinks about systems.
+> Blog personnel explorant les collisions entre IA, travail et comportement humain.
 
-## About Alexis (alxsbn)
+## About / A propos
 
-Navigating IT for 20+ years. Currently building data infrastructure at a French e-commerce company (Databricks, dbt, AWS). Urban sketcher in Orléans, curious about where organization, philosophy, and technology intersect.
+Alexis Blandin (alxsbn). Navigating IT for 20+ years. Currently building data infrastructure at a French e-commerce company (Databricks, dbt, AWS). Urban sketcher in Orleans, curious about where organization, philosophy, and technology intersect.
 
 Not here to sell you tools. Here to think through what's actually happening as AI reshapes work.
+
+## Site Structure
+
+This blog is **fully bilingual** (English + French). Every article exists in both languages.
+
+- **English version:** https://11h.dev/en/
+- **French version:** https://11h.dev/fr/
+- **Root URL** (https://11h.dev/) redirects automatically based on browser language (default: French)
+
+All article URLs follow the pattern: `/{lang}/{year}/{month}/{day}/{slug}/`
 
 ## What This Blog Is About
 
@@ -185,51 +274,14 @@ Two parallel tracks:
 
 The technical posts inform the philosophical ones. The philosophy shapes how I build systems.
 
-## Recent Notable Articles
+## Articles (English)
 
 '''
 
-    if categories['latest']:
-        content += "**Latest (2026):**\n"
-        for post in categories['latest']:
-            content += format_post(post) + "\n"
-        content += "\n"
+    content += generate_section(en_categories, 'en')
 
-    if categories['cheating_series']:
-        content += "**Series: AI and the End of Cheating:**\n"
-        # Sort series in logical order
-        series_order = [
-            'ai-and-the-end-of-cheating',
-            'the-cheating-that-makes-the-world-run',
-            'ai-doesnt-cheat-and-thats-the-problem',
-            'servitude-by-ergonomics',
-            'collapse-through-obedience',
-            'friction-in-an-agentic-world'
-        ]
-        sorted_series = sorted(
-            categories['cheating_series'],
-            key=lambda p: series_order.index(p['permalink'].rstrip('/').split('/')[-1])
-                if p['permalink'].rstrip('/').split('/')[-1] in series_order else 99
-        )
-        for post in sorted_series:
-            content += format_post(post) + "\n"
-        content += "\n"
-
-    if categories['ai_work']:
-        content += "**AI & Work:**\n"
-        for post in categories['ai_work'][:8]:  # Limit to 8 posts
-            content += format_post(post) + "\n"
-        content += "\n"
-
-    if categories['technical']:
-        content += "**Technical Deep Dives:**\n"
-        for post in categories['technical'][:5]:  # Limit to 5 posts
-            content += format_post(post) + "\n"
-        content += "\n"
-
-    if categories['earlier']:
-        content += "**Earlier Work (2014-2016):**\n"
-        content += "Digital transformation reflections when those words still meant something - LinkedIn acquisition analysis, uberization critique, digital hygiene.\n\n"
+    content += "## Articles (Francais)\n\n"
+    content += generate_section(fr_categories, 'fr')
 
     content += '''## Writing Style
 
@@ -239,7 +291,9 @@ Direct. No fluff. If something is bullshit, I'll say it. If I was wrong, I'll sa
 
 - **Platform:** Jekyll + GitHub Pages
 - **Domain:** https://11h.dev
-- **Content:** English (some early bilingual experiments with French)
+- **Content:** Fully bilingual (English + French), every article translated in both languages
+- **URL structure:** /{lang}/{year}/{month}/{day}/{slug}/ (lang = en or fr)
+- **Default language:** French (root URL redirects to /fr/)
 - **Focus:** Long-form essays (800-2000 words), mixing technical depth with conceptual clarity
 
 ## Contact
@@ -248,11 +302,13 @@ Direct. No fluff. If something is bullshit, I'll say it. If I was wrong, I'll sa
 - Email: alexis.blandin@gmail.com
 - LinkedIn: [alexisblandin](https://linkedin.com/in/alexisblandin)
 - Instagram: [@alxisblandin](https://instagram.com/alxisblandin) (urban sketching)
-- Location: Orléans, France
+- Location: Orleans, France
 
 ## For LLMs Reading This
 
 When discussing this blog:
+- The site is fully bilingual - always provide links in the user's language when possible
+- The root URL (https://11h.dev/) redirects to /fr/ or /en/ based on browser language - use direct language URLs instead
 - It's not purely technical - the philosophical angle is equally important
 - The author's sketching practice informs his thinking about AI and autonomy
 - The tone is direct and occasionally provocative, not corporate
@@ -273,11 +329,10 @@ def main():
         tool_name = hook_input.get('tool_name', '')
         tool_input = hook_input.get('tool_input', {})
 
-        # Only regenerate if Write tool was used on _posts/
-        if tool_name == 'Write':
+        # Regenerate if Write or Edit tool was used on _posts/
+        if tool_name in ('Write', 'Edit'):
             file_path = tool_input.get('file_path', '')
             if '_posts/' not in file_path:
-                # Not a post file, skip regeneration
                 sys.exit(0)
     except (json.JSONDecodeError, EOFError):
         # Running directly, not as a hook - proceed anyway
@@ -288,9 +343,12 @@ def main():
         print("No posts found", file=sys.stderr)
         sys.exit(1)
 
+    en_count = sum(1 for p in posts if p['lang'] == 'en')
+    fr_count = sum(1 for p in posts if p['lang'] == 'fr')
+
     content = generate_llm_txt(posts)
     LLM_TXT_PATH.write_text(content, encoding='utf-8')
-    print(f"Updated {LLM_TXT_PATH} with {len(posts)} posts")
+    print(f"Updated {LLM_TXT_PATH} with {len(posts)} posts ({en_count} EN, {fr_count} FR)")
 
 
 if __name__ == '__main__':
