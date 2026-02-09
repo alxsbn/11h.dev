@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "L''IA ne triche pas (et c''est le probleme)"
+title: "L'IA ne triche pas (et c'est le probleme)"
 date: 2026-01-02
 categories: [ai, philosophy, work, series]
-excerpt: "L''IA fait ce qu''on lui dit. C''est sa force et sa limite. Elle comble l''ecart technique, mais l''ecart politique -- savoir quand une regle est absurde -- elle ne le voit pas."
+excerpt: "L'IA fait ce qu'on lui dit. C'est sa force et sa limite. Elle comble l'ecart technique, mais l'ecart politique -- savoir quand une regle est absurde -- elle ne le voit pas."
 lang: fr
 header_image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1600&q=80"
-header_image_alt: "Ecran d''ordinateur affichant des lignes de code"
+header_image_alt: "Ecran d'ordinateur affichant des lignes de code"
 header_image_credit: "Chris Ried"
 header_image_credit_url: "https://unsplash.com/@cdr6934"
 header_image_source: "Unsplash"

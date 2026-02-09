@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "L''IA revele : l''effort n''est pas la valeur"
+title: "L'IA revele : l'effort n'est pas la valeur"
 date: 2025-12-29
 categories: [ai, productivity]
-excerpt: "Que se passe-t-il quand la friction s''effondre ? L''IA vient de le faire."
+excerpt: "Que se passe-t-il quand la friction s'effondre ? L'IA vient de le faire."
 lang: fr
 header_image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1600&q=80"
 header_image_alt: "Espace de travail minimaliste avec un ordinateur portable"

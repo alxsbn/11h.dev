@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Quand la photographie a tue la peinture : le parallele avec l''IA"
+title: "Quand la photographie a tue la peinture : le parallele avec l'IA"
 date: 2025-12-30
 categories: [ai, history, productivity]
-excerpt: "Il y a 166 ans, quand la photographie est arrivee, le monde de l''art a eu exactement la meme crise que celle que l''on observe aujourd''hui avec l''IA. L''histoire ne se repete pas, mais elle rime."
+excerpt: "Il y a 166 ans, quand la photographie est arrivee, le monde de l'art a eu exactement la meme crise que celle que l'on observe aujourd'hui avec l'IA. L'histoire ne se repete pas, mais elle rime."
 lang: fr
 header_image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&q=80"
 header_image_alt: "Appareil photo vintage sur une surface en bois"

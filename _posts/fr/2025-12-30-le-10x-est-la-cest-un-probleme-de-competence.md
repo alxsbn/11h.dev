@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Le 10X est la. C''est un probleme de competence."
+title: "Le 10X est la. C'est un probleme de competence."
 date: 2025-12-30
 categories: [ai, productivity, coding]
 excerpt: 'Deux mois entre "les modeles n''y sont pas" et "ne pas revendiquer le boost 10X, c''est un probleme de competence." La vraie competence n''est plus de coder. C''est de lacher prise.'
 lang: fr
 header_image: "/assets/images/nata-shilo-hand-paintbrush.jpg"
-header_image_alt: "Main tenant un pinceau d''artiste use sur un fond beige"
+header_image_alt: "Main tenant un pinceau d'artiste use sur un fond beige"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"
 ref: the-10x-is-here-its-a-skill-issue

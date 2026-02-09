@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Inverser la pyramide des tests data : optimiser le temps d''acces a l''insight"
+title: "Inverser la pyramide des tests data : optimiser le temps d'acces a l'insight"
 date: 2025-12-20
 categories: [data, testing]
-excerpt: "Le vrai probleme n''etait pas la couverture de tests. C''etait ce qu''on cherchait a optimiser."
+excerpt: "Le vrai probleme n'etait pas la couverture de tests. C'etait ce qu'on cherchait a optimiser."
 lang: fr
 header_image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80"
 header_image_alt: "Tableau de bord de visualisation de donnees"

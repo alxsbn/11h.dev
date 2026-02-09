@@ -3,7 +3,7 @@ layout: post
 title: "MySQL vers S3 avec AWS DMS : ce qui marche vraiment en production"
 date: 2025-12-15
 categories: [data, work, tech]
-excerpt: "Je n''aime pas partager des retours d''experience sur des logiciels specifiques. Ces articles vieillissent mal. Mais sur AWS DMS vers S3, on a assez souffert chez..."
+excerpt: "Je n'aime pas partager des retours d'experience sur des logiciels specifiques. Ces articles vieillissent mal. Mais sur AWS DMS vers S3, on a assez souffert chez..."
 lang: fr
 header_image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80"
 header_image_alt: "Salle de serveurs avec des lumieres bleues"

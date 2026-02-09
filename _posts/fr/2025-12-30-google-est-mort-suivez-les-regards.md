@@ -3,7 +3,7 @@ layout: post
 title: "Google est mort. Suivez les regards"
 date: 2025-12-30
 categories: [marketing, ai]
-excerpt: "Le palet a bouge. Arretez de fixer l''endroit ou il etait."
+excerpt: "Le palet a bouge. Arretez de fixer l'endroit ou il etait."
 lang: fr
 header_image: "https://images.unsplash.com/photo-1515703407324-5f753afd8be8?w=1600&q=80"
 header_image_alt: "Joueurs de hockey sur glace sur la patinoire"
