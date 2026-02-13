@@ -1,122 +1,136 @@
-# CLAUDE.md - Blog Information
+# CLAUDE.md — 11h.dev
 
 ## Overview
-**11h.dev** is a personal notes website and blog by Alexis Blandin (alxsbn) for sharing thoughts on ideas and passions.
+
+**11h.dev** is a personal blog by Alexis Blandin (alxsbn). Jekyll static site, hosted on GitHub Pages.
 
 ## Technical Stack
+
 - **Platform**: Jekyll static site generator
-- **Theme**: Minima (auto skin)
+- **Theme**: Minima v2.5.1 (GitHub Pages version, not v3.x)
+- **Skin**: `auto` (dark mode support)
 - **Markdown**: Kramdown
 - **Hosting**: GitHub Pages
 - **Domain**: https://11h.dev
+- **Languages**: Bilingual — French (default) + English
 
-### GitHub Pages Constraints (IMPORTANT)
+### GitHub Pages Constraints
 
-GitHub Pages uses **Minima v2.5.1** (not v3.x). This has limitations:
+GitHub Pages ships Minima v2.5.1, not v3.x.
 
 | Feature | Minima 3.x | Minima 2.5.1 (GitHub Pages) |
 |---------|------------|----------------------------|
-| `custom-head.html` hook | ✅ Auto-included | ❌ Requires manual override |
-| Dark mode | ✅ Built-in | ⚠️ Via `skin: auto` |
+| `custom-head.html` hook | Auto-included | Requires manual override |
+| Dark mode | Built-in | Via `skin: auto` |
 
-**To include custom head content** (favicon, custom CSS):
-- Create `_includes/head.html` that copies Minima's default and adds `{% include custom-head.html %}`
-- See current `_includes/head.html` for reference
+To include custom head content: `_includes/head.html` copies Minima's default and adds `{% include custom-head.html %}`.
 
-**Current custom includes:**
-- `_includes/head.html` - Override to include custom-head.html
-- `_includes/custom-head.html` - Favicon + header image CSS
+## Project Structure
 
-## Blog Structure
+```
+_posts/
+  en/          # English posts
+  fr/          # French posts
+_layouts/
+  home.html    # Homepage (bilingual, featured post + grid)
+  post.html    # Post layout (header image, share buttons, author bio)
+_includes/
+  head.html          # Minima head override
+  custom-head.html   # Favicon, OG tags, hreflang, Google Fonts
+  header.html        # Nav, language toggle, dark mode toggle
+  newsletter-form.html
+  google-analytics.html
+  youtube.html
+_data/
+  translations.yml   # UI strings (FR/EN)
+assets/
+  main.scss
+  images/            # Post images
+  alexis-photos/     # Author photos
+  favicon.svg
+  11h-logo.png
+en/
+  index.html         # EN homepage
+  about.md           # EN about page
+fr/
+  index.html         # FR homepage
+  about.md           # FR about page
+scripts/
+  check-bilingual.sh # Verifies FR/EN post parity
+```
 
-### Content Organization
-- **Posts**: Located in `_posts/` directory
-- **Naming Convention**: `YYYY-MM-DD-title-slug.md`
-- **Permalink Structure**: `/:year/:month/:day/:title/`
+## Post Format
 
-### Post Format
-All posts must include front matter with:
+Posts live in `_posts/en/` and `_posts/fr/`. Naming: `YYYY-MM-DD-title-slug.md`.
+
+Front matter:
 ```yaml
 ---
 layout: post
 title: "Post Title"
 date: YYYY-MM-DD
 categories: [category1, category2]
-excerpt: 'Short description for preview'  # Use single quotes if content has "double quotes"
+excerpt: 'Short description for preview'
 header_image: "https://images.unsplash.com/photo-XXXXX?w=1600&q=80"
 header_image_alt: "Image description"
 header_image_credit: "Photographer Name"
 header_image_credit_url: "https://unsplash.com/@photographer"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
+ref: post-slug-identifier
+lang: en
 ---
 ```
 
-**YAML Quoting Rule**: If excerpt contains `"quotes"`, use single quotes outside: `excerpt: 'Be "data-driven"'`
-If it also has apostrophes, double them: `excerpt: 'It''s "data-driven"'`
+- `ref`: links FR and EN versions of the same post (must match)
+- `lang`: `en` or `fr`
+- YAML quoting: use single quotes if excerpt contains double quotes: `excerpt: 'Be "data-driven"'`
+- If it also has apostrophes, double them: `excerpt: 'It''s "data-driven"'`
 
-### Header Images
-Every blog post should have a header image. The custom `_layouts/post.html` supports header images with proper attribution.
+## Header Images
 
-**How to add a header image:**
-1. Go to [Unsplash](https://unsplash.com) and search for an image matching the article's theme
-2. Copy the photo URL (format: `https://images.unsplash.com/photo-XXXXX`)
-3. Add `?w=1600&q=80` for optimization
-4. Copy the photographer's name and profile URL for attribution
-5. Add all `header_image_*` fields to the front matter
+Every post needs a header image. See `_layouts/post.html` for rendering.
 
-**Supported fields:**
 | Field | Required | Description |
 |-------|----------|-------------|
-| `header_image` | Yes | URL to the image (Unsplash or local `/assets/images/...`) |
+| `header_image` | Yes | URL (Unsplash `?w=1600&q=80`) or local `/assets/images/...` |
 | `header_image_alt` | Yes | Alt text for accessibility |
 | `header_image_credit` | Recommended | Photographer's name |
 | `header_image_credit_url` | Recommended | Photographer's profile URL |
 | `header_image_source` | Optional | Source name (e.g., "Unsplash") |
 | `header_image_source_url` | Optional | Source website URL |
 
-**Local images:** Store in `/assets/images/` and reference as `/assets/images/filename.jpg`
+## Plugins
 
-## Author Information
+- jekyll-feed (RSS at /feed.xml)
+- jekyll-seo-tag
+- jekyll-sitemap
+- jekyll-redirect-from
+
+## Author
+
 - **Name**: Alexis Blandin (alxsbn)
 - **Email**: alexis.blandin@gmail.com
 - **GitHub**: https://github.com/alxsbn
 - **LinkedIn**: https://linkedin.com/in/alexisblandin
 - **Instagram**: https://www.instagram.com/alxisblandin
 
-## Site Configuration
-- **Base URL**: ""
-- **URL**: https://11h.dev
-- **Excerpts**: Enabled on home page
-- **Social Links**: GitHub, Instagram, LinkedIn
-
-## Navigation
-Header pages:
-- Home (index.md)
-- About (about.md)
-
-## Plugins
-- jekyll-feed (RSS feed at /feed.xml)
-- jekyll-seo-tag (SEO optimization)
-- jekyll-sitemap (sitemap generation)
-
-## Content Guidelines
-- **Language**: Always write blog posts in **English**, even if the user provides input in French. Translate and adapt the content.
-- **Topics**: Ideas, passions, reflections, AI, productivity, philosophy
-- **Style**: Personal, thoughtful, analytical
-
 ## Git Workflow
-- **Main Branch**: (default branch for production)
-- **Feature Branches**: Use `claude/feature-name-sessionID` format
-- Always commit with descriptive messages
+
+- **Main Branch**: production
+- **Feature Branches**: `claude/feature-name-sessionID`
+- Commit with descriptive messages
 - Push to feature branches before merging
 
-## Current Articles (as of 2025-12-29)
-1. "The Effort Trap: What AI Really Reveals About Work" (English)
-2. "Le piège de l'effort" (French version)
-3. "Laziness as a Revealer" (English, shorter version)
-4. "La flemme comme révélateur" (French, shorter version)
+## Editorial Content
 
-## Notes
-- Focus on quality over quantity
-- Articles explore philosophical and practical aspects of technology, work, and human behavior
+**Before creating or modifying any post**, read `_posts/CLAUDE.md`. It contains:
+- Bilingual obligation (every post must exist in FR and EN)
+- Writing style rules and AI anti-patterns to avoid
+- Tone and voice guidelines
+
+**After creating any post**, run:
+```bash
+scripts/check-bilingual.sh
+```
+If it fails, create the missing version before committing.
