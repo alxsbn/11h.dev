@@ -46,8 +46,10 @@ Flag:
 - Paragraphs that are all 1-2 sentences (no breathing room)
 - Cliffhanger-style sentence endings that feel like podcast teasers: "Et ils sont tous liés au pouvoir."
 - Uniform paragraph length throughout (no variation)
+- Two parallel short sentences that could be connected with a comma, semicolon, or colon: "Leurs biais ne sont pas malveillants. Ils sont structurels." → "Leurs biais ne sont pas malveillants, ils sont structurels."
+- Replacing an em dash with a period doesn't fix telegraphic rhythm: "tout ça remonte." is just as choppy as "— tout ça remonte." Restructure the sentence instead.
 
-**Test**: Read a section aloud. Does it sound like someone thinking, or someone performing?
+**Test**: Read a section aloud. Does it sound like someone thinking, or someone performing? If every sentence lands like a slap, you're performing.
 
 ### C. Personal Voice
 

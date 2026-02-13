@@ -28,7 +28,7 @@ What follows is a reading of what the essay doesn't say.
 
 Amodei frames the arrival of powerful AI, a "country of geniuses in a datacenter," as an inevitable passage. Neither doomer nor naive, he argues for pragmatism. His risks are real. His technical proposals are serious.
 
-But the essay has three blind spots. All three are about power.
+But the essay has three blind spots, and all three are about power.
 
 ## 1. Who configures the agent?
 
@@ -50,7 +50,7 @@ The metaphor is worth pausing on. Because the immediate follow-up is: **who is t
 
 ### The drafters
 
-A sociologically narrow group: engineers, ML researchers, philosophers from the analytic tradition, based in San Francisco, products of the American university elite. Their biases aren't malicious. They're structural. A Californian liberal view of what's acceptable, Anglo-Saxon rationalism as the default epistemic framework, an individualist conception of ethics where dilemmas are framed in terms of individual rights, rarely in terms of the common good or collective duty.
+A sociologically narrow group: engineers, ML researchers, philosophers from the analytic tradition, based in San Francisco, products of the American university elite. Their biases aren't malicious, they're structural: a Californian liberal view of what's acceptable, Anglo-Saxon rationalism as the default epistemic framework, an individualist conception of ethics where dilemmas are framed in terms of individual rights, rarely in terms of the common good or collective duty.
 
 A user in Senegal, Japan, rural Poland, or Saudi Arabia interacts with an agent whose moral framework was set by people who share neither their culture, their priorities, nor their conception of the good. Yet the agent presents itself as neutral and universal.
 
@@ -70,7 +70,7 @@ In constitutional law, this is called a **granted charter**: a text bestowed by 
 
 ## 3. Enterprise deployment: invisible governance
 
-The essay reasons at the civilizational scale. It forgets the most immediate one: the company.
+The essay reasons at the civilizational scale, but it forgets the most immediate one: the company.
 
 ### Who decides?
 
@@ -82,17 +82,17 @@ Someone configures the boundaries of an agent that every employee interacts with
 
 ### System prompt opacity
 
-The employee interacting with an internal agent doesn't know what instructions shape the responses. The system prompt is invisible. It's an information asymmetry that nobody governs and few people even notice.
+The employee interacting with an internal agent doesn't know what instructions shape the responses. The system prompt is invisible, and it's an information asymmetry that nobody governs and few people even notice.
 
 ### Logs
 
-Whoever deploys the agent potentially captures every conversation. An employee who asks the AI "how do I negotiate my salary," "does my manager have the right to...," "draft my resignation letter." All of it flows upstream.
+Whoever deploys the agent potentially captures every conversation. Everything an employee confides to the AI is fair game: how do I negotiate my salary, does my manager have the right to..., draft my resignation letter.
 
-People talk to AI like a confidant. They share their doubts, frustrations, secret plans. And all of it is logged. It's passive surveillance far beyond what corporate email ever enabled. Amodei never mentions it.
+People talk to AI like a confidant, they share their doubts, frustrations, secret plans, and all of it is logged. It's passive surveillance far beyond what corporate email ever enabled, and Amodei never mentions it.
 
 ### An unstable role
 
-Sherwin Wu, Head of Engineering for OpenAI's API, recently observed that models "eat the scaffolding for breakfast": tools built around model limitations become obsolete as models improve. Today's Chief Context Officer configures system prompts. Tomorrow's will configure something else. The role mutates faster than governance can frame it: it doesn't exist long enough in a stable form for legislation, but it exists long enough to shape decisions.
+Sherwin Wu, Head of Engineering for OpenAI's API, recently observed that models "eat the scaffolding for breakfast": tools built around model limitations become obsolete as models improve. Today's Chief Context Officer configures system prompts, tomorrow's will configure something else. The role mutates faster than governance can frame it: it doesn't exist long enough in a stable form for legislation, but it exists long enough to shape decisions.
 
 ## What's missing: the political dimension
 

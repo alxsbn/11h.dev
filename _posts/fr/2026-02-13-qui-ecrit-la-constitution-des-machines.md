@@ -26,7 +26,7 @@ Ce qui suit est une lecture de ce que l'essai ne dit pas.
 
 Amodei décrit l'arrivée d'une IA puissante, un « pays de génies dans un datacenter », comme un passage obligé. Ni catastrophiste ni naïf, il plaide pour le pragmatisme. Ses risques sont réels, ses propositions techniques sont sérieuses.
 
-Mais l'essai a trois angles morts. Les trois concernent le pouvoir.
+Mais l'essai a trois angles morts, et les trois concernent le pouvoir.
 
 ## 1. Qui configure l'agent ?
 
@@ -48,7 +48,7 @@ La métaphore mérite qu'on s'y arrête. Car la question qui suit est : **qui es
 
 ### Les rédacteurs
 
-Un groupe sociologiquement étroit : ingénieurs, chercheurs en ML, philosophes de tradition analytique, basés à San Francisco, issus de l'élite universitaire américaine. Leurs biais ne sont pas malveillants. Ils sont structurels. Une vision libérale californienne de ce qui est acceptable, un rationalisme anglo-saxon comme cadre épistémique par défaut, une conception individualiste de l'éthique où les dilemmes se posent en termes de droits individuels, rarement de bien commun ou de devoir collectif.
+Un groupe sociologiquement étroit : ingénieurs, chercheurs en ML, philosophes de tradition analytique, basés à San Francisco, issus de l'élite universitaire américaine. Leurs biais ne sont pas malveillants, ils sont structurels : une vision libérale californienne de ce qui est acceptable, un rationalisme anglo-saxon comme cadre épistémique par défaut, une conception individualiste de l'éthique où les dilemmes se posent en termes de droits individuels, rarement de bien commun ou de devoir collectif.
 
 Un utilisateur au Sénégal, au Japon, en Pologne rurale ou en Arabie Saoudite interagit avec un agent dont le cadre moral a été défini par des gens qui ne partagent ni sa culture, ni ses priorités, ni sa conception du bien. Mais l'agent se présente comme neutre et universel.
 
@@ -68,7 +68,7 @@ En droit constitutionnel, on appelle ça une **charte octroyée** : un texte acc
 
 ## 3. Le déploiement en entreprise : la gouvernance invisible
 
-L'essai raisonne à l'échelle civilisationnelle. Il oublie l'échelle la plus immédiate : l'entreprise.
+L'essai raisonne à l'échelle civilisationnelle, mais il oublie la plus immédiate : l'entreprise.
 
 ### Qui décide ?
 
@@ -80,17 +80,17 @@ Quelqu'un configure les limites d'un agent avec lequel chaque salarié interagit
 
 ### L'opacité du prompt système
 
-Le salarié qui interagit avec un agent interne ne sait pas quelles instructions conditionnent les réponses. Le prompt système est invisible. C'est une asymétrie informationnelle que personne ne gouverne et que peu de gens identifient.
+Le salarié qui interagit avec un agent interne ne sait pas quelles instructions conditionnent les réponses. Le prompt système est invisible, et c'est une asymétrie informationnelle que personne ne gouverne et que peu de gens identifient.
 
 ### Les logs
 
-Celui qui déploie l'agent capture potentiellement l'intégralité des conversations. Un salarié qui demande à l'IA « comment négocier mon salaire », « est-ce que mon manager a le droit de... », « rédige ma lettre de démission ». Tout ça remonte.
+Celui qui déploie l'agent capture potentiellement l'intégralité des conversations. Tout ce qu'un salarié confie à l'IA y passe : comment négocier mon salaire, est-ce que mon manager a le droit de..., rédige ma lettre de démission.
 
-Les gens parlent à l'IA comme à un confident. Ils y mettent leurs doutes, leurs frustrations, leurs projets secrets. Et tout est loggé. C'est un outil de surveillance passive bien au-delà de ce que l'email professionnel a jamais permis. Amodei ne le mentionne pas.
+Les gens parlent à l'IA comme à un confident, ils y mettent leurs doutes, leurs frustrations, leurs projets secrets, et tout est loggé. C'est de la surveillance passive bien au-delà de ce que l'email professionnel a jamais permis, et Amodei ne le mentionne pas.
 
 ### Un rôle instable
 
-Sherwin Wu, Head of Engineering pour l'API d'OpenAI, a récemment observé que les modèles « mangent le scaffolding au petit-déjeuner » : les outils construits autour des limites des modèles deviennent obsolètes à mesure que les modèles s'améliorent. Le Chief Context Officer d'aujourd'hui configure des prompts système. Celui de demain configurera autre chose. Le rôle mute plus vite que la gouvernance ne peut le cadrer : il n'existe pas assez longtemps sous une forme stable pour qu'on légifère, mais assez longtemps pour façonner des décisions.
+Sherwin Wu, Head of Engineering pour l'API d'OpenAI, a récemment observé que les modèles « mangent le scaffolding au petit-déjeuner » : les outils construits autour des limites des modèles deviennent obsolètes à mesure que les modèles s'améliorent. Le Chief Context Officer d'aujourd'hui configure des prompts système, celui de demain configurera autre chose. Le rôle mute plus vite que la gouvernance ne peut le cadrer : il n'existe pas assez longtemps sous une forme stable pour qu'on légifère, mais assez longtemps pour façonner des décisions.
 
 ## Ce qui manque : la dimension politique
 
