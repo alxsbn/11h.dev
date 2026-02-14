@@ -1,9 +1,11 @@
 ---
 layout: post
 title: "Qui écrit la constitution des machines ?"
-date: 2026-02-13
+date: 2026-02-18
 categories: [ai, governance, ethics]
 excerpt: 'Dario Amodei a écrit 20 000 mots sur les risques de l''IA. Il n''a jamais posé la question : qui écrit la constitution morale de Claude, et avec quelle légitimité ?'
+redirect_from:
+  - /fr/2026/02/13/qui-ecrit-la-constitution-des-machines/
 header_image: "https://images.unsplash.com/photo-1602660187275-7275b639d7ea?w=1600&q=80"
 header_image_alt: "Ancien livre ouvert avec texte manuscrit sur parchemin"
 header_image_credit: "Boudewijn Huysmans"
