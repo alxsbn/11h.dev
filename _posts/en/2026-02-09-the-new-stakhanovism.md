@@ -20,19 +20,19 @@ lang: en
 
 In 1935, Alexeï Stakhanov extracted 102 tonnes of coal in a single shift, 14 times the norm. The Soviet Union made him a hero, and the Stakhanovite movement was born. Model workers surpassed quotas, proving the system worked.
 
-What the propaganda didn't mention: teams cleared the way before him, removed obstacles, and prepared his tools. He wasn't alone, he was *staged*.
+What the propaganda didn't mention were the teams that cleared the way before him, removed obstacles, and prepared his tools. He wasn't alone, he was *staged*.
 
 The staging served two purposes: legitimize the system, and raise quotas for everyone else. "If Stakhanov can do it, why can't you?"
 
-In June 2025, Elena Verna, Head of Growth at Lovable, publishes [The Rise of the AI-Native Employee](https://www.elenaverna.com/p/the-rise-of-the-ai-native-employee). Small teams, no process, no handoffs, no middle management. Default to AI. Build, don't coordinate. 35 people for $80M ARR. The #AINativeEmployeeEra.
+In June 2025, Elena Verna, Head of Growth at Lovable, publishes [The Rise of the AI-Native Employee](https://www.elenaverna.com/p/the-rise-of-the-ai-native-employee). She describes a radical model: small teams with no process, no handoffs and no middle management, where AI is the default tool. Build, don't coordinate, with 35 people for $80M ARR. The #AINativeEmployeeEra.
 
-Eight months later, Lovable puts Lazar Jovanovic on [Lenny's Podcast](https://www.lennysnewsletter.com/p/getting-paid-to-vibe-code), the largest product podcast in tech. He's their "first professional vibe coder." No coding background. Ships production-quality products using only AI. The thesis made flesh.
+Eight months later, Lovable puts Lazar Jovanovic on [Lenny's Podcast](https://www.lennysnewsletter.com/p/getting-paid-to-vibe-code), the largest product podcast in tech. He's their "first professional vibe coder": no coding background, he ships production-quality products using only AI. The thesis made flesh.
 
-Meanwhile, Lovable has 47 open positions and ~350 employees. GTM Operations. Recruitment Coordinator. Customer Success Manager. Enterprise Account Executive. Security Engineer with "5+ years in cloud-native environments." Analytics Engineer supporting Sales and Customer Success. Almost word for word, the roles Elena described as going extinct.
+Meanwhile, Lovable has 47 open positions and ~350 employees: GTM Operations, Recruitment Coordinator, Customer Success Manager, Enterprise Account Executive, Security Engineer with "5+ years in cloud-native environments," and Analytics Engineer supporting Sales and Customer Success. Almost word for word, the roles Elena described as going extinct.
 
 Lazar is one person out of 350. Behind his demos, there's infrastructure maintained by platform engineers, security handled by specialists, enterprise deals closed by experienced AEs, and a GTM machine staffed by seasoned operators. Lovable is the most visible case of a broader pattern. Klarna replaced 700 customer service agents with AI and made it a press release. Duolingo cut contractors after expanding its AI capabilities and framed it as evolution. The fable is always the same: the system works, and the human is optional. Lovable tells it loudest, and the gap between its narrative and its job board is the most verifiable in real time.
 
-This doesn't refute the thesis. A comparable SaaS at this stage might employ a thousand people. Lovable may genuinely be building a leaner model. But there's a gap between a transition and a fable. When you scale to 350 while telling the story of 35, you're not describing the future, you're curating it.
+This doesn't refute the thesis, a comparable SaaS at this stage might employ a thousand people. Lovable may genuinely be building a leaner model. But there's a gap between a transition and a fable. When you scale to 350 while telling the story of 35, you're not describing the future, you're curating it.
 
 The parallel isn't political, nobody went to the gulag. It's *narrative*: a model worker made visible, an infrastructure made silent, and a norm set for everyone else.
 
@@ -40,7 +40,7 @@ The parallel isn't political, nobody went to the gulag. It's *narrative*: a mode
 
 But the fable only works if we forget what it compresses. And what gets compressed first is the nature of human work itself.
 
-Christophe Dejours, psychiatrist and founder of the psychodynamics of work, describes what he calls [living work](/en/2026/01/01/the-cheating-that-makes-the-world-run/), the moment where the worker's body encounters the resistance of the real. Take a worker on an assembly line. The bolt doesn't fit into the thread, it's not in the procedure, and the line keeps moving. So he dips the bolt in a bucket of oil, forces it in by hand, falls behind, then catches up. The product ships. No one knows.
+Christophe Dejours, psychiatrist and founder of the psychodynamics of work, describes what he calls [living work](/en/2026/01/01/the-cheating-that-makes-the-world-run/), the moment where the worker's body encounters the resistance of the real. Take a worker on an assembly line. The bolt doesn't fit into the thread, it's not in the procedure, and the line keeps moving. So he dips the bolt in a bucket of oil, forces it in by hand, falls behind, then catches up. The product ships, and no one knows.
 
 The deviation *is* the work, and the deviation is a form of zeal, not obedience to the instruction but loyalty to the outcome. This is productive zeal, the kind that says: I know what was asked, but here's what actually needs to happen.
 
@@ -60,7 +60,7 @@ The Stakhanovite parallel goes beyond narrative. The movement also served a spec
 
 The AI-native narrative runs the same logic with different packaging. When a company demonstrates that one person with AI can do the work of four, two things can happen: produce four times more, or fire three out of four.
 
-Both happen, but the dominant narrative in the AI-native discourse rewards extraction and invisibilizes redistribution. The model worker goes on a podcast. The people whose roles became "redundant" update their LinkedIn in silence.
+Both happen, but the dominant narrative in the AI-native discourse rewards extraction and invisibilizes redistribution. The model worker goes on a podcast, while the people whose roles became "redundant" update their LinkedIn in silence.
 
 This is the compression. Not the compression of execution time (that part is real, and often welcome), but the compression of the workforce into a tighter, faster, more surveilled unit where the norm has been reset by a demo on a podcast. Where "if Lazar can do it" quietly becomes "why do we need you?"
 
@@ -76,7 +76,7 @@ Now transpose this inside your company.
 
 Every organization deploying an AI agent (Copilot, Glean, a custom internal assistant) faces the same invisible decision. Someone defines what the agent knows about the company, what it surfaces, what it omits, what it refuses to answer, what tone it uses, and what it treats as settled versus open.
 
-An employee asks the internal agent about reorganization plans, about compensation benchmarks, about why a project was killed. The answers (or the refusals to answer) aren't neutral. They're configured by someone.
+An employee asks the internal agent about reorganization plans, about compensation benchmarks, about why a project was killed. The answers (or the refusals to answer) aren't neutral, they're configured by someone.
 
 This person is not the CTO, not the Chief Ethics Officer, and not the Data Protection Officer. In most organizations, this person doesn't even have a title. The role is exercised de facto, buried in engineering, treated as a technical implementation detail.
 
@@ -88,7 +88,7 @@ Hannah Arendt identified a specific mechanism, the diligent functionary who exec
 
 A company is, by structure, a small managed authority. The context manager is the person who designs the cognitive architecture of that authority, the one who builds the machine that shapes how everyone else thinks about the organization they work in. This role has no precedent, no governance, and no audit trail.
 
-The fact that this role doesn't have a formal name is not a gap in org charts. It's the gap. Call it Chief Context Officer. The role is being exercised right now, in every company with an internal AI deployment, by someone whose power is inversely proportional to their visibility. Naming it doesn't create it. Naming it reveals that it already exists, ungoverned.
+The fact that this role doesn't have a formal name is not a gap in org charts. It's the gap. Call it Chief Context Officer. The role is being exercised right now, in every company with an internal AI deployment, by someone whose power is inversely proportional to their visibility. Naming it doesn't create it, it reveals that it already exists, ungoverned.
 
 ## What remains open
 
@@ -102,4 +102,4 @@ That productive zeal (the bolt in the oil, the deviation that saves the product,
 
 And that someone, right now, is configuring the machine that configures everyone else, without a title, without oversight, and without anyone asking what the configuration produces.
 
-The next organizational scandal won't come from a CEO. It will come from an engineer whose title nobody knew.
+The next organizational scandal won't come from a CEO, it will come from an engineer whose title nobody knew.

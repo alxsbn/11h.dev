@@ -20,19 +20,19 @@ lang: fr
 
 En 1935, Alexeï Stakhanov extrait 102 tonnes de charbon en un seul poste, soit 14 fois la norme. L'Union soviétique en fait un héros, et le mouvement stakhanoviste naît. Des ouvriers modèles dépassent les quotas pour prouver que le système fonctionne.
 
-Ce que la propagande ne mentionne pas : des équipes lui dégagent le terrain, préparent ses outils et retirent les obstacles. Il n'est pas seul, il est *mis en scène*.
+Ce que la propagande ne mentionne pas, ce sont les équipes qui lui dégagent le terrain, préparent ses outils et retirent les obstacles. Il n'est pas seul, il est *mis en scène*.
 
-La mise en scène sert deux objectifs : légitimer le système, et relever les quotas pour tous les autres. « Si Stakhanov y arrive, pourquoi pas toi ? »
+Cette mise en scène sert deux objectifs : légitimer le système, et relever les quotas pour tous les autres. « Si Stakhanov y arrive, pourquoi pas toi ? »
 
-En juin 2025, Elena Verna, Head of Growth chez Lovable, publie [The Rise of the AI-Native Employee](https://www.elenaverna.com/p/the-rise-of-the-ai-native-employee). Petites équipes, zéro process, zéro handoff, pas de middle management. L'IA par défaut. Construire plutôt que coordonner. 35 personnes pour 80 millions de dollars d'ARR. Le #AINativeEmployeeEra.
+En juin 2025, Elena Verna, Head of Growth chez Lovable, publie [The Rise of the AI-Native Employee](https://www.elenaverna.com/p/the-rise-of-the-ai-native-employee). Elle y décrit un modèle radical : des petites équipes sans process ni handoff, pas de middle management et l'IA comme outil par défaut. Construire plutôt que coordonner, avec 35 personnes pour 80 millions de dollars d'ARR. Le #AINativeEmployeeEra.
 
-Huit mois plus tard, Lovable met Lazar Jovanovic sur [le podcast de Lenny](https://www.lennysnewsletter.com/p/getting-paid-to-vibe-code), le plus grand podcast produit de la tech. C'est leur « premier vibe codeur professionnel ». Aucune formation en développement. Il livre des produits en production en utilisant uniquement l'IA. La thèse faite chair.
+Huit mois plus tard, Lovable met Lazar Jovanovic sur [le podcast de Lenny](https://www.lennysnewsletter.com/p/getting-paid-to-vibe-code), le plus grand podcast produit de la tech. C'est leur « premier vibe codeur professionnel » : il n'a aucune formation en développement et livre des produits en production en utilisant uniquement l'IA. La thèse faite chair.
 
-Pendant ce temps, Lovable affiche 47 postes ouverts et compte environ 350 employés. GTM Operations. Recruitment Coordinator. Customer Success Manager. Enterprise Account Executive. Security Engineer avec « 5 ans et plus en environnements cloud-native ». Analytics Engineer au service des équipes Sales et Customer Success. Presque mot pour mot les rôles qu'Elena décrivait comme condamnés.
+Pendant ce temps, Lovable affiche 47 postes ouverts et compte environ 350 employés : GTM Operations, Recruitment Coordinator, Customer Success Manager, Enterprise Account Executive, Security Engineer avec « 5 ans et plus en environnements cloud-native » et Analytics Engineer au service des équipes Sales et Customer Success. Presque mot pour mot les rôles qu'Elena décrivait comme condamnés.
 
 Lazar est une personne sur 350. Derrière ses démos, il y a une infrastructure maintenue par des platform engineers, une sécurité gérée par des spécialistes, des contrats enterprise signés par des AE expérimentés et une machine GTM portée par des opérateurs seniors. Lovable est le cas le plus visible d'un schéma plus large. Klarna a remplacé 700 agents de service client par de l'IA et en a fait un communiqué de presse. Duolingo a coupé ses contractuels après avoir étendu ses capacités IA et l'a présenté comme une évolution naturelle. La fable est toujours la même : le système fonctionne, et l'humain est optionnel. Lovable la raconte le plus fort, et l'écart entre son récit et ses offres d'emploi est le plus vérifiable en temps réel.
 
-Ça ne réfute pas la thèse. Un SaaS comparable à ce stade emploierait peut-être un millier de personnes. Lovable construit peut-être réellement un modèle plus léger. Mais il y a un écart entre une transition et une fable. Quand on passe à 350 tout en racontant l'histoire de 35, on ne décrit pas l'avenir, on le met en scène.
+Ça ne réfute pas la thèse, un SaaS comparable à ce stade emploierait peut-être un millier de personnes. Lovable construit peut-être réellement un modèle plus léger. Mais il y a un écart entre une transition et une fable. Quand on passe à 350 tout en racontant l'histoire de 35, on ne décrit pas l'avenir, on le met en scène.
 
 Le parallèle n'est pas politique, personne n'a fini au goulag. Il est *narratif* : un ouvrier modèle rendu visible, une infrastructure rendue invisible et une norme imposée à tous les autres.
 
@@ -40,7 +40,7 @@ Le parallèle n'est pas politique, personne n'a fini au goulag. Il est *narratif
 
 Mais la fable ne fonctionne que si on oublie ce qu'elle comprime. Et ce qui se comprime en premier, c'est la nature même du travail humain.
 
-Christophe Dejours, psychiatre et fondateur de la psychodynamique du travail, décrit ce qu'il appelle le [travail vivant](/fr/2026/01/01/la-triche-qui-fait-tourner-le-monde/), le moment où le corps du travailleur rencontre la résistance du réel. Prenons un ouvrier sur une chaîne de montage. Le boulon ne rentre pas dans le filetage, ce n'est pas dans la procédure, et la chaîne continue d'avancer. Alors il trempe le boulon dans un seau d'huile, le force à la main, prend du retard, puis rattrape. Le produit sort. Personne ne sait.
+Christophe Dejours, psychiatre et fondateur de la psychodynamique du travail, décrit ce qu'il appelle le [travail vivant](/fr/2026/01/01/la-triche-qui-fait-tourner-le-monde/), le moment où le corps du travailleur rencontre la résistance du réel. Prenons un ouvrier sur une chaîne de montage. Le boulon ne rentre pas dans le filetage, ce n'est pas dans la procédure, et la chaîne continue d'avancer. Alors il trempe le boulon dans un seau d'huile, le force à la main, prend du retard, puis rattrape. Le produit sort, personne ne sait.
 
 L'écart *est* le travail, et cet écart est une forme de zèle, non pas l'obéissance à l'instruction mais la loyauté envers le résultat. C'est le zèle productif, celui qui dit : je sais ce qu'on m'a demandé, mais voilà ce qu'il faut vraiment faire.
 
@@ -60,7 +60,7 @@ Le parallèle stakhanoviste va au-delà du récit. Le mouvement servait aussi un
 
 Le récit AI-native reprend la même logique dans un autre emballage. Quand une entreprise démontre qu'une personne avec l'IA peut faire le travail de quatre, deux choses peuvent arriver : produire quatre fois plus, ou licencier trois sur quatre.
 
-Les deux arrivent, mais le récit dominant dans le discours AI-native récompense l'extraction et invisibilise la redistribution. L'ouvrier modèle passe sur un podcast. Ceux dont les rôles sont devenus « redondants » mettent à jour leur LinkedIn en silence.
+Les deux arrivent, mais le récit dominant dans le discours AI-native récompense l'extraction et invisibilise la redistribution. L'ouvrier modèle passe sur un podcast, et ceux dont les rôles sont devenus « redondants » mettent à jour leur LinkedIn en silence.
 
 C'est ça, la compression. Pas la compression du temps d'exécution (cette partie est réelle, et souvent bienvenue), mais la compression de la force de travail en une unité plus serrée, plus rapide et plus surveillée, où la norme a été recalibrée par une démo sur un podcast. Où « si Lazar y arrive » devient discrètement « pourquoi on a besoin de toi ? »
 
@@ -76,7 +76,7 @@ Maintenant, transposons ça dans n'importe quelle entreprise.
 
 Chaque organisation qui déploie un agent IA (Copilot, Glean, un assistant interne custom) fait face à la même décision invisible. Quelqu'un définit ce que l'agent sait de l'entreprise, ce qu'il fait remonter, ce qu'il omet, ce qu'il refuse de répondre, quel ton il emploie et ce qu'il considère comme acquis ou comme ouvert.
 
-Un employé demande à l'agent interne des informations sur les plans de réorganisation, sur les benchmarks de rémunération, sur les raisons de l'arrêt d'un projet. Les réponses (ou les refus de répondre) ne sont pas neutres. Elles sont configurées par quelqu'un.
+Un employé demande à l'agent interne des informations sur les plans de réorganisation, sur les benchmarks de rémunération, sur les raisons de l'arrêt d'un projet. Les réponses (ou les refus de répondre) ne sont pas neutres, elles sont configurées par quelqu'un.
 
 Cette personne n'est pas le CTO, pas le Chief Ethics Officer et pas le DPO. Dans la plupart des organisations, elle n'a même pas de titre. Le rôle s'exerce de fait, enfoui dans l'engineering, traité comme un détail d'implémentation technique.
 
@@ -88,7 +88,7 @@ Hannah Arendt a identifié un mécanisme précis, celui du fonctionnaire diligen
 
 Une entreprise est, par structure, une petite autorité administrée. Le gestionnaire de contexte est la personne qui conçoit l'architecture cognitive de cette autorité, celle qui construit la machine qui façonne la manière dont tout le monde pense l'organisation dans laquelle il travaille. Ce rôle n'a pas de précédent, pas de gouvernance et pas de trace d'audit.
 
-Le fait que ce rôle n'ait pas de nom formel n'est pas une lacune dans les organigrammes. C'est *la* lacune. Appelons-le Chief Context Officer. Le rôle est exercé en ce moment même, dans chaque entreprise avec un déploiement IA interne, par quelqu'un dont le pouvoir est inversement proportionnel à sa visibilité. Le nommer ne le crée pas. Le nommer révèle qu'il existe déjà, sans gouvernance.
+Le fait que ce rôle n'ait pas de nom formel n'est pas une lacune dans les organigrammes. C'est *la* lacune. Appelons-le Chief Context Officer. Le rôle est exercé en ce moment même, dans chaque entreprise avec un déploiement IA interne, par quelqu'un dont le pouvoir est inversement proportionnel à sa visibilité. Le nommer ne le crée pas, cela révèle qu'il existe déjà, sans gouvernance.
 
 ## Ce qui reste ouvert
 
@@ -102,4 +102,4 @@ Que le zèle productif (le boulon dans l'huile, l'écart qui sauve le produit et
 
 Et que quelqu'un, en ce moment même, configure la machine qui configure tout le monde, sans titre, sans supervision et sans que personne ne demande ce que la configuration produit.
 
-Le prochain scandale organisationnel ne viendra pas d'un CEO. Il viendra d'un ingénieur dont personne ne connaissait le titre.
+Le prochain scandale organisationnel ne viendra pas d'un CEO, il viendra d'un ingénieur dont personne ne connaissait le titre.
