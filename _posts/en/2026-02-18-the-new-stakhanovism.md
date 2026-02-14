@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The New Stakhanovism"
-date: 2026-02-16
+date: 2026-02-18
 categories: ai work philosophy organization series
 excerpt: 'The Stakhanovite movement celebrated model workers to raise quotas for everyone else. AI-native companies are running the same playbook.'
 header_image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Stakhanov.JPG/1600px-Stakhanov.JPG"
@@ -14,6 +14,7 @@ ref: the-new-stakhanovism
 redirect_from:
   - /2026/02/09/the-new-stakhanovism/
   - /en/2026/02/09/the-new-stakhanovism/
+  - /en/2026/02/16/the-new-stakhanovism/
 lang: en
 ---
 
@@ -69,4 +70,4 @@ In this context, Lazar takes the question to its limit. He has no academic backg
 
 The original Stakhanovism collapsed under the weight of its own quotas. Productive zeal (the bolt in the oil, the deviation that saves the product, and the judgment that no system prompt can encode) cannot be automated, only crushed.
 
-One question remains that no one is asking. Someone has to decide what the agent knows, what it ignores, and where it stops. That someone configures the boundaries of an AI agent that every employee interacts with daily, deciding what's thinkable. This role has no name, no governance, and no audit trail. Call it, echoing Hannah Arendt, the banality of configuration. It's [a question of power, not technique](/en/2026/02/18/who-writes-the-constitution-of-machines/).
+One question remains that no one is asking. Someone has to decide what the agent knows, what it ignores, and where it stops. That someone configures the boundaries of an AI agent that every employee interacts with daily, deciding what's thinkable. This role has no name, no governance, and no audit trail. Call it, echoing Hannah Arendt, the banality of configuration. It's [a question of power, not technique](/en/2026/02/13/who-writes-the-constitution-of-machines/).

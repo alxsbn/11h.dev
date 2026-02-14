@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Le nouveau stakhanovisme"
-date: 2026-02-16
+date: 2026-02-18
 categories: [ai, work, philosophy, organization, series]
 excerpt: 'Le mouvement stakhanoviste célébrait des ouvriers modèles pour relever les quotas de tous les autres. Les entreprises AI-native rejouent le même scénario.'
 header_image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Stakhanov.JPG/1600px-Stakhanov.JPG"
@@ -14,6 +14,7 @@ ref: the-new-stakhanovism
 redirect_from:
   - /2026/02/09/le-nouveau-stakhanovisme/
   - /fr/2026/02/09/le-nouveau-stakhanovisme/
+  - /fr/2026/02/16/le-nouveau-stakhanovisme/
 lang: fr
 ---
 
@@ -69,4 +70,4 @@ Dans ce contexte, Lazar pose la question jusqu'au bout. Il n'a aucune formation 
 
 Le stakhanovisme original a fini par s'effondrer sous le poids de ses propres quotas. Le zèle productif (le boulon dans l'huile, l'écart qui sauve le produit et le jugement qu'aucun system prompt ne peut encoder) ne peut pas être automatisé, seulement écrasé.
 
-Reste la question que personne ne pose. Quelqu'un doit bien décider ce que l'agent sait, ce qu'il ignore et où il s'arrête. Ce quelqu'un configure les limites d'un agent IA avec lequel chaque employé interagit quotidiennement et décide de ce qui est pensable. Ce rôle n'a pas de nom, pas de gouvernance et pas de trace d'audit. Appelons ça, en écho à Hannah Arendt, la banalité de la configuration. C'est [une question de pouvoir, pas de technique](/fr/2026/02/18/qui-ecrit-la-constitution-des-machines/).
+Reste la question que personne ne pose. Quelqu'un doit bien décider ce que l'agent sait, ce qu'il ignore et où il s'arrête. Ce quelqu'un configure les limites d'un agent IA avec lequel chaque employé interagit quotidiennement et décide de ce qui est pensable. Ce rôle n'a pas de nom, pas de gouvernance et pas de trace d'audit. Appelons ça, en écho à Hannah Arendt, la banalité de la configuration. C'est [une question de pouvoir, pas de technique](/fr/2026/02/13/qui-ecrit-la-constitution-des-machines/).

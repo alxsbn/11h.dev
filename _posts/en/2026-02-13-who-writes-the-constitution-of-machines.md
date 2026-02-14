@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Who writes the constitution of machines?"
-date: 2026-02-18
+date: 2026-02-13
 categories: [ai, governance, ethics]
 excerpt: "Dario Amodei wrote 20,000 words on AI risk. He never asked: who writes Claude's moral constitution, and by what authority?"
 header_image: "https://images.unsplash.com/photo-1602660187275-7275b639d7ea?w=1600&q=80"
@@ -13,7 +13,6 @@ header_image_source_url: "https://unsplash.com"
 ref: who-writes-the-constitution-of-machines
 redirect_from:
   - /2026/02/13/who-writes-the-constitution-of-machines/
-  - /en/2026/02/13/who-writes-the-constitution-of-machines/
 lang: en
 ---
 
