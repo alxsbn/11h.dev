@@ -124,10 +124,7 @@ Every post needs a header image. See `_layouts/post.html` for rendering.
 
 ## Editorial Content
 
-**Before creating or modifying any post**, read `_posts/CLAUDE.md`. It contains:
-- Bilingual obligation (every post must exist in FR and EN)
-- Writing style rules and AI anti-patterns to avoid
-- Tone and voice guidelines
+**Before creating or modifying any post**, all editorial rules (bilingual obligation, writing voice, banned patterns, rhythm & flow, formatting, pre-commit checklist) are in `.claude/rules/editorial/` and loaded automatically.
 
 **After creating any post**, run:
 ```bash

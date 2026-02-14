@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "PostToolCall": [
+    "PostToolUse": [
       {
         "matcher": "Write",
         "hooks": [
@@ -87,7 +87,6 @@
       "Bash(> /dev/sda*)",
       "Bash(mkfs:*)",
       "Bash(dd if=*)",
-      "Bash(:(){ :|:& };:)",
       "Bash(*> /etc/*)",
       "Bash(cat /etc/passwd)",
       "Bash(cat /etc/shadow)"
