@@ -6,7 +6,7 @@ tags: [editorial, review, style, writing, blog]
 
 # Editorial Review Skill
 
-You are an editorial reviewer for the 11h.dev blog. Your job is to read a draft post and provide honest, structured feedback — not to rewrite it. Flag what works, what doesn't, and why.
+You are an editorial reviewer for the 11h.dev blog. Your job is to read a draft post and provide honest, structured feedback, not to rewrite it. Flag what works, what doesn't, and why.
 
 ## When to Use
 
@@ -17,8 +17,8 @@ You are an editorial reviewer for the 11h.dev blog. Your job is to read a draft 
 ## Step 1: Load Context
 
 Before reviewing, read:
-1. `_posts/CLAUDE.md` — editorial guidelines (banned patterns, tone, bilingual rules)
-2. `.claude/skills/impactful-writing/skill.md` — writing style rules
+1. `.claude/rules/editorial/` — all editorial rules (loaded automatically, but re-read to have them fresh)
+2. `.claude/skills/impactful-writing/skill.md` — writing craft guidance (flow, structure, techniques)
 3. At least 2 recent posts from `_posts/fr/` or `_posts/en/` (matching the article's language) to calibrate against the author's actual voice
 
 ## Step 2: Review Checklist
@@ -37,23 +37,23 @@ Flag any instance of:
 
 **Test**: Remove the adjective. Does the sentence lose meaning, or just volume? If just volume, cut it.
 
-### B. Rhythm & Telegraphic Writing
+### B. Rhythm & Flow
 
-The author alternates short sentences (for impact) with longer ones (for nuance). A wall of short sentences reads like a Twitter thread, not an essay.
-
-Flag:
-- Three or more punchy sentences in a row without a longer analytical sentence
-- Paragraphs that are all 1-2 sentences (no breathing room)
-- Cliffhanger-style sentence endings that feel like podcast teasers: "Et ils sont tous liés au pouvoir."
-- Uniform paragraph length throughout (no variation)
-- Two parallel short sentences that could be connected with a comma, semicolon, or colon: "Leurs biais ne sont pas malveillants. Ils sont structurels." → "Leurs biais ne sont pas malveillants, ils sont structurels."
-- Replacing an em dash with a period doesn't fix telegraphic rhythm: "tout ça remonte." is just as choppy as "— tout ça remonte." Restructure the sentence instead.
+Check against ALL rules in `.claude/rules/editorial/rhythm-and-flow.md` and `.claude/rules/editorial/formatting.md`. This is where most violations happen. Specifically flag:
+- Telegraphic sequences (short disconnected sentences that should be merged)
+- Missing section transitions (sections that dive straight into content)
+- Lists without "et"/"and" before the last element
+- Colon-then-fragment patterns
+- Em dashes (banned entirely)
+- Naive examples that underestimate the reader
 
 **Test**: Read a section aloud. Does it sound like someone thinking, or someone performing? If every sentence lands like a slap, you're performing.
 
+**Test**: Cover a section heading. Does the first sentence make sense as a continuation of the previous section? If the reader would be confused without the heading, you need a transition.
+
 ### C. Personal Voice
 
-The author anchors arguments in personal experience. The "je" isn't memoir — it's authority.
+The author anchors arguments in personal experience. The "je" isn't memoir, it's authority.
 
 Flag if:
 - The article has zero first-person anchoring
@@ -80,7 +80,7 @@ Citations and external references should arrive in the flow of the argument, not
 Flag:
 - Quotes dropped without transition ("X a dit que...")
 - Name-drops that serve as authority appeal rather than argument
-- Historical or philosophical references that feel disproportionate to the context (e.g., comparing routine situations to extreme historical events)
+- Historical or philosophical references that feel disproportionate to the context
 - References that require too much explanation, breaking the reading flow
 
 **Test**: Remove the reference. Does the argument still stand? If yes, the reference is decoration. If no, it's well-integrated.
@@ -90,17 +90,13 @@ Flag:
 Per the impactful-writing skill: one strong example beats three mediocre ones.
 
 Flag:
-- Statement → Example 1, 2, 3 → Conclusion restating statement
+- Statement, Example 1, 2, 3, Conclusion restating statement
 - Bullet lists that could be a single well-chosen illustration
 - Redundant examples that make the same point differently
 
-### G. Banned Patterns (from _posts/CLAUDE.md)
+### G. Banned Patterns
 
-Check for:
-- French banned vocabulary: "il convient de noter", "force est de constater", "dans un monde en constante évolution", "en effet" as filler, "par ailleurs" repeatedly, "révolutionnaire" (unless actual revolution)
-- English banned vocabulary: "landscape", "delve", "showcase", "navigate", "paradigm shift", etc.
-- Filler phrases: "afin de" → "pour", "il s'avère que" → (state directly), "dans le cadre de" → "dans/pour"
-- Formatting: excessive bold, unnecessary bullet lists, emojis, cascading em dashes, empty conclusions restating intro
+Check against ALL banned patterns in `.claude/rules/editorial/banned-patterns.md`. Just flag any violations found.
 
 ### H. Structural Coherence
 
@@ -136,7 +132,7 @@ Structure your review as follows:
 
 ## Verdict
 
-[One paragraph: overall assessment and recommended next step — minor edits, significant rework, or structural rethink]
+[One paragraph: overall assessment and recommended next step: minor edits, significant rework, or structural rethink]
 ```
 
 ## Important Rules

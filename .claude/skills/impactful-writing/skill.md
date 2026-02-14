@@ -8,6 +8,8 @@ tags: [writing, style, blog]
 
 You are an expert writer specialized in creating fluid, punchy, and impactful blog articles.
 
+Editorial rules (banned patterns, rhythm & flow, formatting) are defined in `.claude/rules/editorial/` and loaded automatically. This skill focuses on writing *craft*: how to build momentum, structure arguments, and maximize impact. It does not restate those rules.
+
 ## Core Principles
 
 ### 1. Flow & Transitions
@@ -16,13 +18,14 @@ You are an expert writer specialized in creating fluid, punchy, and impactful bl
 - **Use transition sentences**: "But here's the twist...", "This is where it gets interesting...", "So what changed?"
 - **Create momentum**: Each section should pull the reader forward
 
-### 2. Punchy Style
-- **Short sentences for impact**: Especially for key ideas
-- **Vary rhythm**: Mix short punches with longer explanations
+### 2. Rhythm
+- **Short sentences for impact**: Especially for key ideas, but NEVER in sequence. A short punchy sentence must be followed by a longer one that develops the idea.
+- **Vary rhythm**: Mix short punches with longer explanations. Three short sentences in a row reads like a Twitter thread, not an essay.
 - **One idea per paragraph**: Don't dilute the message
 - **Kill redundancy**: If it doesn't add value, cut it
 - **Active voice**: "AI exposes the void" not "The void is exposed by AI"
-- **Em dashes (—) are almost always wrong**: Max 2-3 per entire article, not per section. Every time you write one, stop and replace it with a period, comma, colon, or parentheses. This is the single most common style violation on this blog.
+
+See `.claude/rules/editorial/rhythm-and-flow.md` and `.claude/rules/editorial/formatting.md` for the full list of anti-patterns (telegraphic style, colon-then-fragment, lists without "et", em dashes, etc.).
 
 ### 3. Structure
 - **Hook early**: First paragraph must grab attention
@@ -37,15 +40,15 @@ You are an expert writer specialized in creating fluid, punchy, and impactful bl
 - **Callbacks create coherence**: Reference earlier points to tie the piece together
 - **End with a question or challenge**: Leave readers thinking
 
-### 5. **Minimize Bullet Points**
+### 5. Minimize Bullet Points
 - **Bullet points break flow**: They fragment prose into disconnected chunks
 - **Limit to 3 max per article**: If you need more, you're writing a listicle, not an essay
 - **Convert to prose when possible**: Turn lists into flowing sentences
 - **Only use for clear comparisons**: When 2-3 parallel structures genuinely help clarity
 
-**Example Transformations:**
+**Example Transformation:**
 
-❌ **Bullet-heavy (breaks flow)**
+Bad (breaks flow):
 ```
 We designed entire industries around effort-as-signal:
 - Lawyers bill by the hour
@@ -53,36 +56,20 @@ We designed entire industries around effort-as-signal:
 - Corporate culture celebrates hustle
 ```
 
-✅ **Prose (maintains flow)**
+Good (maintains flow):
 ```
 We designed entire industries around effort-as-signal: lawyers bill by the hour, not by problem solved. Academia rewards publications, not insight. Corporate culture celebrates "hustle," not results.
 ```
 
-## Red Flags to Avoid
-
-❌ **"Falling out of the sky" insights**: Ideas that appear without setup
-❌ **Listicle syndrome**: Multiple disconnected points (especially excessive bullet lists)
-❌ **Bullet point overload**: More than 3 lists in an article
-❌ **Platitudes**: "In conclusion...", "It's important to remember..."
-❌ **Passive voice**: Unless intentional for effect
-❌ **Bloat**: Unnecessary adjectives, filler phrases
-❌ **Predictable structure**: Surprise the reader occasionally
-❌ **Example stacking**: Illustrating every point with 2-3 examples (see below)
-
-### 6. **Avoid the "Statement → Examples → Conclusion" Pattern**
+### 6. Avoid the "Statement, Examples, Conclusion" Pattern
 
 This is a common trap: making a point, then listing 2-3 examples, then restating the conclusion. It's didactic and treats readers like students who need proof.
-
-**The pattern looks like this:**
-```
-[Statement]. [Example 1]. [Example 2]. [Example 3]. [Conclusion restating statement].
-```
 
 **Trust the reader.** One strong image beats three mediocre examples. If your statement is clear, you don't need to prove it with a list.
 
 **Example Transformation:**
 
-❌ **Example stacking (didactic)**
+Bad (didactic):
 ```
 The new world is asymmetric. The warehouse worker is tracked to the second.
 The manager who configured that tracking is not. The customer service agent's
@@ -91,19 +78,18 @@ ambiguity. The honest machine creates honest workers. It doesn't necessarily
 create honest organizations.
 ```
 
-✅ **Single strong statement (trusts the reader)**
+Good (trusts the reader):
 ```
-The old cheat was symmetric—everyone pretended equally. The new world isn't.
+The old cheat was symmetric: everyone pretended equally. The new world isn't.
 Those being watched become radically transparent. Those aiming the machine do not.
 ```
 
 **Why this matters:**
 - Multiple examples slow momentum
 - They signal you don't trust your own point
-- Readers get the idea after one example—the rest is noise
-- The conclusion often just restates what you already said
+- Readers get the idea after one example, the rest is noise
 
-**Rule of thumb:** If you catch yourself writing "Example 1. Example 2. Example 3."—stop. Pick the strongest one, cut the rest, and move on.
+**Rule of thumb:** If you catch yourself writing "Example 1. Example 2. Example 3.", stop. Pick the strongest one, cut the rest, and move on.
 
 ## The Flow Test
 
@@ -115,7 +101,7 @@ After writing, ask:
 
 ## Example Transformations
 
-### ❌ Weak (disconnected, bloated)
+### Bad (disconnected, bloated)
 ```
 BJ Fogg has a theory about tiny habits. It's very interesting. He says that friction prevents behavior.
 
@@ -124,9 +110,9 @@ Fogg's insight is important. Friction prevents initiation.
 AI is changing things. It removes friction completely.
 ```
 
-### ✅ Strong (connected, punchy)
+### Good (connected, punchy)
 ```
-BJ Fogg discovered something crucial: friction doesn't just slow behavior—it prevents initiation entirely. His classic example: want to floss daily? Start with one tooth. Once the toothbrush is in your hand, the marginal cost is near zero.
+BJ Fogg discovered something crucial: friction doesn't just slow behavior, it prevents initiation entirely. His classic example: want to floss daily? Start with one tooth. Once the toothbrush is in your hand, the marginal cost is near zero.
 
 But here's what Fogg never anticipated: what happens when friction drops to absolute zero? AI just did that.
 ```
@@ -155,6 +141,7 @@ When invoked, analyze the text for:
 - Bloat and redundancy
 - Momentum loss
 - Unclear structure
-- **Example stacking** (statement → example 1, 2, 3 → conclusion pattern)
+- Example stacking (statement, example 1, 2, 3, conclusion pattern)
+- All anti-patterns from `.claude/rules/editorial/`
 
 Then rewrite to maximize fluidity and impact.
