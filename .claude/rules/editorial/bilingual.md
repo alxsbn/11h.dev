@@ -10,6 +10,10 @@ The French version is NOT a literal translation of the English. The English vers
 
 After creating or modifying posts, run `scripts/check-bilingual.sh` to verify parity. Fix any gaps before committing.
 
+## Simultaneous editing rule
+
+When editing one language version of a post, ALWAYS apply the equivalent changes to the other language version in the same commit. This includes structural changes (transitions, links, references), factual corrections, added sources, and rhythm/flow fixes. Each version should be adapted naturally (not translated literally), but no version should fall behind the other. Never commit a change to only one language.
+
 ## Checklist Before Committing a Post
 
 1. Both FR and EN versions exist with matching `ref` values

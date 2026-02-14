@@ -66,7 +66,7 @@ The point isn't that these texts were bad. It's that they reflected the blind sp
 
 ### No checks and balances
 
-Yet real constitutions have amendments, constitutional courts, and democratic revision processes. Claude's Constitution gets updated when Anthropic decides. No civil society consulted, no contestation mechanism, and no user representation.
+Because real constitutions have amendments, constitutional courts, and democratic revision processes. Claude's Constitution gets updated when Anthropic decides. No civil society consulted, no contestation mechanism, and no user representation.
 
 In constitutional law, this is called a **granted charter**: a text bestowed by a sovereign who considers himself benevolent but answers to no one. That's exactly what Claude's Constitution is. And it's this image that best captures the fundamental problem with Amodei's essay: sincere benevolence, exercised without mandate.
 
@@ -78,13 +78,13 @@ The essay resonates at the civilizational scale, but forgets a more immediate on
 
 When an organization deploys an internal AI agent, who decides how it behaves? A data engineer? An MLOps specialist? A CISO? None of these roles have a mandate to settle ethical, HR, legal, or commercial questions. Yet every system prompt, every guardrail, every behavioral instruction is a normative decision disguised as a technical choice.
 
-"The agent must not criticize company products": that's a communications decision. "The agent should redirect sensitive questions to HR": that's a governance decision. But in most deployments, the data team makes the call by default, without process.
+"The agent must not criticize company products": that's a communications decision. "The agent should redirect sensitive questions to HR": that's a governance decision. But in most deployments, the data team makes the call by default and without process.
 
 Someone configures the boundaries of an agent that every employee interacts with daily, and that someone has neither a title for it nor any visibility. Let's name this role: **Chief Context Officer**. The term doesn't exist yet. The role does.
 
 ### System prompt opacity and passive surveillance
 
-The employee interacting with an internal agent *potentially doesn't know what instructions shape the responses*. The system prompt is invisible, and it's an information asymmetry that nobody governs and few people even notice. It is entirely possible to expose an agent's system prompt and create a transparent internal constitution, but almost no one has started that work.
+The employee interacting with an internal agent *potentially doesn't know what instructions shape the responses*. The system prompt is often invisible, and it's an information asymmetry that nobody governs and few people even notice. It is entirely possible to expose an agent's system prompt and create a transparent internal constitution, but almost no one has started that work.
 
 On top of that, whoever deploys the agent potentially captures every conversation, and everything an employee confides to the AI. People aren't naive enough to ask an internal agent how to negotiate their salary: they'll go to ChatGPT for that. But they do slip in far more sensitive elements without always realizing it: strategic directions, commercial trade-offs, marketing decisions that haven't been announced yet, or thoughts about reorganizing a team.
 
@@ -92,19 +92,19 @@ On the private life side, the picture is even more concerning. Some users alread
 
 ### An unstable role
 
-Even this Chief Context Officer role, even the guardrails put in place today, won't necessarily last in their current form. Sherwin Wu, Head of Engineering for OpenAI's API, recently observed that models "eat the scaffolding for breakfast": tools built around model limitations become obsolete as models improve. Companies will need someone to govern their agents, and the role will eventually take shape. But for now, it mutates faster than governance can frame it: it doesn't exist long enough in a stable form for legislation, but it exists long enough to shape decisions.
+Even this Chief Context Officer role, even the guardrails put in place today, won't necessarily last in their current form. Sherwin Wu, Head of Engineering for OpenAI's API, [recently observed](https://www.lennysnewsletter.com/p/engineers-are-becoming-sorcerers) that models "eat the scaffolding for breakfast": tools built around model limitations become obsolete as models improve. Companies will need someone to govern their agents, and the role will eventually take shape. But for now, it mutates faster than governance can frame it: it doesn't exist long enough in a stable form for legislation, but it exists long enough to shape decisions.
 
 ## What's missing: the political dimension
 
 Amodei treats AI governance as a technical and geopolitical problem. He sidesteps the political dimension proper, because who holds the power to define an agent's behavioral norms, through what process, and with what accountability?
 
-A 20,000-word essay warns about the risks of concentrated power, while embodying that concentration. As Zvi Mowshowitz notes in [his critique](https://thezvi.substack.com/), the tone amounts to "trust me, we'll handle it." That's the posture democracies are supposed to refuse.
+His 20,000-word essay warns about the risks of concentrated power, while embodying that concentration. As Zvi Mowshowitz notes in [his critique](https://thezvi.substack.com/), the tone amounts to "trust me, we'll handle it," and that's the posture democracies are supposed to refuse.
 
 And as Fortune observes, the essay functions simultaneously as warning and sales pitch: Claude's Constitution is presented as a civilizational safeguard *and* as a competitive advantage over OpenAI, Meta, and xAI.
 
 ## A question of power, not technique
 
-Ultimately, the question isn't whether Claude's Constitution is "good." It's probably better than no constitution at all. From where I stand, the question is threefold:
+Ultimately, the question isn't whether Claude's Constitution is "good." It's probably better than no constitution at all. From where I stand, three questions remain:
 
 1. Do we accept that a normative text shaping the interactions of hundreds of millions of people is drafted without democratic process?
 2. Who, within a company, should have the authority to configure the moral framework of an agent used by all employees?
@@ -112,4 +112,4 @@ Ultimately, the question isn't whether Claude's Constitution is "good." It's pro
 
 Because historical constitutions teach us one thing: even the best intentions produce systemic exclusions when the circle of drafters is closed. There's no reason to think AI constitutions, including Claude's, will escape this rule.
 
-But let's give Amodei credit on the essential point. We're going through a technological adolescence. But adolescence isn't just the risk of hurting yourself. It's also the moment you start questioning the authority of those who claim to know what's good for you.
+Let's give Amodei credit on the essential point: we're going through a technological adolescence. But adolescence isn't just the risk of hurting yourself. It's also the moment you start questioning the authority of those who claim to know what's good for you.
