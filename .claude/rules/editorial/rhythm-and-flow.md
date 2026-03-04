@@ -6,11 +6,18 @@ These rules are critical. Violating them is the most common failure mode.
 
 Do NOT write sequences of short disconnected sentences. Connect ideas with conjunctions (et, mais, car, or, because, yet), commas, semicolons, or relative clauses. Two related short sentences should almost always be merged.
 
+This includes "binary reformulations" where two short sentences present a negation then a redefinition. These MUST be joined with a semicolon, comma, or conjunction.
+
 | Don't write | Write instead |
 |-------------|---------------|
 | Leurs biais ne sont pas malveillants. Ils sont structurels. | Leurs biais ne sont pas malveillants, ils sont structurels. |
 | Olympe de Gouges a écrit une version pour les femmes. On l'a guillotinée. | Olympe de Gouges a bien écrit une version pour les femmes, et on l'a guillotinée. |
 | The tool is intimate. An agent people confide in. | The tool is intimate. We're dealing with an agent people confide in. |
+| The complexity wasn't architecture. It was the price of the question. | The complexity wasn't architecture; it was the price of the question. |
+| Those were symptoms. The wound was this: ... | Those were symptoms, and the wound was this: ... |
+| AI doesn't fix this. It makes the armor useless. | AI doesn't fix this; it makes the armor useless. |
+
+A single short sentence can stand alone for emphasis ONLY after a long paragraph (3+ sentences) and ONLY if the next sentence is long. Two consecutive short sentences is already telegraphic.
 
 ## Section transitions are mandatory
 
