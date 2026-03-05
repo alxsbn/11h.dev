@@ -32,11 +32,25 @@
 
     <!-- Right: Language Toggle + Dark Mode Toggle -->
     <div class="header-right">
-      {%- if page_lang == "fr" -%}
-        {%- assign switch_url = page.url | replace: '/fr/', '/en/' -%}
-      {%- else -%}
-        {%- assign switch_url = page.url | replace: '/en/', '/fr/' -%}
+      {%- assign switch_url = nil -%}
+      {%- if page.ref -%}
+        {%- if page_lang == "en" -%}
+          {%- assign other_lang = "fr" -%}
+        {%- else -%}
+          {%- assign other_lang = "en" -%}
+        {%- endif -%}
+        {%- assign translated = site.posts | where: "ref", page.ref | where: "lang", other_lang | first -%}
+        {%- if translated -%}
+          {%- assign switch_url = translated.url -%}
+        {%- endif -%}
       {%- endif -%}
+      {%- unless switch_url -%}
+        {%- if page_lang == "fr" -%}
+          {%- assign switch_url = page.url | replace: '/fr/', '/en/' -%}
+        {%- else -%}
+          {%- assign switch_url = page.url | replace: '/en/', '/fr/' -%}
+        {%- endif -%}
+      {%- endunless -%}
       <a href="{{ switch_url | relative_url }}" class="lang-toggle" title="{{ t.switch_lang_label }}">{{ t.switch_lang }}</a>
 
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
