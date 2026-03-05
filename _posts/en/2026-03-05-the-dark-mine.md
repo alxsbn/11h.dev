@@ -11,7 +11,7 @@ ref: the-dark-mine
 lang: en
 ---
 
-There's a concept that's been making the rounds in manufacturing for a few months now, the dark factory. A fully automated plant, lights off, no humans on the floor. Machines produce, assemble, and ship. The image is striking, but it stays confined to what we already know how to make.
+There's a concept that's been making the rounds in manufacturing for a few years now (and months on tech), the dark factory. A fully automated plant, lights off, no humans on the floor. Machines produce, assemble, and ship. The image is striking, but it stays confined to what we already know how to make.
 
 What interests me is what happens when you push that logic underground. Not a factory that executes, but a mine that explores. Autonomous agents that don't answer your questions but formulate new ones. Unlike a real mine, where you know what ore looks like before you dig, a dark mine doesn't know what it's looking for until it finds it.
 
