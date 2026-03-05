@@ -11,7 +11,7 @@ ref: the-dark-mine
 lang: fr
 ---
 
-Il y a un concept qui circule dans l'industrie manufacturière depuis quelques mois, la dark factory. Une usine entièrement automatisée, sans lumières, sans humains sur la chaîne. Les machines produisent, assemblent et expédient. L'image est saisissante, mais elle reste confinée à ce qu'on sait déjà fabriquer.
+Il y a un concept qui circule dans l'industrie manufacturière depuis quelques mois (and des mois côté tech), la dark factory. Une usine entièrement automatisée, sans lumières, sans humains sur la chaîne. Les machines produisent, assemblent et expédient. L'image est saisissante, mais elle reste confinée à ce qu'on sait déjà fabriquer.
 
 Ce qui m'intéresse, c'est ce qui se passe quand on pousse cette logique sous terre. Pas une usine qui exécute, mais une mine qui cherche. Des agents autonomes qui ne répondent pas à tes questions, mais qui en formulent de nouvelles. Contrairement à une vraie mine, où l'on sait quel minerai on cherche avant de creuser, une dark mine ne sait pas ce qu'elle cherche avant de le trouver.
 
