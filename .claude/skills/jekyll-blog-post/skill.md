@@ -27,8 +27,16 @@ Every post MUST start with YAML front matter:
 layout: post
 title: "Post Title Here"
 date: YYYY-MM-DD
-categories: category1 category2
+categories: [category1, category2]
 excerpt: "Short, punchy preview text for the home page"
+header_image: "https://images.unsplash.com/photo-XXXXX?w=1600&q=80"
+header_image_alt: "Image description"
+header_image_credit: "Photographer Name"
+header_image_credit_url: "https://unsplash.com/@photographer"
+header_image_source: "Unsplash"
+header_image_source_url: "https://unsplash.com"
+ref: post-slug-identifier
+lang: en
 ---
 ```
 
@@ -38,6 +46,17 @@ excerpt: "Short, punchy preview text for the home page"
 - **title**: Quoted string, clear and compelling
 - **date**: Format `YYYY-MM-DD` (matches filename date)
 - **categories**: Space-separated or array format (see below)
+- **ref**: Shared identifier that links the FR and EN versions of the same post. Must be identical in both versions.
+- **lang**: `en` or `fr`. Always required.
+- **header_image**: URL for the post header image (Unsplash with `?w=1600&q=80` or local `/assets/images/...`)
+- **header_image_alt**: Alt text for accessibility
+
+### Recommended Fields
+
+- **header_image_credit**: Photographer's name
+- **header_image_credit_url**: Photographer's profile URL
+- **header_image_source**: Source name (e.g., "Unsplash")
+- **header_image_source_url**: Source website URL
 
 ### Optional Fields
 
@@ -47,7 +66,6 @@ excerpt: "Short, punchy preview text for the home page"
   - If article is in French → excerpt in French
   - Language of title is irrelevant, follow the content language
   - **YAML QUOTING**: See "YAML String Quoting" section below
-- **lang**: Only if non-English (e.g., `lang: fr`)
 
 ### YAML String Quoting (CRITICAL)
 
@@ -124,12 +142,12 @@ YYYY-MM-DD-title-slug-kebab-case.md
 - Date must match front matter date
 - Slug is kebab-case (lowercase, hyphens)
 - Keep slug concise (3-7 words max)
-- Use English for slug even if content is French
+- Slug must be in the same language as the article (English slug for EN posts, French slug for FR posts)
 - Extension is `.md`
 
 **Examples:**
-- ✅ `2025-12-30-the-10x-is-here-its-a-skill-issue.md`
-- ✅ `2025-12-20-inverting-the-data-testing-pyramid-optimizing-for-time-to-insight.md`
+- ✅ `2025-12-30-the-10x-is-here-its-a-skill-issue.md` (EN post, English slug)
+- ✅ `2025-12-30-le-10x-est-la-cest-un-probleme-de-competence.md` (FR post, French slug)
 - ❌ `2025-12-30-The-10X-Skill-Issue.md` (wrong case)
 - ❌ `article-about-ai.md` (missing date)
 - ❌ `2025-12-30-the_10x_article.md` (underscores instead of hyphens)
@@ -246,26 +264,32 @@ Two months earlier, [he said](https://x.com/...) the models "are not there. It's
 Before creating the post file:
 
 - [ ] Front matter is complete and valid YAML
+- [ ] `ref` and `lang` fields are present
+- [ ] Both FR and EN versions exist with matching `ref` values
+- [ ] Slug is in the same language as the article
+- [ ] Header image fields are present (`header_image`, `header_image_alt`)
 - [ ] Filename matches `YYYY-MM-DD-slug.md` pattern
 - [ ] Date in filename matches front matter date
 - [ ] Categories use existing ones when possible
-- [ ] Excerpt is punchy and hook-focused
+- [ ] Excerpt is punchy, hook-focused, and in the same language as the article
 - [ ] All links are valid markdown
 - [ ] No trailing spaces or formatting issues
 - [ ] Headings start at `##` (h2 level)
+- [ ] `scripts/check-bilingual.sh` passes
 
 ## Workflow Integration
 
 ### Step 1: Analyze Existing Posts
 
-Before creating a new post:
+Posts live in `_posts/en/` and `_posts/fr/`. Before creating a new post:
 
 ```bash
-# Get the 5 most recent posts only
-ls -t _posts/*.md | head -5
+# Get the 5 most recent posts per language
+ls -t _posts/en/*.md | head -5
+ls -t _posts/fr/*.md | head -5
 ```
 
-Read these 5 posts and extract:
+Read these posts and extract:
 - Common categories (reuse when possible)
 - Excerpt style (language, tone, length)
 - Front matter patterns
