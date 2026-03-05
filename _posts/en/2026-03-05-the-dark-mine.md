@@ -11,7 +11,7 @@ ref: the-dark-mine
 lang: en
 ---
 
-There's a concept that's been making the rounds in manufacturing for a few years now (and months on tech), the dark factory. A fully automated plant, lights off, no humans on the floor. Machines produce, assemble, and ship. The image is striking, but it stays confined to what we already know how to make.
+There's a concept that's been making the rounds in manufacturing for a few years now (and months on tech), the dark factory. A fully automated plant, lights off, no humans on the floor. Machines produce, assemble, and ship. The image is compelling, but it stays confined to what we already know how to make.
 
 What interests me is what happens when you push that logic underground. Not a factory that executes, but a mine that explores. Autonomous agents that don't answer your questions but formulate new ones. Unlike a real mine, where you know what ore looks like before you dig, a dark mine doesn't know what it's looking for until it finds it.
 
@@ -27,20 +27,20 @@ What I'm arguing here is straightforward. An organization that delegates questio
 
 To ground this in operational reality, I needed not a shiny new framework but an old one that had been gathering dust in the back of everyone's closet.
 
-I went and dug up [CRISP-DM](https://cs.unibo.it/~danilo.montesi/CBD/Beatriz/10.1.1.198.5133.pdf). We confined it to predictive modeling for years, then forgot about it just as quickly. Yet the core process is clear. Understand the business need, understand the data, connect the two, and above all iterate relentlessly. It's also an informal framework, a guideline that gives teams the autonomy to improvise when the terrain demands it. Originally a collaboration standard between research labs, it was often criticized for being too rigid. But that rigidity is precisely what agents need to stay reasonably deterministic. What was a flaw for humans becomes a feature for machines.
+I went and dug up [CRISP-DM](https://cs.unibo.it/~danilo.montesi/CBD/Beatriz/10.1.1.198.5133.pdf). We confined it to predictive modeling for years, then forgot about it just as quickly. Yet the core process is simple. Understand the business need, understand the data, connect the two, and above all iterate relentlessly. It's also an informal framework, a guideline that gives teams the autonomy to improvise when the terrain demands it. Originally a collaboration standard between research labs, it was often criticized for being too rigid. But that rigidity is precisely what agents need to stay reasonably deterministic. What was a flaw for humans strikes me as a feature for machines.
 
-That's the principle I'm applying, combined with NIST data exploration patterns as a foundation, orchestrated through agent swarms. The roles differ from what you see in software development. Leads, Scouts, Explorers, Synthesizers, and Challengers are all coordinated through structured signals, convergence metrics, and satisfaction scores. The implementation details will be a separate post.
+That's the principle I'm applying, combined with [NIST](https://www.itl.nist.gov/div898/handbook/eda/eda.htm) data exploration patterns as a foundation, orchestrated through agent swarms. The roles differ from what you see in software development. Leads, Scouts, Explorers, Synthesizers, and Challengers are all coordinated through structured signals, convergence metrics, and satisfaction scores. The implementation details will be a separate post.
 
 ## Testing ground
 
-To test this logic on the ground, the example I'm iterating on is telling. Take Spotify. Their initial North Star KPI was subscriber count. Then they asked a different question: how do users actually behave when they genuinely value the service? Is the subscription really what captures value, or is it something else? They ended up switching to minutes listened, because that's where the generated value actually lived. It took them years to ask the right question. A dark mine could surface that kind of reframing in days, because the cost of each hypothesis tested is negligible and agents carry no emotional investment in the previous answer.
+To test this logic on the ground, the example I'm iterating on is rather high-level but simple enough. Take Spotify. Their initial North Star KPI was subscriber count. Then they asked a different question: how do users actually behave when they genuinely value the service? Is the subscription really what captures value, or is it something else? They ended up switching to minutes listened, because that's where the generated value actually lived. It took them years to ask themselves the right question. I think a dark mine could surface that kind of reframing in days, because the cost of each hypothesis tested is negligible and agents carry no emotional investment in the previous answer.
 
-That logic is my baseline in the [Jolimoi](https://jolimoi.com) context. Today, a Data Analyst answers questions a human has already formulated. The bias is structural, because you can only find what you're looking for. A dark mine generates questions no one would have asked, and that's a fundamentally different proposition. Discovery emerges from the hypothesis no one had thought worth testing, or even imagined.
+That logic is my baseline in the [Jolimoi](https://jolimoi.com) context. Today, a Data Analyst answers questions a human has already formulated. The bias is structural, because you can only find what you're looking for. A dark mine generates questions no one would have asked, and that's fundamentally what interests me. Discovery emerges from the hypothesis no one had thought worth testing, or even imagined. We're at the frontier of an artistic process ... and that too will be the subject of a future post.
 
 ## The real risk
 
-Surfacing those hypotheses has a cost. The operational complexity is real, with six phases, six agent types, structured signals, and feedback loops between roles. But it's complexity in service of exploration, not of protection.
+Still, surfacing those hypotheses has a cost. The operational complexity is real, with six phases, six agent types, structured signals, and feedback loops between roles. But it's complexity in service of exploration, not of protection.
 
-And that's where the real question surfaces. Just as a dark factory running at full tilt can overwhelm the organization it sits on, a dark mine creates a symmetric problem. How does a structure build the conditions to act on what the mine surfaces?
+And that's where the real question surfaces. Just as a dark factory dedicated to software production can overwhelm the organization it sits on, a dark mine creates a symmetric problem. How does a structure build the conditions to act on what the mine surfaces?
 
 The risk isn't that the mine finds nothing, but that it finds everything, and the organization drowns in ore it can't refine.
