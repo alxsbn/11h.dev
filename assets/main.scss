@@ -35,26 +35,26 @@
 .home-container .post-card__excerpt,
 .home-container .post-card__link .post-card__excerpt,
 .home-container a.post-card__link .post-card__excerpt {
-  color: #4a4a4a !important;
+  color: #6b6b6b !important;
 }
 
 .home-container .post-card__date,
 .home-container .post-card__link .post-card__date {
-  color: #4a4a4a !important;
+  color: #6b6b6b !important;
 }
 
 .home-container .post-card__read-more,
 .home-container .post-card__link .post-card__read-more {
-  color: #c9453c !important;
+  color: #6b6b6b !important;
 }
 
 .home-container .home-intro,
 .home-container .home-intro p {
-  color: #4a4a4a !important;
+  color: #6b6b6b !important;
 }
 
 .home-container .post-card:hover .post-card__title {
-  color: #c9453c !important;
+  color: #6b6b6b !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,24 +62,46 @@
   .home-container .post-card__link:visited,
   .home-container a.post-card__link,
   .home-container a.post-card__link:visited {
-    color: #e8e8e8 !important;
+    color: #f0f0f0 !important;
   }
 
   .home-container .post-card__title,
   .home-container .post-card__link .post-card__title,
   .home-container h2.post-card__title,
   .home-container h3.post-card__title {
-    color: #e8e8e8 !important;
+    color: #f0f0f0 !important;
   }
 
   .home-container .post-card__excerpt,
   .home-container .post-card__link .post-card__excerpt {
-    color: #a0a0a0 !important;
+    color: #b8b8b8 !important;
   }
 
   .home-container .post-card:hover .post-card__title {
-    color: #e07c74 !important;
+    color: #ffffff !important;
   }
+}
+
+/* Dark mode toggle variant */
+[data-theme="dark"] .home-container .post-card__link,
+[data-theme="dark"] .home-container a.post-card__link {
+  color: #f0f0f0 !important;
+}
+
+[data-theme="dark"] .home-container .post-card__title {
+  color: #f0f0f0 !important;
+}
+
+[data-theme="dark"] .home-container .post-card__excerpt {
+  color: #b8b8b8 !important;
+}
+
+[data-theme="dark"] .home-container .post-card:hover .post-card__title {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .home-container .post-card__read-more {
+  color: #b8b8b8 !important;
 }
 
 /* ===== Substack-style Author Section ===== */
@@ -193,7 +215,7 @@
 
 /* Copy link */
 .share-copy:hover {
-  background: var(--color-accent, #c9453c);
+  background: var(--color-text-secondary, #6b6b6b);
   color: #ffffff;
 }
 
