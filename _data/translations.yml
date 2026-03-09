@@ -32,8 +32,6 @@ fr:
   locale: "fr_FR"
   # Date formats
   date_format: "%-d %B %Y"
-  # Read in other language
-  read_other_lang: "Read this article in English"
 
 en:
   # Navigation
@@ -69,5 +67,3 @@ en:
   locale: "en_US"
   # Date formats
   date_format: "%B %-d, %Y"
-  # Read in other language
-  read_other_lang: "Lire cet article en français"
