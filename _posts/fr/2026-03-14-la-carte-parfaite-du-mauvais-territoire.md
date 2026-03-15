@@ -42,20 +42,40 @@ Alors les équipes cartographient compulsivement.
 
 ## Terrain mouvant
 
-Pourtant, le terrain a changé sous la carte. Le coût de production d'un insight tend vers zéro. Ce qui prenait une semaine d'investigation prend vingt minutes. L'excuse historique ("on n'a pas le temps, on a les pipelines à maintenir") n'a plus de fondement. Quand l'insight était rare et cher, la rigueur en amont était une nécessité économique. Quand il est abondant et cheap, la rigueur se déplace en aval. On ne vérifie plus avant de chercher, on vérifie après avoir trouvé.
+Pourtant, le terrain a changé sous la carte. 
 
-Une corrélation imparfaite qui ouvre une piste inédite crée plus de valeur qu'un modèle parfait qui confirme ce qu'on savait déjà. Accepter ça, pour un analyste formé à traquer les biais et les artefacts, c'est une hérésie. Plus on est bon cartographe, moins on supporte l'idée de marcher sans carte.
+Retournons en 2026.
 
-Mais le foisonnement change la donne. On peut générer cinquante hypothèses en une heure. Quarante-cinq seront du bruit. Cinq ouvriront des territoires qu'aucun dashboard n'aurait cartographiés, parce qu'ils n'étaient dans aucun backlog, aucune roadmap et aucune question posée par un stakeholder en réunion.
+Avec l'avènement de l'IA, le coût de production d'un insight, et à l'image du code, tend vers zéro. Ce qui prenait auparavant une semaine d'investigation prend au mieux quelques minutes.m et l'excuse historique ("on n'a pas le temps, on a les pipelines à maintenir") n'a plus de fondement. 
+
+Quand l'insight était rare et cher, la rigueur en amont était une nécessité économique. Alors que lorsqu'il est abondant et cheap, la rigueur se déplace en aval. Désormais on ne vérifie plus avant de chercher, on vérifie après avoir trouvé.
+
+La moindre corrélation imparfaite qui ouvre une piste inédite crée plus de valeur qu'un modèle parfait qui confirme ce qu'on savait déjà. Et accepter cela, pour un analyste formé à traquer les biais et les artefacts, c'est une hérésie. Car plus on est bon cartographe, moins on supporte l'idée de marcher sans carte.
+
+Mais le foisonnement change la donne. On peut générer cinquante hypothèses en moins d'une heure. Et sur ces cinquantes, quarante-cinq seront du bruit et cinq ouvriront peut-être des territoires qu'aucun dashboard n'aurait cartographies. 
+
+Ils n'étaient pourtant dans aucun backlog, aucune roadmap et aucune question posée par un stakeholder en réunion... 
 
 ## L'éditeur d'hypothèses
 
-C'est un nouveau métier. L'analyste ne produit plus l'insight, il en reçoit cinquante et en tue quarante-neuf. Il passe de chercheur à éditeur d'hypothèses. Sa valeur la plus haute, la plus ingrate, c'est le non. Dire "cette corrélation est séduisante mais c'est un artefact" demande plus de compétence que de la trouver. N'importe quel agent peut explorer. Seul un humain qui connaît le domaine, les biais et les pièges de composition peut dire que ça ne tient pas.
+C'est un nouveau métier qui s'annonce même. L'analyste ne produira plus l'insight, il en recevra cinquante et s'occupera d'en faire le tri. Il passera de chercheur à éditeur d'hypothèses.
 
-Ce rôle n'existe nulle part. Pas dans les fiches de poste, pas dans les OKR et pas dans les sprint reviews. Tant que les équipes data seront évaluées sur la disponibilité de leurs pipelines et la fraîcheur de leurs dashboards, elles resteront prisonnières de l'exploitation. Elles continueront de perfectionner des cartes de territoires qu'elles n'explorent jamais.
+Sa valeur la plus importante, la plus ingrate, c'est le non. Dire "cette corrélation est séduisante mais c'est un artefact" demande plus de compétence que de la trouver car désormais n'importe quel agent IA peut explorer sans se fatiguer. 
+
+Seul un humain qui connaît le domaine, les biais et les pièges de composition peut dire que ça ne tient pas.
+
+Et à ce jour ce rôle n'existe nulle part. Pas dans les fiches de poste, pas dans les OKR et pas dans les sprint reviews. Tant que les équipes data seront évaluées sur la disponibilité de leurs pipelines et la fraîcheur de leurs dashboards, elles resteront prisonnières de l'exploitation. Elles continueront de perfectionner des cartes de territoires qu'elles n'explorent jamais.
 
 ## Le slack organisationnel
 
-March avait une solution, inconfortable mais documentée. Il parlait de slack organisationnel, du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Les organisations performantes tolèrent cette inefficacité apparente. Les autres optimisent jusqu'à l'extinction.
+Mais March avait une solution, inconfortable mais documentée. Il parlait de slack organisationnel, du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Les organisations performantes tolèrent cette inefficacité apparente, là où les autres optimisent jusqu'à l'extinction.
 
-Reste une question que cet article évite. Dire aux équipes data "explorez au lieu de cartographier", c'est facile. C'est même confortable. C'est une nouvelle carte, en somme, un cadre rassurant qui dit quoi faire, comment répartir le temps, quel rôle inventer. Le vrai territoire, celui que personne ne cartographie, c'est ce qui se passe quand l'éditeur d'hypothèses se trompe, quand il tue le bon signal et garde le mauvais. Quand la carte qu'on a posée nous manque et que le terrain ne pardonne pas. L'exploration a un coût que l'exploitation n'a jamais eu, celui de ne pas savoir si on a raison avant qu'il soit trop tard.
+Reste néanmoins une question que j'éviterai de traiter dans cet article. 
+
+Dire aux équipes data "explorez au lieu de cartographier", c'est facile et confortable. 
+
+Mais le vrai territoire, celui que personne ne cartographie, c'est une jungle dans laquelle ont peut se perdre. Et qui se passera-t-il quand l'explorateur se trompera ? quand il tuera le bon signal et garde le mauvais ? 
+
+Le terrain ne pardonne pas. 
+
+Et l'exploration, elle, a un coût que l'exploitation n'a jamais eu. Celui de ne pas savoir si on a raison avant qu'il soit trop tard.
