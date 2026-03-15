@@ -76,20 +76,20 @@ Pire, il sera séduisant d'oser penser que les stakeholders métier soient les m
 
 ## Le slack organisationnel
 
-Mais March avait une solution propre aux sciences des organisations. 
+Mais March avait une solution.
 
 Inconfortable mais documentée, il voyait dans le slack organisationnel, la solution au problème qui nous occupe. 
 
-Du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Les organisations performantes tolèrent cette inefficacité apparente, là où les autres optimisent jusqu'à l'extinction.
+Du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Certaines organisations performantes toléront cette inefficacité apparente, là où les autres optimiseront ce qu'ils pourront, et cela jusqu'à l'extinction.
 
-Cela pousse à des organisations plus fluides, sans doute moins freiné par la bureaucratie et le management. Un sujet qui nous ramène aux impacts que certains perçoivent dans l'IA appliqué à la Tech. 
+Cela poussera à re/construire des organisations plus fluides, sans doute moins freinées par les theories gestionnaires. Un sujet qui nous ramène aux impacts que certains perçoivent déjà dans l'IA appliqué à la Tech... 
 
-Mais revenons à notre sujet. Il reste néanmoins une question que j'éviterai de traiter dans cet article. 
+Mais revenons à notre sujet. Il restera néanmoins une question que j'éviterai de traiter dans cet article. 
 
 Dire aux équipes data "explorez au lieu de cartographier", c'est facile et confortable. 
 
-Mais le vrai territoire, celui que personne ne cartographie, reste une jungle dans laquelle ont peut facilement se perdre. Et que se passera-t-il lorsque l'explorateur se trompera ? quand il tuera le bon signal et garde le mauvais ? 
+Mais le vrai territoire, celui que personne ne cartographie, reste une jungle dans laquelle ont peut facilement se perdre. Et donc que se passera-t-il lorsque l'explorateur se trompera ? quand il tuera le bon signal et garde le mauvais ? 
 
-Le terrain ne pardonne pas. 
+Le terrain ne pardonnera pas. 
 
 Et l'exploration, elle, a un coût que l'exploitation n'a jamais eu. Celui de ne pas savoir si on a raison avant qu'il soit trop tard.
