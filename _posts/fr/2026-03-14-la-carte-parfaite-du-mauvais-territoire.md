@@ -16,13 +16,13 @@ lang: fr
 
 Qu'on se le dise, une équipe data produisant des dashboards que personne ne lit ne vaut rien. Peu importe la qualité des pipelines, la robustesse des modèles ou encore six décimales et plus de précision. Si personne ne regarde, rien de tout cela n'a d'intérêt. 
 
-C'est le piège de la carte parfaite. On la raffine, on la met à jour, des fois entre se trompant, on en soigne la légende, et pendant ce temps le terrain bouge sans nous.
+C'est le piège de la carte parfaite. On la raffine, on la met à jour, des fois en se trompant, on en soigne la légende, et pendant ce temps le terrain bouge sans nous.
 
 La rigueur, telle qu'elle est pratiquée dans la plupart des équipes data, n'est pas de l'exigence pure, mais plus ou moins de la procrastination confortable. 
 
 Je m'explique. 
 
-Fiabiliser ou créer un pipeline, documenter un modèle ou produire un dashboard, c'est produire un livrable mesurable. Cela rassure et s'évalue, mais cela permet d'éviter la seule question qui compte : est-ce que quelqu'un a appris quelque chose qu'il ne savait pas hier ? La semaine derniere ? Le mois dernier ? 
+Fiabiliser ou créer un pipeline, documenter un modèle ou produire un dashboard, c'est produire un livrable mesurable. Cela rassure et s'évalue, mais cela permet d'éviter la seule question qui compte : est-ce que quelqu'un a appris quelque chose qu'il ne savait pas hier ? La semaine dernière ? Le mois dernier ? 
 
 La plupart du temps la réponse est simplement négative. 
 
@@ -30,7 +30,7 @@ La plupart du temps la réponse est simplement négative.
 
 James March, un des penseurs les plus influents des sciences sociales du XXe siècle, a donné un nom à ce mécanisme en 1991 dans l'article « Exploration and Exploitation in organizational learning ». Il l'a appelé la myopie de l'exploitation. 
 
-Les organisations dérivent vers ce qui produit des résultats visibles et immédiats. Chaque dashboard livré renforce la croyance que la valeur est dans le dashboard. Chaque pipeline stabilisé justifie le prochain crée et la boucle se referme. 
+Les organisations dérivent vers ce qui produit des résultats visibles et immédiats. Chaque dashboard livré renforce la croyance que la valeur est dans le dashboard. Chaque pipeline stabilisé justifie le prochain créé et la boucle se referme. 
 
 L'exploration, elle, celle qui naît de la surprise et de la découverte inconfortable, est chassée en silence. En fait, l'organisation ne décide pas d'arrêter de chercher. Elle oublie juste trop rapidement, par certitude, qu'elle pourrait (et devrait) continuer de le faire. 
 
@@ -46,15 +46,15 @@ Pourtant, le terrain a changé sous la carte.
 
 Retournons en 2026.
 
-Avec l'avènement de l'IA, le coût de production d'un insight, tend vers zéro. Ce qui prenait auparavant une semaine d'investigation prend au mieux quelques minutes et l'excuse historique ("on n'a pas le temps, on a les pipelines à maintenir") n'a plus de fondement. 
+Avec l'avènement de l'IA, le coût de production d'un insight tend vers zéro. Ce qui prenait auparavant une semaine d'investigation prend au mieux quelques minutes et l'excuse historique ("on n'a pas le temps, on a les pipelines à maintenir") n'a plus de fondement. 
 
-Surtout que le temps dédié aux tâches exploitation (pipeline, mise en qualité, modélisation, etc.) tendent elles aussi vers zéro.
+Surtout que le temps dédié aux tâches d'exploitation (pipeline, mise en qualité, modélisation, etc.) tend lui aussi vers zéro.
 
 Quand l'insight était rare et cher, la rigueur en amont était une nécessité économique. Alors que lorsqu'il est abondant et cheap, la rigueur se déplace en aval. Désormais on ne vérifie plus avant de chercher, on vérifie après avoir trouvé.
 
 La moindre corrélation imparfaite qui ouvre une piste inédite crée plus de valeur qu'un modèle parfait qui confirme ce qu'on savait déjà. Et accepter cela, pour un analyste formé à traquer les biais et les artefacts, c'est une hérésie. Car plus on est bon cartographe, moins on supporte l'idée de marcher sans carte.
 
-Mais le foisonnement change la donne. On peut générer cinquante hypothèses en moins d'une heure. Et sur ces cinquantes, quarante-cinq seront du bruit et cinq ouvriront peut-être des territoires qu'aucun dashboard ne pourrait cartographier.
+Mais le foisonnement change la donne. On peut générer cinquante hypothèses en moins d'une heure. Et sur ces cinquante, quarante-cinq seront du bruit et cinq ouvriront peut-être des territoires qu'aucun dashboard ne pourrait cartographier.
 
 Ils n'étaient pourtant dans aucun backlog, aucune roadmap, ni aucune question posée par un stakeholder en réunion... 
 
@@ -68,11 +68,11 @@ Sa responsabilité la plus importante, la plus ingrate, sera d'arbitrer, de tran
 
 Seul un humain connaissant le domaine, les biais et les pièges de composition peut dire que ça ne tient pas.
 
-Mais j'ai la certitude qu'à ce jour ce rôle n'existe nulle part. Qu'il y a vide à combler, une opportunité incroyable à capter. 
+Mais j'ai la certitude qu'à ce jour ce rôle n'existe nulle part. Qu'il y a un vide à combler, une opportunité incroyable à capter. 
 
 Néanmoins, tant que les équipes data seront évaluées sur la disponibilité de leurs pipelines et la fraîcheur de leurs dashboards, elles resteront prisonnières de l'exploitation. Elles continueront de perfectionner des cartes de territoires qu'elles n'explorent jamais.
 
-Pire, il sera séduisant d'oser penser que les stakeholders métier soient les mieux placer pour endosser cette responsabilité nouvelle. On verra sans doute beaucoup d'équipes data se contracter sur cette simple croyance.  
+Pire, il sera séduisant d'oser penser que les stakeholders métier soient les mieux placés pour endosser cette responsabilité nouvelle. On verra sans doute beaucoup d'équipes data se contracter sur cette simple croyance.  
 
 ## Le slack organisationnel
 
@@ -80,15 +80,15 @@ Mais March avait une solution.
 
 Inconfortable mais documentée, il voyait dans le slack organisationnel, la solution au problème qui nous occupe. 
 
-Du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Certaines organisations performantes toléront cette inefficacité apparente, là où les autres optimiseront ce qu'ils pourront, et cela jusqu'à l'extinction.
+Du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Certaines organisations performantes toléreront cette inefficacité apparente, là où les autres optimiseront ce qu'ils pourront, et cela jusqu'à l'extinction.
 
-Cela poussera à re/construire des organisations plus fluides, sans doute moins freinées par les theories gestionnaires. Un sujet qui nous ramène aux impacts que certains perçoivent déjà dans l'IA appliqué à la Tech... 
+Cela poussera à re/construire des organisations plus fluides, sans doute moins freinées par les theories gestionnaires. Un sujet qui nous ramène aux impacts que certains perçoivent déjà dans l'IA appliquée à la Tech... 
 
 Mais revenons à notre sujet. Il restera néanmoins une question que j'éviterai de traiter dans cet article. 
 
 Dire aux équipes data "explorez au lieu de cartographier", c'est facile et confortable. 
 
-Mais le vrai territoire, celui que personne ne cartographie, reste une jungle dans laquelle ont peut facilement se perdre. Et donc que se passera-t-il lorsque l'explorateur se trompera ? quand il tuera le bon signal et garde le mauvais ? 
+Mais le vrai territoire, celui que personne ne cartographie, reste une jungle dans laquelle on peut facilement se perdre. Et donc que se passera-t-il lorsque l'explorateur se trompera ? quand il tuera le bon signal et gardera le mauvais ? 
 
 Le terrain ne pardonnera pas. 
 
