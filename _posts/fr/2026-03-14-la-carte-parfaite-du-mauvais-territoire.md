@@ -14,19 +14,33 @@ ref: the-perfect-map-of-the-wrong-territory
 lang: fr
 ---
 
-Une équipe data qui produit deddashboards que personne ne lit ne vaut rien. Peu importe la qualité des pipelines, la robustesse des modèles et les six décimales de précision. Si personne ne regarde, rien de tout ça n'existe.
+Qu'on se le dise, une équipe data produisant des dashboards que personne ne lit ne vaut rien. Peu importe la qualité des pipelines, la robustesse des modèles ou encore six décimales et plus de précision. Si personne ne regarde, rien de tout cela n'a d'intérêt. 
 
-C'est le piège de la carte parfaite. On la raffine, on la met à jour, on en soigne la légende, et pendant ce temps le terrain bouge sans nous. La carte devient le produit, et le territoire devient optionnel.
+C'est le piège de la carte parfaite. On la raffine, on la met à jour, on en soigne la légende, et pendant ce temps le terrain bouge sans nous. Pire, on a male cartographié Le terrain. La carte devient la finalité, le produit, et le territoire devient optionnel.
 
-La rigueur, telle qu'elle est pratiquée dans la plupart des équipes data, n'est pas de l'exigence. C'est de la procrastination confortable. Fiabiliser un pipeline est mesurable, documenter un modèle est présentable en review, et produire un dashboard, c'est livrable. Tout ça rassure, tout ça s'évalue, tout ça évite la seule question qui compte. Est-ce que quelqu'un a appris quelque chose qu'il ne savait pas hier ?
+La rigueur, telle qu'elle est pratiquée dans la plupart des équipes data, n'est pas de l'exigence pure, mais plus ou moins de la procrastination confortable. 
+
+Je m'explique. 
+
+Fiabiliser ou créer un pipeline, documenter un modèle ou produire un dashboard, c'est produire un livrable mesurable. Cela rassure et s'évalue, mais cela permet d'éviter la seule question qui compte : est-ce que quelqu'un a appris quelque chose qu'il ne savait pas hier ? La semaine derniere ? Le mois dernier ? 
+
+La plupart du temps la réponse est simplement négative. 
 
 ## La myopie de l'exploitation
 
-James March a donné un nom à ce mécanisme en 1991. Il l'a appelé la myopie de l'exploitation. Les organisations dérivent vers ce qui produit des résultats visibles et immédiats. Chaque dashboard livré renforce la croyance que la valeur est dans le dashboard. Chaque pipeline stabilisé justifie le prochain. La boucle se referme. L'exploration, celle qui naît de la surprise et de la découverte inconfortable, est chassée en silence. L'organisation ne décide pas d'arrêter de chercher. Elle oublie qu'elle pourrait.
+James March a donné un nom à ce mécanisme en 1991 dans l'article « Exploration and Exploitation in organizational learning ». Il l'a appelé la myopie de l'exploitation. 
 
-Le piège tient par une asymétrie de visibilité. Un pipeline livré, c'est un ticket fermé. Une corrélation suspecte explorée pendant deux heures et rejetée ? Dans un sprint review, c'est du temps "perdu". L'exploitation produit des preuves d'elle-même. L'exploration n'en produit que rétrospectivement, quand elle a déjà réussi. Alors les équipes cartographient, compulsivement, magnifiquement.
+Les organisations dérivent vers ce qui produit des résultats visibles et immédiats. Chaque dashboard livré renforce la croyance que la valeur est dans le dashboard. Chaque pipeline stabilisé justifie le prochain crée et la boucle se referme. 
 
-## Le terrain a changé sous la carte
+L'exploration, elle, celle qui naît de la surprise et de la découverte inconfortable, est chassée en silence. En fait, l'organisation ne décide pas d'arrêter de chercher. Elle oublie juste trop rapidement, pas certitude, qu'elle pourrait (et devrait) continuer de le faire. 
+
+Le piège est pernicieux car il tient par une asymétrie de visibilité. Un pipeline livré, c'est un ticket fermé. Une corrélation suspecte explorée pendant deux heures et rejetée ? Dans un sprint review, c'est du temps "perdu" voire bornée dans le temps. 
+
+L'exploitation produit des preuves d'elle-même alors que l'exploration n'en produit que rétrospectivement, quand elle a déjà réussi. 
+
+Alors les équipes cartographient compulsivement. 
+
+## Terrain mouvant
 
 Pourtant, le terrain a changé sous la carte. Le coût de production d'un insight tend vers zéro. Ce qui prenait une semaine d'investigation prend vingt minutes. L'excuse historique ("on n'a pas le temps, on a les pipelines à maintenir") n'a plus de fondement. Quand l'insight était rare et cher, la rigueur en amont était une nécessité économique. Quand il est abondant et cheap, la rigueur se déplace en aval. On ne vérifie plus avant de chercher, on vérifie après avoir trouvé.
 
