@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "La carte parfaite du mauvais territoire"
+title: "Data team, explorez ou disparaissez"
 date: 2026-03-14
 categories: data
 excerpt: 'Une équipe data qui produit quarante dashboards que personne ne lit ne vaut rien. Le piège, c''est de confondre la rigueur de production avec la création de valeur.'
@@ -10,8 +10,10 @@ header_image_credit: "Andrew Stutesman"
 header_image_credit_url: "https://unsplash.com/@drwmrk"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: the-perfect-map-of-the-wrong-territory
+ref: data-team-explore-or-disappear
 lang: fr
+redirect_from:
+  - /fr/2026/03/14/la-carte-parfaite-du-mauvais-territoire/
 ---
 
 Qu'on se le dise, une équipe data produisant des dashboards que personne ne lit ne vaut rien. Peu importe la qualité des pipelines, la robustesse des modèles ou encore six décimales et plus de précision. Si personne ne regarde, rien de tout cela n'a d'intérêt. 
