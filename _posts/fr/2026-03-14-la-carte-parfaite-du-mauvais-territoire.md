@@ -28,7 +28,7 @@ La plupart du temps la réponse est simplement négative.
 
 ## La myopie de l'exploitation
 
-James March a donné un nom à ce mécanisme en 1991 dans l'article « Exploration and Exploitation in organizational learning ». Il l'a appelé la myopie de l'exploitation. 
+James March, un des penseurs les plus influents des sciences sociales du XXe siècle, a donné un nom à ce mécanisme en 1991 dans l'article « Exploration and Exploitation in organizational learning ». Il l'a appelé la myopie de l'exploitation. 
 
 Les organisations dérivent vers ce qui produit des résultats visibles et immédiats. Chaque dashboard livré renforce la croyance que la valeur est dans le dashboard. Chaque pipeline stabilisé justifie le prochain crée et la boucle se referme. 
 
