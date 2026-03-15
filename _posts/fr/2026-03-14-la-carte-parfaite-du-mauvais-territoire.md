@@ -16,7 +16,7 @@ lang: fr
 
 Qu'on se le dise, une équipe data produisant des dashboards que personne ne lit ne vaut rien. Peu importe la qualité des pipelines, la robustesse des modèles ou encore six décimales et plus de précision. Si personne ne regarde, rien de tout cela n'a d'intérêt. 
 
-C'est le piège de la carte parfaite. On la raffine, on la met à jour, on en soigne la légende, et pendant ce temps le terrain bouge sans nous. Pire, on a male cartographié Le terrain. La carte devient la finalité, le produit, et le territoire devient optionnel.
+C'est le piège de la carte parfaite. On la raffine, on la met à jour, des fois entre se trompant, on en soigne la légende, et pendant ce temps le terrain bouge sans nous.
 
 La rigueur, telle qu'elle est pratiquée dans la plupart des équipes data, n'est pas de l'exigence pure, mais plus ou moins de la procrastination confortable. 
 
