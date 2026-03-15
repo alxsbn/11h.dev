@@ -68,11 +68,11 @@ Sa responsabilité la plus importante, la plus ingrate, sera d'arbitrer, de tran
 
 Seul un humain connaissant le domaine, les biais et les pièges de composition peut dire que ça ne tient pas.
 
-Dès lors, il sera séduisant d'oser penser que les stakeholders métier soient les mieux placer pour endosser cette responsabilité. 
-
 Mais j'ai la certitude qu'à ce jour ce rôle n'existe nulle part. Qu'il y a vide à combler, une opportunité incroyable à capter. 
 
 Néanmoins, tant que les équipes data seront évaluées sur la disponibilité de leurs pipelines et la fraîcheur de leurs dashboards, elles resteront prisonnières de l'exploitation. Elles continueront de perfectionner des cartes de territoires qu'elles n'explorent jamais.
+
+Pire, il sera séduisant d'oser penser que les stakeholders métier soient les mieux placer pour endosser cette responsabilité nouvelle. On verra sans doute beaucoup d'équipes data se contracter sur cette simple croyance.  
 
 ## Le slack organisationnel
 
