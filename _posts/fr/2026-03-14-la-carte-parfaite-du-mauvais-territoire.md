@@ -54,7 +54,7 @@ La moindre corrélation imparfaite qui ouvre une piste inédite crée plus de va
 
 Mais le foisonnement change la donne. On peut générer cinquante hypothèses en moins d'une heure. Et sur ces cinquantes, quarante-cinq seront du bruit et cinq ouvriront peut-être des territoires qu'aucun dashboard ne pourrait cartographier.
 
-Ils n'étaient pourtant dans aucun backlog, aucune roadmap et aucune question posée par un stakeholder en réunion... 
+Ils n'étaient pourtant dans aucun backlog, aucune roadmap, ni aucune question posée par un stakeholder en réunion... 
 
 ## L'éditeur d'hypothèses
 
