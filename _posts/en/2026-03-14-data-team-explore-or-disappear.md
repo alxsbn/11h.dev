@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Data team, explore or disappear"
+title: "Data team. Explore or disappear"
 date: 2026-03-14
 categories: data
 excerpt: 'A data team that ships forty dashboards nobody reads is worth nothing. The trap is mistaking production rigor for value creation.'
@@ -10,10 +10,11 @@ header_image_credit: "Andrew Stutesman"
 header_image_credit_url: "https://unsplash.com/@drwmrk"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: data-team-explore-or-disappear
+ref: data-team-explorer-ou-disparaitre
 lang: en
 redirect_from:
   - /en/2026/03/14/the-perfect-map-of-the-wrong-territory/
+  - /en/2026/03/14/data-team-explore-or-disappear/
 ---
 
 Let's be clear about this. A data team shipping dashboards that nobody reads is worth nothing. It doesn't matter how clean the pipelines are, how robust the models look, or how many decimal places the metrics carry. If nobody looks, none of it exists.
