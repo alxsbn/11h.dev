@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The perfect map of the wrong territory"
+title: "Data team. Explore or disappear"
 date: 2026-03-14
 categories: data
 excerpt: 'A data team that ships forty dashboards nobody reads is worth nothing. The trap is mistaking production rigor for value creation.'
@@ -10,8 +10,11 @@ header_image_credit: "Andrew Stutesman"
 header_image_credit_url: "https://unsplash.com/@drwmrk"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: the-perfect-map-of-the-wrong-territory
+ref: data-team-explorer-ou-disparaitre
 lang: en
+redirect_from:
+  - /en/2026/03/14/the-perfect-map-of-the-wrong-territory/
+  - /en/2026/03/14/data-team-explore-or-disappear/
 ---
 
 Let's be clear about this. A data team shipping dashboards that nobody reads is worth nothing. It doesn't matter how clean the pipelines are, how robust the models look, or how many decimal places the metrics carry. If nobody looks, none of it exists.
@@ -75,6 +78,8 @@ Worse, it will be tempting to assume that business stakeholders are best positio
 But March had a solution.
 
 Uncomfortable but well-documented, he saw organizational slack as the answer to the problem at hand. Unallocated time, unjustifiable time, dedicated to exploration with no guaranteed return. Some high-performing organizations tolerate this apparent inefficiency, while the rest optimize what they can, until they go extinct.
+
+Slack is expensive precisely because it produces nothing reportable. That's its condition, not its flaw.
 
 This will push toward building (or rebuilding) more fluid organizations, likely less constrained by management theory. A topic that brings us back to the impact some are [already seeing](/en/2026/01/04/collapse-through-obedience/) from AI applied to tech.
 

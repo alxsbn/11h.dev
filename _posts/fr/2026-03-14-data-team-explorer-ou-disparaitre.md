@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "La carte parfaite du mauvais territoire"
+title: "Data team. Explorer ou disparaître"
 date: 2026-03-14
 categories: data
 excerpt: 'Une équipe data qui produit quarante dashboards que personne ne lit ne vaut rien. Le piège, c''est de confondre la rigueur de production avec la création de valeur.'
@@ -10,8 +10,11 @@ header_image_credit: "Andrew Stutesman"
 header_image_credit_url: "https://unsplash.com/@drwmrk"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: the-perfect-map-of-the-wrong-territory
+ref: data-team-explorer-ou-disparaitre
 lang: fr
+redirect_from:
+  - /fr/2026/03/14/la-carte-parfaite-du-mauvais-territoire/
+  - /fr/2026/03/14/data-team-explorez-ou-disparaissez/
 ---
 
 Qu'on se le dise, une équipe data produisant des dashboards que personne ne lit ne vaut rien. Peu importe la qualité des pipelines, la robustesse des modèles ou encore six décimales et plus de précision. Si personne ne regarde, rien de tout cela n'a d'intérêt. 
@@ -77,6 +80,8 @@ Mais March avait une solution.
 Inconfortable mais documentée, il voyait dans le slack organisationnel, la solution au problème qui nous occupe. 
 
 Du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Certaines organisations performantes tolèrent cette inefficacité apparente, là où les autres optimisent ce qu'elles peuvent, jusqu'à l'extinction.
+
+Le slack coûte cher précisément parce qu'il ne produit rien de rapportable. C'est sa condition, pas son défaut.
 
 Cela poussera à re/construire des organisations plus fluides, sans doute moins freinées par les théories gestionnaires. Un sujet qui nous ramène aux impacts que certains [perçoivent déjà](/fr/2026/01/04/effondrement-par-obeissance/) dans l'IA appliquée à la Tech... 
 
