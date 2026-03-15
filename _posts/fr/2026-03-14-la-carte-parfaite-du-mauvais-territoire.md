@@ -58,23 +58,35 @@ Ils n'étaient pourtant dans aucun backlog, aucune roadmap, ni aucune question p
 
 ## L'éditeur d'hypothèses
 
-C'est un nouveau métier qui s'annonce même. L'analyste ne produira plus l'insight, il en recevra cinquante et s'occupera d'en faire le tri. Il passera de chercheur à éditeur d'hypothèses.
+C'est un nouveau rôle qui s'annonce pour les équipes data. Celui de chasseur de valeur. 
 
-Sa valeur la plus importante, la plus ingrate, c'est le non. Dire "cette corrélation est séduisante mais c'est un artefact" demande plus de compétence que de la trouver car désormais n'importe quel agent IA peut explorer sans se fatiguer. 
+L'analyste ne produira plus l'insight, il en recevra cinquante et s'occupera d'en faire le tri. Il passera de chercheur à éditeur d'hypothèses produisant cette valeur, cet Eldorado tant recherché. 
 
-Seul un humain qui connaît le domaine, les biais et les pièges de composition peut dire que ça ne tient pas.
+Sa valeur la plus importante, la plus ingrate, sera d'arbitrer, de trancher et oser dire non. Dire "cette corrélation est séduisante mais c'est un artefact" demande plus de compétence que de la trouver car désormais n'importe quel agent IA peut explorer sans se fatiguer. 
 
-Et à ce jour ce rôle n'existe nulle part. Pas dans les fiches de poste, pas dans les OKR et pas dans les sprint reviews. Tant que les équipes data seront évaluées sur la disponibilité de leurs pipelines et la fraîcheur de leurs dashboards, elles resteront prisonnières de l'exploitation. Elles continueront de perfectionner des cartes de territoires qu'elles n'explorent jamais.
+Seul un humain connaissant le domaine, les biais et les pièges de composition peut dire que ça ne tient pas.
+
+Dès lors, il sera séduisant d'oser penser que les stakeholders métier soient les mieux placer pour endosser cette responsabilité. 
+
+Mais j'ai la certitude qu'à ce jour ce rôle n'existe nulle part. Qu'il y a vide à combler, une opportunité incroyable à capter. 
+
+Néanmoins, tant que les équipes data seront évaluées sur la disponibilité de leurs pipelines et la fraîcheur de leurs dashboards, elles resteront prisonnières de l'exploitation. Elles continueront de perfectionner des cartes de territoires qu'elles n'explorent jamais.
 
 ## Le slack organisationnel
 
-Mais March avait une solution, inconfortable mais documentée. Il parlait de slack organisationnel, du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Les organisations performantes tolèrent cette inefficacité apparente, là où les autres optimisent jusqu'à l'extinction.
+Mais March avait une solution propre aux sciences des organisations. 
 
-Reste néanmoins une question que j'éviterai de traiter dans cet article. 
+Inconfortable mais documentée, il voyait dans le slack organisationnel, la solution au problème qui nous occupe. 
+
+Du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Les organisations performantes tolèrent cette inefficacité apparente, là où les autres optimisent jusqu'à l'extinction.
+
+Cela pousse à des organisations plus fluides, sans doute moins freiné par la bureaucratie et le management. Un sujet qui nous ramène aux impacts que certains perçoivent dans l'IA appliqué à la Tech. 
+
+Mais revenons à notre sujet. Il reste néanmoins une question que j'éviterai de traiter dans cet article. 
 
 Dire aux équipes data "explorez au lieu de cartographier", c'est facile et confortable. 
 
-Mais le vrai territoire, celui que personne ne cartographie, c'est une jungle dans laquelle ont peut se perdre. Et qui se passera-t-il quand l'explorateur se trompera ? quand il tuera le bon signal et garde le mauvais ? 
+Mais le vrai territoire, celui que personne ne cartographie, reste une jungle dans laquelle ont peut facilement se perdre. Et que se passera-t-il lorsque l'explorateur se trompera ? quand il tuera le bon signal et garde le mauvais ? 
 
 Le terrain ne pardonne pas. 
 
