@@ -64,7 +64,7 @@ C'est un nouveau rôle qui s'annonce pour les équipes data. Celui de chasseur d
 
 L'analyste ne produira plus l'insight, il en recevra cinquante et s'occupera d'en faire le tri. Il passera de chercheur à éditeur d'hypothèses produisant cette valeur, cet Eldorado tant recherché. 
 
-Sa valeur la plus importante, la plus ingrate, sera d'arbitrer, de trancher et oser dire non. Dire "cette corrélation est séduisante mais c'est un artefact" demande plus de compétence que de la trouver car désormais n'importe quel agent IA peut explorer sans se fatiguer. 
+Sa responsabilité la plus importante, la plus ingrate, sera d'arbitrer, de trancher et oser dire non. Dire "cette corrélation est séduisante mais c'est un artefact" demande plus de compétence que de la trouver car désormais n'importe quel agent IA peut explorer sans se fatiguer. 
 
 Seul un humain connaissant le domaine, les biais et les pièges de composition peut dire que ça ne tient pas.
 
