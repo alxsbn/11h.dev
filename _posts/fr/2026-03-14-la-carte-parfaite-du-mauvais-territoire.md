@@ -14,11 +14,11 @@ ref: the-perfect-map-of-the-wrong-territory
 lang: fr
 ---
 
-Une équipe data qui produit quarante dashboards que personne ne lit ne vaut rien. Peu importe la qualité des pipelines, la robustesse des modèles et les six décimales de précision. Si personne ne regarde, rien de tout ça n'existe.
+Une équipe data qui produit deddashboards que personne ne lit ne vaut rien. Peu importe la qualité des pipelines, la robustesse des modèles et les six décimales de précision. Si personne ne regarde, rien de tout ça n'existe.
 
 C'est le piège de la carte parfaite. On la raffine, on la met à jour, on en soigne la légende, et pendant ce temps le terrain bouge sans nous. La carte devient le produit, et le territoire devient optionnel.
 
-La rigueur, telle qu'elle est pratiquée dans la plupart des équipes data, n'est pas de l'exigence. C'est de la procrastination, non par paresse mais par confort. Fiabiliser un pipeline, c'est mesurable, documenter un modèle, c'est présentable en review, et produire un dashboard, c'est livrable. Tout ça rassure, tout ça s'évalue, tout ça évite la seule question qui compte. Est-ce que quelqu'un a appris quelque chose qu'il ne savait pas hier ?
+La rigueur, telle qu'elle est pratiquée dans la plupart des équipes data, n'est pas de l'exigence. C'est de la procrastination confortable. Fiabiliser un pipeline est mesurable, documenter un modèle est présentable en review, et produire un dashboard, c'est livrable. Tout ça rassure, tout ça s'évalue, tout ça évite la seule question qui compte. Est-ce que quelqu'un a appris quelque chose qu'il ne savait pas hier ?
 
 ## La myopie de l'exploitation
 
