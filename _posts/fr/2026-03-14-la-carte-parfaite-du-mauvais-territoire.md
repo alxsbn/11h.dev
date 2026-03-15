@@ -34,7 +34,7 @@ Les organisations dérivent vers ce qui produit des résultats visibles et immé
 
 L'exploration, elle, celle qui naît de la surprise et de la découverte inconfortable, est chassée en silence. En fait, l'organisation ne décide pas d'arrêter de chercher. Elle oublie juste trop rapidement, par certitude, qu'elle pourrait (et devrait) continuer de le faire. 
 
-Le piège est pernicieux car il tient par une asymétrie de visibilité. Un pipeline livré, c'est un ticket fermé. Une corrélation suspecte explorée pendant deux heures et rejetée ? Dans un sprint review, c'est très souvent considéré comme du temps "perdu". 
+Le piège est pernicieux car il tient par une asymétrie de visibilité. Un pipeline livré, c'est un ticket fermé. Une corrélation suspecte explorée pendant deux jours et rejetée ? Dans un sprint review, c'est très souvent considéré comme du temps "perdu". 
 
 L'exploitation produit des preuves d'elle-même alors que l'exploration n'en produit que rétrospectivement, quand elle a déjà réussi. 
 
