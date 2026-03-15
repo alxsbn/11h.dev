@@ -52,7 +52,7 @@ Quand l'insight était rare et cher, la rigueur en amont était une nécessité 
 
 La moindre corrélation imparfaite qui ouvre une piste inédite crée plus de valeur qu'un modèle parfait qui confirme ce qu'on savait déjà. Et accepter cela, pour un analyste formé à traquer les biais et les artefacts, c'est une hérésie. Car plus on est bon cartographe, moins on supporte l'idée de marcher sans carte.
 
-Mais le foisonnement change la donne. On peut générer cinquante hypothèses en moins d'une heure. Et sur ces cinquantes, quarante-cinq seront du bruit et cinq ouvriront peut-être des territoires qu'aucun dashboard n'aurait cartographies. 
+Mais le foisonnement change la donne. On peut générer cinquante hypothèses en moins d'une heure. Et sur ces cinquantes, quarante-cinq seront du bruit et cinq ouvriront peut-être des territoires qu'aucun dashboard ne pourrait cartographier.
 
 Ils n'étaient pourtant dans aucun backlog, aucune roadmap et aucune question posée par un stakeholder en réunion... 
 
