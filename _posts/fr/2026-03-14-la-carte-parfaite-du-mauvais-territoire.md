@@ -48,6 +48,8 @@ Retournons en 2026.
 
 Avec l'avènement de l'IA, le coût de production d'un insight, tend vers zéro. Ce qui prenait auparavant une semaine d'investigation prend au mieux quelques minutes et l'excuse historique ("on n'a pas le temps, on a les pipelines à maintenir") n'a plus de fondement. 
 
+Surtout que le temps dédié aux tâches exploitation (pipeline, mise en qualité, modélisation, etc.) tendent elles aussi vers zéro.
+
 Quand l'insight était rare et cher, la rigueur en amont était une nécessité économique. Alors que lorsqu'il est abondant et cheap, la rigueur se déplace en aval. Désormais on ne vérifie plus avant de chercher, on vérifie après avoir trouvé.
 
 La moindre corrélation imparfaite qui ouvre une piste inédite crée plus de valeur qu'un modèle parfait qui confirme ce qu'on savait déjà. Et accepter cela, pour un analyste formé à traquer les biais et les artefacts, c'est une hérésie. Car plus on est bon cartographe, moins on supporte l'idée de marcher sans carte.
