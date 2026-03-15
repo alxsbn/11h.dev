@@ -46,7 +46,7 @@ Pourtant, le terrain a changé sous la carte.
 
 Retournons en 2026.
 
-Avec l'avènement de l'IA, le coût de production d'un insight, et à l'image du code, tend vers zéro. Ce qui prenait auparavant une semaine d'investigation prend au mieux quelques minutes.m et l'excuse historique ("on n'a pas le temps, on a les pipelines à maintenir") n'a plus de fondement. 
+Avec l'avènement de l'IA, le coût de production d'un insight, tend vers zéro. Ce qui prenait auparavant une semaine d'investigation prend au mieux quelques minutes.m et l'excuse historique ("on n'a pas le temps, on a les pipelines à maintenir") n'a plus de fondement. 
 
 Quand l'insight était rare et cher, la rigueur en amont était une nécessité économique. Alors que lorsqu'il est abondant et cheap, la rigueur se déplace en aval. Désormais on ne vérifie plus avant de chercher, on vérifie après avoir trouvé.
 
