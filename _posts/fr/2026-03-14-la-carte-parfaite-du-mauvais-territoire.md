@@ -78,6 +78,8 @@ Inconfortable mais documentée, il voyait dans le slack organisationnel, la solu
 
 Du temps non alloué, non justifiable, consacré à l'exploration sans garantie de retour. Certaines organisations performantes tolèrent cette inefficacité apparente, là où les autres optimisent ce qu'elles peuvent, jusqu'à l'extinction.
 
+Le slack coûte cher précisément parce qu'il ne produit rien de rapportable. C'est sa condition, pas son défaut.
+
 Cela poussera à re/construire des organisations plus fluides, sans doute moins freinées par les théories gestionnaires. Un sujet qui nous ramène aux impacts que certains [perçoivent déjà](/fr/2026/01/04/effondrement-par-obeissance/) dans l'IA appliquée à la Tech... 
 
 Mais revenons à notre sujet. Il restera néanmoins une question que j'éviterai de traiter dans cet article. 

@@ -76,6 +76,8 @@ But March had a solution.
 
 Uncomfortable but well-documented, he saw organizational slack as the answer to the problem at hand. Unallocated time, unjustifiable time, dedicated to exploration with no guaranteed return. Some high-performing organizations tolerate this apparent inefficiency, while the rest optimize what they can, until they go extinct.
 
+Slack is expensive precisely because it produces nothing reportable. That's its condition, not its flaw.
+
 This will push toward building (or rebuilding) more fluid organizations, likely less constrained by management theory. A topic that brings us back to the impact some are [already seeing](/en/2026/01/04/collapse-through-obedience/) from AI applied to tech.
 
 But let's return to our subject. One question remains that I will avoid addressing in this article.
