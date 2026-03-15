@@ -32,7 +32,7 @@ James March, un des penseurs les plus influents des sciences sociales du XXe si�
 
 Les organisations dérivent vers ce qui produit des résultats visibles et immédiats. Chaque dashboard livré renforce la croyance que la valeur est dans le dashboard. Chaque pipeline stabilisé justifie le prochain crée et la boucle se referme. 
 
-L'exploration, elle, celle qui naît de la surprise et de la découverte inconfortable, est chassée en silence. En fait, l'organisation ne décide pas d'arrêter de chercher. Elle oublie juste trop rapidement, pas certitude, qu'elle pourrait (et devrait) continuer de le faire. 
+L'exploration, elle, celle qui naît de la surprise et de la découverte inconfortable, est chassée en silence. En fait, l'organisation ne décide pas d'arrêter de chercher. Elle oublie juste trop rapidement, par certitude, qu'elle pourrait (et devrait) continuer de le faire. 
 
 Le piège est pernicieux car il tient par une asymétrie de visibilité. Un pipeline livré, c'est un ticket fermé. Une corrélation suspecte explorée pendant deux heures et rejetée ? Dans un sprint review, c'est très souvent considéré comme du temps "perdu". 
 
