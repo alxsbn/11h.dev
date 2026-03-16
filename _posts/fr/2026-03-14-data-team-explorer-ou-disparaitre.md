@@ -3,7 +3,7 @@ layout: post
 title: "Data team. Explorer ou disparaître"
 date: 2026-03-14
 categories: data
-excerpt: 'Une équipe data qui produit quarante dashboards que personne ne lit ne vaut rien. Le piège, c''est de confondre la rigueur de production avec la création de valeur.'
+excerpt: 'Une équipe data qui produit quarante dashboards ou analyses que personne ne lit ni ne consulte ne vaut rien. Le piège, c''est de confondre la rigueur de production avec la création de valeur.'
 header_image: "https://images.unsplash.com/photo-1476842634003-7dcca8f832de?w=1600&q=80"
 header_image_alt: "Carte du monde colorée et détaillée vue de dessus"
 header_image_credit: "Andrew Stutesman"

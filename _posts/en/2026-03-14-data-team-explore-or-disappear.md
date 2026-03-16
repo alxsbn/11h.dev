@@ -3,7 +3,7 @@ layout: post
 title: "Data team. Explore or disappear"
 date: 2026-03-14
 categories: data
-excerpt: 'A data team that ships forty dashboards nobody reads is worth nothing. The trap is mistaking production rigor for value creation.'
+excerpt: 'A data team that ships forty dashboards or analyses nobody reads or even looks at is worth nothing. The trap is mistaking production rigor for value creation.'
 header_image: "https://images.unsplash.com/photo-1476842634003-7dcca8f832de?w=1600&q=80"
 header_image_alt: "Colorful detailed world map seen from above"
 header_image_credit: "Andrew Stutesman"
