@@ -5,10 +5,10 @@ date: 2016-02-15
 categories: [digital, work, tech]
 excerpt: "J'entends beaucoup parler de transformation digitale. En soi, et cet angle est rarement abordé, le digital n'est qu'une affaire d'automatisation (robots + algorithmes)..."
 lang: fr
-header_image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&q=80"
-header_image_alt: "Robot humanoïde blanc (Pepper) symbolisant l'automatisation et la transformation digitale"
-header_image_credit: "Alex Knight"
-header_image_credit_url: "https://unsplash.com/@agk42"
+header_image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80"
+header_image_alt: "Gros plan sur un circuit imprimé, infrastructure numérique et automatisation"
+header_image_credit: "Alexandre Debiève"
+header_image_credit_url: "https://unsplash.com/@alexkixa"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ref: a-deadly-digital-transformation

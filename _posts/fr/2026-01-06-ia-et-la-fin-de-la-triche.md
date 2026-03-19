@@ -4,10 +4,10 @@ title: "L'IA et la fin de la triche"
 date: 2026-01-06
 categories: [ai, philosophy, work, series]
 excerpt: "Le travail ne fonctionne pas comme prescrit. Il fonctionne parce que les gens trichent. L'IA ne triche pas. C'est son probleme -- et le notre."
-header_image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80"
-header_image_alt: "Reseau complexe de cables de serveurs representant des systemes interconnectes"
-header_image_credit: "Taylor Vick"
-header_image_credit_url: "https://unsplash.com/@tvick"
+header_image: "https://images.unsplash.com/photo-1588412079929-790b9f593d8e?w=1600&q=80"
+header_image_alt: "Pieces d'echecs blanches et noires sur un echiquier, strategie et regles"
+header_image_credit: "Damiano Lingauri"
+header_image_credit_url: "https://unsplash.com/@dendrolago89"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ref: ai-and-the-end-of-cheating

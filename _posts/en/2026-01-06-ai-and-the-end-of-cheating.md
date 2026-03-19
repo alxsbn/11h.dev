@@ -4,10 +4,10 @@ title: "AI and the End of Cheating"
 date: 2026-01-06
 categories: ai philosophy work series
 excerpt: "Work doesn't function as prescribed. It functions because people cheat. AI doesn't cheat. That's its problem—and ours."
-header_image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80"
-header_image_alt: "Complex network of server cables representing interconnected systems"
-header_image_credit: "Taylor Vick"
-header_image_credit_url: "https://unsplash.com/@tvick"
+header_image: "https://images.unsplash.com/photo-1588412079929-790b9f593d8e?w=1600&q=80"
+header_image_alt: "White and black chess pieces on a board, strategy and rules"
+header_image_credit: "Damiano Lingauri"
+header_image_credit_url: "https://unsplash.com/@dendrolago89"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ref: ai-and-the-end-of-cheating
