@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Le pillage est la fonctionnalite"
+title: "Le pillage est la fonctionnalité"
 date: 2025-12-31
 categories: [ai, history, philosophy]
 excerpt: "Rob Pike crie au vol. L'histoire baille."
 lang: fr
 header_image: "https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=1600&q=80"
-header_image_alt: "Peinture classique dans un musee"
+header_image_alt: "Peinture classique dans un musée"
 header_image_credit: "Europeana"
 header_image_credit_url: "https://unsplash.com/@europeana"
 header_image_source: "Unsplash"

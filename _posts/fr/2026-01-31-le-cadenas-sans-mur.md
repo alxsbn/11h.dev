@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Le cadenas sans mur : pourquoi le modele open-core est mort"
+title: "Le cadenas sans mur : pourquoi le modèle open-core est mort"
 date: 2026-01-31
 categories: [tech, business, open-source]
-excerpt: 'Un editeur de logiciels installe un cadenas sur le portail de son jardin. Mais il n''y a plus de mur autour du jardin. Juste le cadenas, seul, plante dans le vide.'
+excerpt: 'Un éditeur de logiciels installe un cadenas sur le portail de son jardin. Mais il n''y a plus de mur autour du jardin. Juste le cadenas, seul, planté dans le vide.'
 header_image: "/assets/images/nata-shilo-tree-trident.jpg"
-header_image_alt: "Arbre majestueux aux branches en forme de trident s'elancant vers un ciel bleu profond"
+header_image_alt: "Arbre majestueux aux branches en forme de trident s'élançant vers un ciel bleu profond"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"
 ref: the-padlock-without-a-wall

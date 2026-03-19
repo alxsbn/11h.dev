@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "L'effondrement par l'obeissance"
+title: "L'effondrement par l'obéissance"
 date: 2026-01-04
 categories: [ai, philosophy, organization, series]
-excerpt: 'Une armee qui obeit parfaitement est une armee vaincue. L''IA realise le vieux reve tayloriste : la prescription parfaitement executee. Mais les systemes complexes tiennent par leur jeu.'
+excerpt: 'Une armée qui obéit parfaitement est une armée vaincue. L''IA réalise le vieux rêve tayloriste, la prescription parfaitement exécutée. Mais les systèmes complexes tiennent par leur jeu.'
 header_image: "/assets/images/nata-shilo-stop-attention-sign.jpg"
-header_image_alt: "Panneau STOP avec un panneau d'avertissement ATTENTION dessine a la main en dessous"
+header_image_alt: "Panneau STOP avec un panneau d'avertissement ATTENTION dessiné à la main en dessous"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"
 ref: collapse-through-obedience

@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "L'execution n'est plus la contrainte"
+title: "L'exécution n'est plus la contrainte"
 date: 2026-01-21
 categories: [ai, work, organizations]
-excerpt: "Pendant des decennies, les organisations logicielles ont ete faconnees par une contrainte dominante : le developpement etait lent et couteux. Cette contrainte est en train de s'effondrer."
+excerpt: "Pendant des décennies, les organisations logicielles ont été façonnées par une contrainte dominante : le développement était lent et coûteux. Cette contrainte est en train de s'effondrer."
 header_image: "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=1600&q=80"
-header_image_alt: "Sablier avec le sable qui s'ecoule, symbolisant l'evolution des contraintes de temps"
+header_image_alt: "Sablier avec le sable qui s'écoule, symbolisant l'évolution des contraintes de temps"
 header_image_credit: "Aron Visuals"
 header_image_credit_url: "https://unsplash.com/@aronvisuals"
 header_image_source: "Unsplash"
