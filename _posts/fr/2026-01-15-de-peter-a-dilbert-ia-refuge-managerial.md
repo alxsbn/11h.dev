@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "De Peter a Dilbert : comment l'IA inverse le refuge managerial"
+title: "De Peter à Dilbert : comment l'IA inverse le refuge managérial"
 date: 2026-01-15
 categories: [management, ai, work]
-excerpt: "Le principe de Peter decrivait la montee vers l'incompetence. Le principe de Dilbert revelait le refuge dans l'incompetence. L'IA supprime le refuge."
+excerpt: "Le principe de Peter décrivait la montée vers l'incompétence. Le principe de Dilbert révélait le refuge dans l'incompétence. L'IA supprime le refuge."
 header_image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80"
-header_image_alt: "Immeuble de bureaux moderne avec des escaliers geometriques symbolisant la hierarchie en entreprise"
+header_image_alt: "Immeuble de bureaux moderne avec des escaliers géométriques symbolisant la hiérarchie en entreprise"
 header_image_credit: "Brice Cooper"
 header_image_credit_url: "https://unsplash.com/@bricecooper"
 header_image_source: "Unsplash"

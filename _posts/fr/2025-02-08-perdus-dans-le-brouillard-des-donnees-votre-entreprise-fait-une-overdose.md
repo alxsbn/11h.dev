@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Perdus dans le brouillard des donnees ? Votre entreprise fait une overdose"
+title: "Perdus dans le brouillard des données ? Votre entreprise fait une overdose"
 date: 2025-02-08
 categories: [data, tech]
-excerpt: 'Tout le monde veut etre "data-driven", mais personne ne parle des dangers de l''overdose analytique. Trop de donnees, plus de confusion, zero impact...'
+excerpt: 'Tout le monde veut être "data-driven", mais personne ne parle des dangers de l''overdose analytique. Trop de données, plus de confusion, zéro impact...'
 lang: fr
 header_image: "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?w=1600&q=80"
 header_image_alt: "Brouillard sur un paysage"

@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Gouvernance des donnees 2026 : le ROI aura le dernier mot"
+title: "Gouvernance des données 2026 : le ROI aura le dernier mot"
 date: 2026-01-09
 categories: [data, governance, ai, predictions]
 excerpt: "Le ROI et le time-to-delivery tueront toujours les efforts de gouvernance. 2026 le confirmera plus que jamais."
 header_image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80"
-header_image_alt: "Tableau de bord analytique sur ecran d'ordinateur"
+header_image_alt: "Tableau de bord analytique sur écran d'ordinateur"
 header_image_credit: "Carlos Muza"
 header_image_credit_url: "https://unsplash.com/@kmuza"
 header_image_source: "Unsplash"
