@@ -3,9 +3,9 @@ layout: post
 title: "L'IA et la fin de la triche"
 date: 2026-01-06
 categories: [ai, philosophy, work, series]
-excerpt: "Le travail ne fonctionne pas comme prescrit. Il fonctionne parce que les gens trichent. L'IA ne triche pas. C'est son probleme -- et le notre."
+excerpt: "Le travail ne fonctionne pas comme prescrit. Il fonctionne parce que les gens trichent. L'IA ne triche pas. C'est son problème, et le nôtre."
 header_image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80"
-header_image_alt: "Reseau complexe de cables de serveurs representant des systemes interconnectes"
+header_image_alt: "Réseau complexe de câbles de serveurs représentant des systèmes interconnectés"
 header_image_credit: "Taylor Vick"
 header_image_credit_url: "https://unsplash.com/@tvick"
 header_image_source: "Unsplash"
@@ -14,22 +14,22 @@ ref: ai-and-the-end-of-cheating
 lang: fr
 ---
 
-Le travail ne fonctionne pas comme prescrit. Il fonctionne parce que les gens trichent, s'adaptent, contournent, interpretent. C'est ce que le psychiatre [Christophe Dejours](https://fr.wikipedia.org/wiki/Christophe_Dejours) appelle le "travail vivant". La greve du zele le prouve : suivez les regles a la lettre, tout s'arrete.
+Le travail ne fonctionne pas comme prescrit. Il fonctionne parce que les gens trichent, s'adaptent, contournent et interprètent. C'est ce que le psychiatre [Christophe Dejours](https://fr.wikipedia.org/wiki/Christophe_Dejours) appelle le "travail vivant". La grève du zèle le prouve : suivez les règles à la lettre, tout s'arrête.
 
-L'IA ne triche pas. Elle execute. Parfaitement.
+L'IA ne triche pas. Elle exécute, parfaitement.
 
-**C'est son probleme... et le notre**
+**C'est son problème... et le nôtre**
 
-Cette serie explore ce qui se passe quand on elimine les espaces de transgression intelligente. Ce n'est pas une dystopie, c'est un mecanisme.
+Cette série explore ce qui se passe quand on élimine les espaces de transgression intelligente. Ce n'est pas une dystopie, c'est un mécanisme.
 
-1. **[La triche qui fait tourner le monde](/2026/01/01/the-cheating-that-makes-the-world-run/)** : Pourquoi les organisations tiennent grace a ce qu'elles interdisent officiellement.
+1. **[La triche qui fait tourner le monde](/fr/2026/01/01/la-triche-qui-fait-tourner-le-monde/)** : Pourquoi les organisations tiennent grâce à ce qu'elles interdisent officiellement.
 
-2. **[L'IA ne triche pas (et c'est le probleme)](/2026/01/02/ai-doesnt-cheat-and-thats-the-problem/)** : Ecart technique vs ecart politique. Qui decide quand la regle est absurde ?
+2. **[L'IA ne triche pas (et c'est le problème)](/fr/2026/01/02/lia-ne-triche-pas-et-cest-le-probleme/)** : Écart technique vs écart politique. Qui décide quand la règle est absurde ?
 
-3. **[La servitude par l'ergonomie](/2026/01/03/servitude-by-ergonomics/)** : Au-dela de La Boetie : une servitude qui n'a plus besoin d'ideologie.
+3. **[La servitude par l'ergonomie](/fr/2026/01/03/servitude-par-ergonomie/)** : Au-delà de La Boétie, une servitude qui n'a plus besoin d'idéologie.
 
-4. **[L'effondrement par l'obeissance](/2026/01/04/collapse-through-obedience/)** : L'armee a appris que l'obeissance parfaite mene a la defaite. Et nous ?
+4. **[L'effondrement par l'obéissance](/fr/2026/01/04/effondrement-par-obeissance/)** : L'armée a appris que l'obéissance parfaite mène à la défaite. Et nous ?
 
-5. **[La friction dans un monde agentique](/2026/01/05/friction-in-an-agentic-world/)** : Ce qu'on peut encore faire. Exercices d'incendie cognitifs, droit a l'incomprehension.
+5. **[La friction dans un monde agentique](/fr/2026/01/05/friction-dans-un-monde-agentique/)** : Ce qu'on peut encore faire. Exercices d'incendie cognitifs, droit à l'incompréhension.
 
-*Cette serie est nee d'un dialogue entre un humain et une IA. La friction de cet echange -- objections, reformulations, desaccords -- est peut-etre exactement ce qu'il nous faut preserver.*
+*Cette série est née d'un dialogue entre un humain et une IA. La friction de cet échange, objections, reformulations et désaccords, est peut-être exactement ce qu'il nous faut préserver.*
