@@ -50,7 +50,7 @@ Revenons à notre directeur marketing, dont le problème n'a jamais été l'outi
 
 Et ça marchait, parce que quelqu'un dans la salle comprenait, interprétait et exécutait à sa place.
 
-Maintenant le même gars se croit doté de super-pouvoirs, mais sous le capot l'IA ne fait que révéler sa soudaine cécité, son incompétence relative et ce que l'organisation humaine masquait depuis le début, à savoir que cette phrase n'a jamais contenu de pensée.
+Maintenant le même gars se croit doté de [super-pouvoirs](https://x.com/garrytan/status/2032196172430131498), mais sous le capot l'IA ne fait que révéler sa soudaine cécité, son incompétence relative et ce que l'organisation humaine masquait depuis le début, à savoir que cette phrase n'a jamais contenu de pensée.
 
 Chaque prompt est un aveu de ce qu'on sait vraiment, de ce qu'on veut vraiment et de ce qu'on a vraiment pensé avant de taper. L'IA n'est pas un cerveau qu'on loue, c'est un confessionnal où l'on ne peut pas mentir.
 

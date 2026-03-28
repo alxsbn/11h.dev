@@ -50,7 +50,7 @@ Let us return to our marketing director, whose problem was never the tool. "Buil
 
 And it worked, because someone in the room understood, interpreted and executed on his behalf.
 
-Now the same guy believes he has superpowers, but under the hood AI is only revealing his sudden blindness, his relative incompetence and what the human organization had been masking all along, which is that this sentence never contained any thought.
+Now the same guy believes he has [superpowers](https://x.com/garrytan/status/2032196172430131498), but under the hood AI is only revealing his sudden blindness, his relative incompetence and what the human organization had been masking all along, which is that this sentence never contained any thought.
 
 Every prompt is a confession of what you actually know, what you actually want and what you actually thought before you started typing. AI is not a brain you rent, it is a confessional where you cannot lie.
 
