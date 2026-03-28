@@ -4,8 +4,8 @@ title: "Your prompt is a confession"
 date: 2026-03-28
 categories: ai
 excerpt: 'A marketing director types "build me a content strategy" and gets generic slop. The problem was never the tool.'
-header_image: "/assets/images/nata-shilo-blurry-flowers-glass.jpg"
-header_image_alt: "Blurry white flowers seen through a glass pane"
+header_image: "/assets/images/nata-shilo-blurry-night-lights.jpg"
+header_image_alt: "Illuminated building at night, golden motion blur reflected on water"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"
 header_image_source: ""

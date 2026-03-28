@@ -4,8 +4,8 @@ title: "Votre prompt est un aveu"
 date: 2026-03-28
 categories: ia
 excerpt: 'Un directeur marketing tape "fais-moi une stratégie de contenu" et obtient une bouillie générique. Le problème n''a jamais été l''outil.'
-header_image: "/assets/images/nata-shilo-blurry-flowers-glass.jpg"
-header_image_alt: "Fleurs blanches floues vues à travers une vitre"
+header_image: "/assets/images/nata-shilo-blurry-night-lights.jpg"
+header_image_alt: "Bâtiment illuminé la nuit, flou de mouvement doré reflété sur l'eau"
 header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"
 header_image_source: ""
