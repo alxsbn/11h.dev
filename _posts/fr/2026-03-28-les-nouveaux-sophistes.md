@@ -12,8 +12,6 @@ header_image_source: ""
 header_image_source_url: ""
 ref: the-new-sophists
 lang: fr
-redirect_from:
-  - /fr/2026/03/28/votre-prompt-est-un-aveu/
 ---
 
 Ton directeur marketing envoie un prompt, sûr de lui, "fais-moi une stratégie de contenu" accompagnée de tout un tas de détails insignifiants et autres pièces jointes. Le résultat est une belle bouillie générique. Deux options : l'impression d'omniscience ou dans le meilleur des cas se rendre compte de la piètre qualité de la réponse, et itérer sur la discussion. Ce qui est moins visible, c'est que l'outil vient de renvoyer l'exact flou de sa propre pensée.

@@ -12,8 +12,6 @@ header_image_source: ""
 header_image_source_url: ""
 ref: the-new-sophists
 lang: en
-redirect_from:
-  - /en/2026/03/28/your-prompt-is-a-confession/
 ---
 
 Your marketing director sends a prompt, brimming with confidence. "Build me a content strategy," along with a pile of insignificant details and attachments. The result is generic slop. Two outcomes follow: either the impression of omniscience, or at best the realization that the answer is poor, and another round of iteration. What is less obvious is that the tool just returned the exact vagueness of his own thinking.
