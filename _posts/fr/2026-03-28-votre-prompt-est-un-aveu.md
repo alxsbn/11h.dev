@@ -3,7 +3,7 @@ layout: post
 title: "Votre prompt est un aveu"
 date: 2026-03-28
 categories: ia
-excerpt: 'Un directeur marketing tape "fais-moi une stratégie de contenu" et obtient une bouillie générique. Le problème n''a jamais été l''outil.'
+excerpt: 'Ton directeur marketing tape "fais-moi une stratégie de contenu" et obtient une bouillie générique. Le problème n''a jamais été l''outil mais l'intention derrière son usage'
 header_image: "/assets/images/nata-shilo-blurry-night-lights.jpg"
 header_image_alt: "Bâtiment illuminé la nuit, flou de mouvement doré reflété sur l'eau"
 header_image_credit: "Nata Shilo"
@@ -14,7 +14,7 @@ ref: your-prompt-is-a-confession
 lang: fr
 ---
 
-Tu es directeur marketing et tu promptes, sûr de toi "fais-moi une stratégie de contenu." Le résultat est une belle bouillie générique, suivie de ressentiment envers ce qui ne reste qu'un outil. Ce qui est moins visible, c'est que l'outil vient de renvoyer l'exact flou de ta propre pensée.
+Ton directeur marketing promptes, sûr de lui, "fais-moi une stratégie de contenu." Le résultat est une belle bouillie générique, suivie de ressentiment envers ce qui ne reste qu'un outil. Ce qui est moins visible, c'est que l'outil vient de renvoyer l'exact flou de sa propre pensée.
 
 ## Le flou fonctionnel
 
