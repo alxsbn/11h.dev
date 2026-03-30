@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Votre prompt est un aveu"
+title: "Les nouveaux sophistes. Ou l'art de mal prompter"
 date: 2026-03-28
 categories: ia
 excerpt: 'Ton directeur marketing tape "fais-moi une stratégie de contenu" et obtient une bouillie générique. Le problème n''a jamais été l''outil mais l''intention derrière son usage'
@@ -10,11 +10,11 @@ header_image_credit: "Nata Shilo"
 header_image_credit_url: "https://www.natashilo.com"
 header_image_source: ""
 header_image_source_url: ""
-ref: your-prompt-is-a-confession
+ref: the-new-sophists
 lang: fr
 ---
 
-Ton directeur marketing promptes, sûr de lui, "fais-moi une stratégie de contenu" accompagnée de tout un tas de détails insignifiants et autres pièces jointes. Le résultat est une belle bouillie générique. Deux options : l'impression d'omniscience ou dans le meilleur des cas se rendre de la piètre qualité de la réponse, et itérer sur la discussion. Ce qui est moins visible, c'est que l'outil vient de renvoyer l'exact flou de sa propre pensée.
+Ton directeur marketing envoie un prompt, sûr de lui, "fais-moi une stratégie de contenu" accompagnée de tout un tas de détails insignifiants et autres pièces jointes. Le résultat est une belle bouillie générique. Deux options : l'impression d'omniscience ou dans le meilleur des cas se rendre compte de la piètre qualité de la réponse, et itérer sur la discussion. Ce qui est moins visible, c'est que l'outil vient de renvoyer l'exact flou de sa propre pensée.
 
 ## Le flou fonctionnel
 
@@ -22,13 +22,13 @@ Ce directeur n'est pas (totalement) incompétent. Il aura certainement survécu 
 
 L'IA, elle, ne comble rien. Elle prend chaque instruction au mot, et quand le mot est vide, l'output l'est aussi.
 
-Ce n'est pas un défaut du modèle, ou je ne sais quelle configuration, mais juste un outil qui refusera quoiqu'il arrive de deviner ce que tu n'as pas formulé.
+Ce n'est pas un défaut du modèle, ou je ne sais quelle configuration, mais juste un outil qui refusera quoi qu'il arrive de deviner ce que tu n'as pas formulé.
 
 ## La nouvelle rhétorique
 
 Aristote aurait reconnu le problème. Les sophistes athéniens vendaient de la persuasion déguisée en logique, avec de beaux discours fluides, structurés, convaincants et souvent faux.
 
-Il a dû formaliser les règles du raisonnement valide, les [prémisses  syllogistiques (majeures ou mineures)](https://fr.wikipedia.org/wiki/Syllogisme), pour une raison précise. La fluidité d'un argument ne garantit rien sur sa vérité.
+Il a dû formaliser les règles du raisonnement valide, les [prémisses syllogistiques (majeures ou mineures)](https://fr.wikipedia.org/wiki/Syllogisme), pour une raison précise. La fluidité d'un argument ne garantit rien sur sa vérité.
 
 Les LLM reproduisent cette pathologie dans les deux sens. En aval, ils génèrent des réponses éloquentes et creuses. En amont, le prompt lui-même peut être fluide, structuré mais fondamentalement vide.
 
