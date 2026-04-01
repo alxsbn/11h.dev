@@ -5,10 +5,10 @@ date: 2014-04-28
 categories: [digital, work, tech]
 excerpt: 'Nous sommes ce que nous partageons. Mais se pose ici la question du sens de l''action, du partage. Que faire de ceux qui ne veulent pas, ne peuvent pas, ou ne souhaitent pas partager ?'
 lang: fr
-header_image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&q=80"
-header_image_alt: "Robot humanoïde blanc représentant le futur du travail et de l'automatisation"
-header_image_credit: "Alex Knight"
-header_image_credit_url: "https://unsplash.com/@agk42"
+header_image: "https://images.unsplash.com/photo-1705700585343-551cfa3a0c65?w=1600&q=80"
+header_image_alt: "Buste en marbre d'un homme aux cheveux bouclés, sculpture grecque antique"
+header_image_credit: "Felipe Pérez Lamana"
+header_image_credit_url: "https://unsplash.com/@felipe_lamana"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ref: engagement-crisis-stoicism-to-robotism
