@@ -38,7 +38,6 @@ _includes/
   head.html          # Minima head override
   custom-head.html   # Favicon, OG tags, hreflang, Google Fonts
   header.html        # Nav, language toggle, dark mode toggle
-  newsletter-form.html
   google-analytics.html
   youtube.html
 _data/

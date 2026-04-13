@@ -15,13 +15,6 @@ fr:
   # Homepage
   description: "Notes et réflexions sur la tech, la data et ce qui m'anime"
   rss: "RSS"
-  newsletter: "Newsletter"
-  # Newsletter
-  newsletter_title: "Restez informé"
-  newsletter_description: "Nouveaux articles et réflexions livrés dans votre boîte mail."
-  newsletter_placeholder: "votre@email.com"
-  newsletter_subscribe: "S'abonner"
-  newsletter_note: "Pas de spam, désinscription à tout moment."
   # About
   about_title: "À propos"
   # Language switcher
@@ -50,13 +43,6 @@ en:
   # Homepage
   description: "Personal blog about passions and ideas"
   rss: "RSS"
-  newsletter: "Newsletter"
-  # Newsletter
-  newsletter_title: "Stay in the loop"
-  newsletter_description: "New posts and thoughts delivered to your inbox."
-  newsletter_placeholder: "your@email.com"
-  newsletter_subscribe: "Subscribe"
-  newsletter_note: "No spam, unsubscribe anytime."
   # About
   about_title: "About Me"
   # Language switcher
