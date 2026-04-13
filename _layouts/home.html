@@ -26,8 +26,6 @@ layout: default
       </svg>
       {{ t.rss }}
     </a>
-    <span class="subscribe-divider">|</span>
-    <a href="#newsletter" class="subscribe-newsletter">{{ t.newsletter }}</a>
   </div>
 
   {{ content }}
@@ -85,9 +83,4 @@ layout: default
     </div>
   </div>
   {%- endif -%}
-
-  <!-- Newsletter Box -->
-  <div id="newsletter">
-    {% include newsletter-form.html lang=page_lang %}
-  </div>
 </div>
