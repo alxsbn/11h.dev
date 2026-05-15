@@ -4,12 +4,12 @@ title: "Adam Smith remballe ses épingles"
 date: 2026-05-15
 categories: [management, ai, work]
 excerpt: 'Depuis 1776, la division du travail fragmentait les tâches pour les rendre productives. L''IA fait l''inverse et recompose une chaîne de valeur entière dans une seule personne, ce qui rend la chaîne de commandement de plus en plus inutile.'
-header_image: "https://images.unsplash.com/photo-1602660187275-7275b639d7ea?w=1600&q=80"
-header_image_alt: "Ancien livre ouvert avec texte manuscrit sur parchemin"
-header_image_credit: "Boudewijn Huysmans"
-header_image_credit_url: "https://unsplash.com/@boudewijn_huysmans"
-header_image_source: "Unsplash"
-header_image_source_url: "https://unsplash.com"
+header_image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Defehrt_epinglier_pl2.jpg/1600px-Defehrt_epinglier_pl2.jpg"
+header_image_alt: "Gravure de 1762 d'un atelier d'épinglier du XVIIIe siècle, ouvriers à des postes distincts"
+header_image_credit: "Diderot & d'Alembert, Encyclopédie (1762)"
+header_image_credit_url: "https://commons.wikimedia.org/wiki/File:Defehrt_epinglier_pl2.jpg"
+header_image_source: "Wikimedia Commons"
+header_image_source_url: "https://commons.wikimedia.org/wiki/File:Defehrt_epinglier_pl2.jpg"
 ref: adam-smith-packs-up-his-pins
 lang: fr
 ---
