@@ -4,7 +4,7 @@ title: "Adam Smith packs up his pins"
 date: 2026-05-15
 categories: [management, ai, work]
 excerpt: "Since 1776, the division of labor fragmented work to make it productive. AI does the opposite and recomposes an entire value chain inside one person, which makes the chain of command increasingly pointless."
-header_image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Defehrt_epinglier_pl2.jpg/1600px-Defehrt_epinglier_pl2.jpg"
+header_image: "https://upload.wikimedia.org/wikipedia/commons/9/99/Defehrt_epinglier_pl2.jpg"
 header_image_alt: "1762 engraving of an 18th-century pin maker's workshop, with workers at separate stations"
 header_image_credit: "Diderot & d'Alembert, Encyclopédie (1762)"
 header_image_credit_url: "https://commons.wikimedia.org/wiki/File:Defehrt_epinglier_pl2.jpg"
