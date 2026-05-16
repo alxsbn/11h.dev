@@ -14,7 +14,7 @@ ref: adam-smith-packs-up-his-pins
 lang: fr
 ---
 
-En 1776, Adam Smith ouvre son grand œuvre, *Recherches sur la nature et les causes de la richesse des nations*, sur une fabrique d'épingles, et son petit calcul est resté célèbre. 
+En 1776, Adam Smith ouvre son grand œuvre, *Recherches sur la nature et les causes de la richesse des nations*, sur quelques calculs à propos d'une fabrique d'épingles. 
 
 Il y démontre que là où un ouvrier isolé peut à peine produire une vingtaine d'épingles par jour, dix ouvriers spécialisés en sortent quarante-huit mille. La division du travail venait de poser les fondements de deux siècles et demi de capitalisme industriel.
 
