@@ -14,17 +14,17 @@ ref: adam-smith-packs-up-his-pins
 lang: en
 ---
 
-In 1776, Adam Smith opened his masterwork, *An Inquiry into the Nature and Causes of the Wealth of Nations*, with a pin factory, and his little calculation became famous.
+In 1776, Adam Smith opened his masterwork, *An Inquiry into the Nature and Causes of the Wealth of Nations*, with a few calculations about a pin factory.
 
 He shows that where a lone worker can barely make twenty pins a day, ten specialized workers turn out forty-eight thousand. The division of labor had just laid the foundations of two and a half centuries of industrial capitalism.
 
 AI does the exact opposite, and that is the paradox we are living through. For the first time since Smith, a major technology no longer fragments tasks but recomposes them inside a single person.
 
-This person already has a name. It is the [HI-C, the high-impact individual contributor Elena Verna describes at Lovable](https://www.elenaverna.com/p/ic-work-is-the-new-career-flex), or the Member of Technical Staff [popularized by Anthropic](https://www.anthropic.com/careers), two names for one concept, an augmented individual who pulls back into one pair of hands what several teams coordinated yesterday. It is the craftsman resurrected, a white-collar worker in cybernetic form.
+This person is the [HI-C, the high-impact individual contributor Elena Verna describes at Lovable](https://www.elenaverna.com/p/ic-work-is-the-new-career-flex), or the Member of Technical Staff [popularized by Anthropic](https://www.anthropic.com/careers), two names for one concept, an augmented individual who reclaims what several teams coordinated yesterday. It is the craftsman resurrected, a white-collar worker in cybernetic form.
 
 Behind this augmentation sits the compression of white-collar work. It does not target code alone but reaches design, marketing, analytics, legal, product, and finance in turn. Becoming an average contributor in almost any field adjacent to your own now costs close to nothing, and that average, added to the craft you actually excel at, is enough to ship an entire project.
 
-The problem is that the entire managerial scaffolding was built to handle that fragmentation. So if the value chain now fits inside one person, it is fair to ask what the chain of command is still for.
+The problem is that the entire managerial scaffolding was built to handle that fragmentation. So if the value chain now fits inside one person, it is fair to ask what the chain of command is still for…
 
 That reminds us that the [Peter principle](https://en.wikipedia.org/wiki/Peter_principle) and the [Dilbert principle](https://en.wikipedia.org/wiki/Dilbert_principle) already described the same bug, since we traditionally promote good craftspeople into roles where they stop being good. The root cause goes back to Smith, because the division of labor made coordination so expensive that producing coordination became a job in itself, better paid than producing value, and our whole economy still runs on that arrangement.
 
@@ -40,7 +40,7 @@ The second is the immune system of middle management, which was never designed t
 
 The last, and the most stubborn, is status. The title is still a social currency, and going back to IC stays symbolically violent even at equal pay. Why? Because the pyramid is not only an org chart, it is also a collective story.
 
-This is why the HI-C will not fight to transform the pyramid, they will leave it, burn out, or worse. Large organizations that fail to welcome these profiles may become the employer of last resort for craft talent, the way some public administrations did against the private sector, while those that adapt will gain a decade of lead.
+This is why the HI-C will not fight to transform the pyramid, they will leave it, succumb to bore-out, or worse. Large organizations that fail to welcome these profiles may become the employer of last resort for craft talent, the way some public administrations did against the private sector, while those that adapt will gain a decade of lead.
 
 The fork may already be underway. On one side, hyper-productive contributors, autonomous, well paid, and mobile; on the other, coordinators sliding into obsolescence, stuck in structures that cannot reform themselves.
 
