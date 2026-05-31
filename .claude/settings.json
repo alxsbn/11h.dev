@@ -42,8 +42,6 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:pages.github.com)",
 
-      "Skill(unsplash-header-images)",
-
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(grep:*)",
