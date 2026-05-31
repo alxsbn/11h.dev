@@ -121,11 +121,18 @@ Every post needs a header image. See `_layouts/post.html` for rendering.
 - Commit with descriptive messages
 - Push to feature branches before merging
 
-## Editorial Content
+## Editorial Content & Authoring
 
-**Before creating or modifying any post**, all editorial rules (bilingual obligation, writing voice, banned patterns, rhythm & flow, formatting, pre-commit checklist) are in `.claude/rules/editorial/` and loaded automatically.
+Posts are drafted in the author's Obsidian vault (notes `type: blogpost`) and published
+from there via the **`blog-publish`** skill, which generates the paired FR/EN files, runs
+the checks below, and opens a PR. The editorial brain (writing voice, banned patterns,
+bilingual rule, rhythm & flow, formatting) and the writing skills (`impactful-writing`,
+`editorial-review`, `editorial-audit`, `jekyll-blog-post`, `unsplash-header-images`) live
+in the author's personal Claude config (`~/.claude/skills/`), not in this repo. This repo
+keeps only build-time tooling: the `llm.txt` hook and `check-bilingual.sh`.
 
-**After creating any post**, run:
+**Every post MUST exist in both `_posts/fr/` and `_posts/en/`**, linked by a matching `ref`
+front-matter field. **After creating or modifying any post**, run:
 ```bash
 scripts/check-bilingual.sh
 ```
