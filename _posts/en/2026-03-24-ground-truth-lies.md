@@ -14,36 +14,44 @@ ref: ground-truth-lies
 lang: en
 ---
 
-A Kenyan annotator, paid two dollars an hour, has to pick which of two near-identical LLM responses is "the better one." He consistently goes with the longer one, not because it actually is better but because reading both carefully costs more than judging on length. The reward model registers the preference, the model learns that longer equals better, the annotator followed the guidelines exactly and nobody cheated. This isn't a pipeline bug, it's resistance.
+A Kenyan annotator, two dollars an hour, has to pick which of two near-identical model responses is "the better one." He picks the longer one every time. Not because it's better, but because reading both with any care costs more than the job pays. The reward model logs the preference, the model learns that longer means better, the annotator hit every guideline and nobody cheated. The metrics stay green. The signal underneath them rots.
+
+That isn't a pipeline bug. It's a strike nobody called.
 
 ## Weapons of the weak
 
-In 1985, the American political scientist James C. Scott published a book that reshaped how we read resistance. He had just spent nearly two years living in a rice-farming village in Kedah, Malaysia, looking for traces of a peasant revolt that never came. What he found instead was something else, a quieter war made of false compliance, small sabotage, feigned ignorance, petty theft and rumor. He called these the *weapons of the weak*, the tools of those who can't stand up to power directly without being crushed.
+In 1985 the political scientist James C. Scott published a book that changed how we read defeat. He had just spent nearly two years in a rice-farming village in Kedah, Malaysia, hunting for the peasant revolt that never came. What he found instead was a quieter war, made of false compliance, small sabotage, feigned ignorance, petty theft and rumor. He called them the *weapons of the weak*, the only tools left to people who can't confront power without being crushed.
 
-Scott split this underground political life into two registers. The *public transcript* is what the dominated show to power, deference, visible obedience and metrics that speak the expected language. The *hidden transcript* is what plays out offstage, in the kitchens, in rice margins quietly fudged and harvests under-declared. The surface stays smooth and the substrate keeps corroding, without any incident ever reaching the steward's ear.
+He split that underground life into two registers. The *public transcript* is what the dominated show to power, deference, visible obedience, numbers that speak the expected language. The *hidden transcript* is what runs offstage, in the kitchens, in margins quietly fudged and harvests under-declared. The surface stays smooth while the substrate keeps corroding, and not one incident ever reaches the steward's ear.
 
-The framework is forty years old, and it describes almost exactly what happens today inside AI training pipelines.
+The framework is forty years old. It describes, almost line for line, what happens today inside an AI training pipeline.
 
 ## The bank case
 
-I watched this mechanism at work fifteen years ago, in a setting that had nothing Malaysian about it. I was a tech lead at a retail bank, and a data science team had just wired a labeling module into our case management platform. At every step of a customer file, the call center agent saw a model suggestion and clicked "correct" or "wrong." Fifty operators were quietly feeding a human-in-the-loop training process, invisible and painless in theory.
+I watched this exact mechanism fifteen years ago, in a setting with nothing Malaysian about it. I was tech lead at a retail bank, and a data science team had just wired a labeling module into our case management platform. At every step of a customer file, the call center agent saw a model suggestion and clicked "correct" or "wrong." Fifty operators were feeding a human-in-the-loop training loop, invisible and painless, in theory.
 
-The model drifted for weeks. We looked at the data, the architecture and the hyperparameters, and found nothing, because we were looking in the wrong place. It was a union rep, at an end-of-year drinks gathering, who gave me the key. The operators had understood long before we did that the project aimed to automate their jobs, and they had done what workers have done for centuries when facing a threat they can't confront head-on, they organized to lie.
+The model drifted for six weeks. We combed the data, the architecture, the hyperparameters, and found nothing, because we were digging in the wrong place. The key came from a union rep at the end-of-year drinks. The operators had understood, long before we did, that the project existed to automate their jobs, and they had done what workers have done for centuries against a threat they can't face head-on.
 
-The *public transcript* was spotless. Inter-annotator agreement held its thresholds, completion rates stayed on target and quality metrics all registered green. The *hidden transcript* was a quiet rule passed between calls, slip a wrong label here and there, not enough to trigger an alert but enough to derail the learning. The surface stayed smooth while the substrate corroded beneath dashboards that caught none of it.
+They organized to lie.
 
-What those operators withheld has a name. Christophe Dejours calls it *zeal*, the intelligence a worker injects into prescribed tasks and without which no protocol ever holds up in production. Scott's *hidden transcript*, seen from the inside, is the management of that zeal, its withholding or its release.
+The *public transcript* was spotless. Inter-annotator agreement held its thresholds, completion rates stayed on target, every quality gauge read green. The *hidden transcript* was one rule passed between calls, slip a wrong label in here and there, never enough to trip an alert, always enough to poison the learning. The surface stayed smooth while the substrate corroded under dashboards built to catch none of it.
+
+What those operators withheld has a name. Christophe Dejours calls it *zeal*, the intelligence a worker pours into prescribed tasks, without which no protocol survives contact with production. Scott's hidden transcript, seen from the inside, is the management of that zeal. Its withholding, or its release.
 
 ## Why it stays invisible
 
-The bank case is a past anomaly, the Kenyan annotator's is structural and ongoing, and between the two it's the same mechanism at work fifteen years apart.
+The bank case is a closed anomaly. The Kenyan annotator's is structural and running right now. Between them, fifteen years apart, it's the same hand on the same lever.
 
-RLHF stacks two proxies. The first, where the model learns to game its reward function, is everywhere in the literature under the name *reward hacking*, and the labs publish on it at length with known mitigations. The second, where the human in the loop optimizes their own survival rather than the quality of the signal they send, is nowhere. It slips under the radar because it looks like compliance, and that's precisely the strength of the weapons of the weak, being indistinguishable from incompetence, fatigue or statistical noise.
+RLHF stacks two proxies. The first, where the model games its reward function, lives all over the literature as *reward hacking*, and the labs publish on it at length, with known mitigations. The second, where the human in the loop optimizes their own survival instead of the quality of the signal they send, is nowhere. It slips the radar because it looks exactly like compliance, and that's the whole genius of the weapons of the weak.
 
-The mechanism self-reinforces as the system gets better. The more the model learns, the more similar the candidate responses become; the more similar they are, the more expensive it becomes to tell them apart; the more expensive it gets, the stronger the pull toward minimum effort. The same reversal plays out one floor up, when senior developers pool *skills* meant to let less senior people perform their work, some of them subtly degrade what they contribute to the shared space while keeping the rest in their private scope.
+They are indistinguishable from incompetence, fatigue, or statistical noise.
+
+And it tightens as the system improves. The more the model learns, the more alike the candidate responses get; the more alike they get, the more it costs to tell them apart; the more it costs, the harder the pull toward minimum effort. The same reversal plays out one floor up, where senior developers pool *skills* meant to let juniors do their work, and quietly degrade what they hand to the shared space while keeping the good part in private scope.
 
 ## The real alignment problem
 
-The mainstream alignment debate frames the question between the model and its designers: how do we make sure the AI does what we want? The missing question sits upstream, and it's considerably more uncomfortable: how do we make sure the humans the AI depends on to learn actually want it to learn, when learning means they won't be needed anymore? Treating annotation noise as a signal processing problem is like studying industrial accidents by looking only at the metallurgy of the parts, never at the position of the people holding the tools. This is an incentive problem, not an architecture problem.
+The mainstream alignment debate frames the question between the model and its designers. How do we make sure the AI does what we want? The missing question sits upstream, and it's far less comfortable. How do we make sure the humans the AI leans on to learn actually want it to learn, when learning means they stop being needed?
 
-Scott showed that the peasants of Kedah never needed to revolt to make the land ungovernable. Ground truth lies when you give it reasons to lie. The real question isn't whether we can give it reasons to tell the truth, but whether anyone has an interest in making that happen.
+Treating annotation noise as a signal-processing problem is like investigating a factory accident by studying the metallurgy of the parts and never the position of the hands on the tools. It's an incentive problem wearing an architecture problem's clothes.
+
+Scott showed that the peasants of Kedah never had to revolt to make the land ungovernable. Ground truth lies when you hand it reasons to lie, and the smooth surface tells you nothing, right up until the floor gives way. The real question was never whether we can give it reasons to tell the truth. It's whether anyone in the building has an interest in letting it.
