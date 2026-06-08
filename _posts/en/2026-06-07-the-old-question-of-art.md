@@ -16,19 +16,22 @@ lang: en
 
 Every technical revolution brings back the same question: is this still art?
 
-When photography appeared, plenty of painters and critics dismissed it as a mere mechanical process. Where a portrait took days or weeks of labor, a photograph seemed to come down to pressing a button. Yet over time we learned to see that the art of photography never lived in the technical gesture itself. It lived in the choice of subject, the framing, the moment, the intention, the selection. And those choices are continuous and fine-grained. The photographer decides the light, the instant, the focal length, the grain. That density of decisions is what grounds authorship, not the absence of manual effort.
+When photography appeared, plenty of painters and critics [dismissed it as a mere mechanical process](/en/2025/12/30/when-photography-killed-painting-the-ai-parallel/). Where a portrait took days or weeks of labor, a photograph seemed to come down to pressing a button. Yet over time we learned to see that the art of photography never lived in the technical gesture itself. It lived in the choice of subject, the framing, the moment, the intention, the selection. And those choices are continuous and fine-grained. The photographer decides the light, the instant, the focal length, the grain. That density of decisions is what grounds authorship, not the absence of manual effort.
 
 Today artificial intelligence draws the same objections. You often hear that prompting is neither art nor even a real skill, since all it takes is typing a few words into an interface to get an image, a piece of music, or a text.
 
-But that objection rests on one particular conception of art: the one that ties artistic value to the quantity of manual labor. The more serious objection lies elsewhere. It asks: whose taste shows up in the result? Because the model does not simply execute, it brings its own aesthetic, inherited from its training. And that first conception does not always survive a look at the history of art.
+But that objection rests on one particular conception of art: the one that ties artistic value to the [quantity of manual labor](/en/2025/12/29/ai-reveals-effort-isnt-value/). The more serious objection lies elsewhere. It asks: whose taste shows up in the result? Because the model does not simply execute, it brings its own aesthetic, inherited from its training. And that first conception does not always survive a look at the history of art.
 
 The great masters of European painting often worked on commission. Renaissance and seventeenth-century workshops ran like genuine craft businesses. Painters belonged to guilds, employed assistants, and answered to the expectations of patrons. The master, true, directed his assistants closely. They were trained instruments, not autonomous generators bringing their own material. What was delegated there was execution, not taste. And yet no one today disputes the artistic standing of those works.
 
-The twentieth century then went further and questioned the very idea that art had to pass through manual execution. With the ready-made, Marcel Duchamp showed that an act of selection could be enough to found an artistic gesture. His urinal was a critical move, situated, aimed squarely at the institution. It does not legitimize everything, but it shifts the question for good toward the decision. The work no longer lived only in the making of the object, but in the decision to present it as such.
+The twentieth century then went further and questioned the very idea that art had to pass through manual execution. With the [ready-made](https://en.wikipedia.org/wiki/Readymades_of_Marcel_Duchamp), [Marcel Duchamp](https://en.wikipedia.org/wiki/Marcel_Duchamp) showed that an act of selection could be enough to found an artistic gesture. [His urinal](https://en.wikipedia.org/wiki/Fountain_(Duchamp)) was a critical move, situated, aimed squarely at the institution. It does not legitimize everything, but it shifts the question for good toward the decision. The work no longer lived only in the making of the object, but in the decision to present it as such.
+
+![Fountain (1917), Marcel Duchamp's ready-made, photographed by Alfred Stieglitz.](https://upload.wikimedia.org/wikipedia/commons/f/f6/Duchamp_Fountaine.jpg)
+*Fountain (1917), Marcel Duchamp — photograph by Alfred Stieglitz. Public domain, via Wikimedia Commons.*
 
 That shift invites us to move the question. Instead of asking who made the work, it becomes more useful to ask where the creative decision sits.
 
-Everything then depends on the intensity of the direction. A single word thrown into an interface, taking whatever comes out, is a lottery. Research, constraints, iterations, rejected versions, responsibility owned at the moment of publishing: that is a directed work.
+Everything then depends on the intensity of the direction. [A single word thrown into an interface, taking whatever comes out](/en/2026/03/28/the-new-sophists/), is a lottery. Research, constraints, iterations, rejected versions, responsibility owned at the moment of publishing: that is a directed work.
 
 Take a song generated by AI. The author may have chosen the subject, done the research, built a context, set the constraints, kept some versions and rejected the rest before releasing the final result. In that case the author is not just using a tool. They are directing a process of creation.
 
@@ -38,6 +41,6 @@ What artificial intelligence finally forces us to admit is an old truth: art was
 
 Prompting can then be understood as a new medium. Like photography in its day, it automates part of the work that used to be manual. But automating a gesture does not necessarily make the creative act disappear.
 
-When someone imagines a work, defines its broad lines, steers its making, and chooses the final result, they take part in its creation. So the question may not be whether prompting is art or craft, but whether it introduces a new form of creation, one where execution is largely delegated while intention and direction stay human.
+When someone imagines a work, defines its broad lines, steers its making, and chooses the final result, they take part in its creation. So the question may not be whether prompting is art or craft, but whether it introduces a new form of creation, one where [execution is largely delegated](/en/2026/01/21/execution-is-no-longer-the-constraint/) while intention and direction stay human.
 
 After all, if we accept that a photographer can be an artist by pressing a shutter, it becomes hard to claim on principle that someone guiding an artificial intelligence cannot be one too. The line does not run between the hand and the machine. It runs between the person who takes whatever the tool is willing to give, and the person who knows, version after version, what they refuse.
