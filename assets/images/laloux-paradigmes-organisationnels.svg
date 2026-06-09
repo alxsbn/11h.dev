@@ -1,12 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="760" height="600" viewBox="0 0 760 600" font-family="Georgia, 'Times New Roman', serif">
-  <rect width="760" height="600" fill="#ffffff"/>
-  <text x="380" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a1a1a">Les paradigmes organisationnels selon Frédéric Laloux</text>
-  <text x="380" y="60" text-anchor="middle" font-size="13" fill="#666">Chaque palier de conscience invente une nouvelle façon de coordonner le travail</text>
+  <style>
+    .bg { fill: #ffffff; }
+    .ink { fill: #1a1a1a; }
+    .muted { fill: #666666; }
+    .faint { fill: #999999; }
+    .faint-stroke { stroke: #999999; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1e1e1e; }
+      .ink { fill: #f0f0f0; }
+      .muted { fill: #b0b0b0; }
+      .faint { fill: #8a8a8a; }
+      .faint-stroke { stroke: #8a8a8a; }
+    }
+  </style>
+  <rect class="bg" width="760" height="600"/>
+  <text class="ink" x="380" y="38" text-anchor="middle" font-size="22" font-weight="bold">Les paradigmes organisationnels selon Frédéric Laloux</text>
+  <text class="muted" x="380" y="60" text-anchor="middle" font-size="13">Chaque palier de conscience invente une nouvelle façon de coordonner le travail</text>
 
   <!-- direction arrow -->
-  <line x1="34" y1="540" x2="34" y2="98" stroke="#999" stroke-width="2"/>
-  <polygon points="34,88 29,100 39,100" fill="#999"/>
-  <text x="20" y="320" text-anchor="middle" font-size="12" fill="#999" transform="rotate(-90 20 320)">évolution de la conscience &#8594; plus de complexité</text>
+  <line class="faint-stroke" x1="34" y1="540" x2="34" y2="98" stroke-width="2"/>
+  <polygon class="faint" points="34,88 29,100 39,100"/>
+  <text class="faint" x="20" y="320" text-anchor="middle" font-size="12" transform="rotate(-90 20 320)">évolution de la conscience &#8594; plus de complexité</text>
 
   <!-- bands: top = most evolved -->
   <!-- Opale -->
@@ -51,5 +65,5 @@
   <text x="76" y="534" font-size="13" fill="#f3dada">Survie, pas d'organisation durable</text>
   <text x="724" y="523" text-anchor="end" font-size="13" fill="#fff">petits groupes familiaux</text>
 
-  <text x="380" y="578" text-anchor="middle" font-size="11" fill="#999">D'après « Reinventing Organizations » (F. Laloux, 2014). Schéma : 11h.dev</text>
+  <text class="faint" x="380" y="578" text-anchor="middle" font-size="11">D'après « Reinventing Organizations » (F. Laloux, 2014). Schéma : 11h.dev</text>
 </svg>

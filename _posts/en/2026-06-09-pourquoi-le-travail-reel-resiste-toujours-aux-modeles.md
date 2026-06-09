@@ -5,7 +5,7 @@ date: 2026-06-09
 categories: [ai, work, organizations]
 excerpt: 'Jack Dorsey wants to replace managers with an AI that sees everything. But real work has never fit inside a model, and it isn''t a problem of information.'
 header_image: "https://images.unsplash.com/photo-1717700300260-02b182f94c9d?w=1600&q=80"
-header_image_alt: "Carte antique du monde avec continents détaillés et figures célestes"
+header_image_alt: "Antique world map with detailed continents and celestial figures"
 header_image_credit: "Europeana"
 header_image_credit_url: "https://unsplash.com/@europeana"
 header_image_source: "Unsplash"
