@@ -12,46 +12,46 @@ ref: the-padlock-without-a-wall
 lang: fr
 ---
 
-Il y a une image dont je n'arrive pas a me defaire. Un editeur de logiciels qui installe soigneusement un cadenas sur le portail de son jardin. Un beau cadenas, solide, avec une etiquette "Pro/Enterprise". Le probleme, c'est qu'il n'y a plus de mur autour du jardin. Juste le cadenas, seul, plante dans le vide.
+Il y a une image dont je n'arrive pas à me défaire. Un éditeur de logiciels qui installe soigneusement un cadenas sur le portail de son jardin. Un beau cadenas, solide, avec une étiquette "Pro/Enterprise". Le problème, c'est qu'il n'y a plus de mur autour du jardin. Juste le cadenas, seul, planté dans le vide.
 
-C'est exactement ce qu'est devenu le modele open-core en 2025.
+C'est exactement ce qu'est devenu le modèle open-core en 2025.
 
 ## Le deal qui avait du sens
 
-Le principe etait simple : vous publiez une version gratuite de votre logiciel, vous gardez les meilleures fonctionnalites pour la version payante. Le code ouvert vous donne la distribution, les fonctionnalites verrouillees vous donnent le revenu. Tout le monde y gagne.
+Le principe était simple : vous publiez une version gratuite de votre logiciel, vous gardez les meilleures fonctionnalités pour la version payante. Le code ouvert vous donne la distribution, les fonctionnalités verrouillées vous donnent le revenu. Tout le monde y gagne.
 
-Sauf que le code est devenu une commodite.
+Sauf que le code est devenu une commodité.
 
-Avec les LLM, toute base de code open source est desormais une donnee d'entrainement. On peut la forker, la repliquer, ou construire quelque chose de similaire sans effort. Le fosse n'est plus dans le code. Il ne l'a jamais vraiment ete, mais maintenant c'est visible a l'oeil nu.
+Avec les LLM, toute base de code open source est désormais une donnée d'entraînement. On peut la forker, la répliquer, ou construire quelque chose de similaire sans effort. Le fossé n'est plus dans le code. Il ne l'a jamais vraiment été, mais maintenant c'est visible à l'œil nu.
 
-Alors quel est l'interet de verrouiller des fonctionnalites derriere un paywall quand le code sous-jacent n'a pas de valeur defensible ?
+Alors quel est l'intérêt de verrouiller des fonctionnalités derrière un paywall quand le code sous-jacent n'a pas de valeur défensible ?
 
-## Deux positions coherentes
+## Deux positions cohérentes
 
-Je vois deux approches defensibles.
+Je vois deux approches défensibles.
 
-Vous etes full open source et vous monetisez ce qui est reellement difficile a repliquer -- ca varie selon le marche, mais ce n'est jamais le code en lui-meme. Le support, l'hebergement, les integrations, la confiance, la conformite, la vitesse d'iteration. Le code est le cadeau ; le business se construit sur tout ce qui l'entoure.
+Vous êtes full open source et vous monétisez ce qui est réellement difficile à répliquer -- ça varie selon le marché, mais ce n'est jamais le code en lui-même. Le support, l'hébergement, les intégrations, la confiance, la conformité, la vitesse d'itération. Le code est le cadeau ; le business se construit sur tout ce qui l'entoure.
 
-Ou vous etes closed source et votre produit EST la valeur. Le code reste proprietaire parce que c'est la que vit la differenciation. Pas de pretention d'ouverture, pas de theatre communautaire.
+Ou vous êtes closed source et votre produit EST la valeur. Le code reste propriétaire parce que c'est là que vit la différenciation. Pas de prétention d'ouverture, pas de théâtre communautaire.
 
-Les deux sont honnetes.
+Les deux sont honnêtes.
 
-Le modele hybride ne l'est plus. Il detruit la confiance sans rien proteger.
+Le modèle hybride ne l'est plus. Il détruit la confiance sans rien protéger.
 
-## L'erosion
+## L'érosion
 
-Chaque fois qu'un utilisateur voit "Pro uniquement" sur une fonctionnalite qu'il pourrait utiliser, quelque chose s'erode. Ce n'est pas de la frustration passagere. C'est la prise de conscience progressive que la version gratuite est frustrante *a dessein*. Que la version payante se contente de supprimer une friction qui a ete intentionnellement creee.
+Chaque fois qu'un utilisateur voit "Pro uniquement" sur une fonctionnalité qu'il pourrait utiliser, quelque chose s'érode. Ce n'est pas de la frustration passagère. C'est la prise de conscience progressive que la version gratuite est frustrante *à dessein*. Que la version payante se contente de supprimer une friction qui a été intentionnellement créée.
 
-Et une fois qu'on a vu ca, on ne peut plus ne pas le voir.
+Et une fois qu'on a vu ça, on ne peut plus ne pas le voir.
 
-Le pitch de l'open-core dit : "On vous donne de la valeur gratuitement, et on facture pour plus." La realite ressemble de plus en plus a : "On vous donne une demo, et on vous facture pour enlever les desagrements."
+Le pitch de l'open-core dit : "On vous donne de la valeur gratuitement, et on facture pour plus." La réalité ressemble de plus en plus à : "On vous donne une démo, et on vous facture pour enlever les désagréments."
 
 ## Le nouveau paysage
 
-Le cadenas sans mur ne protege rien. Il signale juste qu'il y avait quelque chose a proteger, autrefois.
+Le cadenas sans mur ne protège rien. Il signale juste qu'il y avait quelque chose à protéger, autrefois.
 
-Les entreprises qui s'accrochent encore a l'open-core parient que les utilisateurs ne remarqueront pas que le mur a disparu. Que la marque, l'ecosysteme, les couts de migration les feront continuer a payer pour des fonctionnalites qu'on pourrait reconstruire en un week-end.
+Les entreprises qui s'accrochent encore à l'open-core parient que les utilisateurs ne remarqueront pas que le mur a disparu. Que la marque, l'écosystème, les coûts de migration les feront continuer à payer pour des fonctionnalités qu'on pourrait reconstruire en un week-end.
 
-Certains continueront a payer. L'inertie est reelle. Mais la legitimite du modele se vide, un badge "Pro uniquement" a la fois.
+Certains continueront à payer. L'inertie est réelle. Mais la légitimité du modèle se vide, un badge "Pro uniquement" à la fois.
 
-L'avenir appartient a ceux qui choisissent un camp : veritablement ouvert, ou veritablement proprietaire. Le juste milieu s'est effondre.
+L'avenir appartient à ceux qui choisissent un camp : véritablement ouvert, ou véritablement propriétaire. Le juste milieu s'est effondré.

@@ -14,52 +14,52 @@ header_image_source_url: "https://unsplash.com"
 ref: when-photography-killed-painting-the-ai-parallel
 ---
 
-Les debats sur l'IA qui remplace les programmeurs semblent inedits, urgents, existentiels.
+Les débats sur l'IA qui remplace les programmeurs semblent inédits, urgents, existentiels.
 
-Ils ne le sont pas. On est deja passes par la.
+Ils ne le sont pas. On est déjà passés par là.
 
-Il y a 166 ans, quand la photographie est arrivee, le monde de l'art a eu exactement la meme crise.
+Il y a 166 ans, quand la photographie est arrivée, le monde de l'art a eu exactement la même crise.
 
 ## 1859 : L'ennemi le plus mortel de l'art
 
-Charles Baudelaire, ecrivant dans la [*Revue Francaise*](https://gallica.bnf.fr/ark:/12148/bpt6k9641210r/f263.item), detestait absolument la photographie :
+Charles Baudelaire, écrivant dans la [*Revue française*](https://gallica.bnf.fr/ark:/12148/bpt6k9641210r/f263.item), détestait absolument la photographie :
 
-> "Comme l'industrie photographique etait le refuge de tous les peintres manques, trop mal doues ou trop paresseux pour achever leurs etudes, cet engouement universel portait non seulement le caractere de l'aveuglement et de l'imbecillite, mais avait aussi la couleur d'une vengeance."
+> "Comme l'industrie photographique était le refuge de tous les peintres manqués, trop mal doués ou trop paresseux pour achever leurs études, cet engouement universel portait non seulement le caractère de l'aveuglement et de l'imbécillité, mais avait aussi la couleur d'une vengeance."
 
 > "Cette industrie, en envahissant les territoires de l'art, est devenue l'ennemie la plus mortelle de l'art."
 
-Sa conclusion ? La photographie doit "rentrer dans son veritable devoir, qui est d'etre la servante des sciences et des arts."
+Sa conclusion ? La photographie doit "rentrer dans son véritable devoir, qui est d'être la servante des sciences et des arts."
 
-Ca vous rappelle quelque chose ?
+Ça vous rappelle quelque chose ?
 
-## 1862 : La petition des 26 artistes
+## 1862 : La pétition des 26 artistes
 
-Jean-Auguste-Dominique Ingres, maitre etabli de la peinture academique francaise, signa une "Protestation des grands artistes contre toute assimilation de la photographie a l'art." Cette [petition soutenue par 26 artistes eminents](https://fr.wikipedia.org/wiki/Chambre_syndicale_de_la_photographie) fut soumise lors d'un proces qui devait determiner si les photographies meritaient une protection legale en tant qu'oeuvres creatives.
+Jean-Auguste-Dominique Ingres, maître établi de la peinture académique française, signa une "Protestation des grands artistes contre toute assimilation de la photographie à l'art." Cette [pétition soutenue par 26 artistes éminents](https://fr.wikipedia.org/wiki/Chambre_syndicale_de_la_photographie) fut soumise lors d'un procès qui devait déterminer si les photographies méritaient une protection légale en tant qu'œuvres créatives.
 
-L'ironie ? Ingres lui-meme utilisait la photographie pour assister ses peintures, et [posa pour des photographes a de multiples reprises](https://www.musee-orsay.fr/en/artworks/ingres-76922) tout au long de sa vie. Il voyait la menace, utilisait l'outil, mais combattait publiquement pour le garder subalterne.
+L'ironie ? Ingres lui-même utilisait la photographie pour assister ses peintures, et [posa pour des photographes à de multiples reprises](https://www.musee-orsay.fr/en/artworks/ingres-76922) tout au long de sa vie. Il voyait la menace, utilisait l'outil, mais combattait publiquement pour le garder subalterne.
 
-Ingres reste une figure majeure de l'histoire de l'art, ses peintures sont au Louvre. Mais sa resistance a la photographie ? Oubliee et sans importance. L'histoire a avance sans lui.
+Ingres reste une figure majeure de l'histoire de l'art, ses peintures sont au Louvre. Mais sa résistance à la photographie ? Oubliée et sans importance. L'histoire a avancé sans lui.
 
-## Ceux qui ont gagne : ceux qui sont nes avec l'appareil photo
+## Ceux qui ont gagné : ceux qui sont nés avec l'appareil photo
 
-Le calendrier est frappant. Pres de la moitie des impressionnistes les plus celebres sont nes dans les trois ans suivant l'invention de la photographie (l'annee meme ou le daguerreotype fut annonce, 1839) : Claude Monet (1840), Pierre-Auguste Renoir (1841), Berthe Morisot (1841), Alfred Sisley (1839), Paul Cezanne (1839).
+Le calendrier est frappant. Près de la moitié des impressionnistes les plus célèbres sont nés dans les trois ans suivant l'invention de la photographie (l'année même où le daguerréotype fut annoncé, 1839) : Claude Monet (1840), Pierre-Auguste Renoir (1841), Berthe Morisot (1841), Alfred Sisley (1839), Paul Cézanne (1839).
 
-Ils n'ont pas grandi en pleurant "l'age d'or de la peinture realiste." Pour eux, la photographie etait simplement la -- une realite plutot qu'une disruption. Pas de bagage a lacher, rien a desapprendre.
+Ils n'ont pas grandi en pleurant "l'âge d'or de la peinture réaliste." Pour eux, la photographie était simplement là -- une réalité plutôt qu'une disruption. Pas de bagage à lâcher, rien à désapprendre.
 
-Et la photographie n'a pas seulement echoue a detruire la peinture -- elle l'a liberee. En prenant en charge le devoir de documentation, l'appareil photo a revele que reproduire la realite n'etait plus le sujet. Soudain, "peindre ce que l'on voit" est devenu redondant. Alors les impressionnistes ont pose une question differente : que *percois*-je ? Que *ressens*-je ? Ils n'ont pas combattu la photographie, ils l'ont rendue hors sujet en allant la ou elle ne pouvait pas les suivre.
+Et la photographie n'a pas seulement échoué à détruire la peinture -- elle l'a libérée. En prenant en charge le devoir de documentation, l'appareil photo a révélé que reproduire la réalité n'était plus le sujet. Soudain, "peindre ce que l'on voit" est devenu redondant. Alors les impressionnistes ont posé une question différente : que *perçois*-je ? Que *ressens*-je ? Ils n'ont pas combattu la photographie, ils l'ont rendue hors sujet en allant là où elle ne pouvait pas les suivre.
 
 ## Les impressionnistes d'aujourd'hui
 
-Le schema se repete.
+Le schéma se répète.
 
-Les developpeurs seniors, avec des annees d'experience et une expertise forgee au combat, resisteront presque certainement le plus aux outils de codage IA. Non pas parce qu'ils ont tort sur le code, mais parce qu'ils ont le plus a perdre : des annees de memoire musculaire, des reflexes durement acquis, une fierte artisanale liee a "ecrire du code elegant."
+Les développeurs seniors, avec des années d'expérience et une expertise forgée au combat, résisteront presque certainement le plus aux outils de codage IA. Non pas parce qu'ils ont tort sur le code, mais parce qu'ils ont le plus à perdre : des années de mémoire musculaire, des réflexes durement acquis, une fierté artisanale liée à "écrire du code élégant."
 
-Pendant ce temps, les nouveaux developpeurs qui arrivent aujourd'hui ne porteront pas ce poids. Pour eux, les outils de codage IA seront simplement la -- une realite plutot qu'une menace autour de laquelle il faut desapprendre. Ils ne debattront pas pour savoir si le code genere par IA est de la "vraie programmation." Ils demanderont simplement : que puis-je construire avec ca ?
+Pendant ce temps, les nouveaux développeurs qui arrivent aujourd'hui ne porteront pas ce poids. Pour eux, les outils de codage IA seront simplement là -- une réalité plutôt qu'une menace autour de laquelle il faut désapprendre. Ils ne débattront pas pour savoir si le code généré par IA est de la "vraie programmation." Ils demanderont simplement : que puis-je construire avec ça ?
 
-Les seniors qui lacheront prise evolueront, comme les peintres academiques qui se sont adaptes et ont trouve une nouvelle valeur au-dela de l'execution technique. Ceux qui tiendront la ligne ? L'histoire a deja ecrit leur parcours.
+Les seniors qui lâcheront prise évolueront, comme les peintres académiques qui se sont adaptés et ont trouvé une nouvelle valeur au-delà de l'exécution technique. Ceux qui tiendront la ligne ? L'histoire a déjà écrit leur parcours.
 
-## 166 ans plus tard, meme histoire, des deux cotes
+## 166 ans plus tard, même histoire, des deux côtés
 
-Voici l'ironie finale : aujourd'hui, l'IA ne bouscule pas seulement les programmeurs, elle bouscule aussi les artistes. Le meme monde de l'art qui avait ete soi-disant "detruit" par la photographie en 1859, et qui a produit son siecle le plus revolutionnaire, fait maintenant face a l'IA generative avec exactement les memes arguments.
+Voici l'ironie finale : aujourd'hui, l'IA ne bouscule pas seulement les programmeurs, elle bouscule aussi les artistes. Le même monde de l'art qui avait été soi-disant "détruit" par la photographie en 1859, et qui a produit son siècle le plus révolutionnaire, fait maintenant face à l'IA générative avec exactement les mêmes arguments.
 
-La competence qui compte desormais n'est pas de defendre l'ancien metier. C'est de lacher prise pour decouvrir ce qui vient apres.
+La compétence qui compte désormais n'est pas de défendre l'ancien métier. C'est de lâcher prise pour découvrir ce qui vient après.
