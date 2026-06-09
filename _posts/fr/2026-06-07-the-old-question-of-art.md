@@ -24,10 +24,10 @@ Cette critique repose cependant sur une conception particulière de l'art : cell
 
 Les grands maîtres de la peinture européenne travaillaient souvent sur commande. Les ateliers de la Renaissance ou du XVIIe siècle fonctionnaient comme de véritables entreprises artisanales. Les peintres appartenaient à des corporations, employaient des assistants et répondaient aux attentes de mécènes. Certes, le maître dirigeait ses assistants de près : des instruments dressés, non des générateurs autonomes apportant leur propre matière. La délégation y était d'exécution, pas de goût. Pourtant, personne ne conteste aujourd'hui le caractère artistique de ces œuvres.
 
-De même, le XXe siècle a profondément remis en question l'idée que l'art devait nécessairement passer par l'exécution manuelle. Avec le [ready-made](https://fr.wikipedia.org/wiki/Ready-made), [Marcel Duchamp](https://fr.wikipedia.org/wiki/Marcel_Duchamp) a montré qu'un acte de sélection pouvait suffire à fonder un geste artistique. [Son urinoir](https://fr.wikipedia.org/wiki/Fountain_(Duchamp)) était un geste critique, situé, dirigé contre l'institution. Il ne légitime pas tout, mais il déplace définitivement la question vers la décision. L'œuvre n'était plus seulement dans la fabrication de l'objet, mais dans la décision de le présenter comme tel.
+De même, le XXe siècle a profondément remis en question l'idée que l'art devait nécessairement passer par l'exécution manuelle. Avec le [ready-made](https://fr.wikipedia.org/wiki/Ready-made), [Marcel Duchamp](https://fr.wikipedia.org/wiki/Marcel_Duchamp) a montré qu'un acte de sélection pouvait suffire à fonder un geste artistique. [Son urinoir]((https://fr.wikipedia.org/wiki/Fontaine_(Duchamp))) était un geste critique, situé, dirigé contre l'institution. Il ne légitime pas tout, mais il déplace définitivement la question vers la décision. L'œuvre n'était plus seulement dans la fabrication de l'objet, mais dans la décision de le présenter comme tel.
 
 ![Fountain (1917), le ready-made de Marcel Duchamp, photographié par Alfred Stieglitz.](https://upload.wikimedia.org/wikipedia/commons/f/f6/Duchamp_Fountaine.jpg)
-*Fountain (1917), Marcel Duchamp — photographie d'Alfred Stieglitz. Domaine public, via Wikimedia Commons.*
+*Urinoir (1917), Marcel Duchamp — photographie d'Alfred Stieglitz. Domaine public, via Wikimedia Commons.*
 
 Cette évolution invite à déplacer la question. Au lieu de demander : « Qui a fabriqué l'œuvre ? », il devient plus pertinent de demander : « Où se situe la décision créative ? »
 
