@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="600" viewBox="0 0 760 600" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="760" height="600" fill="#ffffff"/>
+  <text x="380" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a1a1a">Les paradigmes organisationnels selon Frédéric Laloux</text>
+  <text x="380" y="60" text-anchor="middle" font-size="13" fill="#666">Chaque palier de conscience invente une nouvelle façon de coordonner le travail</text>
+
+  <!-- direction arrow -->
+  <line x1="34" y1="540" x2="34" y2="98" stroke="#999" stroke-width="2"/>
+  <polygon points="34,88 29,100 39,100" fill="#999"/>
+  <text x="20" y="320" text-anchor="middle" font-size="12" fill="#999" transform="rotate(-90 20 320)">évolution de la conscience &#8594; plus de complexité</text>
+
+  <!-- bands: top = most evolved -->
+  <!-- Opale -->
+  <rect x="60" y="90" width="680" height="62" fill="#0CA678"/>
+  <text x="76" y="116" font-size="16" font-weight="bold" fill="#fff">Opale &#183; Évolutif</text>
+  <text x="76" y="138" font-size="13" fill="#eafff6">Métaphore : l'organisme vivant</text>
+  <text x="724" y="127" text-anchor="end" font-size="13" fill="#fff">Buurtzorg, FAVI, Morning Star</text>
+
+  <!-- Vert -->
+  <rect x="60" y="156" width="680" height="62" fill="#2F9E44"/>
+  <text x="76" y="182" font-size="16" font-weight="bold" fill="#fff">Vert &#183; Pluraliste</text>
+  <text x="76" y="204" font-size="13" fill="#e9ffe9">Métaphore : la famille</text>
+  <text x="724" y="193" text-anchor="end" font-size="13" fill="#fff">cultures d'entreprise, entreprises à mission</text>
+
+  <!-- Orange -->
+  <rect x="60" y="222" width="680" height="62" fill="#F76707"/>
+  <text x="76" y="248" font-size="16" font-weight="bold" fill="#fff">Orange &#183; Réussite</text>
+  <text x="76" y="270" font-size="13" fill="#fff1e6">Métaphore : la machine</text>
+  <text x="724" y="259" text-anchor="end" font-size="13" fill="#fff">multinationale moderne, start-up</text>
+
+  <!-- Ambre -->
+  <rect x="60" y="288" width="680" height="62" fill="#E8A33D"/>
+  <text x="76" y="314" font-size="16" font-weight="bold" fill="#1a1a1a">Ambre &#183; Conformiste</text>
+  <text x="76" y="336" font-size="13" fill="#3a2a08">Métaphore : l'armée</text>
+  <text x="724" y="325" text-anchor="end" font-size="13" fill="#1a1a1a">Église catholique, administration, armée romaine</text>
+
+  <!-- Rouge -->
+  <rect x="60" y="354" width="680" height="62" fill="#E03131"/>
+  <text x="76" y="380" font-size="16" font-weight="bold" fill="#fff">Rouge &#183; Impulsif</text>
+  <text x="76" y="402" font-size="13" fill="#ffecec">Métaphore : la meute de loups</text>
+  <text x="724" y="391" text-anchor="end" font-size="13" fill="#fff">gangs, mafias, proto-empires</text>
+
+  <!-- Magenta -->
+  <rect x="60" y="420" width="680" height="62" fill="#C2255C"/>
+  <text x="76" y="446" font-size="16" font-weight="bold" fill="#fff">Magenta &#183; Magique</text>
+  <text x="76" y="468" font-size="13" fill="#ffe9f1">Pensée magique, esprit tribal</text>
+  <text x="724" y="457" text-anchor="end" font-size="13" fill="#fff">clans, tribus</text>
+
+  <!-- Infrarouge -->
+  <rect x="60" y="486" width="680" height="62" fill="#7a1212"/>
+  <text x="76" y="512" font-size="16" font-weight="bold" fill="#fff">Infrarouge &#183; Réactif</text>
+  <text x="76" y="534" font-size="13" fill="#f3dada">Survie, pas d'organisation durable</text>
+  <text x="724" y="523" text-anchor="end" font-size="13" fill="#fff">petits groupes familiaux</text>
+
+  <text x="380" y="578" text-anchor="middle" font-size="11" fill="#999">D'après « Reinventing Organizations » (F. Laloux, 2014). Schéma : 11h.dev</text>
+</svg>
