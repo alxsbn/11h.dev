@@ -3,7 +3,7 @@ layout: post
 title: "La triche qui fait tourner le monde"
 date: 2026-01-01
 categories: [work, ai, productivity, series]
-excerpt: "Le vrai travail, c'est de la triche permanente. Toleree. Necessaire. Niee par ceux-la memes qui en beneficient."
+excerpt: "Le vrai travail, c'est de la triche permanente. Tolérée. Nécessaire. Niée par ceux-là mêmes qui en bénéficient."
 lang: fr
 header_image: "/assets/images/nata-shilo-artist-drawing-leaves.jpg"
 header_image_alt: "Mains d'artiste dessinant des feuilles dans un carnet, entourees de fournitures et de cafe"
@@ -12,20 +12,20 @@ header_image_credit_url: "https://www.natashilo.com"
 ref: the-cheating-that-makes-the-world-run
 ---
 
-Il existe une preuve irrefutable que les regles ne suffisent pas a faire fonctionner une organisation : la **greve du zele**.
+Il existe une preuve irréfutable que les règles ne suffisent pas à faire fonctionner une organisation : la **grève du zèle**.
 
-Quand les travailleurs veulent bloquer un systeme sans enfreindre la loi, ils appliquent le reglement a la lettre. Pas de debrayage, une obeissance parfaite. Et tout s'arrete !
+Quand les travailleurs veulent bloquer un système sans enfreindre la loi, ils appliquent le règlement à la lettre. Pas de débrayage, une obéissance parfaite. Et tout s'arrête !
 
 ## Le travail vivant
-Travailler, ce n'est pas executer. C'est combler l'ecart entre ce qu'on vous demande de faire et ce qui doit reellement se passer.
+Travailler, ce n'est pas exécuter. C'est combler l'écart entre ce qu'on vous demande de faire et ce qui doit réellement se passer.
 
-L'operateur qui sent la panne avant les capteurs. L'infirmiere qui adapte le protocole au patient reel. Le developpeur qui sait que le code "fonctionne" mais ne tiendra pas. Ce n'est pas de la desobeissance. C'est le travail lui-meme. Ce qu'on appelle le "travail vivant".
+L'opérateur qui sent la panne avant les capteurs. L'infirmière qui adapte le protocole au patient réel. Le développeur qui sait que le code "fonctionne" mais ne tiendra pas. Ce n'est pas de la désobéissance. C'est le travail lui-même. Ce qu'on appelle le "travail vivant".
 
-## Travailler = cooperer = tricher
-Appelons les choses par leur nom : le vrai travail, c'est de la triche permanente. Toleree et necessaire. Niee par ceux-la memes qui en beneficient.
+## Travailler = coopérer = tricher
+Appelons les choses par leur nom : le vrai travail, c'est de la triche permanente. Tolérée et nécessaire. Niée par ceux-là mêmes qui en bénéficient.
 
-Et c'est dans cette triche que la cooperation est nee. On ne coopere pas en suivant les memes regles, mais en trouvant ensemble comment contourner ce qui ne marche pas. Ces arrangements transmis entre pairs, jamais dans les procedures, sont le produit d'une deliberation clandestine.
+Et c'est dans cette triche que la coopération est née. On ne coopère pas en suivant les mêmes règles, mais en trouvant ensemble comment contourner ce qui ne marche pas. Ces arrangements transmis entre pairs, jamais dans les procédures, sont le produit d'une délibération clandestine.
 
-Un systeme qui ne tolere aucun ecart par rapport au prescrit est un systeme qui ne peut plus apprendre.
+Un système qui ne tolère aucun écart par rapport au prescrit est un système qui ne peut plus apprendre.
 
 Et maintenant, il y a des agents IA qui font exactement ce qu'on leur dit...

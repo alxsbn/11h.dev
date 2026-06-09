@@ -16,40 +16,40 @@ lang: fr
 
 ## 1969 : Le principe de Peter
 
-**Dans une hierarchie, tout employe tend a s'elever a son niveau d'incompetence.**
+**Dans une hiérarchie, tout employé tend à s'élever à son niveau d'incompétence.**
 
-Vous etes un bon developpeur ? On vous promeut lead. Bon lead ? On vous fait directeur. Jusqu'a ce que vous atteigniez le poste ou vous devenez mauvais. La, vous restez.
+Vous êtes un bon développeur ? On vous promeut lead. Bon lead ? On vous fait directeur. Jusqu'à ce que vous atteigniez le poste où vous devenez mauvais. Là, vous restez.
 
 La conclusion de Peter : le travail est fait par ceux qui n'ont pas encore atteint leur plafond.
 
 ## 1995 : Le principe de Dilbert
 
-Scott Adams observe autre chose. On ne promeut pas les bons jusqu'a ce qu'ils echouent. On promeut directement les mauvais pour les sortir du flux productif.
+Scott Adams observe autre chose. On ne promeut pas les bons jusqu'à ce qu'ils échouent. On promeut directement les mauvais pour les sortir du flux productif.
 
-> "Les travailleurs les plus inefficaces sont deplaces la ou ils peuvent faire le moins de degats : le management."
+> "Les travailleurs les plus inefficaces sont déplacés là où ils peuvent faire le moins de dégâts : le management."
 
-Le management n'est plus une recompense. C'est une quarantaine.
+Le management n'est plus une récompense. C'est une quarantaine.
 
 ## Et si tout le monde devenait manager ?
 
-Avant, etre manager etait un privilege. Une minorite y accedait.
+Avant, être manager était un privilège. Une minorité y accédait.
 
 Maintenant, vous ouvrez Claude, et vous dirigez.
 
 Alors le filtre change.
 
-**Manager un humain tolere le flou.** Les reunions d'alignement. Le politiquement acceptable.
+**Manager un humain tolère le flou.** Les réunions d'alignement. Le politiquement acceptable.
 
-**Manager une IA exige de la clarte.** Elle ne "ressent" pas. Elle execute ce que vous formulez.
+**Manager une IA exige de la clarté.** Elle ne "ressent" pas. Elle exécute ce que vous formulez.
 
 ## L'inversion
 
 Le principe de Dilbert s'inverse.
 
-Adams pensait que le management protegeait les incompetents.
+Adams pensait que le management protégeait les incompétents.
 
 **L'IA les expose.**
 
-Peter decrivait la montee vers l'incompetence. Adams, le refuge dans l'incompetence.
+Peter décrivait la montée vers l'incompétence. Adams, le refuge dans l'incompétence.
 
 **L'IA supprime le refuge.**

@@ -14,16 +14,16 @@ header_image_source_url: "https://unsplash.com"
 ref: ai-reveals-effort-isnt-value
 ---
 
-Scott Adams a une [hypothese](https://www.youtube.com/live/y5ZkIDUuHAM) simple : **la flemme** n'est pas un manque d'energie. C'est un **bug cognitif**, l'habitude de se focaliser sur le cout plutot que sur le benefice.
+Scott Adams a une [hypothèse](https://www.youtube.com/live/y5ZkIDUuHAM) simple : **la flemme** n'est pas un manque d'énergie. C'est un **bug cognitif**, l'habitude de se focaliser sur le coût plutôt que sur le bénéfice.
 
-BJ Fogg dit [quelque chose de similaire](https://youtu.be/AdKUJxjn-R8) avec ses "tiny habits" : **reduisez la friction pour declencher le comportement**.
+BJ Fogg dit [quelque chose de similaire](https://youtu.be/AdKUJxjn-R8) avec ses "tiny habits" : **réduisez la friction pour déclencher le comportement**.
 
 Mais que se passe-t-il quand **la friction s'effondre** ? L'IA vient de le faire.
 
-Elle fait chuter le cout d'execution de nombreuses taches a quasiment zero. Et soudain, la question nue apparait : **ou etait le benefice, au juste ?**
+Elle fait chuter le coût d'exécution de nombreuses tâches à quasiment zéro. Et soudain, la question nue apparaît : **où était le bénéfice, au juste ?**
 
-Ce qui est cruel pour beaucoup de taches et de metiers, c'est qu'ils tiraient leur **legitimite de l'effort requis, pas de la valeur produite**. L'effort etait la **valeur percue**. Et quelqu'un facturait pour ca.
+Ce qui est cruel pour beaucoup de tâches et de métiers, c'est qu'ils tiraient leur **légitimité de l'effort requis, pas de la valeur produite**. L'effort était la **valeur perçue**. Et quelqu'un facturait pour ça.
 
-Quand on reduit la friction sur quelque chose qui n'a pas de vrai retour, on ne cree pas une habitude. On expose un **vide**.
+Quand on réduit la friction sur quelque chose qui n'a pas de vrai retour, on ne crée pas une habitude. On expose un **vide**.
 
-La flemme n'est pas le probleme. C'est le symptome, et l'IA est le revelateur.
+La flemme n'est pas le problème. C'est le symptôme, et l'IA est le révélateur.
