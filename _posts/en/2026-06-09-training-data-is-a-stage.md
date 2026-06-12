@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ground truth lies"
+title: "Your training data is a stage"
 date: 2026-06-09
 categories: [data, ai]
 excerpt: 'When you ask people to supply the raw material of their own obsolescence, they do what James C. Scott''s Malaysian peasants always did.'
@@ -10,7 +10,7 @@ header_image_credit: "Rob Laughter"
 header_image_credit_url: "https://unsplash.com/@roblaughter"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: ground-truth-lies
+ref: training-data-is-a-stage
 lang: en
 ---
 

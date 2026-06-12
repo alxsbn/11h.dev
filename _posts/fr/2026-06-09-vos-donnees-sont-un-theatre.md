@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "La vérité terrain ment"
+title: "Vos données d'entraînement sont un théâtre"
 date: 2026-06-09
 categories: [data, ai]
 excerpt: 'Quand on demande à des gens de fournir la matière première de leur propre obsolescence, ils font ce que les paysans malaisiens de James C. Scott ont toujours fait.'
@@ -10,7 +10,7 @@ header_image_credit: "Rob Laughter"
 header_image_credit_url: "https://unsplash.com/@roblaughter"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: ground-truth-lies
+ref: training-data-is-a-stage
 lang: fr
 ---
 
