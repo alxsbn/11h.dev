@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "La vérité terrain ment"
-date: 2026-06-15
+date: 2026-06-09
 categories: [data, ai]
 excerpt: 'Quand on demande à des gens de fournir la matière première de leur propre obsolescence, ils font ce que les paysans malaisiens de James C. Scott ont toujours fait.'
 header_image: "https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=1600&q=80"
