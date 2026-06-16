@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Your training data is a stage"
-date: 2026-06-09
+date: 2026-06-15
 categories: [data, ai]
 excerpt: 'When you ask people to supply the raw material of their own obsolescence, they do what James C. Scott''s Malaysian peasants always did.'
 header_image: "https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=1600&q=80"
