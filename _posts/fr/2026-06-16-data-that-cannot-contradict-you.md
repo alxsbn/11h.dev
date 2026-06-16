@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Une donnée qui ne peut pas vous contredire ne sert à rien"
+title: "Une donnée qui ne peut vous contredire ne sert à rien"
 date: 2026-06-16
 categories: [data, ai]
 excerpt: 'Une donnée qui ne peut que confirmer ce qu''on pensait déjà n''apporte presque aucune information. Sa valeur tient à une seule question : si le résultat avait été différent, aurais-je changé d''avis ?'
