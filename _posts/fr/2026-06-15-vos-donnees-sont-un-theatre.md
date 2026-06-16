@@ -14,9 +14,7 @@ ref: training-data-is-a-stage
 lang: fr
 ---
 
-## Une dérive inexplicable
-
-Il y a quelques années, alors que je travaillais dans une banque de détail, nous avons déployé un système d'apprentissage continu pour améliorer un modèle de machine learning. Le principe était simple : à chaque étape du traitement d'un dossier, les opérateurs voyaient la recommandation du modèle et pouvaient indiquer si celle-ci leur paraissait correcte ou non. Cinquante personnes alimentaient ainsi en permanence la boucle de rétroaction.
+Il y a quelques années, alors que je travaillais dans une banque de détail, nous avions déployé un système d'apprentissage continu pour améliorer un modèle de machine learning. Le principe était simple : à chaque étape du traitement d'un dossier, les opérateurs voyaient la recommandation du modèle et pouvaient indiquer si celle-ci leur paraissait correcte ou non. Cinquante personnes alimentaient ainsi en permanence la boucle de rétroaction.
 
 Sur le papier, l'idée était élégante. Dans les faits, quelque chose ne fonctionnait pas. Plus nous accumulions de feedback, plus les performances du modèle se dégradaient. Nous avons vérifié les données, les algorithmes, les pipelines de traitement, les métriques de qualité. Rien ne semblait expliquer cette dérive.
 
