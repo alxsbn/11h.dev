@@ -4,10 +4,10 @@ title: "Data that can't contradict you is useless"
 date: 2026-06-16
 categories: [data, ai]
 excerpt: 'Data that can only confirm what you already believed carries almost no information. Its value comes down to one question: if the result had been different, would you have changed your mind?'
-header_image: "https://images.unsplash.com/photo-1613694437268-b8b2a5f98f16?w=1600&q=80"
-header_image_alt: "Grey concrete bridge over a river under a grey sky"
-header_image_credit: "Vitor Paladini"
-header_image_credit_url: "https://unsplash.com/@vtrpldn"
+header_image: "https://images.unsplash.com/photo-1555347582-b9ac76801308?w=1600&q=80"
+header_image_alt: "Love padlocks attached to the railing of the Pont des Arts in Paris"
+header_image_credit: "George Kourounis"
+header_image_credit_url: "https://unsplash.com/@neudekk"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ref: data-that-cannot-contradict-you

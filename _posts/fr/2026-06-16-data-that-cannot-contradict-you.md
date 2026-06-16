@@ -4,10 +4,10 @@ title: "Une donnée qui ne peut vous contredire ne sert à rien"
 date: 2026-06-16
 categories: [data, ai]
 excerpt: 'Une donnée qui ne peut que confirmer ce qu''on pensait déjà n''apporte presque aucune information. Sa valeur tient à une seule question : si le résultat avait été différent, aurais-je changé d''avis ?'
-header_image: "https://images.unsplash.com/photo-1613694437268-b8b2a5f98f16?w=1600&q=80"
-header_image_alt: "Pont de béton gris au-dessus d'une rivière sous un ciel gris"
-header_image_credit: "Vitor Paladini"
-header_image_credit_url: "https://unsplash.com/@vtrpldn"
+header_image: "https://images.unsplash.com/photo-1555347582-b9ac76801308?w=1600&q=80"
+header_image_alt: "Cadenas d'amour accrochés à la grille du Pont des Arts à Paris"
+header_image_credit: "George Kourounis"
+header_image_credit_url: "https://unsplash.com/@neudekk"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
 ref: data-that-cannot-contradict-you
