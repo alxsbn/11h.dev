@@ -13,9 +13,6 @@ header_image_source_url: "https://unsplash.com"
 ref: training-data-is-a-stage
 lang: en
 ---
-
-## An inexplicable drift
-
 A few years ago, when I was working at a retail bank, we rolled out a continuous learning system to improve a machine learning model. The principle was simple: at every step of processing a case, operators saw the model's recommendation and could indicate whether it looked correct to them or not. Fifty people thus fed the feedback loop continuously.
 
 On paper, the idea was elegant. In practice, something wasn't working. The more feedback we accumulated, the more the model's performance degraded. We checked the data, the algorithms, the processing pipelines, the quality metrics. Nothing seemed to explain the drift.
