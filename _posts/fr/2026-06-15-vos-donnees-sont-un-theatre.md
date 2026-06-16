@@ -16,7 +16,7 @@ lang: fr
 
 Il y a quelques années, alors que je travaillais dans une banque de détail, nous avions déployé un système d'apprentissage continu pour améliorer un modèle de machine learning. Le principe était simple : à chaque étape du traitement d'un dossier, les opérateurs voyaient la recommandation du modèle et pouvaient indiquer si celle-ci leur paraissait correcte ou non. Cinquante personnes alimentaient ainsi en permanence la boucle de rétroaction.
 
-Sur le papier, l'idée était élégante. Dans les faits, quelque chose ne fonctionnait pas. Plus nous accumulions de feedback, plus les performances du modèle se dégradaient. Nous avons vérifié les données, les algorithmes, les pipelines de traitement, les métriques de qualité. Rien ne semblait expliquer cette dérive.
+Sur le papier, l'idée était élégante. Dans les faits, quelque chose ne fonctionnait pas. Plus nous accumulions des feedbacks, plus les performances du modèle se dégradaient. Données, algorithmes, pipelines de traitement, métriques de qualité. Rien ne semblait expliquer cette dérive ...
 
 La réponse est arrivée de manière totalement inattendue, au détour d'une conversation avec un représentant syndical lors d'un pot de fin d'année. Les opérateurs avaient compris que l'objectif du projet était, à terme, d'automatiser une partie de leur travail. Ils avaient donc commencé à fausser les évaluations. Pas suffisamment pour que cela soit visible dans les indicateurs, pas suffisamment pour déclencher une alerte, mais assez pour perturber l'apprentissage du système.
 
