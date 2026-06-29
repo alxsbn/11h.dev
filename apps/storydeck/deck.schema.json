@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StoryDeck",
+  "description": "Grammaire d'un deck. C'est la cible que l'IA doit produire à partir d'un script en prose.",
+  "type": "object",
+  "required": ["scenes"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "title":     { "type": "string" },
+        "source":    { "type": "string", "description": "Table/cube d'origine des chiffres, pour traçabilité." },
+        "generated": { "type": "string" },
+        "lang":      { "type": "string", "default": "fr" }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/scene" }
+    }
+  },
+  "definitions": {
+    "media": { "type": "string", "format": "uri", "description": "URL d'image de fond plein écran (optionnel)." },
+    "scene": {
+      "type": "object",
+      "required": ["type"],
+      "oneOf": [
+        {
+          "title": "title",
+          "properties": {
+            "type": { "const": "title" },
+            "title": { "type": "string" },
+            "subtitle": { "type": "string" },
+            "media": { "$ref": "#/definitions/media" }
+          },
+          "required": ["type", "title"]
+        },
+        {
+          "title": "text",
+          "properties": {
+            "type": { "const": "text" },
+            "heading": { "type": "string" },
+            "body": { "type": "string" },
+            "media": { "$ref": "#/definitions/media" }
+          },
+          "required": ["type", "heading"]
+        },
+        {
+          "title": "stat",
+          "description": "Un grand chiffre animé (compteur). format: integer | percent | raw.",
+          "properties": {
+            "type": { "const": "stat" },
+            "value": { "type": "number" },
+            "label": { "type": "string" },
+            "format": { "enum": ["integer", "percent", "raw"], "default": "integer" },
+            "media": { "$ref": "#/definitions/media" }
+          },
+          "required": ["type", "value", "label"]
+        },
+        {
+          "title": "compare",
+          "description": "Deux chiffres côte à côte (avant / après une rupture).",
+          "properties": {
+            "type": { "const": "compare" },
+            "heading": { "type": "string" },
+            "left":  { "$ref": "#/definitions/datum" },
+            "right": { "$ref": "#/definitions/datum" },
+            "caption": { "type": "string" },
+            "media": { "$ref": "#/definitions/media" }
+          },
+          "required": ["type", "left", "right"]
+        },
+        {
+          "title": "chart",
+          "description": "Graphe D3 animé. chart: line | bar.",
+          "properties": {
+            "type": { "const": "chart" },
+            "chart": { "enum": ["line", "bar"], "default": "bar" },
+            "heading": { "type": "string" },
+            "x": { "type": "string", "default": "label" },
+            "y": { "type": "string", "default": "value" },
+            "data": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/datum" },
+              "minItems": 1
+            },
+            "drops": {
+              "type": "array",
+              "description": "Coupures de presse qui pleuvent par-dessus le graphe (effet polaroïds).",
+              "items": {
+                "type": "object",
+                "required": ["img", "x", "y", "rot"],
+                "properties": {
+                  "img": { "type": "string", "description": "Chemin du PNG (capture recadrée)." },
+                  "x": { "type": "string", "description": "Position horizontale, ex '8%'." },
+                  "y": { "type": "string", "description": "Position verticale, ex '18%'." },
+                  "rot": { "type": "string", "description": "Rotation finale, ex '-6deg'." },
+                  "caption": { "type": "string" }
+                }
+              }
+            },
+            "media": { "$ref": "#/definitions/media" }
+          },
+          "required": ["type", "data"]
+        }
+      ]
+    },
+    "datum": {
+      "type": "object",
+      "required": ["label", "value"],
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": "number" }
+      }
+    }
+  }
+}

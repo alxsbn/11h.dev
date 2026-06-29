@@ -1,0 +1,579 @@
+/* ============================================================
+   StoryDeck — moteur générique
+   Charge un deck.json et le rend. Trois couches : registre de scènes
+   (renderers) · moteur de progression unifié (clic/flèche/molette →
+   même index, avec beats internes) · chrome UI.
+   ============================================================ */
+
+const fmt = {
+  integer: (v) => Math.round(v).toLocaleString("fr-FR"),
+  percent: (v) => v.toLocaleString("fr-FR", { maximumFractionDigits: 1 }) + " %",
+  raw: (v) => String(Math.round(v))
+};
+
+/* ---------- 1) REGISTRE DE SCÈNES ---------- */
+const renderers = {
+  title(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--title");
+    el.querySelector(".scene__content").innerHTML = `
+      <h1 class="reveal">${s.title}</h1>
+      ${s.subtitle ? `<p class="lead reveal">${s.subtitle}</p>` : ""}`;
+    return { el };
+  },
+
+  // Liste qui s'empile (puces ▸ par défaut ; noBullet:true = sans puce)
+  list(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    const cls = "stacklist" + (s.noBullet ? " stacklist--plain" : "");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <ul class="${cls}">${s.items.map((it) => `<li>${it}</li>`).join("")}</ul>
+      ${s.caption ? `<p class="lead reveal">${s.caption}</p>` : ""}`;
+    const lis = [...el.querySelectorAll(".stacklist li")];
+    return {
+      el,
+      onEnter() { lis.forEach((li, i) => setTimeout(() => li.classList.add("on"), 200 + i * 280)); },
+      onExit()  { lis.forEach((li) => li.classList.remove("on")); }
+    };
+  },
+
+  stat(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    const f = fmt[s.format] || fmt.raw;
+    el.querySelector(".scene__content").innerHTML = `
+      <div class="stat reveal" data-target="${s.value}">${f(0)}</div>
+      <div class="stat__label reveal">${s.label}</div>`;
+    const node = el.querySelector(".stat");
+    return {
+      el,
+      onEnter() {
+        d3.select(node).transition().duration(1200).ease(d3.easeCubicOut)
+          .tween("count", () => { const i = d3.interpolateNumber(0, +node.dataset.target);
+            return (t) => { node.textContent = f(i(t)); }; });
+      },
+      onExit() { node.textContent = f(0); }
+    };
+  },
+
+  quote(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--quote");
+    el.querySelector(".scene__content").innerHTML = `
+      <blockquote class="quote reveal">${s.text}</blockquote>
+      ${s.cite ? `<cite class="reveal">${s.cite}</cite>` : ""}`;
+    return { el };
+  },
+
+  text(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.querySelector(".scene__content").innerHTML = `
+      <h2 class="reveal">${s.heading}</h2>
+      ${s.body ? `<p class="lead reveal">${s.body}</p>` : ""}`;
+    return { el };
+  },
+
+  compare(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.querySelector(".scene__content").innerHTML = `
+      <h2 class="reveal">${s.heading}</h2>
+      <div class="compare reveal">
+        <div class="compare__side"><div class="compare__val" data-target="${s.left.value}">0</div><div class="compare__lbl">${s.left.label}</div></div>
+        <div class="compare__arrow">→</div>
+        <div class="compare__side"><div class="compare__val" data-target="${s.right.value}">0</div><div class="compare__lbl">${s.right.label}</div></div>
+      </div>
+      ${s.caption ? `<p class="lead reveal">${s.caption}</p>` : ""}`;
+    const vals = [...el.querySelectorAll(".compare__val")];
+    return {
+      el,
+      onEnter() {
+        vals.forEach((node) => {
+          const i = d3.interpolateNumber(0, +node.dataset.target);
+          d3.select(node).transition().duration(1100).ease(d3.easeCubicOut)
+            .tween("c", () => (t) => { node.textContent = fmt.integer(i(t)); });
+        });
+      },
+      onExit() { vals.forEach((n) => (n.textContent = "0")); }
+    };
+  },
+
+  grid(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="grid">${s.cells.map((c, i) => `
+        <div class="grid__cell" data-i="${i}" ${c.accent ? 'data-accent="1"' : ""}>
+          <div class="grid__cell-title">${c.title}</div>
+          ${c.sub ? `<div class="grid__cell-sub">${c.sub}</div>` : ""}
+        </div>`).join("")}</div>
+      ${s.caption ? `<p class="lead reveal">${s.caption}</p>` : ""}`;
+    const cells = [...el.querySelectorAll(".grid__cell")];
+    return {
+      el,
+      onEnter() { cells.forEach((c, i) => setTimeout(() => c.classList.add("on"), 250 + i * 350)); },
+      onExit()  { cells.forEach((c) => c.classList.remove("on")); }
+    };
+  },
+
+  table(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    const verdictClass = (v) => /✅|résiste|resist/i.test(v) ? "ok" : /❌/.test(v) ? "ko" : /⚠️/.test(v) ? "warn" : "";
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <table class="verdict"><thead><tr>${s.columns.map((c) => `<th>${c}</th>`).join("")}</tr></thead>
+      <tbody>${s.rows.map((r) => `<tr>${r.map((cell, ci) =>
+        `<td class="${ci === r.length - 1 ? verdictClass(cell) : ""}">${cell}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+    const rows = [...el.querySelectorAll(".verdict tbody tr")];
+    return {
+      el,
+      onEnter() { rows.forEach((tr, i) => setTimeout(() => tr.classList.add("on"), 250 + i * 320)); },
+      onExit()  { rows.forEach((tr) => tr.classList.remove("on")); }
+    };
+  },
+
+  // Chart D3 (line/bar) + couche optionnelle de coupures de presse (polaroïds)
+  chart(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.querySelector(".scene__content").innerHTML = `
+      <h2 class="reveal">${s.heading}</h2>
+      <svg class="chart reveal" role="img" aria-label="${s.heading}"></svg>`;
+    const svg = el.querySelector(".chart");
+
+    let drops = [], timers = [];
+    if (Array.isArray(s.drops) && s.drops.length) {
+      const layer = document.createElement("div");
+      layer.className = "drops";
+      layer.innerHTML = s.drops.map((d) => `
+        <figure class="drop" style="--x:${d.x};--y:${d.y};--rot:${d.rot}">
+          <img src="${d.img}" alt="${d.caption || ""}" />
+          ${d.caption ? `<figcaption>${d.caption}</figcaption>` : ""}
+        </figure>`).join("");
+      el.appendChild(layer);
+      drops = [...layer.querySelectorAll(".drop")];
+    }
+
+    const CURVE_MS = 1400, FIRST_GAP = 800, ACCEL = 0.72, MIN_GAP = 120;
+    function dropDelays(n) {
+      const out = []; let t = CURVE_MS, gap = FIRST_GAP;
+      for (let i = 0; i < n; i++) { out.push(t); t += gap; gap = Math.max(MIN_GAP, gap * ACCEL); }
+      return out;
+    }
+    function settle(landed) {
+      landed.forEach((d, k) => {
+        const depth = landed.length - 1 - k, dir = (k % 2 === 0) ? 1 : -1;
+        d.style.setProperty("--nx", dir * (4 + depth * 2) + "px");
+        d.style.setProperty("--ny", depth * 3 + "px");
+        d.style.setProperty("--nr", dir * (1.2 + depth * 0.6) + "deg");
+        d.style.zIndex = String(10 + k);
+        d.classList.toggle("jostled", depth > 0);
+      });
+    }
+    return {
+      el,
+      onEnter() {
+        (s.chart === "bar" ? drawBars : drawLine)(svg, s.data, s.highlight);
+        const landed = [], delays = dropDelays(drops.length);
+        drops.forEach((d, i) => timers.push(setTimeout(() => {
+          d.classList.add("landed"); landed.push(d); settle(landed);
+        }, delays[i])));
+      },
+      onExit() {
+        timers.forEach(clearTimeout); timers = [];
+        d3.select(svg).selectAll("*").remove();
+        drops.forEach((d) => { d.classList.remove("landed", "jostled");
+          d.style.removeProperty("--nx"); d.style.removeProperty("--ny"); d.style.removeProperty("--nr"); d.style.zIndex = ""; });
+      }
+    };
+  },
+
+  // Marquee — rubans de logos qui défilent en boucle infinie
+  marquee(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    const rowHtml = (row) => {
+      const tiles = row.items.map((it) =>
+        `<div class="mq__tile"><img src="${it.img}" alt="${it.name || ""}" /></div>`).join("");
+      const dir = row.dir === "right" ? "mq--right" : "mq--left";
+      return `<div class="mq__row"><div class="mq__track ${dir}" style="--dur:${(row.speed || 40)}s">${tiles}${tiles}</div></div>`;
+    };
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      ${s.subtitle ? `<p class="lead reveal">${s.subtitle}</p>` : ""}`;
+    const wall = document.createElement("div");
+    wall.className = "mq reveal";
+    wall.innerHTML = s.rows.map(rowHtml).join("");
+    el.querySelector(".scene__content").appendChild(wall);
+    return { el };
+  },
+
+  // Modèle multi-faces (non utilisé dans le deck courant, gardé pour réemploi)
+  model(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="faces">${s.faces.map((f) => `
+        <div class="face"${f.accent ? ` data-accent="${f.accent}"` : ""}>
+          <div class="face__tag">${f.tag}</div>
+          <div class="face__title">${f.title}</div>
+          <div class="face__desc">${f.desc}</div>
+        </div>`).join("")}</div>`;
+    return { el };
+  },
+
+  // Embed — poster (screenshot) au départ, bascule sur la vidéo au 1er clic
+  embed(s) {
+    const el = sceneEl(null);
+    el.classList.add("scene--embed");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.title ? `<div class="embed__title reveal">${s.title}</div>` : ""}
+      <div class="embed__frame reveal">
+        ${s.poster ? `<img class="embed__poster" src="${s.poster}" alt="" />` : ""}
+        <video class="embed__video" muted loop playsinline preload="auto" src="${s.video}"></video>
+      </div>`;
+    const video = el.querySelector(".embed__video");
+    const frame = el.querySelector(".embed__frame");
+    let played = false;
+    function reset() { played = false; frame.classList.remove("playing"); try { video.pause(); video.currentTime = 0; } catch (e) {} }
+    return {
+      el,
+      onEnter() { reset(); },
+      onExit()  { reset(); },
+      advance() {
+        if (!played) { played = true; frame.classList.add("playing");
+          try { video.currentTime = 0; video.play(); } catch (e) {} return true; }
+        return false;
+      }
+    };
+  },
+
+  // Dashboard — mini-indicateurs révélés un par un au clic
+  dashboard(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--dash");
+    const panelHtml = (p, i) => {
+      const inner = p.kind === "stat"
+        ? `<div class="dash__stat" data-target="${p.value}" data-format="${p.format || "raw"}">0</div>
+           ${p.unit ? `<div class="dash__unit">${p.unit}</div>` : ""}`
+        : `<svg class="dash__chart" data-i="${i}" role="img"></svg>`;
+      return `<div class="dash__panel dash__panel--hidden" data-panel="${i}">
+        <div class="dash__title">${p.title}</div>
+        ${inner}
+        ${p.delta ? `<div class="dash__delta ${p.deltaDir || ""}">${p.delta}</div>` : ""}
+        ${p.label ? `<div class="dash__label">${p.label}</div>` : ""}
+        ${p.source ? `<div class="dash__source">${p.source}</div>` : ""}
+      </div>`;
+    };
+    const pointsHtml = Array.isArray(s.points) && s.points.length
+      ? `<div class="dash__points">${s.points.map((pt) =>
+          `<span class="dash__point">${pt}</span>`).join('<span class="dash__sep">→</span>')}</div>`
+      : (s.caption ? `<p class="lead reveal dash__caption">${s.caption}</p>` : "");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="dash">${s.panels.map(panelHtml).join("")}</div>
+      ${pointsHtml}`;
+
+    function revealPanel(i) {
+      const p = s.panels[i];
+      const panel = el.querySelector(`.dash__panel[data-panel="${i}"]`);
+      if (!panel) return;
+      panel.classList.remove("dash__panel--hidden");
+      if (p.kind === "stat") {
+        const node = panel.querySelector(".dash__stat");
+        const f = fmt[p.format] || fmt.raw;
+        d3.select(node).transition().duration(1100).ease(d3.easeCubicOut)
+          .tween("c", () => { const it = d3.interpolateNumber(0, +node.dataset.target);
+            return (t) => { node.textContent = f(it(t)); }; });
+      } else {
+        const svg = panel.querySelector(".dash__chart");
+        (p.chart === "bar" ? drawBars : drawLine)(svg, p.data, p.highlight);
+      }
+    }
+    function resetAll() {
+      el.querySelectorAll(".dash__panel").forEach((panel) => panel.classList.add("dash__panel--hidden"));
+      el.querySelectorAll(".dash__chart").forEach((svg) => d3.select(svg).selectAll("*").remove());
+      el.querySelectorAll(".dash__stat").forEach((n) => (n.textContent = "0"));
+    }
+    let shown = 0;
+    return {
+      el,
+      onEnter() { resetAll(); shown = 1; revealPanel(0); },
+      onExit()  { resetAll(); shown = 0; },
+      advance() { if (shown < s.panels.length) { revealPanel(shown); shown++; return true; } return false; }
+    };
+  },
+
+  // Dualline — barres (équipe) + courbe (automatisation) sur échelles indépendantes
+  dualline(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--dual");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      ${s.subtitle ? `<p class="lead reveal">${s.subtitle}</p>` : ""}
+      <div class="dual">
+        <svg class="dual__svg reveal" role="img" aria-label="${s.heading || ""}"></svg>
+        <div class="dual__legend reveal">${s.series.map((se) =>
+          `<span class="dual__key"><i style="background:${se.color}"></i>${se.name}</span>`).join("")}</div>
+      </div>`;
+    const svg = el.querySelector(".dual__svg");
+    return {
+      el,
+      onEnter() { drawDual(svg, s.x, s.series, s.markers); },
+      onExit()  { d3.select(svg).selectAll("*").remove(); }
+    };
+  },
+
+  // Stack — logos en grille par couches, beats au clic (show/add/replace/absorb/morph)
+  stack(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--stack");
+    const tile = (id) => {
+      const it = s.items.find((x) => x.id === id);
+      return `<figure class="stk__tile" data-id="${it.id}">
+        <img src="${it.img}" alt="${it.name}" /><figcaption>${it.name}</figcaption></figure>`;
+    };
+    const cols = s.columns.map((c) =>
+      `<div class="stk__col">${c.ids.map(tile).join("")}</div>`).join('<div class="stk__flow">→</div>');
+    el.querySelector(".scene__content").innerHTML = `
+      <div class="stk__sub reveal"></div>
+      <div class="stk__grid">${cols}</div>`;
+    const subEl = el.querySelector(".stk__sub");
+    const tileEl = (id) => el.querySelector(`.stk__tile[data-id="${id}"]`);
+
+    let beat = 0;
+    function applyBeat(b) {
+      const def = s.beats[b];
+      if (!def) return;
+      subEl.innerHTML = def.sub || "";
+      (def.actions || []).forEach((a) => {
+        if (a.op === "show" || a.op === "add") tileEl(a.id)?.classList.add("on");
+        if (a.op === "replace") { tileEl(a.byId)?.classList.add("on", "stk__repl"); tileEl(a.id)?.classList.add("stk__gone"); }
+        if (a.op === "absorb") { tileEl(a.id)?.classList.add("stk__absorbed"); tileEl(a.underId)?.classList.add("stk__host"); }
+        if (a.op === "morph") {
+          const t = tileEl(a.id); if (!t) return;
+          t.classList.add("stk__morph");
+          const img = t.querySelector("img"), cap = t.querySelector("figcaption");
+          const into = s.items.find((x) => x.id === a.into);
+          if (img && into) img.src = into.img;
+          if (cap && into) cap.textContent = into.name;
+        }
+      });
+    }
+    function clearTo(target) {
+      s.items.forEach((it) => {
+        const t = tileEl(it.id); t.className = "stk__tile";
+        const img = t.querySelector("img"), cap = t.querySelector("figcaption");
+        if (img) img.src = it.img; if (cap) cap.textContent = it.name;
+      });
+      for (let b = 0; b <= target; b++) applyBeat(b);
+    }
+    return {
+      el,
+      onEnter() { beat = 0; applyBeat(0); },
+      onExit()  { clearTo(-1); beat = 0; },
+      advance() { if (beat < s.beats.length - 1) { beat++; applyBeat(beat); return true; } return false; },
+      retreat() { if (beat > 0) { beat--; clearTo(beat); return true; } return false; }
+    };
+  }
+};
+
+/* ---------- squelette d'une scène ---------- */
+function sceneEl(media, bgVideo) {
+  const el = document.createElement("section");
+  el.className = "scene";
+  let bg = "";
+  if (bgVideo) {
+    bg = `<video class="scene__video" autoplay muted loop playsinline src="${bgVideo}"></video><div class="scene__overlay scene__overlay--strong"></div>`;
+  } else if (media) {
+    bg = `<div class="scene__media" style="background-image:url('${media}')"></div><div class="scene__overlay"></div>`;
+  }
+  el.innerHTML = `${bg}<div class="scene__content"></div>`;
+  return el;
+}
+
+/* ---------- charts D3 ---------- */
+function chartDims(svg) {
+  const W = svg.clientWidth || 640, H = svg.clientHeight || 380;
+  return { W, H, m: { t: 14, r: 16, b: 32, l: 52 } };
+}
+
+function drawBars(svg, data, highlight) {
+  const { W, H, m } = chartDims(svg);
+  const sel = d3.select(svg).attr("viewBox", `0 0 ${W} ${H}`);
+  sel.selectAll("*").remove();
+  const x = d3.scaleBand().domain(data.map((d) => d.label)).range([m.l, W - m.r]).padding(0.25);
+  const y = d3.scaleLinear().domain([0, d3.max(data, (d) => d.value) * 1.1]).range([H - m.b, m.t]);
+  sel.append("g").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x));
+  sel.append("g").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(d3.format("~s")));
+  sel.selectAll(".bar").data(data).join("rect")
+    .attr("class", (d, i) => "bar" + (i === highlight ? " bar--hl" : ""))
+    .attr("x", (d) => x(d.label)).attr("width", x.bandwidth())
+    .attr("y", H - m.b).attr("height", 0)
+    .transition().duration(900).delay((d, i) => i * 70).ease(d3.easeCubicOut)
+    .attr("y", (d) => y(d.value)).attr("height", (d) => H - m.b - y(d.value));
+}
+
+function drawLine(svg, data, highlight) {
+  const { W, H, m } = chartDims(svg);
+  const sel = d3.select(svg).attr("viewBox", `0 0 ${W} ${H}`);
+  sel.selectAll("*").remove();
+  const x = d3.scalePoint().domain(data.map((d) => d.label)).range([m.l, W - m.r]).padding(0.5);
+  const vmin = Math.min(0, d3.min(data, (d) => d.value));
+  const vmax = d3.max(data, (d) => d.value);
+  const pad = (vmax - vmin) * 0.12 || 1;
+  const y = d3.scaleLinear().domain([vmin - (vmin < 0 ? pad : 0), vmax + pad]).range([H - m.b, m.t]);
+  const narrow = W < 380 || data.length > 5;
+  const keep = narrow ? new Set([0, Math.floor((data.length - 1) / 2), data.length - 1, highlight]) : null;
+  const xAxis = d3.axisBottom(x).tickFormat((d, i) => (!keep || keep.has(i)) ? d : "");
+  sel.append("g").attr("transform", `translate(0,${H - m.b})`).call(xAxis).call((g) => g.selectAll(".tick line").remove());
+  sel.append("g").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(3).tickFormat(d3.format("~s")));
+  const line = d3.line().x((d) => x(d.label)).y((d) => y(d.value)).curve(d3.curveMonotoneX);
+  const path = sel.append("path").datum(data).attr("class", "line").attr("fill", "none")
+    .attr("stroke", "var(--accent)").attr("stroke-width", 2.5).attr("d", line);
+  const len = path.node().getTotalLength();
+  path.attr("stroke-dasharray", `${len} ${len}`).attr("stroke-dashoffset", len)
+    .transition().duration(1400).ease(d3.easeCubicInOut).attr("stroke-dashoffset", 0);
+  sel.selectAll(".dot").data(data).join("circle")
+    .attr("class", (d, i) => "dot" + (i === highlight ? " dot--hl" : ""))
+    .attr("cx", (d) => x(d.label)).attr("cy", (d) => y(d.value)).attr("r", 0)
+    .attr("fill", (d, i) => i === highlight ? "var(--hot)" : "var(--accent)")
+    .transition().delay((d, i) => 200 + i * 100).duration(300).attr("r", (d, i) => i === highlight ? 7 : 4);
+  if (highlight != null && data[highlight]) {
+    const d = data[highlight];
+    sel.append("text").attr("class", "hl-label").attr("x", x(d.label)).attr("y", y(d.value) - 14)
+      .attr("text-anchor", "middle").attr("fill", "var(--hot)").attr("font-weight", "700")
+      .text(d.note || d.value.toLocaleString("fr-FR"))
+      .attr("opacity", 0).transition().delay(1400).duration(400).attr("opacity", 1);
+  }
+}
+
+function drawDual(svg, labels, series, markers) {
+  const { W, H } = chartDims(svg);
+  const m = { t: 30, r: 54, b: 36, l: 54 };
+  const sel = d3.select(svg).attr("viewBox", `0 0 ${W} ${H}`);
+  sel.selectAll("*").remove();
+  const x = d3.scalePoint().domain(labels).range([m.l, W - m.r]).padding(0.5);
+  const scaleFor = (se) => d3.scaleLinear()
+    .domain([Math.min(0, d3.min(se.values)), d3.max(se.values) * 1.15]).range([H - m.b, m.t]);
+  const scales = series.map(scaleFor);
+  const keep = labels.length > 5 ? new Set([0, Math.floor((labels.length - 1) / 2), labels.length - 1]) : null;
+  sel.append("g").attr("transform", `translate(0,${H - m.b})`)
+    .call(d3.axisBottom(x).tickFormat((d, i) => (!keep || keep.has(i)) ? d : ""))
+    .call((g) => g.selectAll(".tick line").remove());
+  (markers || []).forEach((mk) => {
+    const px = x(labels[mk.at]);
+    sel.append("line").attr("x1", px).attr("x2", px).attr("y1", m.t).attr("y2", H - m.b)
+      .attr("stroke", "#3a4150").attr("stroke-dasharray", "3 3");
+    sel.append("text").attr("x", px).attr("y", m.t - 8).attr("text-anchor", "middle")
+      .attr("fill", "var(--muted)").attr("font-size", "12px").attr("font-weight", "600")
+      .text(mk.label).attr("opacity", 0).transition().delay(1600).duration(400).attr("opacity", 1);
+  });
+  const bw = Math.min(54, (W - m.l - m.r) / labels.length * 0.5);
+  series.forEach((se, si) => {
+    const y = scales[si];
+    if (se.kind === "bars") {
+      sel.selectAll(`.bar-${si}`).data(se.values).join("rect")
+        .attr("x", (d, i) => x(labels[i]) - bw / 2).attr("width", bw)
+        .attr("y", H - m.b).attr("height", 0).attr("rx", 3).attr("fill", se.color).attr("opacity", 0.55)
+        .transition().duration(800).delay((d, i) => i * 90).ease(d3.easeCubicOut)
+        .attr("y", (d) => y(d)).attr("height", (d) => H - m.b - y(d));
+    } else {
+      const line = d3.line().x((d, i) => x(labels[i])).y((d) => y(d)).curve(d3.curveMonotoneX);
+      const path = sel.append("path").datum(se.values).attr("fill", "none")
+        .attr("stroke", se.color).attr("stroke-width", 3.5).attr("d", line);
+      const len = path.node().getTotalLength();
+      path.attr("stroke-dasharray", `${len} ${len}`).attr("stroke-dashoffset", len)
+        .transition().duration(1600).ease(d3.easeCubicInOut).attr("stroke-dashoffset", 0);
+      sel.selectAll(`.dot-${si}`).data(se.values).join("circle")
+        .attr("cx", (d, i) => x(labels[i])).attr("cy", (d) => y(d)).attr("r", 0).attr("fill", se.color)
+        .transition().delay((d, i) => 300 + i * 90).duration(250).attr("r", 4);
+    }
+  });
+}
+
+/* ---------- 2) MOTEUR DE PROGRESSION (unifié, avec beats) ---------- */
+export async function mountDeck(rootSel, deckUrl) {
+  const deckRoot = document.querySelector(rootSel);
+  const deck = await fetch(deckUrl).then((r) => r.json());
+  document.title = deck.meta?.title || "StoryDeck";
+
+  const scenes = deck.scenes.map((s) => {
+    const r = renderers[s.type];
+    if (!r) { console.warn("type inconnu:", s.type); return renderers.text({ heading: "(type inconnu)", body: s.type }); }
+    return r(s);
+  });
+  scenes.forEach(({ el }) => deckRoot.appendChild(el));
+
+  let current = 0, isAnimating = false;
+
+  const dots = document.getElementById("dots");
+  scenes.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.setAttribute("aria-label", `Scène ${i + 1}`);
+    b.onclick = (e) => { e.stopPropagation(); goTo(i); };
+    dots.appendChild(b);
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+        setActive(scenes.findIndex((s) => s.el === entry.target));
+      }
+    });
+  }, { threshold: [0, 0.6, 1] });
+  scenes.forEach((s) => io.observe(s.el));
+
+  function setActive(idx) {
+    if (idx === current || idx < 0) return;
+    scenes[current]?.onExit?.();
+    scenes[current]?.el.classList.remove("is-active");
+    current = idx;
+    scenes[current].el.classList.add("is-active");
+    scenes[current].onEnter?.();
+    updateChrome();
+  }
+
+  function goTo(idx) {
+    idx = Math.max(0, Math.min(scenes.length - 1, idx));
+    isAnimating = true;
+    scenes[idx].el.scrollIntoView({ behavior: "smooth", block: "start" });
+    clearTimeout(goTo._t);
+    goTo._t = setTimeout(() => { isAnimating = false; setActive(idx); }, 700);
+  }
+  const next = () => goTo(current + 1);
+  const prev = () => goTo(current - 1);
+
+  function forward() {
+    const sc = scenes[current];
+    if (sc?.advance && sc.advance()) { updateChrome(); return; }
+    next();
+  }
+  function backward() {
+    const sc = scenes[current];
+    if (sc?.retreat && sc.retreat()) { updateChrome(); return; }
+    prev();
+  }
+
+  addEventListener("keydown", (e) => {
+    if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(e.key)) { e.preventDefault(); forward(); }
+    if (["ArrowLeft", "ArrowUp", "PageUp"].includes(e.key)) { e.preventDefault(); backward(); }
+  });
+  addEventListener("click", (e) => { if (!e.target.closest("#dots")) forward(); });
+
+  let wheelLock = false;
+  addEventListener("wheel", (e) => {
+    if (isAnimating || wheelLock) { e.preventDefault(); return; }
+    if (Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    wheelLock = true;
+    (e.deltaY > 0 ? forward : backward)();
+    setTimeout(() => { wheelLock = false; }, 750);
+  }, { passive: false });
+
+  function updateChrome() {
+    document.getElementById("progress").style.width = (current / (scenes.length - 1) * 100) + "%";
+    [...dots.children].forEach((d, i) => d.classList.toggle("active", i === current));
+  }
+
+  scenes[0].el.classList.add("is-active");
+  scenes[0].onEnter?.();
+  updateChrome();
+}

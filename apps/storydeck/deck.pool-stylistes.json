@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "title": "Le pool stylistes actives — 12 mois",
+    "source": "gold.core.active_stylist_monthly",
+    "generated": "2026-06-24",
+    "lang": "fr"
+  },
+  "scenes": [
+    {
+      "type": "title",
+      "title": "Le pool stylistes actives",
+      "subtitle": "Une histoire en douze mois — de juin 2025 à mai 2026.",
+      "media": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600"
+    },
+    {
+      "type": "text",
+      "heading": "La question",
+      "body": "Combien de stylistes vendent réellement chaque mois — et que raconte la forme de cette courbe sur un an ?"
+    },
+    {
+      "type": "stat",
+      "value": 9825,
+      "label": "stylistes actives en novembre 2025 — le pic de l'année",
+      "format": "integer"
+    },
+    {
+      "type": "chart",
+      "chart": "line",
+      "heading": "Le pool mois par mois",
+      "x": "label",
+      "y": "value",
+      "data": [
+        { "label": "Juin 25", "value": 8028 },
+        { "label": "Juil",   "value": 7377 },
+        { "label": "Août",   "value": 5163 },
+        { "label": "Sept",   "value": 6599 },
+        { "label": "Oct",    "value": 6905 },
+        { "label": "Nov",    "value": 9825 },
+        { "label": "Déc",    "value": 4034 },
+        { "label": "Jan 26", "value": 5298 },
+        { "label": "Fév",    "value": 3794 },
+        { "label": "Mars",   "value": 4310 },
+        { "label": "Avr",    "value": 4038 },
+        { "label": "Mai",    "value": 3866 }
+      ]
+    },
+    {
+      "type": "compare",
+      "heading": "La rupture de décembre",
+      "left":  { "label": "Novembre 2025", "value": 9825 },
+      "right": { "label": "Décembre 2025", "value": 4034 },
+      "caption": "−59 % en un mois. Le pic de novembre n'a pas tenu."
+    },
+    {
+      "type": "stat",
+      "value": 98.9,
+      "label": "% des stylistes actives font une vente répétée, pas une première activation",
+      "format": "percent"
+    },
+    {
+      "type": "title",
+      "title": "La croissance ne vient pas du recrutement",
+      "subtitle": "Moins de 200 nouvelles activations par mois : presque tout le pool est constitué de vendeuses déjà actives.",
+      "media": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600"
+    }
+  ]
+}
