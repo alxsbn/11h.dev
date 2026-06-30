@@ -44,6 +44,9 @@ for scene in deck.get("scenes", []):
     # poster d'embed (screenshot affiché avant la vidéo)
     if is_local(scene.get("poster")):
         scene["poster"] = inline_img(scene["poster"]); n_inlined += 1
+    # capture côté liste (list image)
+    if is_local(scene.get("image")):
+        scene["image"] = inline_img(scene["image"]); n_inlined += 1
     # coupures de presse (drops)
     for d in scene.get("drops", []) or []:
         if is_local(d.get("img")):

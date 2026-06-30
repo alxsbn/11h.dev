@@ -23,13 +23,19 @@ const renderers = {
   },
 
   // Liste qui s'empile (puces ▸ par défaut ; noBullet:true = sans puce)
+  // image:"..." optionnelle → capture affichée à droite de la liste (2 colonnes)
   list(s) {
     const el = sceneEl(s.media, s.bgVideo);
+    if (s.image) el.classList.add("scene--list-img");
     const cls = "stacklist" + (s.noBullet ? " stacklist--plain" : "");
-    el.querySelector(".scene__content").innerHTML = `
+    const listBlock = `
       ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
       <ul class="${cls}">${s.items.map((it) => `<li>${it}</li>`).join("")}</ul>
       ${s.caption ? `<p class="lead reveal">${s.caption}</p>` : ""}`;
+    el.querySelector(".scene__content").innerHTML = s.image
+      ? `<div class="list-split"><div class="list-split__text">${listBlock}</div>
+           <img class="list-split__img reveal" src="${s.image}" alt="" /></div>`
+      : listBlock;
     const lis = [...el.querySelectorAll(".stacklist li")];
     return {
       el,
@@ -314,10 +320,32 @@ const renderers = {
           `<span class="dual__key"><i style="background:${se.color}"></i>${se.name}</span>`).join("")}</div>
       </div>`;
     const svg = el.querySelector(".dual__svg");
+    const h2 = el.querySelector("h2");
+    // markerReveal:true → les markers ne s'affichent qu'au clic (2e temps), losange grossi
+    const deferMarkers = s.markerReveal && Array.isArray(s.markers) && s.markers.length;
+    let revealed = false;
     return {
       el,
-      onEnter() { drawDual(svg, s.x, s.series, s.markers); },
-      onExit()  { d3.select(svg).selectAll("*").remove(); }
+      onEnter() {
+        revealed = false;
+        if (h2 && s.heading) h2.textContent = s.heading;  // titre initial
+        drawDual(svg, s.x, s.series, deferMarkers ? [] : s.markers);
+      },
+      onExit() {
+        revealed = false; d3.select(svg).selectAll("*").remove();
+        if (h2 && s.heading) h2.textContent = s.heading;
+      },
+      advance() {
+        if (deferMarkers && !revealed) {
+          revealed = true;
+          // ajoute SEULEMENT le marqueur par-dessus (ne redessine pas le graphe), en emphase rouge
+          drawDualMarkers(svg, s.x, s.markers, true);
+          // au même clic : bascule le titre
+          if (h2 && s.headingReveal) h2.textContent = s.headingReveal;
+          return true;
+        }
+        return false;
+      }
     };
   },
 
@@ -325,13 +353,28 @@ const renderers = {
   stack(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--stack");
-    const tile = (id) => {
+    // paires replace {id → byId} : le remplaçant occupe le MÊME slot que le remplacé
+    const replaceBy = {};   // id remplacé -> id remplaçant
+    const replaces = new Set(); // ids qui sont des remplaçants
+    s.beats.forEach((b) => (b.actions || []).forEach((a) => {
+      if (a.op === "replace") { replaceBy[a.id] = a.byId; replaces.add(a.byId); }
+    }));
+    const tileFig = (id) => {
       const it = s.items.find((x) => x.id === id);
       return `<figure class="stk__tile" data-id="${it.id}">
         <img src="${it.img}" alt="${it.name}" /><figcaption>${it.name}</figcaption></figure>`;
     };
+    // un id avec remplaçant devient un "slot" contenant les 2 tuiles superposées
+    const tile = (id) => {
+      if (replaceBy[id]) {
+        return `<div class="stk__slot">${tileFig(id)}${tileFig(replaceBy[id])}</div>`;
+      }
+      return tileFig(id);
+    };
     const cols = s.columns.map((c) =>
-      `<div class="stk__col">${c.ids.map(tile).join("")}</div>`).join('<div class="stk__flow">→</div>');
+      // on saute les remplaçants : ils sont rendus dans le slot de leur remplacé
+      `<div class="stk__col">${c.ids.filter((id) => !replaces.has(id)).map(tile).join("")}</div>`
+    ).join('<div class="stk__flow">→</div>');
     el.querySelector(".scene__content").innerHTML = `
       <div class="stk__sub reveal"></div>
       <div class="stk__grid">${cols}</div>`;
@@ -365,12 +408,26 @@ const renderers = {
       });
       for (let b = 0; b <= target; b++) applyBeat(b);
     }
+    // upTo : snapshot figé jouant les beats 0..upTo à l'entrée (pas de clic interne).
+    // sans upTo : comportement classique à beats (clic = beat suivant).
+    const hasUpTo = Number.isInteger(s.upTo);
     return {
       el,
-      onEnter() { beat = 0; applyBeat(0); },
+      onEnter() {
+        if (hasUpTo) { clearTo(s.upTo); }   // affiche directement l'état voulu
+        else { beat = 0; applyBeat(0); }
+      },
       onExit()  { clearTo(-1); beat = 0; },
-      advance() { if (beat < s.beats.length - 1) { beat++; applyBeat(beat); return true; } return false; },
-      retreat() { if (beat > 0) { beat--; clearTo(beat); return true; } return false; }
+      advance() {
+        if (hasUpTo) return false;          // un snapshot ne consomme pas le clic
+        if (beat < s.beats.length - 1) { beat++; applyBeat(beat); return true; }
+        return false;
+      },
+      retreat() {
+        if (hasUpTo) return false;
+        if (beat > 0) { beat--; clearTo(beat); return true; }
+        return false;
+      }
     };
   }
 };
@@ -445,9 +502,16 @@ function drawLine(svg, data, highlight) {
   }
 }
 
-function drawDual(svg, labels, series, markers) {
+// marge commune (haut généreux pour loger le losange + label des markers)
+const DUAL_M = { t: 56, r: 54, b: 36, l: 54 };
+function dualX(svg, labels) {
+  const { W } = chartDims(svg);
+  return d3.scalePoint().domain(labels).range([DUAL_M.l, W - DUAL_M.r]).padding(0.5);
+}
+
+function drawDual(svg, labels, series, markers, emphasis) {
   const { W, H } = chartDims(svg);
-  const m = { t: 30, r: 54, b: 36, l: 54 };
+  const m = DUAL_M;
   const sel = d3.select(svg).attr("viewBox", `0 0 ${W} ${H}`);
   sel.selectAll("*").remove();
   const x = d3.scalePoint().domain(labels).range([m.l, W - m.r]).padding(0.5);
@@ -458,14 +522,7 @@ function drawDual(svg, labels, series, markers) {
   sel.append("g").attr("transform", `translate(0,${H - m.b})`)
     .call(d3.axisBottom(x).tickFormat((d, i) => (!keep || keep.has(i)) ? d : ""))
     .call((g) => g.selectAll(".tick line").remove());
-  (markers || []).forEach((mk) => {
-    const px = x(labels[mk.at]);
-    sel.append("line").attr("x1", px).attr("x2", px).attr("y1", m.t).attr("y2", H - m.b)
-      .attr("stroke", "#3a4150").attr("stroke-dasharray", "3 3");
-    sel.append("text").attr("x", px).attr("y", m.t - 8).attr("text-anchor", "middle")
-      .attr("fill", "var(--muted)").attr("font-size", "12px").attr("font-weight", "600")
-      .text(mk.label).attr("opacity", 0).transition().delay(1600).duration(400).attr("opacity", 1);
-  });
+  if (markers) drawDualMarkers(svg, labels, markers, emphasis);
   const bw = Math.min(54, (W - m.l - m.r) / labels.length * 0.5);
   series.forEach((se, si) => {
     const y = scales[si];
@@ -486,6 +543,32 @@ function drawDual(svg, labels, series, markers) {
         .attr("cx", (d, i) => x(labels[i])).attr("cy", (d) => y(d)).attr("r", 0).attr("fill", se.color)
         .transition().delay((d, i) => 300 + i * 90).duration(250).attr("r", 4);
     }
+  });
+}
+
+// Dessine UNIQUEMENT les marqueurs par-dessus le graphe existant (sans rien effacer/redessiner).
+function drawDualMarkers(svg, labels, markers, emphasis) {
+  const { H } = chartDims(svg);
+  const m = DUAL_M;
+  const sel = d3.select(svg);
+  const x = dualX(svg, labels);
+  (markers || []).forEach((mk) => {
+    const px = x(labels[mk.at]);
+    const dsz = emphasis ? 16 : 7;
+    const dy = m.t + 8; // centre du losange, sous le bord haut
+    const HOT = "#ff5d6c"; // var(--hot) ne se résout pas toujours dans un attr SVG → hex direct
+    const g = sel.append("g").attr("class", "dual-marker").attr("opacity", 0);
+    g.append("line").attr("x1", px).attr("x2", px).attr("y1", dy).attr("y2", H - m.b)
+      .attr("stroke", emphasis ? HOT : "#3a4150")
+      .attr("stroke-width", emphasis ? 3 : 1).attr("stroke-dasharray", "4 3");
+    g.append("path")
+      .attr("d", `M ${px} ${dy - dsz} L ${px + dsz} ${dy} L ${px} ${dy + dsz} L ${px - dsz} ${dy} Z`)
+      .attr("fill", emphasis ? HOT : "#3a4150");
+    g.append("text").attr("x", px).attr("y", dy - dsz - 10).attr("text-anchor", "middle")
+      .attr("fill", emphasis ? HOT : "var(--muted)")
+      .attr("font-size", emphasis ? "26px" : "12px").attr("font-weight", emphasis ? "800" : "600")
+      .text(mk.label);
+    g.transition().duration(450).attr("opacity", 1);
   });
 }
 

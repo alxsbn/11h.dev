@@ -396,7 +396,7 @@
     },
     {
       "type": "dualline",
-      "heading": "Faire plus avec moins.",
+      "heading": "Faire plus avec moins",
       "x": [
         "2022",
         "mai 23",
@@ -422,15 +422,31 @@
           "color": "#6ea8fe",
           "kind": "line",
           "values": [
+            2,
             3,
-            5,
-            10,
-            55,
-            150
+            6,
+            40,
+            400
           ]
         }
       ],
-      "markers": []
+      "markers": [
+        {
+          "at": 2,
+          "label": "Audit"
+        }
+      ],
+      "markerReveal": true,
+      "headingReveal": "Générer de la valeur"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Stack notée A — le problème n'était pas la techno",
+        "Le point noir : l'usage, l'analyse (« data team = support »)",
+        "Sortir du mode ticketing",
+        "D'un centre de coût à un centre de valeur"
+      ]
     },
     {
       "type": "stack",
@@ -488,7 +504,7 @@
       ],
       "beats": [
         {
-          "sub": "Notre stack — la <span class=\"hl\">Modern Data Stack</span>",
+          "sub": "",
           "actions": [
             {
               "op": "show",
@@ -512,20 +528,25 @@
             },
             {
               "op": "show",
-              "id": "census"
+              "id": "airflow"
             },
             {
               "op": "show",
               "id": "metabase"
-            },
-            {
-              "op": "show",
-              "id": "airflow"
             }
           ]
         },
         {
-          "sub": "L'arrivée des agents — <span class=\"hl--accent\">Claude Code</span> · juillet 2025",
+          "sub": "",
+          "actions": [
+            {
+              "op": "add",
+              "id": "census"
+            }
+          ]
+        },
+        {
+          "sub": "Juillet 2025 — Claude Code",
           "actions": [
             {
               "op": "add",
@@ -534,7 +555,7 @@
           ]
         },
         {
-          "sub": "On délègue l'ingestion — <span class=\"hl\">Fivetran</span> · sept. 2025 · 13 connecteurs",
+          "sub": "Septembre 2025 — Fivetran remplace Airbyte",
           "actions": [
             {
               "op": "replace",
@@ -544,17 +565,12 @@
           ]
         },
         {
-          "sub": "Census devient Fivetran · le BI glisse vers les agents",
+          "sub": "Février 2026 — Census migre vers Fivetran",
           "actions": [
             {
               "op": "morph",
               "id": "census",
               "into": "fivetran"
-            },
-            {
-              "op": "absorb",
-              "id": "metabase",
-              "underId": "claude"
             }
           ]
         }
@@ -590,85 +606,404 @@
             "claude"
           ]
         }
+      ],
+      "upTo": 0
+    },
+    {
+      "type": "stack",
+      "items": [
+        {
+          "id": "rds",
+          "name": "RDS Aurora",
+          "img": "assets/stack/tiles/rds.png"
+        },
+        {
+          "id": "dms",
+          "name": "AWS DMS",
+          "img": "assets/stack/tiles/dms.png"
+        },
+        {
+          "id": "databricks",
+          "name": "Databricks",
+          "img": "assets/stack/tiles/databricks.png"
+        },
+        {
+          "id": "dbt",
+          "name": "dbt",
+          "img": "assets/stack/tiles/dbt.png"
+        },
+        {
+          "id": "census",
+          "name": "Census",
+          "img": "assets/stack/tiles/census.png"
+        },
+        {
+          "id": "metabase",
+          "name": "Metabase",
+          "img": "assets/stack/tiles/metabase.png"
+        },
+        {
+          "id": "airbyte",
+          "name": "Airbyte",
+          "img": "assets/stack/tiles/airbyte.png"
+        },
+        {
+          "id": "fivetran",
+          "name": "Fivetran",
+          "img": "assets/stack/tiles/fivetran.png"
+        },
+        {
+          "id": "claude",
+          "name": "Claude Code",
+          "img": "assets/stack/tiles/claude.png"
+        },
+        {
+          "id": "airflow",
+          "name": "Airflow",
+          "img": "assets/stack/tiles/airflow.png"
+        }
+      ],
+      "beats": [
+        {
+          "sub": "",
+          "actions": [
+            {
+              "op": "show",
+              "id": "rds"
+            },
+            {
+              "op": "show",
+              "id": "dms"
+            },
+            {
+              "op": "show",
+              "id": "airbyte"
+            },
+            {
+              "op": "show",
+              "id": "databricks"
+            },
+            {
+              "op": "show",
+              "id": "dbt"
+            },
+            {
+              "op": "show",
+              "id": "airflow"
+            },
+            {
+              "op": "show",
+              "id": "metabase"
+            }
+          ]
+        },
+        {
+          "sub": "",
+          "actions": [
+            {
+              "op": "add",
+              "id": "census"
+            }
+          ]
+        },
+        {
+          "sub": "Juillet 2025 — Claude Code",
+          "actions": [
+            {
+              "op": "add",
+              "id": "claude"
+            }
+          ]
+        },
+        {
+          "sub": "Septembre 2025 — Fivetran remplace Airbyte",
+          "actions": [
+            {
+              "op": "replace",
+              "id": "airbyte",
+              "byId": "fivetran"
+            }
+          ]
+        },
+        {
+          "sub": "Février 2026 — Census migre vers Fivetran",
+          "actions": [
+            {
+              "op": "morph",
+              "id": "census",
+              "into": "fivetran"
+            }
+          ]
+        }
+      ],
+      "columns": [
+        {
+          "ids": [
+            "rds",
+            "dms"
+          ]
+        },
+        {
+          "ids": [
+            "airbyte",
+            "fivetran"
+          ]
+        },
+        {
+          "ids": [
+            "databricks",
+            "dbt",
+            "airflow"
+          ]
+        },
+        {
+          "ids": [
+            "census",
+            "metabase"
+          ]
+        },
+        {
+          "ids": [
+            "claude"
+          ]
+        }
+      ],
+      "upTo": 1
+    },
+    {
+      "type": "list",
+      "heading": "Census, c'était quoi",
+      "items": [
+        "Un modèle de prix lisible — ~200 €/mois, quota généreux",
+        "Pas d'open-source viable en reverse ETL",
+        "(Grouparoo racheté par Airbyte en avril 2022, intégration lente)",
+        "On scriptait tout nous-mêmes (Python + HubSpot)",
+        "Abandonné à la bascule vers Klaviyo"
       ]
     },
     {
-      "type": "grid",
-      "heading": "La décision qu'on connaît tous",
-      "cells": [
+      "type": "list",
+      "heading": "La maintenance d'un connecteur",
+      "items": [
+        "Rate limiting",
+        "Pagination & curseurs",
+        "Schema drift",
+        "Données incrémentales",
+        "Auth / secret rotation",
+        "Orchestration",
+        "Support"
+      ],
+      "subtitle": "En entrée comme en sortie : le même problème."
+    },
+    {
+      "type": "list",
+      "heading": "Avant : l'intégration Airbyte",
+      "items": [
+        "Airbyte poussait en Parquet sur S3",
+        "Pas de push direct Airbyte → Databricks à l'époque",
+        "Puis Spark Structured Streaming + Databricks Auto Loader",
+        "Toute la chaîne d'ingestion à maintenir nous-mêmes"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "La team rétrécit — il faut trancher",
+      "items": [
+        "Des connecteurs Fivetran qu'on gérait nous-mêmes",
+        "Contribution à des connecteurs communautaires (sans SLA)",
+        "Option A : full agentique (Airbyte / dlt Hub)",
+        "Option B : déléguer à du managé (Fivetran)"
+      ]
+    },
+    {
+      "type": "stack",
+      "items": [
         {
-          "title": "BUILD",
-          "sub": "je le construis"
+          "id": "rds",
+          "name": "RDS Aurora",
+          "img": "assets/stack/tiles/rds.png"
         },
         {
-          "title": "BUY",
-          "sub": "je l'achète"
+          "id": "dms",
+          "name": "AWS DMS",
+          "img": "assets/stack/tiles/dms.png"
         },
         {
-          "title": "AGENTIC",
-          "sub": "je le fais piloter par un agent",
-          "accent": true
+          "id": "databricks",
+          "name": "Databricks",
+          "img": "assets/stack/tiles/databricks.png"
+        },
+        {
+          "id": "dbt",
+          "name": "dbt",
+          "img": "assets/stack/tiles/dbt.png"
+        },
+        {
+          "id": "census",
+          "name": "Census",
+          "img": "assets/stack/tiles/census.png"
+        },
+        {
+          "id": "metabase",
+          "name": "Metabase",
+          "img": "assets/stack/tiles/metabase.png"
+        },
+        {
+          "id": "airbyte",
+          "name": "Airbyte",
+          "img": "assets/stack/tiles/airbyte.png"
+        },
+        {
+          "id": "fivetran",
+          "name": "Fivetran",
+          "img": "assets/stack/tiles/fivetran.png"
+        },
+        {
+          "id": "claude",
+          "name": "Claude Code",
+          "img": "assets/stack/tiles/claude.png"
+        },
+        {
+          "id": "airflow",
+          "name": "Airflow",
+          "img": "assets/stack/tiles/airflow.png"
         }
       ],
-      "caption": "En 2026, une 3ᵉ branche. Elle ne complète pas le menu — elle déplace la question."
+      "beats": [
+        {
+          "sub": "",
+          "actions": [
+            {
+              "op": "show",
+              "id": "rds"
+            },
+            {
+              "op": "show",
+              "id": "dms"
+            },
+            {
+              "op": "show",
+              "id": "airbyte"
+            },
+            {
+              "op": "show",
+              "id": "databricks"
+            },
+            {
+              "op": "show",
+              "id": "dbt"
+            },
+            {
+              "op": "show",
+              "id": "airflow"
+            },
+            {
+              "op": "show",
+              "id": "metabase"
+            }
+          ]
+        },
+        {
+          "sub": "",
+          "actions": [
+            {
+              "op": "add",
+              "id": "census"
+            }
+          ]
+        },
+        {
+          "sub": "Juillet 2025 — Claude Code",
+          "actions": [
+            {
+              "op": "add",
+              "id": "claude"
+            }
+          ]
+        },
+        {
+          "sub": "Septembre 2025 — Fivetran remplace Airbyte",
+          "actions": [
+            {
+              "op": "replace",
+              "id": "airbyte",
+              "byId": "fivetran"
+            }
+          ]
+        },
+        {
+          "sub": "Février 2026 — Census migre vers Fivetran",
+          "actions": [
+            {
+              "op": "morph",
+              "id": "census",
+              "into": "fivetran"
+            }
+          ]
+        }
+      ],
+      "columns": [
+        {
+          "ids": [
+            "rds",
+            "dms"
+          ]
+        },
+        {
+          "ids": [
+            "airbyte",
+            "fivetran"
+          ]
+        },
+        {
+          "ids": [
+            "databricks",
+            "dbt",
+            "airflow"
+          ]
+        },
+        {
+          "ids": [
+            "census",
+            "metabase"
+          ]
+        },
+        {
+          "ids": [
+            "claude"
+          ]
+        }
+      ],
+      "upTo": 4
     },
     {
       "type": "quote",
-      "text": "L'IA n'a pas reconstruit le monde. Elle a effondré le coût de construire.",
-      "cite": "Donc la vraie question : qu'est-ce qu'on achète vraiment ?"
-    },
-    {
-      "type": "compare",
-      "heading": "L'angle mort : le run",
-      "left": {
-        "label": "BUILD (construire)",
-        "value": 20
-      },
-      "right": {
-        "label": "RUN (faire tourner)",
-        "value": 80
-      },
-      "caption": "Sur le cycle de vie d'un logiciel, le run pèse 75-85 %. L'IA effondre le build — pas le run."
+      "text": "Le mot qui vient : <span class=\"hl--accent\">robuste</span>.",
+      "cite": "Mon REX sur Fivetran — honnête, pas un publireportage."
     },
     {
       "type": "list",
-      "heading": "Les 3 craintes du marché",
+      "heading": "Ce qui marche",
       "items": [
-        "Les agents IA remplacent les applications",
-        "Le pricing par siège devient obsolète",
-        "Le vibe coding recode n'importe quel SaaS"
+        "Facilité d'usage · natif Databricks · 700+ connecteurs",
+        "Schema drift géré tout seul (colle à Autoloader)",
+        "Robuste — on dort sur nos deux oreilles",
+        "Observabilité : alertes + tous les logs",
+        "ERD + doc par connecteur — idéal pour un agent",
+        "Serveur MCP officiel (~150 opérations)"
       ],
-      "caption": "Toutes visent le build. Aucune ne touche ce qu'on achète vraiment."
-    },
-    {
-      "type": "title",
-      "title": "On n'a plus le luxe de maintenir Airbyte",
-      "subtitle": "Les connecteurs communautaires cassent, les API changent — et on n'a plus le temps.",
-      "media": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600"
+      "image": "assets/img/fivetran-erd.png"
     },
     {
       "type": "list",
-      "heading": "Sous le capot d'« un simple connecteur »",
+      "heading": "Le levier des 14 jours gratuits",
       "items": [
-        "Rate limiting — backoff, 429, ne pas perdre l'état",
-        "Pagination & curseurs — crash page 47 = repartir de 0 ?",
-        "Schema drift — un champ ajouté, la table explose",
-        "Incremental — updated_at pas fiable, deletes ratés",
-        "Auth rotation — clés dépréciées = pipeline cassé",
-        "Orchestration — où ? quand ? qui t'alerte ?"
+        "Pas un essai — un outil de méthode",
+        "Un projet pointe → on ingère tout de suite (gratuit)",
+        "Un agent cerne la data utile pendant le run",
+        "« La cloche démarre — bouclé dans 14 jours »"
       ],
-      "caption": "Un agent t'écrit le premier jet. Le maintenir vert quand 6 API évoluent, c'est le run — et le run ne se génère pas."
-    },
-    {
-      "type": "quote",
-      "text": "Le critère tient en une phrase : dormir sur ses deux oreilles.",
-      "cite": "Ingestion = critique → managé (Fivetran). Transfo = rejouable → automatisée (agents)."
-    },
-    {
-      "type": "stat",
-      "value": 13,
-      "label": "connecteurs Fivetran aujourd'hui — bascule en octobre 2025",
-      "format": "integer"
+      "image": "assets/img/fivetran-14days.png"
     },
     {
       "type": "compare",
@@ -682,6 +1017,21 @@
         "value": 600
       },
       "caption": "Même produit, migration sans downtime. On délègue un outil avec son modèle économique — qui peut bouger sous nos pieds."
+    },
+    {
+      "type": "list",
+      "heading": "Ce qui pique",
+      "items": [
+        "Facturation au MAR — la facture grimpe vite",
+        "Durcissement janv. 2026 (les deletes comptent)",
+        "Friction facturation AWS marketplace (DoiT)",
+        "Refresh 1 min gated — non-bloquant pour nous"
+      ]
+    },
+    {
+      "type": "quote",
+      "text": "Oui — mais c'est un <span class=\"hl\">parti pris assumé</span>.",
+      "cite": "On pourrait recruter un data engineer et tout refaire. On choisit de ne pas le faire."
     },
     {
       "type": "table",

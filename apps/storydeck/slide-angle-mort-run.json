@@ -1,0 +1,13 @@
+{
+  "type": "compare",
+  "heading": "L'angle mort : le run",
+  "left": {
+    "label": "BUILD (construire)",
+    "value": 20
+  },
+  "right": {
+    "label": "RUN (faire tourner)",
+    "value": 80
+  },
+  "caption": "Sur le cycle de vie d'un logiciel, le run pèse 75-85 %. L'IA effondre le build — pas le run."
+}
