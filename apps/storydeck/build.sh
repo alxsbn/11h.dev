@@ -30,7 +30,8 @@ def inline_img(path):
     if not p.exists():
         raise SystemExit(f"build.sh: image manquante {path} — lance d'abord node scripts/capture-press.mjs")
     b64 = base64.b64encode(p.read_bytes()).decode()
-    return f"data:image/png;base64,{b64}"
+    mime = "image/jpeg" if p.suffix.lower() in (".jpg", ".jpeg") else "image/png"
+    return f"data:{mime};base64,{b64}"
 
 # N'inline que les chemins locaux (assets/...). Les URLs http(s) restent telles quelles.
 def is_local(v):

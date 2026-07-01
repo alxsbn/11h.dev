@@ -8,7 +8,7 @@
 <style>
   :root {
     --bg: #0b0d12; --fg: #f4f5f7; --muted: #9aa3b2; --accent: #6ea8fe;
-    --hot: #ff5d6c; --ok: #4ade80; --warn: #fbbf24;
+    --hot: #ff2d55; --ok: #4ade80; --warn: #fbbf24;
     --scene-pad: clamp(1.5rem, 5vw, 6rem);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,6 +37,7 @@
 
   h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -.02em; }
   h2 { font-size: clamp(1.6rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.01em; margin-bottom: .6em; }
+  .scene--bigtext h2 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.1; }
   p.lead { font-size: clamp(1.1rem, 2.2vw, 1.5rem); color: var(--muted); margin-top: 1em; }
   /* slide data team : titre blanc plus grand */
   .scene--dual h2 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.8rem); }
@@ -124,18 +125,38 @@
   .dual__key { display: flex; align-items: center; gap: .5em; color: #e7eaf0; font-weight: 600; }
   .dual__key i { width: 22px; height: 4px; border-radius: 2px; display: inline-block; }
 
+  /* bars2 — deux barres horizontales segmentées comparées (Avant / Aujourd'hui) */
+  .scene--bars2 .scene__content { max-width: none; width: 100%; }
+  .b2 { display: flex; flex-direction: column; gap: clamp(1.5rem, 4vh, 3rem); margin-top: 1.5rem; }
+  .b2__row { display: flex; align-items: center; gap: 1.2rem; }
+  .b2__label { flex: 0 0 clamp(120px, 14vw, 190px); font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    font-weight: 800; color: #fff; text-align: right; }
+  .b2__track { flex: 1; display: flex; height: clamp(56px, 9vh, 92px); border-radius: 12px; overflow: hidden;
+    background: #141a26; }
+  .b2__seg { width: 0; background: var(--c); display: flex; align-items: center; justify-content: center;
+    overflow: hidden; white-space: nowrap; transition: width .7s cubic-bezier(.34,1.1,.5,1);
+    border-right: 2px solid #0b0d12; }
+  .b2__seg.on { width: var(--pct); }
+  .b2__seg span { font-size: clamp(.8rem, 1.5vw, 1.1rem); font-weight: 700; color: #0b0d12; opacity: 0;
+    transition: opacity .4s ease .3s; padding: 0 .4em; }
+  .b2__seg.on span { opacity: 1; }
+  .b2__cap { text-align: center; margin-top: 1.5rem; }
+
   /* stack — logos en grille par couches, grands, SANS cadre, sur fond sombre */
-  .scene--stack { justify-content: center; }
+  .scene--stack { justify-content: center; align-items: center; }
+  .scene--stack .scene__content { max-width: none; width: 100%; }
   .scene--stack .stk__sub { color: var(--muted); font-size: clamp(1.1rem, 2.2vw, 1.6rem);
     min-height: 1.6em; margin-bottom: 1.5rem; text-align: center; }
   .scene--stack .stk__sub .hl { color:#fff; font-weight:800; }
   .scene--stack .stk__sub .hl--accent { color:var(--accent); font-weight:800; }
   .stk__grid { display: flex; align-items: flex-start; justify-content: center;
-    gap: clamp(1rem, 3vw, 3rem); width: 100%; }
-  .stk__col { display: flex; flex-direction: column; gap: clamp(1.5rem, 3vh, 3rem);
-    align-items: center; justify-content: flex-start; flex: 1 1 0; }
+    gap: clamp(.6rem, 1.4vw, 1.6rem); width: 100%; max-width: 1200px; margin: 0 auto; flex-wrap: nowrap; }
+  .stk__col { display: flex; flex-direction: column; gap: clamp(1.2rem, 2.4vh, 2.4rem);
+    align-items: center; justify-content: flex-start; flex: 0 1 auto; }
   .stk__flow { color: #3a4150; font-size: clamp(1.5rem, 3vw, 2.6rem); align-self: center; }
-  .stk__tile { position: relative; display: flex; flex-direction: column; align-items: center; gap: .6em;
+  /* largeur de tuile FIXE → un logo plus étroit/large ne fait pas bouger la colonne */
+  .stk__tile { position: relative; width: clamp(120px, 15vw, 190px); box-sizing: border-box;
+    display: flex; flex-direction: column; align-items: center; gap: .6em;
     opacity: 0; transform: translateY(20px) scale(.85);
     transition: opacity .5s ease, transform .55s cubic-bezier(.34,1.4,.5,1); }
   .stk__tile.on { opacity: 1; transform: none; }
@@ -150,7 +171,8 @@
   /* remplacé : disparaît (fade out, pas de croix) */
   .stk__tile.stk__gone { opacity: 0; transform: scale(.6); pointer-events: none; }
   /* remplaçant : léger halo d'accent */
-  .stk__tile.stk__repl img { filter: drop-shadow(0 0 14px rgba(110,168,254,.7)); }
+  /* remplaçant : même rendu que les autres logos (pas de halo bleu) */
+  .stk__tile.stk__repl img { filter: drop-shadow(0 6px 16px rgba(0,0,0,.5)); }
   /* absorbé : rétréci et glissé sous l'hôte (subtil, sans légende) */
   .stk__tile.stk__absorbed { transform: translateY(46px) scale(.42); opacity: .55; z-index: 0; }
   .stk__tile.stk__absorbed figcaption { display: none; }
@@ -199,7 +221,7 @@
   .stacklist li { font-size: clamp(1.1rem, 2.4vw, 1.7rem); padding: .5em 0 .5em 1.4em; position: relative;
     opacity: 0; transform: translateX(-16px); transition: all .5s ease; }
   .stacklist li.on { opacity: 1; transform: none; }
-  .stacklist li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  .stacklist li::before { content: none; }
   /* variante sans puce : items plus grands, alignés à gauche, sur photo de fond */
   .stacklist--plain li { padding-left: 0; font-size: clamp(1.6rem, 4vw, 3rem); font-weight: 800;
     color: #fff; text-shadow: 0 2px 16px rgba(0,0,0,.8); line-height: 1.5; }
@@ -210,9 +232,110 @@
   /* liste + capture côte à côte */
   .scene--list-img .scene__content { max-width: none; width: 100%; }
   .list-split { display: flex; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
-  .list-split__text { flex: 1 1 42%; min-width: 0; }
-  .list-split__img { flex: 1 1 58%; max-width: 58%; height: auto; border-radius: 12px;
-    box-shadow: 0 18px 50px rgba(0,0,0,.55); border: 1px solid #2a3140; }
+  .list-split__text { flex: 1 1 60%; min-width: 0; }
+  .list-split__img { flex: 0 0 42%; max-width: 42%; max-height: 62vh; width: auto; height: auto; object-fit: contain;
+    border-radius: 12px; box-shadow: 0 18px 50px rgba(0,0,0,.55); border: 1px solid #2a3140; }
+  .list-split__img--bare { border: none; box-shadow: none; background: transparent; }
+  /* brique Lego animée : se cale à l'entrée puis flotte doucement en boucle */
+  .scene.is-active .list-split__img--float {
+    animation: brick-settle .9s cubic-bezier(.34,1.4,.5,1) both, brick-float 4s ease-in-out 1s infinite; }
+  @keyframes brick-settle {
+    0%   { opacity: 0; transform: translateY(-40px) rotate(-4deg) scale(.94); }
+    100% { opacity: 1; transform: translateY(0) rotate(0) scale(1); } }
+  @keyframes brick-float {
+    0%,100% { transform: translateY(0) rotate(0); }
+    50%     { transform: translateY(-10px) rotate(1.2deg); } }
+
+
+  /* versus — logos alignés avec « VS » entre eux */
+  .scene--versus .scene__content { max-width: none; width: 100%; }
+  .scene--versus .decis { flex: none; margin-top: clamp(2rem, 5vh, 3.5rem); }
+  .vs { display: flex; align-items: center; justify-content: center; gap: clamp(1rem, 3vw, 2.5rem); margin-top: 1rem; }
+  .vs__item { display: flex; flex-direction: column; align-items: center; gap: .8em;
+    opacity: 0; transform: translateY(20px) scale(.9); transition: opacity .5s ease, transform .5s cubic-bezier(.34,1.4,.5,1); }
+  .vs__item.on { opacity: 1; transform: none; }
+  .vs__item img { height: clamp(46px, 6vw, 88px); max-width: clamp(120px, 16vw, 220px); width: auto; object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,.5)); }
+  .vs__item figcaption { font-size: clamp(1rem, 2vw, 1.4rem); font-weight: 700; color: #e7eaf0; }
+  .vs__sep { font-size: clamp(1.4rem, 3.5vw, 2.6rem); font-weight: 900; color: #fff;
+    opacity: 0; transform: scale(.5); transition: opacity .4s ease, transform .4s cubic-bezier(.34,1.6,.5,1); }
+  .vs__sep.on { opacity: 1; transform: none; }
+
+  /* tricol — 3 colonnes titrées révélées au clic (Build or Buy) */
+  .scene--tricol .scene__content { max-width: none; width: 100%; }
+  .scene--tricol .scene__overlay { background:
+    linear-gradient(180deg, rgba(11,13,18,.82), rgba(11,13,18,.9)); }
+  .tri { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(.7rem, 1.6vw, 1.4rem); margin-top: .6rem; }
+  .tri__col { padding: clamp(1.2rem, 2.2vw, 2rem); border-radius: 16px;
+    border: 1px solid #2a3140; background: rgba(20,26,38,.75);
+    opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+  .tri__col.on { opacity: 1; transform: none; }
+  .tri__title { font-size: clamp(1.3rem, 2.6vw, 2rem); font-weight: 800; color: #fff; margin-bottom: .7em; }
+  .tri__col[data-accent="build"] { border-color: var(--hot); }
+  .tri__col[data-accent="build"] .tri__title { color: var(--hot); }
+  .tri__col[data-accent="buy"] { border-color: var(--accent); }
+  .tri__col[data-accent="buy"] .tri__title { color: var(--accent); }
+  .tri__list { list-style: none; display: flex; flex-direction: column; gap: .7em; }
+  .tri__list li { font-size: clamp(1.1rem, 2.1vw, 1.6rem); line-height: 1.35; color: #e7eaf0; padding-left: 1.1em; position: relative;
+    opacity: 0; transform: translateX(-10px); transition: opacity .4s ease, transform .4s ease; }
+  .tri__list li.on { opacity: 1; transform: none; }
+  .tri__list li::before { content: "·"; position: absolute; left: .2em; color: var(--muted); font-weight: 900; }
+  /* items avec marque (check vert / croix rouge / robot) */
+  .tri__list--marked li { padding-left: 0; display: flex; align-items: flex-start; gap: .5em; }
+  .tri__list--marked li::before { content: none; }
+  .tri__mark { flex: 0 0 auto; font-weight: 900; }
+  .tri__list li[data-mark="ok"] .tri__mark { color: var(--ok); }
+  .tri__list li[data-mark="ko"] .tri__mark { color: var(--hot); }
+  .tri__list li[data-mark="ko"] { color: var(--muted); }
+
+  /* slide liste + compare : liste à gauche, compare vertical à droite (révélé au dernier clic) */
+  .scene--list-cmp .scene__content { max-width: none; width: 100%; }
+  .list-cmp { flex: 0 0 34%; display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+  .list-cmp.on { opacity: 1; transform: none; }
+  .list-cmp__col { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
+  .list-cmp__arrow { font-size: clamp(2rem, 5vw, 3.5rem); color: var(--muted); line-height: 1; }
+  .list-cmp__title { font-size: clamp(1rem, 2vw, 1.4rem); font-weight: 700; color: #e7eaf0; }
+  .list-cmp__row { display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.5rem); }
+  .list-cmp__val { font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; color: var(--accent);
+    font-variant-numeric: tabular-nums; line-height: 1; }
+  .list-cmp__val--hot { color: var(--hot); }
+  .list-cmp__lbl { font-size: clamp(.85rem, 1.6vw, 1.05rem); color: var(--muted); text-align: center; margin-top: .4em; }
+  .list-cmp__arrow { font-size: clamp(2rem, 5vw, 3.5rem); color: var(--muted); }
+
+  /* 2 briques Lego : base + brique qui tombe de très haut et s'emboîte (pas de contour) */
+  .bricks { flex: 0 0 40%; max-width: 40%; position: relative; height: clamp(240px, 38vh, 380px); align-self: center; }
+  .bricks__base, .bricks__top { position: absolute; left: 50%; width: clamp(180px, 22vw, 280px);
+    height: auto; filter: drop-shadow(0 12px 22px rgba(0,0,0,.5)); }
+  .bricks__base { bottom: 6%; transform: translateX(-50%); z-index: 1; }
+  /* brique du dessus : démarre très haut, tombe et s'EMBOÎTE (tenons du dessous sur le dessus de la base) */
+  .bricks__top { bottom: 6%; z-index: 2; opacity: 0;
+    transform: translate(-50%, -220%); }
+  .scene.is-active .bricks__top.on { opacity: 1;
+    transform: translate(-50%, -72%);
+    transition: transform .75s cubic-bezier(.45,.05,.35,1.2), opacity .2s ease; }
+
+  /* bloc décision « Build vs Buy » → au clic Build barré + patch « Agentic ? » */
+  .scene--decision .list-split { align-items: center; }
+  .decis { flex: 1 1 55%; position: relative; display: flex; align-items: center; justify-content: center;
+    gap: clamp(.6rem, 1.5vw, 1.4rem); font-weight: 800; }
+  .decis__opt { font-size: clamp(2rem, 5vw, 4rem); color: #fff; position: relative; transition: opacity .4s ease; }
+  .decis__vs { font-size: clamp(1.1rem, 2.5vw, 1.8rem); color: var(--muted); }
+  /* trait qui barre "Build" */
+  .decis__build::after { content: ""; position: absolute; left: -6%; right: -6%; top: 50%; height: 5px;
+    background: var(--hot); border-radius: 3px; transform: scaleX(0); transform-origin: left;
+    transition: transform .45s cubic-bezier(.5,.1,.3,1); }
+  .decis.is-struck .decis__build { opacity: .5; }
+  .decis.is-struck .decis__build::after { transform: scaleX(1); }
+  /* patch "Agentic !" atterrit PAR-DESSUS "Build" (enfant de .decis__build, centré dessus) */
+  .decis__patch { position: absolute; left: 50%; top: 50%;
+    padding: .2em .7em; border-radius: 10px; background: var(--hot); color: #0b0d12;
+    font-size: clamp(1.1rem, 2.6vw, 2rem); font-weight: 900; white-space: nowrap;
+    box-shadow: 0 12px 30px rgba(0,0,0,.5);
+    opacity: 0; transform: translate(-50%, -180%) rotate(-16deg) scale(1.4); pointer-events: none; }
+  .decis.is-struck .decis__patch { opacity: 1;
+    transform: translate(-50%, -50%) rotate(-9deg) scale(1);
+    transition: opacity .25s ease, transform .5s cubic-bezier(.34,1.5,.5,1); }
 
   /* table verdict */
   .verdict { border-collapse: collapse; margin-top: .6em; font-size: clamp(.8rem, 1.6vw, 1.05rem); width: min(900px, 92vw); }

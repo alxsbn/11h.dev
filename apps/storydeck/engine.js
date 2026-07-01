@@ -23,24 +23,152 @@ const renderers = {
   },
 
   // Liste qui s'empile (puces ▸ par défaut ; noBullet:true = sans puce)
-  // image:"..." optionnelle → capture affichée à droite de la liste (2 colonnes)
+  // image:"..." → capture à droite (2 colonnes). decision:true → bloc « Build vs Buy » à droite,
+  //   au clic « Build » est barré + patch « Agentic ? » en travers.
   list(s) {
     const el = sceneEl(s.media, s.bgVideo);
     if (s.image) el.classList.add("scene--list-img");
+    if (s.decision) el.classList.add("scene--list-img", "scene--decision");
     const cls = "stacklist" + (s.noBullet ? " stacklist--plain" : "");
     const listBlock = `
       ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
       <ul class="${cls}">${s.items.map((it) => `<li>${it}</li>`).join("")}</ul>
       ${s.caption ? `<p class="lead reveal">${s.caption}</p>` : ""}`;
-    el.querySelector(".scene__content").innerHTML = s.image
-      ? `<div class="list-split"><div class="list-split__text">${listBlock}</div>
-           <img class="list-split__img reveal" src="${s.image}" alt="" /></div>`
+    const decisionBlock = `
+      <div class="decis reveal">
+        <span class="decis__opt decis__build">Build</span>
+        <span class="decis__vs">vs</span>
+        <span class="decis__opt">Buy</span>
+        <span class="decis__patch">Agentic !</span>
+      </div>`;
+    // bloc "2 briques Lego" : base + brique qui tombe de très haut et s'emboîte
+    const bricksBlock = `
+      <div class="bricks reveal">
+        <img class="bricks__top" src="assets/img/lego-blue-brick.png" alt="" />
+        <img class="bricks__base" src="assets/img/lego-brick.png" alt="" />
+      </div>`;
+    // bloc compare VERTICAL (200 au-dessus, flèche ↓, 600 en dessous) — dans la colonne droite
+    const cmpBlock = s.compare ? `
+      <div class="list-cmp reveal">
+        ${s.compare.title ? `<div class="list-cmp__title">${s.compare.title}</div>` : ""}
+        <div class="list-cmp__col">
+          <div class="list-cmp__side"><div class="list-cmp__val" data-target="${s.compare.left.value}">0</div><div class="list-cmp__lbl">${s.compare.left.label}</div></div>
+          <div class="list-cmp__arrow">↓</div>
+          <div class="list-cmp__side"><div class="list-cmp__val list-cmp__val--hot" data-target="${s.compare.right.value}">0</div><div class="list-cmp__lbl">${s.compare.right.label}</div></div>
+        </div>
+      </div>` : "";
+    const rightBlock = s.decision ? decisionBlock
+      : s.bricks ? bricksBlock
+      : s.compare ? cmpBlock
+      : (s.image ? `<img class="list-split__img reveal${s.imageBare ? " list-split__img--bare" : ""}${s.imageFloat ? " list-split__img--float" : ""}" src="${s.image}" alt="" />` : "");
+    const bodyHtml = rightBlock
+      ? `<div class="list-split"><div class="list-split__text">${listBlock}</div>${rightBlock}</div>`
       : listBlock;
+    el.querySelector(".scene__content").innerHTML = bodyHtml;
+    if (s.compare) el.classList.add("scene--list-cmp");
     const lis = [...el.querySelectorAll(".stacklist li")];
+    const cmpEl = el.querySelector(".list-cmp");
+    let shown = 0, struck = false, cmpDone = false;
     return {
       el,
-      onEnter() { lis.forEach((li, i) => setTimeout(() => li.classList.add("on"), 200 + i * 280)); },
-      onExit()  { lis.forEach((li) => li.classList.remove("on")); }
+      onEnter() {
+        lis.forEach((li) => li.classList.remove("on"));
+        shown = 1; lis[0]?.classList.add("on");   // 1re puce visible à l'entrée
+        struck = false; cmpDone = false;
+        el.querySelector(".decis")?.classList.remove("is-struck");
+        cmpEl?.classList.remove("on");            // compare caché au départ
+        const top = el.querySelector(".bricks__top");
+        if (top) { top.classList.remove("on"); setTimeout(() => top.classList.add("on"), 500); }
+      },
+      onExit()  {
+        lis.forEach((li) => li.classList.remove("on"));
+        shown = 0; struck = false; cmpDone = false;
+        el.querySelector(".decis")?.classList.remove("is-struck");
+        cmpEl?.classList.remove("on");
+      },
+      advance() {
+        // 1) révèle les puces une par une au clic
+        if (shown < lis.length) { lis[shown].classList.add("on"); shown++; return true; }
+        // 2) beat décision (Build barré + patch Agentic)
+        if (s.decision && !struck) { struck = true; el.querySelector(".decis")?.classList.add("is-struck"); return true; }
+        // 3) EN DERNIER : révèle le compare + anime les compteurs
+        if (s.compare && !cmpDone) {
+          cmpDone = true; cmpEl?.classList.add("on");
+          el.querySelectorAll(".list-cmp__val").forEach((node) => {
+            const it = d3.interpolateNumber(0, +node.dataset.target);
+            d3.select(node).transition().duration(1100).ease(d3.easeCubicOut)
+              .tween("c", () => (t) => { node.textContent = fmt.integer(it(t)); });
+          });
+          return true;
+        }
+        return false;
+      }
+    };
+  },
+
+  // Versus — N logos alignés avec « VS » entre eux, apparaissent l'un après l'autre.
+  // `items` = [{ img, name }]. decision:true → bloc « Build vs Buy » sous les logos,
+  //   au dernier clic « Build » barré + patch « Agentic ! » par-dessus Build.
+  versus(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--versus");
+    const cells = s.items.map((it) =>
+      `<figure class="vs__item"><img src="${it.img}" alt="${it.name}" /><figcaption>${it.name}</figcaption></figure>`);
+    const decisionBlock = `
+      <div class="decis reveal">
+        <span class="decis__opt decis__build">Build<span class="decis__patch">Agentic !</span></span>
+        <span class="decis__vs">vs</span>
+        <span class="decis__opt">Buy</span>
+      </div>`;
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="vs">${cells.join('<div class="vs__sep">VS</div>')}</div>
+      ${s.decision ? decisionBlock : ""}`;
+    const els = [...el.querySelectorAll(".vs__item, .vs__sep")];
+    let struck = false;
+    return {
+      el,
+      onEnter() { struck = false; el.querySelector(".decis")?.classList.remove("is-struck");
+        els.forEach((x, i) => { x.classList.remove("on"); setTimeout(() => x.classList.add("on"), 250 + i * 300); }); },
+      onExit()  { struck = false; el.querySelector(".decis")?.classList.remove("is-struck");
+        els.forEach((x) => x.classList.remove("on")); },
+      advance() {
+        if (s.decision && !struck) { struck = true; el.querySelector(".decis")?.classList.add("is-struck"); return true; }
+        return false;
+      }
+    };
+  },
+
+  // Tricol — 3 colonnes titrées, chacune révélée au clic (items empilés).
+  // `cols` = [{ title, accent?, items:[...] }]. media/bgVideo possibles.
+  tricol(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--tricol");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="tri">${s.cols.map((c, ci) => `
+        <div class="tri__col" data-col="${ci}"${c.accent ? ` data-accent="${c.accent}"` : ""}>
+          <div class="tri__title">${c.title}</div>
+          <ul class="tri__list${c.marked ? " tri__list--marked" : ""}">${c.items.map((it) => {
+            const t = (typeof it === "string") ? it : it.t;
+            const mark = (typeof it === "object" && it.mark) ? it.mark : null;
+            const glyph = mark === "ok" ? "✓" : mark === "ko" ? "✕" : mark === "robot" ? "🤖" : "";
+            return `<li${mark ? ` data-mark="${mark}"` : ""}>${mark ? `<span class="tri__mark">${glyph}</span>` : ""}${t}</li>`;
+          }).join("")}</ul>
+        </div>`).join("")}</div>`;
+    const cols = [...el.querySelectorAll(".tri__col")];
+    let shown = 0;
+    function reveal(ci) {
+      const col = cols[ci]; if (!col) return;
+      col.classList.add("on");
+      [...col.querySelectorAll("li")].forEach((li, i) => setTimeout(() => li.classList.add("on"), 150 + i * 120));
+    }
+    return {
+      el,
+      onEnter() { cols.forEach((c) => { c.classList.remove("on"); c.querySelectorAll("li").forEach((l) => l.classList.remove("on")); });
+        shown = 1; reveal(0); },
+      onExit()  { shown = 0; cols.forEach((c) => { c.classList.remove("on"); c.querySelectorAll("li").forEach((l) => l.classList.remove("on")); }); },
+      advance() { if (shown < cols.length) { reveal(shown); shown++; return true; } return false; }
     };
   },
 
@@ -73,6 +201,7 @@ const renderers = {
 
   text(s) {
     const el = sceneEl(s.media, s.bgVideo);
+    if (s.big) el.classList.add("scene--bigtext");
     el.querySelector(".scene__content").innerHTML = `
       <h2 class="reveal">${s.heading}</h2>
       ${s.body ? `<p class="lead reveal">${s.body}</p>` : ""}`;
@@ -307,6 +436,64 @@ const renderers = {
     };
   },
 
+  // Bars2 — deux barres horizontales segmentées comparées (Avant / Aujourd'hui).
+  // `rows` = [{ label, segments:[{name,pct,color?}] }]. Le clic révèle la 2e barre segment par segment.
+  bars2(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--bars2");
+    const palette = { spec: "#6ea8fe", code: "#9aa3b2", review: "#c9a2ff", value: "#ff5d6c" };
+    // un segment avec `reveal:true` affiche "?" d'abord, puis son nom au clic (fondu)
+    const rowHtml = (row, ri) => `
+      <div class="b2__row" data-row="${ri}">
+        <div class="b2__label">${row.label}</div>
+        <div class="b2__track">${row.segments.map((seg, si) => `
+          <div class="b2__seg${seg.reveal ? " b2__seg--q" : ""}" data-row="${ri}" data-seg="${si}"
+               style="--pct:${seg.pct}%; --c:${seg.color || palette[seg.key] || "#6ea8fe"}">
+            <span>${seg.reveal ? "?" : seg.name}</span>
+          </div>`).join("")}</div>
+      </div>`;
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="b2">${s.rows.map(rowHtml).join("")}</div>
+      ${s.caption ? `<p class="lead reveal b2__cap">${s.caption}</p>` : ""}`;
+    const segs = (ri) => [...el.querySelectorAll(`.b2__seg[data-row="${ri}"]`)];
+    function grow(ri, stagger) {
+      segs(ri).forEach((seg, i) => setTimeout(() => seg.classList.add("on"), stagger ? i * 350 : 0));
+    }
+    // le segment "?" à révéler (s'il existe)
+    const qInfo = (() => {
+      for (let ri = 0; ri < s.rows.length; ri++)
+        for (let si = 0; si < s.rows[ri].segments.length; si++)
+          if (s.rows[ri].segments[si].reveal) return { ri, si, name: s.rows[ri].segments[si].name };
+      return null;
+    })();
+    let shown = 0, qRevealed = false;
+    return {
+      el,
+      onEnter() {
+        el.querySelectorAll(".b2__seg").forEach((x) => x.classList.remove("on"));
+        shown = 1; qRevealed = false; grow(0, true);
+      },
+      onExit() { shown = 0; qRevealed = false; el.querySelectorAll(".b2__seg").forEach((x) => x.classList.remove("on")); },
+      advance() {
+        if (shown < s.rows.length) { grow(shown, true); shown++; return true; }
+        // toutes les barres montrées → si un "?" reste, on le bascule en fondu vers son nom
+        if (qInfo && !qRevealed) {
+          qRevealed = true;
+          const seg = el.querySelector(`.b2__seg[data-row="${qInfo.ri}"][data-seg="${qInfo.si}"]`);
+          const span = seg?.querySelector("span");
+          if (span) {
+            span.style.transition = "opacity .35s ease";
+            span.style.opacity = "0";
+            setTimeout(() => { span.textContent = qInfo.name; span.style.opacity = "1"; }, 350);
+          }
+          return true;
+        }
+        return false;
+      }
+    };
+  },
+
   // Dualline — barres (équipe) + courbe (automatisation) sur échelles indépendantes
   dualline(s) {
     const el = sceneEl(s.media, s.bgVideo);
@@ -328,20 +515,29 @@ const renderers = {
       el,
       onEnter() {
         revealed = false;
-        if (h2 && s.heading) h2.textContent = s.heading;  // titre initial
+        if (h2 && s.heading) { h2.textContent = s.heading; h2.style.opacity = "1"; h2.style.transform = "none"; }
         drawDual(svg, s.x, s.series, deferMarkers ? [] : s.markers);
       },
       onExit() {
         revealed = false; d3.select(svg).selectAll("*").remove();
-        if (h2 && s.heading) h2.textContent = s.heading;
+        if (h2 && s.heading) { h2.textContent = s.heading; h2.style.opacity = "1"; h2.style.transform = "none"; }
       },
       advance() {
         if (deferMarkers && !revealed) {
           revealed = true;
           // ajoute SEULEMENT le marqueur par-dessus (ne redessine pas le graphe), en emphase rouge
           drawDualMarkers(svg, s.x, s.markers, true);
-          // au même clic : bascule le titre
-          if (h2 && s.headingReveal) h2.textContent = s.headingReveal;
+          // au même clic : bascule le titre en fondu (sortant puis entrant)
+          if (h2 && s.headingReveal) {
+            h2.style.transition = "opacity .4s ease, transform .4s ease";
+            h2.style.opacity = "0";
+            h2.style.transform = "translateY(-10px)";
+            setTimeout(() => {
+              h2.textContent = s.headingReveal;
+              h2.style.opacity = "1";
+              h2.style.transform = "none";
+            }, 400);
+          }
           return true;
         }
         return false;
@@ -408,24 +604,27 @@ const renderers = {
       });
       for (let b = 0; b <= target; b++) applyBeat(b);
     }
-    // upTo : snapshot figé jouant les beats 0..upTo à l'entrée (pas de clic interne).
-    // sans upTo : comportement classique à beats (clic = beat suivant).
+    // upTo  : snapshot figé jouant les beats 0..upTo à l'entrée (pas de clic interne).
+    // startAt/stopAt : stack interactive bornée — entre à `startAt`, avance au clic jusqu'à `stopAt`.
+    // sinon : comportement classique à beats (de 0 au dernier).
     const hasUpTo = Number.isInteger(s.upTo);
+    const startAt = Number.isInteger(s.startAt) ? s.startAt : 0;
+    const maxBeat = Number.isInteger(s.stopAt) ? s.stopAt : s.beats.length - 1;
     return {
       el,
       onEnter() {
-        if (hasUpTo) { clearTo(s.upTo); }   // affiche directement l'état voulu
-        else { beat = 0; applyBeat(0); }
+        if (hasUpTo) { clearTo(s.upTo); }
+        else { beat = startAt; clearTo(startAt); }
       },
-      onExit()  { clearTo(-1); beat = 0; },
+      onExit()  { clearTo(-1); beat = startAt; },
       advance() {
-        if (hasUpTo) return false;          // un snapshot ne consomme pas le clic
-        if (beat < s.beats.length - 1) { beat++; applyBeat(beat); return true; }
+        if (hasUpTo) return false;          // un snapshot figé ne consomme pas le clic
+        if (beat < maxBeat) { beat++; applyBeat(beat); return true; }
         return false;
       },
       retreat() {
         if (hasUpTo) return false;
-        if (beat > 0) { beat--; clearTo(beat); return true; }
+        if (beat > startAt) { beat--; clearTo(beat); return true; }
         return false;
       }
     };
@@ -556,7 +755,7 @@ function drawDualMarkers(svg, labels, markers, emphasis) {
     const px = x(labels[mk.at]);
     const dsz = emphasis ? 16 : 7;
     const dy = m.t + 8; // centre du losange, sous le bord haut
-    const HOT = "#ff5d6c"; // var(--hot) ne se résout pas toujours dans un attr SVG → hex direct
+    const HOT = "#ff2d55"; // var(--hot) ne se résout pas toujours dans un attr SVG → hex direct
     const g = sel.append("g").attr("class", "dual-marker").attr("opacity", 0);
     g.append("line").attr("x1", px).attr("x2", px).attr("y1", dy).attr("y2", H - m.b)
       .attr("stroke", emphasis ? HOT : "#3a4150")
