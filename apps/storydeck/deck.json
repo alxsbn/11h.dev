@@ -658,8 +658,8 @@
       "type": "list",
       "heading": "Pourquoi Census ?",
       "items": [
-        "0 alternative OSS → Grouparoo racheté par Airbyte",
         "Scripting Python → chronophage",
+        "0 alternative OSS → Grouparoo racheté par Airbyte",
         "Bascule HubSpot → Klaviyo",
         "200 €"
       ],
@@ -680,7 +680,7 @@
     },
     {
       "type": "list",
-      "heading": "Fivetran ?",
+      "heading": "Fivetran ❤️",
       "items": [
         "Databricks native",
         "700+ connecteurs",

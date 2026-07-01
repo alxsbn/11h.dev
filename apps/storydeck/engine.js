@@ -73,7 +73,7 @@ const renderers = {
       el,
       onEnter() {
         lis.forEach((li) => li.classList.remove("on"));
-        shown = 1; lis[0]?.classList.add("on");   // 1re puce visible à l'entrée
+        shown = 0;                                // aucune puce à l'entrée — tout au clic
         struck = false; cmpDone = false;
         el.querySelector(".decis")?.classList.remove("is-struck");
         cmpEl?.classList.remove("on");            // compare caché au départ
@@ -166,7 +166,7 @@ const renderers = {
     return {
       el,
       onEnter() { cols.forEach((c) => { c.classList.remove("on"); c.querySelectorAll("li").forEach((l) => l.classList.remove("on")); });
-        shown = 1; reveal(0); },
+        shown = 0; },   // aucune colonne à l'entrée — tout au clic
       onExit()  { shown = 0; cols.forEach((c) => { c.classList.remove("on"); c.querySelectorAll("li").forEach((l) => l.classList.remove("on")); }); },
       advance() { if (shown < cols.length) { reveal(shown); shown++; return true; } return false; }
     };
