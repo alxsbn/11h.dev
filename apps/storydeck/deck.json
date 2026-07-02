@@ -638,6 +638,12 @@
       "startAt": 0
     },
     {
+      "type": "figure",
+      "heading": "La tentation",
+      "image": "assets/img/tweet-salomartin.png",
+      "alt": "Tweet de Martin Salo : ETL cost down 182x per month, sync time improved 10x using @modal_labs and @dltHub and dropping @fivetran for our ERP pipeline"
+    },
+    {
       "type": "list",
       "heading": "C'est quoi un connecteur ?",
       "items": [
