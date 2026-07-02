@@ -243,13 +243,13 @@
   .list-split__img--bare { border: none; box-shadow: none; background: transparent; }
   /* brique Lego animée : se cale à l'entrée puis flotte doucement en boucle */
   .scene.is-active .list-split__img--float {
-    animation: brick-settle .9s cubic-bezier(.34,1.4,.5,1) both, brick-float 4s ease-in-out 1s infinite; }
+    animation: brick-settle .9s cubic-bezier(.34,1.4,.5,1) both, brick-float 3.4s ease-in-out 1s infinite; }
   @keyframes brick-settle {
     0%   { opacity: 0; transform: translateY(-40px) rotate(-4deg) scale(.94); }
     100% { opacity: 1; transform: translateY(0) rotate(0) scale(1); } }
   @keyframes brick-float {
-    0%,100% { transform: translateY(0) rotate(0); }
-    50%     { transform: translateY(-10px) rotate(1.2deg); } }
+    0%,100% { transform: translateY(0) rotate(-1.4deg); }
+    50%     { transform: translateY(-22px) rotate(1.8deg); } }
 
 
   /* versus — logos alignés avec « VS » entre eux */

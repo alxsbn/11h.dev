@@ -676,7 +676,8 @@
         "Documentation light"
       ],
       "image": "assets/img/airbyte-community.png",
-      "imageBare": true
+      "imageBare": true,
+      "imageFloat": true
     },
     {
       "type": "list",
