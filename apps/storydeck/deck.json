@@ -451,7 +451,7 @@
               "pct": 20
             },
             {
-              "name": "Code",
+              "name": "Code / Run",
               "key": "code",
               "pct": 60
             },
@@ -471,7 +471,7 @@
               "pct": 40
             },
             {
-              "name": "Code",
+              "name": "Code / Run",
               "key": "code",
               "pct": 8
             },
