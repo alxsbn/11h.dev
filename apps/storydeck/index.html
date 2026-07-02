@@ -12,6 +12,11 @@
     --scene-pad: clamp(1.5rem, 5vw, 6rem);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Le deck empile les scènes en 100vh → il existe un scroll vertical natif
+     (en plus de la navigation clic/flèche/molette). On masque la scrollbar :
+     rendu « présentation » net et identique en file:// et servi dans l'iframe. */
+  html { scrollbar-width: none; }              /* Firefox */
+  html::-webkit-scrollbar { display: none; }   /* Chrome/Safari/Edge */
   body { background: var(--bg); color: var(--fg); overflow-x: hidden;
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; }
 
