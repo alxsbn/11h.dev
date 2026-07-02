@@ -433,7 +433,7 @@
       "markers": [
         {
           "at": 2,
-          "label": "Audit"
+          "label": "Autonomie"
         }
       ],
       "markerReveal": true,
@@ -441,7 +441,6 @@
     },
     {
       "type": "bars2",
-      "heading": "Le travail s'est déplacé",
       "rows": [
         {
           "label": "Avant",
@@ -452,7 +451,7 @@
               "pct": 20
             },
             {
-              "name": "Code",
+              "name": "Code / Run",
               "key": "code",
               "pct": 60
             },
@@ -472,7 +471,7 @@
               "pct": 40
             },
             {
-              "name": "Code",
+              "name": "Code / Run",
               "key": "code",
               "pct": 8
             },
@@ -482,7 +481,7 @@
               "pct": 22
             },
             {
-              "name": "Générer de la valeur",
+              "name": "Agentic Configuration / Business Value",
               "key": "value",
               "pct": 30,
               "reveal": true
@@ -639,6 +638,12 @@
       "startAt": 0
     },
     {
+      "type": "figure",
+      "heading": "La tentation",
+      "image": "assets/img/tweet-salomartin.png",
+      "alt": "Tweet de Martin Salo : ETL cost down 182x per month, sync time improved 10x using @modal_labs and @dltHub and dropping @fivetran for our ERP pipeline"
+    },
+    {
       "type": "list",
       "heading": "C'est quoi un connecteur ?",
       "items": [
@@ -676,7 +681,8 @@
         "Documentation light"
       ],
       "image": "assets/img/airbyte-community.png",
-      "imageBare": true
+      "imageBare": true,
+      "imageFloat": true
     },
     {
       "type": "list",

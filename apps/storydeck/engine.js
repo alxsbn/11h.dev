@@ -208,6 +208,17 @@ const renderers = {
     return { el };
   },
 
+  // titre + grande image centrée (capture, tweet…), révélée au clic.
+  figure(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--figure");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <img class="figure__img reveal" src="${s.image}" alt="${s.alt || ""}" />
+      ${s.caption ? `<p class="lead reveal figure__cap">${s.caption}</p>` : ""}`;
+    return { el };
+  },
+
   compare(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.querySelector(".scene__content").innerHTML = `
