@@ -112,8 +112,10 @@ const renderers = {
   versus(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--versus");
+    // strikeItems: ["Airbyte","dlt Hub"] → une croix rouge se superpose sur ces items au clic
+    const strike = new Set(s.strikeItems || []);
     const cells = s.items.map((it) =>
-      `<figure class="vs__item"><img src="${it.img}" alt="${it.name}" /><figcaption>${it.name}</figcaption></figure>`);
+      `<figure class="vs__item"><img src="${it.img}" alt="${it.name}" /><figcaption>${it.name}</figcaption>${strike.has(it.name) ? '<span class="vs__cross">✕</span>' : ""}</figure>`);
     const decisionBlock = `
       <div class="decis reveal">
         <span class="decis__opt decis__build">Build<span class="decis__patch">Agentic !</span></span>
@@ -125,15 +127,18 @@ const renderers = {
       <div class="vs">${cells.join('<div class="vs__sep">VS</div>')}</div>
       ${s.decision ? decisionBlock : ""}`;
     const els = [...el.querySelectorAll(".vs__item, .vs__sep")];
-    let struck = false;
+    const crosses = [...el.querySelectorAll(".vs__cross")];
+    let struck = false, crossed = false;
+    const clearCrosses = () => { crossed = false; crosses.forEach((c) => c.classList.remove("on")); };
     return {
       el,
-      onEnter() { struck = false; el.querySelector(".decis")?.classList.remove("is-struck");
+      onEnter() { struck = false; clearCrosses(); el.querySelector(".decis")?.classList.remove("is-struck");
         els.forEach((x, i) => { x.classList.remove("on"); setTimeout(() => x.classList.add("on"), 250 + i * 300); }); },
-      onExit()  { struck = false; el.querySelector(".decis")?.classList.remove("is-struck");
+      onExit()  { struck = false; clearCrosses(); el.querySelector(".decis")?.classList.remove("is-struck");
         els.forEach((x) => x.classList.remove("on")); },
       advance() {
         if (s.decision && !struck) { struck = true; el.querySelector(".decis")?.classList.add("is-struck"); return true; }
+        if (crosses.length && !crossed) { crossed = true; crosses.forEach((c) => c.classList.add("on")); return true; }
         return false;
       }
     };
