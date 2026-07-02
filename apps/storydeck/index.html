@@ -261,9 +261,15 @@
   .scene--versus .scene__content { max-width: none; width: 100%; }
   .scene--versus .decis { flex: none; margin-top: clamp(2rem, 5vh, 3.5rem); }
   .vs { display: flex; align-items: center; justify-content: center; gap: clamp(1rem, 3vw, 2.5rem); margin-top: 1rem; }
-  .vs__item { display: flex; flex-direction: column; align-items: center; gap: .8em;
+  .vs__item { position: relative; display: flex; flex-direction: column; align-items: center; gap: .8em;
     opacity: 0; transform: translateY(20px) scale(.9); transition: opacity .5s ease, transform .5s cubic-bezier(.34,1.4,.5,1); }
   .vs__item.on { opacity: 1; transform: none; }
+  /* croix rouge qui se superpose sur un item éliminé (au clic) */
+  .vs__cross { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(2.2) rotate(-8deg);
+    font-size: clamp(3rem, 9vw, 7rem); font-weight: 900; line-height: 1; color: #ff2d55;
+    text-shadow: 0 4px 14px rgba(0,0,0,.6); pointer-events: none;
+    opacity: 0; transition: opacity .35s ease, transform .35s cubic-bezier(.34,1.7,.5,1); }
+  .vs__cross.on { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-8deg); }
   .vs__item img { height: clamp(46px, 6vw, 88px); max-width: clamp(120px, 16vw, 220px); width: auto; object-fit: contain;
     filter: drop-shadow(0 8px 20px rgba(0,0,0,.5)); }
   .vs__item figcaption { font-size: clamp(1rem, 2vw, 1.4rem); font-weight: 700; color: #e7eaf0; }

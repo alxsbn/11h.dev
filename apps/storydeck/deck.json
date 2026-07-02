@@ -651,8 +651,7 @@
         "Pagination & curseurs",
         "Schema drift",
         "Données incrémentales",
-        "Auth / secret rotation",
-        "Orchestration"
+        "Auth / secret rotation"
       ],
       "subtitle": "En entrée comme en sortie : le même problème.",
       "image": "assets/img/lego-stacked.png",
@@ -666,13 +665,14 @@
         "Scripting Python → chronophage",
         "0 alternative OSS → Grouparoo racheté par Airbyte",
         "Bascule HubSpot → Klaviyo",
-        "200 €"
+        "200 €",
+        "On délègue le run"
       ],
       "image": "assets/img/census-dataset.jpg"
     },
     {
       "type": "list",
-      "heading": "Et Airbyte alors ?",
+      "heading": "Et donc, Airbyte ?",
       "items": [
         "13 connecteurs utilisés",
         "Lenteur process OSS",
@@ -683,6 +683,25 @@
       "image": "assets/img/airbyte-community.png",
       "imageBare": true,
       "imageFloat": true
+    },
+    {
+      "type": "versus",
+      "items": [
+        {
+          "img": "assets/stack/tiles/airbyte.png",
+          "name": "Airbyte"
+        },
+        {
+          "img": "assets/stack/tiles/dlt.png",
+          "name": "dlt Hub"
+        },
+        {
+          "img": "assets/stack/tiles/fivetran.png",
+          "name": "Fivetran"
+        }
+      ],
+      "decision": true,
+      "heading": "Build or build ?"
     },
     {
       "type": "list",
@@ -704,7 +723,6 @@
         "Facturation MAR",
         "Impact DBU",
         "Friction marketplace AWS",
-        "Refresh 1 min gated",
         "80/20 ?"
       ],
       "compare": {
@@ -735,7 +753,11 @@
           "name": "Fivetran"
         }
       ],
-      "decision": true
+      "heading": "",
+      "strikeItems": [
+        "Airbyte",
+        "dlt Hub"
+      ]
     },
     {
       "type": "tricol",
