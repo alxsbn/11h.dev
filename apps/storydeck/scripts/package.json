@@ -1,0 +1,9 @@
+{
+  "name": "storydeck-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Scripts de capture de coupures de presse (Playwright) pour le deck StoryDeck.",
+  "dependencies": {
+    "playwright": "^1.61.1"
+  }
+}

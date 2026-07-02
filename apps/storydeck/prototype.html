@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>StoryDeck — prototype</title>
+<!-- D3 pour les graphes animés (chargé depuis CDN pour le prototype) -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --fg: #f4f5f7;
+    --muted: #9aa3b2;
+    --accent: #6ea8fe;
+    --scene-pad: clamp(1.5rem, 5vw, 6rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: auto; } /* on pilote le smooth-scroll en JS, pas en CSS */
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* ---- Un "waypoint" = une scène plein écran (un point d'arrêt) ---- */
+  .scene {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--scene-pad);
+    position: relative;
+  }
+
+  /* Média sticky : reste fixe pendant que le texte/les beats passent dessus */
+  .scene__media {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    z-index: 0;
+  }
+  .scene.is-active .scene__media { opacity: 1; }
+  .scene__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,13,18,.2), rgba(11,13,18,.85)); z-index: 1; }
+  .scene__content { position: relative; z-index: 2; max-width: 60ch; }
+
+  /* Animation d'entrée des éléments de la scène active */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .scene.is-active .reveal { opacity: 1; transform: none; }
+  .scene.is-active .reveal:nth-child(2) { transition-delay: .15s; }
+  .scene.is-active .reveal:nth-child(3) { transition-delay: .3s; }
+
+  h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -.02em; }
+  h2 { font-size: clamp(1.6rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.01em; margin-bottom: .6em; }
+  p.lead { font-size: clamp(1.1rem, 2.2vw, 1.5rem); color: var(--muted); margin-top: 1em; }
+
+  /* Scène "stat" : un gros chiffre */
+  .stat { font-size: clamp(4rem, 16vw, 12rem); font-weight: 800; letter-spacing: -.04em; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .stat__label { color: var(--muted); font-size: clamp(1rem, 2.5vw, 1.6rem); }
+
+  /* Scène graphe */
+  .chart { width: min(720px, 90vw); height: min(420px, 55vh); }
+  .chart .bar { fill: var(--accent); }
+  .chart text { fill: var(--muted); font-size: 13px; }
+
+  /* ---- Barre de progression + aide ---- */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 50; transition: width .2s ease; }
+  #hint { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 13px; z-index: 50; opacity: .8; }
+  #dots { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 50; }
+  #dots button { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--muted); background: transparent; cursor: pointer; padding: 0; }
+  #dots button.active { background: var(--accent); border-color: var(--accent); }
+</style>
+</head>
+<body>
+  <div id="progress"></div>
+  <nav id="dots" aria-label="Aller à la scène"></nav>
+  <main id="deck"></main>
+  <div id="hint">↓ molette, → flèche ou clic pour avancer</div>
+
+<script type="module">
+/* ============================================================
+   1) LE DECK — c'est ce que l'IA produira à partir d'un script.
+      Pour l'instant on l'écrit à la main. Format = liste de scènes typées.
+   ============================================================ */
+const DECK = [
+  { type: "title",
+    title: "Le pool stylistes en 2025",
+    subtitle: "Une histoire en quelques chiffres",
+    media: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600" },
+
+  { type: "text",
+    heading: "Tout commence par une question",
+    body: "Combien de stylistes étaient réellement actives ce mois-ci — et pourquoi ce chiffre bouge-t-il autant d'un mois à l'autre ?",
+    media: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1600" },
+
+  { type: "stat",
+    value: 14820,
+    label: "stylistes actives en juin",
+    format: "integer" },
+
+  { type: "chart",
+    heading: "Évolution mois par mois",
+    // données d'exemple ; viendront plus tard d'un cube gold.core
+    data: [
+      { label: "Jan", value: 11200 },
+      { label: "Fév", value: 11950 },
+      { label: "Mar", value: 12700 },
+      { label: "Avr", value: 13400 },
+      { label: "Mai", value: 14100 },
+      { label: "Juin", value: 14820 }
+    ] },
+
+  { type: "title",
+    title: "+32 % en six mois",
+    subtitle: "La suite de l'histoire dépend de la rétention.",
+    media: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600" }
+];
+
+/* ============================================================
+   2) LE REGISTRE DE SCÈNES — une fonction de rendu par type.
+      Chaque scène renvoie un <section class="scene"> (un waypoint).
+      onEnter() est appelé quand la scène devient active (anims D3, etc.).
+   ============================================================ */
+const renderers = {
+  title(s) {
+    const el = sceneEl(s.media);
+    el.querySelector(".scene__content").innerHTML = `
+      <h1 class="reveal">${s.title}</h1>
+      ${s.subtitle ? `<p class="lead reveal">${s.subtitle}</p>` : ""}`;
+    return { el };
+  },
+
+  text(s) {
+    const el = sceneEl(s.media);
+    el.querySelector(".scene__content").innerHTML = `
+      <h2 class="reveal">${s.heading}</h2>
+      <p class="lead reveal">${s.body}</p>`;
+    return { el };
+  },
+
+  stat(s) {
+    const el = sceneEl(null);
+    el.querySelector(".scene__content").innerHTML = `
+      <div class="stat reveal" data-target="${s.value}">0</div>
+      <div class="stat__label reveal">${s.label}</div>`;
+    // l'animation du compteur se joue à l'entrée
+    return {
+      el,
+      onEnter() {
+        const node = el.querySelector(".stat");
+        const target = +node.dataset.target;
+        d3.select(node).transition().duration(1200).ease(d3.easeCubicOut)
+          .tween("count", () => {
+            const i = d3.interpolateNumber(0, target);
+            return t => { node.textContent = Math.round(i(t)).toLocaleString("fr-FR"); };
+          });
+      },
+      onExit() { el.querySelector(".stat").textContent = "0"; } // reset au retour arrière
+    };
+  },
+
+  chart(s) {
+    const el = sceneEl(null);
+    el.querySelector(".scene__content").innerHTML = `
+      <h2 class="reveal">${s.heading}</h2>
+      <svg class="chart reveal" role="img"></svg>`;
+    return {
+      el,
+      onEnter() { drawBars(el.querySelector(".chart"), s.data); },
+      onExit()  { d3.select(el.querySelector(".chart")).selectAll("*").remove(); }
+    };
+  }
+};
+
+// Squelette commun d'une scène (média sticky optionnel + overlay + contenu)
+function sceneEl(media) {
+  const el = document.createElement("section");
+  el.className = "scene";
+  el.innerHTML = `
+    ${media ? `<div class="scene__media" style="background-image:url('${media}')"></div><div class="scene__overlay"></div>` : ""}
+    <div class="scene__content"></div>`;
+  return el;
+}
+
+// Un barchart D3 animé (les barres montent depuis 0 à l'entrée de la scène)
+function drawBars(svg, data) {
+  const W = svg.clientWidth || 640, H = svg.clientHeight || 380, m = { t: 10, r: 10, b: 30, l: 50 };
+  const sel = d3.select(svg).attr("viewBox", `0 0 ${W} ${H}`);
+  sel.selectAll("*").remove();
+  const x = d3.scaleBand().domain(data.map(d => d.label)).range([m.l, W - m.r]).padding(0.25);
+  const y = d3.scaleLinear().domain([0, d3.max(data, d => d.value) * 1.1]).range([H - m.b, m.t]);
+  sel.append("g").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x));
+  sel.append("g").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(d3.format("~s")));
+  sel.selectAll(".bar").data(data).join("rect")
+    .attr("class", "bar").attr("x", d => x(d.label)).attr("width", x.bandwidth())
+    .attr("y", H - m.b).attr("height", 0)
+    .transition().duration(900).delay((d, i) => i * 80).ease(d3.easeCubicOut)
+    .attr("y", d => y(d.value)).attr("height", d => H - m.b - y(d.value));
+}
+
+/* ============================================================
+   3) LE MOTEUR — progression unifiée.
+      - scroll manuel : l'IntersectionObserver détecte la scène active
+      - clic / flèche / molette : on "scrolle en douceur" vers le prochain stop
+      Les deux convergent vers le même index de scène.
+   ============================================================ */
+const deckRoot = document.getElementById("deck");
+const scenes = DECK.map(s => renderers[s.type](s));
+scenes.forEach(({ el }) => deckRoot.appendChild(el));
+
+let current = 0;
+let isAnimating = false; // verrou pendant un smooth-scroll programmé
+
+// Pastilles de navigation
+const dots = document.getElementById("dots");
+scenes.forEach((_, i) => {
+  const b = document.createElement("button");
+  b.setAttribute("aria-label", `Scène ${i + 1}`);
+  b.onclick = () => goTo(i);
+  dots.appendChild(b);
+});
+
+// Observer : marque la scène la plus visible comme active + joue ses anims
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const idx = scenes.findIndex(s => s.el === entry.target);
+    if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+      setActive(idx);
+    }
+  });
+}, { threshold: [0, 0.6, 1] });
+scenes.forEach(s => io.observe(s.el));
+
+function setActive(idx) {
+  if (idx === current) return;
+  // sortie de l'ancienne
+  scenes[current]?.onExit?.();
+  scenes[current]?.el.classList.remove("is-active");
+  current = idx;
+  scenes[current].el.classList.add("is-active");
+  scenes[current].onEnter?.();
+  updateChrome();
+}
+
+function goTo(idx) {
+  idx = Math.max(0, Math.min(scenes.length - 1, idx));
+  isAnimating = true;
+  // "comme si on scrollait à la main jusqu'au prochain stop"
+  scenes[idx].el.scrollIntoView({ behavior: "smooth", block: "start" });
+  // libère le verrou après la fin probable du smooth-scroll
+  clearTimeout(goTo._t);
+  goTo._t = setTimeout(() => { isAnimating = false; setActive(idx); }, 700);
+}
+
+function next() { goTo(current + 1); }
+function prev() { goTo(current - 1); }
+
+// Entrées clavier / clic / molette → même moteur
+addEventListener("keydown", (e) => {
+  if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(e.key)) { e.preventDefault(); next(); }
+  if (["ArrowLeft", "ArrowUp", "PageUp"].includes(e.key)) { e.preventDefault(); prev(); }
+});
+addEventListener("click", (e) => { if (!e.target.closest("#dots")) next(); });
+
+// La molette avance d'UN stop à la fois (snap), au lieu d'un scroll libre
+let wheelLock = false;
+addEventListener("wheel", (e) => {
+  if (isAnimating || wheelLock) { e.preventDefault(); return; }
+  if (Math.abs(e.deltaY) < 8) return;
+  e.preventDefault();
+  wheelLock = true;
+  (e.deltaY > 0 ? next : prev)();
+  setTimeout(() => { wheelLock = false; }, 750);
+}, { passive: false });
+
+function updateChrome() {
+  document.getElementById("progress").style.width = ((current) / (scenes.length - 1) * 100) + "%";
+  [...dots.children].forEach((d, i) => d.classList.toggle("active", i === current));
+}
+
+// init : active la première scène
+scenes[0].el.classList.add("is-active");
+scenes[0].onEnter?.();
+updateChrome();
+</script>
+</body>
+</html>

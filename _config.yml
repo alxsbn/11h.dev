@@ -45,6 +45,18 @@ exclude:
   - node_modules
   - vendor
   - .github
+  # StoryDeck : ne publier que l'artefact autoportant (talk.html) + ses assets.
+  # Les sources (moteur, builder, scripts, deck.json…) restent hors du site public.
+  - apps/storydeck/index.html
+  - apps/storydeck/prototype.html
+  - apps/storydeck/engine.js
+  - apps/storydeck/build.sh
+  - apps/storydeck/.gitignore
+  - apps/storydeck/deck.json
+  - apps/storydeck/deck.pool-stylistes.json
+  - apps/storydeck/deck.schema.json
+  - apps/storydeck/slide-angle-mort-run.json
+  - apps/storydeck/scripts
 
 # Plugins
 plugins:

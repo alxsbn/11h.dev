@@ -1,0 +1,793 @@
+{
+  "meta": {
+    "title": "Build, buy… or AI ?",
+    "source": "Notes/Fivetran x Databricks.md",
+    "generated": "2026-06-25",
+    "lang": "fr"
+  },
+  "scenes": [
+    {
+      "type": "title",
+      "title": "Build, buy… or AI ?",
+      "subtitle": "Ce qu'on achète n'est plus ce qu'on croit",
+      "media": "assets/img/hero.jpg"
+    },
+    {
+      "type": "chart",
+      "chart": "line",
+      "heading": "SaaSpocalypse ?",
+      "highlight": 3,
+      "data": [
+        {
+          "label": "2023",
+          "value": 100
+        },
+        {
+          "label": "2024",
+          "value": 95,
+          "note": "Salesforce −20 % (croissance, pas l'IA)"
+        },
+        {
+          "label": "Jan 26",
+          "value": 92
+        },
+        {
+          "label": "Fév 26",
+          "value": 28,
+          "note": "≈ 1 000 Md$ effacés"
+        }
+      ],
+      "drops": [
+        {
+          "img": "assets/press/01-fortune.png",
+          "x": "50%",
+          "y": "12%",
+          "rot": "-5deg"
+        },
+        {
+          "img": "assets/press/02-forbes.png",
+          "x": "57%",
+          "y": "18%",
+          "rot": "4deg"
+        },
+        {
+          "img": "assets/press/03-economist.png",
+          "x": "49%",
+          "y": "27%",
+          "rot": "-3deg"
+        },
+        {
+          "img": "assets/press/05-techcrunch.png",
+          "x": "55%",
+          "y": "23%",
+          "rot": "5deg"
+        },
+        {
+          "img": "assets/press/06-forbes-500.png",
+          "x": "52%",
+          "y": "33%",
+          "rot": "-2deg"
+        },
+        {
+          "img": "assets/press/04-businesstimes.png",
+          "x": "58%",
+          "y": "30%",
+          "rot": "7deg"
+        }
+      ]
+    },
+    {
+      "type": "embed",
+      "video": "assets/video/deathbyclawd.mp4",
+      "poster": "assets/video/deathbyclawd-home.png"
+    },
+    {
+      "type": "text",
+      "bgVideo": "assets/video/meetup.mp4",
+      "heading": "<span class=\"hl\">Marketplace beauté &amp; bien-être</span> en réseau de vente directe, opérée par des <span class=\"hl--accent\">micro-influenceuses indépendantes</span>"
+    },
+    {
+      "type": "marquee",
+      "heading": "Des marques connues et reconnues",
+      "rows": [
+        {
+          "items": [
+            {
+              "img": "assets/brands/tiles/absolution.png",
+              "name": "Absolution"
+            },
+            {
+              "img": "assets/brands/tiles/antipodes.png",
+              "name": "Antipodes"
+            },
+            {
+              "img": "assets/brands/tiles/apicia.png",
+              "name": "Apicia"
+            },
+            {
+              "img": "assets/brands/tiles/birdie.png",
+              "name": "Birdie"
+            },
+            {
+              "img": "assets/brands/tiles/bobbi-brown.png",
+              "name": "Bobbi Brown"
+            },
+            {
+              "img": "assets/brands/tiles/cocosolis.png",
+              "name": "Cocosolis"
+            },
+            {
+              "img": "assets/brands/tiles/bouche-bee.png",
+              "name": "Bouche Bée"
+            },
+            {
+              "img": "assets/brands/tiles/cut-by-fred.png",
+              "name": "Cut By Fred"
+            },
+            {
+              "img": "assets/brands/tiles/merci-handy.png",
+              "name": "Merci Handy"
+            },
+            {
+              "img": "assets/brands/tiles/substance-of-light.png",
+              "name": "Substance Of Light"
+            },
+            {
+              "img": "assets/brands/tiles/equilibrist.png",
+              "name": "Equilibrist"
+            },
+            {
+              "img": "assets/brands/tiles/dermalogica.png",
+              "name": "Dermalogica"
+            },
+            {
+              "img": "assets/brands/tiles/dijo.png",
+              "name": "Dijo"
+            },
+            {
+              "img": "assets/brands/tiles/embryolisse.png",
+              "name": "Embryolisse"
+            },
+            {
+              "img": "assets/brands/tiles/epycure.png",
+              "name": "Epycure"
+            },
+            {
+              "img": "assets/brands/tiles/equilibre.png",
+              "name": "Équilibre"
+            },
+            {
+              "img": "assets/brands/tiles/evolve.png",
+              "name": "Evolve"
+            },
+            {
+              "img": "assets/brands/tiles/french-mush.png",
+              "name": "French Mush"
+            },
+            {
+              "img": "assets/brands/tiles/hydratis.png",
+              "name": "Hydratis"
+            },
+            {
+              "img": "assets/brands/tiles/hygee.png",
+              "name": "Hygée"
+            },
+            {
+              "img": "assets/brands/tiles/svr.png",
+              "name": "SVR"
+            },
+            {
+              "img": "assets/brands/tiles/lamazuna.png",
+              "name": "Lamazuna"
+            },
+            {
+              "img": "assets/brands/tiles/lao-care.png",
+              "name": "Lao Care"
+            },
+            {
+              "img": "assets/brands/tiles/lauvee.png",
+              "name": "Lauvée"
+            },
+            {
+              "img": "assets/brands/tiles/les-petits-prodiges.png",
+              "name": "Les Petits Prodiges"
+            }
+          ],
+          "dir": "left",
+          "speed": 55
+        },
+        {
+          "items": [
+            {
+              "img": "assets/brands/tiles/love-and-be-loved.png",
+              "name": "Love And Be Loved"
+            },
+            {
+              "img": "assets/brands/tiles/mac.png",
+              "name": "MAC"
+            },
+            {
+              "img": "assets/brands/tiles/manucurist.png",
+              "name": "Manucurist"
+            },
+            {
+              "img": "assets/brands/tiles/mimetique.png",
+              "name": "Mimétique"
+            },
+            {
+              "img": "assets/brands/tiles/miye.png",
+              "name": "MiYé"
+            },
+            {
+              "img": "assets/brands/tiles/mon-shampoing.png",
+              "name": "Mon Shampoing"
+            },
+            {
+              "img": "assets/brands/tiles/mymosa.png",
+              "name": "Mymosa"
+            },
+            {
+              "img": "assets/brands/tiles/on-the-wild-side.png",
+              "name": "On The Wild Side"
+            },
+            {
+              "img": "assets/brands/tiles/quinque.png",
+              "name": "Quinque"
+            },
+            {
+              "img": "assets/brands/tiles/origins.png",
+              "name": "Origins"
+            },
+            {
+              "img": "assets/brands/tiles/pomelo-co.png",
+              "name": "Pomélo+Co"
+            },
+            {
+              "img": "assets/brands/tiles/pomponne.png",
+              "name": "Pomponne"
+            },
+            {
+              "img": "assets/brands/tiles/q-a.png",
+              "name": "Q+A"
+            },
+            {
+              "img": "assets/brands/tiles/revamp.png",
+              "name": "Revamp"
+            },
+            {
+              "img": "assets/brands/tiles/s-vae.png",
+              "name": "S&Vaé"
+            },
+            {
+              "img": "assets/brands/tiles/seventy-one-percent.png",
+              "name": "Seventy One Percent"
+            },
+            {
+              "img": "assets/brands/tiles/silk-n.png",
+              "name": "Silk'n"
+            },
+            {
+              "img": "assets/brands/tiles/skin-out.png",
+              "name": "Skin & Out"
+            },
+            {
+              "img": "assets/brands/tiles/sweed.png",
+              "name": "Sweed"
+            },
+            {
+              "img": "assets/brands/tiles/terraphy.png",
+              "name": "Terraphy"
+            },
+            {
+              "img": "assets/brands/tiles/torriden.png",
+              "name": "Torriden"
+            },
+            {
+              "img": "assets/brands/tiles/whamisa.png",
+              "name": "Whamisa"
+            },
+            {
+              "img": "assets/brands/tiles/yfen.png",
+              "name": "Yfen"
+            },
+            {
+              "img": "assets/brands/tiles/zao.png",
+              "name": "Zao"
+            }
+          ],
+          "dir": "right",
+          "speed": 60
+        }
+      ]
+    },
+    {
+      "type": "dashboard",
+      "panels": [
+        {
+          "kind": "chart",
+          "chart": "line",
+          "title": "Conso des ménages (France, vol. %/an)",
+          "data": [
+            {
+              "label": "2021",
+              "value": 5.2
+            },
+            {
+              "label": "2022",
+              "value": 3.2
+            },
+            {
+              "label": "2023",
+              "value": 0.8
+            },
+            {
+              "label": "2024",
+              "value": 0.8
+            },
+            {
+              "label": "2025",
+              "value": 0.4,
+              "note": "stagnation"
+            }
+          ],
+          "highlight": 4,
+          "delta": "stagnation",
+          "deltaDir": "down",
+          "source": "INSEE"
+        },
+        {
+          "kind": "chart",
+          "chart": "line",
+          "title": "Taux directeur BCE (dépôt, %)",
+          "data": [
+            {
+              "label": "mi-22",
+              "value": -0.5
+            },
+            {
+              "label": "déc 22",
+              "value": 2.0
+            },
+            {
+              "label": "juin 23",
+              "value": 3.5
+            },
+            {
+              "label": "sept 23",
+              "value": 4.0,
+              "note": "+4 %"
+            },
+            {
+              "label": "déc 24",
+              "value": 3.0
+            },
+            {
+              "label": "juin 25",
+              "value": 2.0
+            }
+          ],
+          "highlight": 3,
+          "delta": "+450 pb",
+          "deltaDir": "up",
+          "source": "BCE"
+        },
+        {
+          "kind": "stat",
+          "title": "Levées French Tech",
+          "value": -47,
+          "unit": "%",
+          "format": "integer",
+          "delta": "13 → 6,9 Md€ (2022→2024)",
+          "deltaDir": "down",
+          "source": "Maddyness"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "items": [
+        "Hiérarchie flat",
+        "JIT",
+        "Séniorisation",
+        "Zéro gaspillage"
+      ],
+      "noBullet": true,
+      "media": "assets/img/portrait-elegante.jpg"
+    },
+    {
+      "type": "dualline",
+      "heading": "Faire plus avec moins",
+      "x": [
+        "2022",
+        "mai 23",
+        "août 24",
+        "mai 25",
+        "2026"
+      ],
+      "series": [
+        {
+          "name": "Taille de l'équipe",
+          "color": "#9aa3b2",
+          "kind": "bars",
+          "values": [
+            4,
+            6,
+            5,
+            3,
+            2
+          ]
+        },
+        {
+          "name": "Niveau d'automatisation",
+          "color": "#6ea8fe",
+          "kind": "line",
+          "values": [
+            2,
+            3,
+            6,
+            40,
+            400
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "at": 2,
+          "label": "Audit"
+        }
+      ],
+      "markerReveal": true,
+      "headingReveal": "Générer de la valeur"
+    },
+    {
+      "type": "bars2",
+      "heading": "Le travail s'est déplacé",
+      "rows": [
+        {
+          "label": "Avant",
+          "segments": [
+            {
+              "name": "Spec",
+              "key": "spec",
+              "pct": 20
+            },
+            {
+              "name": "Code",
+              "key": "code",
+              "pct": 60
+            },
+            {
+              "name": "Review",
+              "key": "review",
+              "pct": 20
+            }
+          ]
+        },
+        {
+          "label": "Aujourd'hui",
+          "segments": [
+            {
+              "name": "Plan / Spec",
+              "key": "spec",
+              "pct": 40
+            },
+            {
+              "name": "Code",
+              "key": "code",
+              "pct": 8
+            },
+            {
+              "name": "Review",
+              "key": "review",
+              "pct": 22
+            },
+            {
+              "name": "Générer de la valeur",
+              "key": "value",
+              "pct": 30,
+              "reveal": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "stack",
+      "items": [
+        {
+          "id": "dms",
+          "name": "AWS DMS",
+          "img": "assets/stack/tiles/dms.png"
+        },
+        {
+          "id": "databricks",
+          "name": "Databricks",
+          "img": "assets/stack/tiles/databricks.png"
+        },
+        {
+          "id": "dbt",
+          "name": "dbt",
+          "img": "assets/stack/tiles/dbt.png"
+        },
+        {
+          "id": "census",
+          "name": "Census",
+          "img": "assets/stack/tiles/census.png"
+        },
+        {
+          "id": "metabase",
+          "name": "Metabase",
+          "img": "assets/stack/tiles/metabase.png"
+        },
+        {
+          "id": "airbyte",
+          "name": "Airbyte",
+          "img": "assets/stack/tiles/airbyte.png"
+        },
+        {
+          "id": "fivetran",
+          "name": "Fivetran",
+          "img": "assets/stack/tiles/fivetran.png"
+        },
+        {
+          "id": "claude",
+          "name": "Claude Code",
+          "img": "assets/stack/tiles/claude.png"
+        },
+        {
+          "id": "airflow",
+          "name": "Airflow",
+          "img": "assets/stack/tiles/airflow.png"
+        }
+      ],
+      "beats": [
+        {
+          "sub": "",
+          "actions": [
+            {
+              "op": "show",
+              "id": "dms"
+            },
+            {
+              "op": "show",
+              "id": "airbyte"
+            },
+            {
+              "op": "show",
+              "id": "databricks"
+            },
+            {
+              "op": "show",
+              "id": "dbt"
+            },
+            {
+              "op": "show",
+              "id": "airflow"
+            },
+            {
+              "op": "show",
+              "id": "metabase"
+            }
+          ]
+        },
+        {
+          "sub": "",
+          "actions": [
+            {
+              "op": "add",
+              "id": "census"
+            }
+          ]
+        },
+        {
+          "sub": "",
+          "actions": [
+            {
+              "op": "add",
+              "id": "claude"
+            }
+          ]
+        },
+        {
+          "sub": "",
+          "actions": [
+            {
+              "op": "replace",
+              "id": "airbyte",
+              "byId": "fivetran"
+            }
+          ]
+        },
+        {
+          "sub": "",
+          "actions": [
+            {
+              "op": "morph",
+              "id": "census",
+              "into": "fivetran"
+            }
+          ]
+        }
+      ],
+      "columns": [
+        {
+          "ids": [
+            "dms",
+            "airbyte",
+            "fivetran"
+          ]
+        },
+        {
+          "ids": [
+            "databricks",
+            "dbt",
+            "airflow"
+          ]
+        },
+        {
+          "ids": [
+            "metabase",
+            "census"
+          ]
+        },
+        {
+          "ids": [
+            "claude"
+          ]
+        }
+      ],
+      "startAt": 0
+    },
+    {
+      "type": "list",
+      "heading": "C'est quoi un connecteur ?",
+      "items": [
+        "Rate limiting",
+        "Pagination & curseurs",
+        "Schema drift",
+        "Données incrémentales",
+        "Auth / secret rotation",
+        "Orchestration"
+      ],
+      "subtitle": "En entrée comme en sortie : le même problème.",
+      "image": "assets/img/lego-stacked.png",
+      "imageBare": true,
+      "imageFloat": true
+    },
+    {
+      "type": "list",
+      "heading": "Pourquoi Census ?",
+      "items": [
+        "Scripting Python → chronophage",
+        "0 alternative OSS → Grouparoo racheté par Airbyte",
+        "Bascule HubSpot → Klaviyo",
+        "200 €"
+      ],
+      "image": "assets/img/census-dataset.jpg"
+    },
+    {
+      "type": "list",
+      "heading": "Et Airbyte alors ?",
+      "items": [
+        "13 connecteurs utilisés",
+        "Lenteur process OSS",
+        "Driver communautaire",
+        "Pas de destination Databricks native au début",
+        "Documentation light"
+      ],
+      "image": "assets/img/airbyte-community.png",
+      "imageBare": true
+    },
+    {
+      "type": "list",
+      "heading": "Fivetran ❤️",
+      "items": [
+        "Databricks native",
+        "700+ connecteurs",
+        "Schema drift automatique",
+        "SLA",
+        "Taux de refresh élevé",
+        "14 jours gratuits"
+      ],
+      "image": "assets/img/fivetran-erd.png"
+    },
+    {
+      "type": "list",
+      "heading": "Le prix à payer",
+      "items": [
+        "Facturation MAR",
+        "Impact DBU",
+        "Friction marketplace AWS",
+        "Refresh 1 min gated",
+        "80/20 ?"
+      ],
+      "compare": {
+        "title": "Migration Census",
+        "left": {
+          "value": 200,
+          "label": "€/mois"
+        },
+        "right": {
+          "value": 600,
+          "label": "MAR"
+        }
+      }
+    },
+    {
+      "type": "versus",
+      "items": [
+        {
+          "img": "assets/stack/tiles/airbyte.png",
+          "name": "Airbyte"
+        },
+        {
+          "img": "assets/stack/tiles/dlt.png",
+          "name": "dlt Hub"
+        },
+        {
+          "img": "assets/stack/tiles/fivetran.png",
+          "name": "Fivetran"
+        }
+      ],
+      "decision": true
+    },
+    {
+      "type": "tricol",
+      "media": "assets/img/hero-woman.jpg",
+      "cols": [
+        {
+          "title": "🤖 L'agentique règle",
+          "accent": "buy",
+          "marked": true,
+          "items": [
+            {
+              "t": "Écrire le code",
+              "mark": "ok"
+            },
+            {
+              "t": "Time to market",
+              "mark": "ok"
+            },
+            {
+              "t": "Fit fonctionnel de base",
+              "mark": "ok"
+            },
+            {
+              "t": "Le premier jet",
+              "mark": "ok"
+            }
+          ]
+        },
+        {
+          "title": "Ce qui reste",
+          "accent": "build",
+          "marked": true,
+          "items": [
+            {
+              "t": "Maintenance & run",
+              "mark": "ko"
+            },
+            {
+              "t": "Vendor lock-in",
+              "mark": "ko"
+            },
+            {
+              "t": "Sécurité & conformité",
+              "mark": "ko"
+            },
+            {
+              "t": "Accountability",
+              "mark": "ko"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "media": "assets/img/temoignages-hero.jpg",
+      "heading": "<span class=\"hl\">Accountability</span><br>→ <span class=\"hl--accent\">Value-driven</span>",
+      "big": true
+    }
+  ]
+}
