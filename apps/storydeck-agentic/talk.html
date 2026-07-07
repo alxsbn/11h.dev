@@ -458,15 +458,21 @@
   .scene--disclaimer .scene__content { max-width: 60ch; display: flex; flex-direction: column; align-items: center; }
   .disc__tri { width: clamp(70px, 10vw, 120px); height: auto; margin-bottom: .3rem;
     filter: drop-shadow(0 0 14px rgba(230,20,20,.6)); }
-  .disc__title { font-family: -apple-system, "Arial Black", sans-serif; font-weight: 900;
-    font-size: clamp(2.6rem, 8vw, 6rem); letter-spacing: .04em; color: #e11;
-    text-shadow: 0 0 20px rgba(230,20,20,.5), 0 3px 0 #900; margin: 0 0 1rem; }
+  /* DISCLAIMER — rouge vif, très bold, relief 3D (empilement d'ombres foncées) façon meme */
+  .disc__title { font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif; font-weight: 900;
+    font-size: clamp(3rem, 9.5vw, 7rem); letter-spacing: .02em; line-height: 1;
+    color: #ff1a1a; margin: 0 0 1.4rem;
+    text-shadow:
+      1px 1px 0 #b00, 2px 2px 0 #900, 3px 3px 0 #7a0000, 4px 4px 0 #5a0000,
+      5px 5px 0 #400, 6px 6px 8px rgba(0,0,0,.9),
+      0 0 24px rgba(255,26,26,.55), 0 0 46px rgba(255,26,26,.3); }
   .disc__body { color: #eee; font-size: clamp(1rem, 2vw, 1.4rem); line-height: 1.5; margin-bottom: 1.2rem; }
-  .disc__list { list-style: none; display: flex; flex-direction: column; gap: .9rem; margin-top: .5rem; }
-  .disc__list li { font-size: clamp(1.3rem, 3vw, 2.2rem); font-weight: 600; color: #fff;
-    opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
-  .disc__list li.on { opacity: 1; transform: none; }
-  .disc__list li::before { content: "\25B8  "; color: #e11; font-weight: 900; }
+  /* items en LIGNE séparés par un point · (pas de puces), révélés au clic un par un */
+  .disc__line { font-size: clamp(1.3rem, 3vw, 2.3rem); font-weight: 600; color: #fff;
+    line-height: 1.5; max-width: 40ch; text-align: center; }
+  .disc__item, .disc__dot { opacity: 0; transition: opacity .5s ease; }
+  .disc__item.on, .disc__dot.on { opacity: 1; }
+  .disc__dot { color: #ff1a1a; font-weight: 900; margin: 0 .5em; }
 
   /* ============ cellular — soupe métaball WebGL plein écran (signature) ============ */
   .scene--cellular { padding: 0; }
@@ -1317,24 +1323,36 @@ const renderers = {
     return { el };
   },
 
-  // Disclaimer — triangle ⚠️ rouge + « DISCLAIMER » + bullets révélés au clic
+  // Disclaimer — triangle ⚠️ + « DISCLAIMER » rouge relief, puis les items s'enchaînent
+  // AU CLIC, séparés par un point « · » (pas de puces), comme une phrase qui se construit.
   disclaimer(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--disclaimer");
+    const items = (s.items || []).map((it, i) =>
+      `${i > 0 ? '<span class="disc__dot">·</span>' : ""}<span class="disc__item">${it}</span>`).join("");
     el.querySelector(".scene__content").innerHTML = `
       <div class="disc__warn reveal">
-        <svg viewBox="0 0 100 88" class="disc__tri"><path d="M50 4 L96 84 L4 84 Z" fill="none" stroke="#e11" stroke-width="7" stroke-linejoin="round"/><rect x="46" y="30" width="8" height="30" rx="4" fill="#e11"/><circle cx="50" cy="70" r="5" fill="#e11"/></svg>
+        <svg viewBox="0 0 100 88" class="disc__tri"><path d="M50 5 L95 83 L5 83 Z" fill="none" stroke="#ee1111" stroke-width="6" stroke-linejoin="round"/><rect x="46" y="30" width="8" height="30" rx="4" fill="#ee1111"/><circle cx="50" cy="70" r="5" fill="#ee1111"/></svg>
       </div>
-      <h1 class="disc__title reveal">${s.title || "DISCLAIMER"}</h1>
+      <h1 class="disc__title reveal" data-text="${s.title || "DISCLAIMER"}">${s.title || "DISCLAIMER"}</h1>
       ${s.body ? `<p class="disc__body reveal">${s.body}</p>` : ""}
-      <ul class="disc__list">${(s.items || []).map((it) => `<li>${it}</li>`).join("")}</ul>`;
-    const lis = [...el.querySelectorAll(".disc__list li")];
+      <p class="disc__line">${items}</p>`;
+    // chaque item + son point précédent forme une unité révélée au clic
+    const parts = [...el.querySelectorAll(".disc__item, .disc__dot")];
+    // regroupe : [item0], [dot,item1], [dot,item2]… → on révèle item par item (avec son point)
+    const steps = [];
+    let cur = [];
+    parts.forEach((node) => {
+      if (node.classList.contains("disc__item")) { cur.push(node); steps.push(cur); cur = []; }
+      else { cur.push(node); }
+    });
     let shown = 0;
+    const reset = () => { parts.forEach((n) => n.classList.remove("on")); shown = 0; };
     return {
       el,
-      onEnter() { lis.forEach((li) => li.classList.remove("on")); shown = 0; },
-      onExit()  { lis.forEach((li) => li.classList.remove("on")); shown = 0; },
-      advance() { if (shown < lis.length) { lis[shown].classList.add("on"); shown++; return true; } return false; }
+      onEnter() { reset(); },
+      onExit()  { reset(); },
+      advance() { if (shown < steps.length) { steps[shown].forEach((n) => n.classList.add("on")); shown++; return true; } return false; }
     };
   },
 

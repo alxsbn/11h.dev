@@ -458,15 +458,21 @@
   .scene--disclaimer .scene__content { max-width: 60ch; display: flex; flex-direction: column; align-items: center; }
   .disc__tri { width: clamp(70px, 10vw, 120px); height: auto; margin-bottom: .3rem;
     filter: drop-shadow(0 0 14px rgba(230,20,20,.6)); }
-  .disc__title { font-family: -apple-system, "Arial Black", sans-serif; font-weight: 900;
-    font-size: clamp(2.6rem, 8vw, 6rem); letter-spacing: .04em; color: #e11;
-    text-shadow: 0 0 20px rgba(230,20,20,.5), 0 3px 0 #900; margin: 0 0 1rem; }
+  /* DISCLAIMER — rouge vif, très bold, relief 3D (empilement d'ombres foncées) façon meme */
+  .disc__title { font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif; font-weight: 900;
+    font-size: clamp(3rem, 9.5vw, 7rem); letter-spacing: .02em; line-height: 1;
+    color: #ff1a1a; margin: 0 0 1.4rem;
+    text-shadow:
+      1px 1px 0 #b00, 2px 2px 0 #900, 3px 3px 0 #7a0000, 4px 4px 0 #5a0000,
+      5px 5px 0 #400, 6px 6px 8px rgba(0,0,0,.9),
+      0 0 24px rgba(255,26,26,.55), 0 0 46px rgba(255,26,26,.3); }
   .disc__body { color: #eee; font-size: clamp(1rem, 2vw, 1.4rem); line-height: 1.5; margin-bottom: 1.2rem; }
-  .disc__list { list-style: none; display: flex; flex-direction: column; gap: .9rem; margin-top: .5rem; }
-  .disc__list li { font-size: clamp(1.3rem, 3vw, 2.2rem); font-weight: 600; color: #fff;
-    opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
-  .disc__list li.on { opacity: 1; transform: none; }
-  .disc__list li::before { content: "\25B8  "; color: #e11; font-weight: 900; }
+  /* items en LIGNE séparés par un point · (pas de puces), révélés au clic un par un */
+  .disc__line { font-size: clamp(1.3rem, 3vw, 2.3rem); font-weight: 600; color: #fff;
+    line-height: 1.5; max-width: 40ch; text-align: center; }
+  .disc__item, .disc__dot { opacity: 0; transition: opacity .5s ease; }
+  .disc__item.on, .disc__dot.on { opacity: 1; }
+  .disc__dot { color: #ff1a1a; font-weight: 900; margin: 0 .5em; }
 
   /* ============ cellular — soupe métaball WebGL plein écran (signature) ============ */
   .scene--cellular { padding: 0; }

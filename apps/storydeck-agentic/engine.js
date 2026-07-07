@@ -206,24 +206,36 @@ const renderers = {
     return { el };
   },
 
-  // Disclaimer — triangle ⚠️ rouge + « DISCLAIMER » + bullets révélés au clic
+  // Disclaimer — triangle ⚠️ + « DISCLAIMER » rouge relief, puis les items s'enchaînent
+  // AU CLIC, séparés par un point « · » (pas de puces), comme une phrase qui se construit.
   disclaimer(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--disclaimer");
+    const items = (s.items || []).map((it, i) =>
+      `${i > 0 ? '<span class="disc__dot">·</span>' : ""}<span class="disc__item">${it}</span>`).join("");
     el.querySelector(".scene__content").innerHTML = `
       <div class="disc__warn reveal">
-        <svg viewBox="0 0 100 88" class="disc__tri"><path d="M50 4 L96 84 L4 84 Z" fill="none" stroke="#e11" stroke-width="7" stroke-linejoin="round"/><rect x="46" y="30" width="8" height="30" rx="4" fill="#e11"/><circle cx="50" cy="70" r="5" fill="#e11"/></svg>
+        <svg viewBox="0 0 100 88" class="disc__tri"><path d="M50 5 L95 83 L5 83 Z" fill="none" stroke="#ee1111" stroke-width="6" stroke-linejoin="round"/><rect x="46" y="30" width="8" height="30" rx="4" fill="#ee1111"/><circle cx="50" cy="70" r="5" fill="#ee1111"/></svg>
       </div>
-      <h1 class="disc__title reveal">${s.title || "DISCLAIMER"}</h1>
+      <h1 class="disc__title reveal" data-text="${s.title || "DISCLAIMER"}">${s.title || "DISCLAIMER"}</h1>
       ${s.body ? `<p class="disc__body reveal">${s.body}</p>` : ""}
-      <ul class="disc__list">${(s.items || []).map((it) => `<li>${it}</li>`).join("")}</ul>`;
-    const lis = [...el.querySelectorAll(".disc__list li")];
+      <p class="disc__line">${items}</p>`;
+    // chaque item + son point précédent forme une unité révélée au clic
+    const parts = [...el.querySelectorAll(".disc__item, .disc__dot")];
+    // regroupe : [item0], [dot,item1], [dot,item2]… → on révèle item par item (avec son point)
+    const steps = [];
+    let cur = [];
+    parts.forEach((node) => {
+      if (node.classList.contains("disc__item")) { cur.push(node); steps.push(cur); cur = []; }
+      else { cur.push(node); }
+    });
     let shown = 0;
+    const reset = () => { parts.forEach((n) => n.classList.remove("on")); shown = 0; };
     return {
       el,
-      onEnter() { lis.forEach((li) => li.classList.remove("on")); shown = 0; },
-      onExit()  { lis.forEach((li) => li.classList.remove("on")); shown = 0; },
-      advance() { if (shown < lis.length) { lis[shown].classList.add("on"); shown++; return true; } return false; }
+      onEnter() { reset(); },
+      onExit()  { reset(); },
+      advance() { if (shown < steps.length) { steps[shown].forEach((n) => n.classList.add("on")); shown++; return true; } return false; }
     };
   },
 
