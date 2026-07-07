@@ -419,9 +419,15 @@ void main(){
       const sx = st.at*(w-46);
       if (sx > xmax+2) return;
       if (st.mark) {
-        // jalon « marqueur » (S.I.M.P.L.E, PSE, audit…) : gros point NOIR, sans label
+        // jalon « marqueur », sans label. mark:"gold" → point DORÉ ; sinon NOIR.
+        const gold = st.mark === "gold";
         ctx.beginPath(); ctx.arc(sx, mid, 6, 0, Math.PI*2);
-        ctx.fillStyle = "#1c1c1c"; ctx.fill();
+        if (gold) {
+          ctx.fillStyle = "#e0a020"; ctx.fill();
+          ctx.lineWidth = 1.5; ctx.strokeStyle = "#a86e10"; ctx.stroke();
+        } else {
+          ctx.fillStyle = "#1c1c1c"; ctx.fill();
+        }
       } else {
         // station datée normale : pastille crème cerclée bleu
         ctx.beginPath(); ctx.arc(sx, mid, 4.5, 0, Math.PI*2);
@@ -533,7 +539,7 @@ void main(){
 
     // station (jalon frise) — positionnée sur les VRAIS jalons datés
     if (b.station) {
-      this.stations.push({ at: (i+0.0)/(this.beats.length-1), date: b.station.date || null, mark: !!b.station.mark });
+      this.stations.push({ at: (i+0.0)/(this.beats.length-1), date: b.station.date || null, mark: b.station.mark || false });
     }
   }
 

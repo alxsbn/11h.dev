@@ -31,7 +31,7 @@
       "type": "cellular",
       "beats": [
         {
-          "chapter": "I — La fondation",
+          "chapter": "I — Fondation",
           "tempo": 0.8,
           "add": [
             {
@@ -280,10 +280,10 @@
           }
         },
         {
-          "caption": "<span class=\"hl\">KO data team</span> — l'équipe démarre.",
+          "caption": "<span class=\"hl\">KO data team</span>",
           "station": {
             "date": "déc. 2022",
-            "mark": true
+            "mark": "gold"
           }
         },
         {
@@ -369,10 +369,29 @@
           }
         },
         {
-          "caption": "<span class=\"hl\">AI Code of Conduct</span> — on cadre l'usage de l'IA.",
+          "caption": "<span class=\"hl--accent\">ChatGPT</span> sort. Tout le monde teste.",
+          "add": [
+            {
+              "id": "chatgpt",
+              "usage": "agent",
+              "kind": "agent",
+              "x": 0.7,
+              "y": 0.68,
+              "r": 0.06,
+              "label": "ChatGPT",
+              "logo": "chatgpt.svg"
+            }
+          ],
+          "station": {
+            "date": "mars 2023",
+            "mark": "gold"
+          }
+        },
+        {
+          "caption": "<span class=\"hl\">AI Code of Conduct</span>",
           "station": {
             "date": "juil. 2023",
-            "mark": true
+            "mark": "gold"
           }
         },
         {
@@ -416,7 +435,7 @@
             "date": "sept. 2023",
             "mark": true
           },
-          "caption": "<span class=\"hl\">S.I.M.P.L.E</span> — nouveau plan de rémunération. Un bouton rouge."
+          "caption": "<span class=\"hl--hot\">Bascule stratégique</span>"
         },
         {},
         {
@@ -458,23 +477,11 @@
           }
         },
         {
-          "add": [
-            {
-              "id": "chatgpt",
-              "usage": "agent",
-              "kind": "agent",
-              "x": 0.68,
-              "y": 0.66,
-              "r": 0.07,
-              "label": "ChatGPT",
-              "logo": "chatgpt.svg"
-            }
-          ],
           "station": {
             "date": "Q2 2024",
-            "mark": true
+            "mark": "gold"
           },
-          "caption": "<span class=\"hl\">Prompt like a star</span> — on intègre l'IA dans nos process."
+          "caption": "<span class=\"hl\">Prompt like a star</span>"
         },
         {
           "add": [
@@ -491,7 +498,7 @@
           ]
         },
         {
-          "caption": "<span class=\"hl--hot\">Lean progressif</span> — on ne remplace plus les départs.",
+          "caption": "<span class=\"hl--hot\">Lean progressif</span>",
           "station": {
             "date": "juin 2024",
             "mark": true
@@ -559,13 +566,45 @@
           ]
         },
         {
+          "add": [
+            {
+              "id": "metric",
+              "usage": "gouvernance",
+              "kind": "tech",
+              "x": 0.34,
+              "y": 0.3,
+              "r": 0.07,
+              "label": "metric tree"
+            }
+          ],
+          "station": {
+            "date": "nov. 2024"
+          }
+        },
+        {
+          "add": [
+            {
+              "id": "catalog",
+              "usage": "gouvernance",
+              "kind": "tech",
+              "x": 0.3,
+              "y": 0.4,
+              "r": 0.06,
+              "label": "data catalog"
+            }
+          ],
+          "station": {
+            "date": "janv. 2025"
+          }
+        },
+        {
           "chapter": "II — Transition",
           "tempo": 1.35,
           "station": {
             "date": "2024",
             "mark": true
           },
-          "caption": "<span class=\"hl\">Plan de licenciement éco</span> — sans impact sur nous."
+          "caption": "<span class=\"hl--hot\">Contraction</span>"
         },
         {
           "size": [
@@ -619,21 +658,9 @@
             "date": "janv. 2025",
             "mark": true
           },
-          "caption": "<span class=\"hl--hot\">Transition</span> — « une Rolls-Royce, mais trop de mode ticket ». On dégrossit."
+          "caption": "<span class=\"hl--hot\">Audit Data</span>"
         },
-        {
-          "add": [
-            {
-              "id": "catalog",
-              "usage": "gouvernance",
-              "kind": "tech",
-              "x": 0.3,
-              "y": 0.3,
-              "r": 0.05,
-              "label": "data catalog"
-            }
-          ]
-        },
+        {},
         {
           "absorb": [
             {
@@ -718,6 +745,17 @@
           ]
         },
         {
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.2
+            }
+          ],
+          "station": {
+            "date": "juil. 2025"
+          }
+        },
+        {
           "absorb": [
             {
               "id": "sre",
@@ -739,6 +777,14 @@
             {
               "id": "claude",
               "r": 0.1
+            },
+            {
+              "id": "skills",
+              "r": 0.05
+            },
+            {
+              "id": "dbt",
+              "r": 0.188
             }
           ],
           "move": [
@@ -778,11 +824,21 @@
             "date": "déc. 2025",
             "mark": true
           },
-          "caption": "<span class=\"hl\">Purge du backlog</span> — Genie + semantic layer se déploient.",
+          "caption": "<span class=\"hl\">Purge du backlog</span>",
           "morph": [
             {
               "id": "claude",
               "label": "Claude Code · YOLO"
+            }
+          ],
+          "size": [
+            {
+              "id": "skills",
+              "r": 0.06
+            },
+            {
+              "id": "dbt",
+              "r": 0.176
             }
           ]
         },
@@ -811,6 +867,14 @@
             {
               "id": "genie",
               "r": 0.09
+            },
+            {
+              "id": "skills",
+              "r": 0.07
+            },
+            {
+              "id": "dbt",
+              "r": 0.164
             }
           ]
         },
@@ -818,8 +882,12 @@
           "morph": [
             {
               "id": "linear",
-              "label": "Linear · prompt-base",
+              "label": "Linear · agents logs",
               "r": 0.055
+            },
+            {
+              "id": "claude",
+              "label": "Claude Code · headless"
             }
           ],
           "add": [
@@ -831,53 +899,123 @@
               "x": 0.22,
               "y": 0.46,
               "r": 0.055
+            }
+          ],
+          "station": {
+            "date": "janv. 2026"
+          },
+          "size": [
+            {
+              "id": "skills",
+              "r": 0.08
+            },
+            {
+              "id": "claude",
+              "r": 0.15
+            },
+            {
+              "id": "dbt",
+              "r": 0.152
+            }
+          ]
+        },
+        {
+          "size": [
+            {
+              "id": "claude",
+              "r": 0.12
+            },
+            {
+              "id": "skills",
+              "r": 0.09
+            },
+            {
+              "id": "dbt",
+              "r": 0.14
+            }
+          ]
+        },
+        {
+          "station": {
+            "date": "Agentic at scale",
+            "mark": true
+          },
+          "caption": "<span class=\"hl--hot\">Agentic at scale</span>",
+          "size": [
+            {
+              "id": "skills",
+              "r": 0.1
+            },
+            {
+              "id": "dbt",
+              "r": 0.128
+            }
+          ],
+          "add": [
+            {
+              "id": "dev0",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "dev",
+              "x": 0.9,
+              "y": 0.66,
+              "r": 0.04
             },
             {
               "id": "dev1",
               "usage": "people_prod",
               "kind": "human",
               "label": "dev",
-              "x": 0.86,
-              "y": 0.64,
-              "r": 0.05
-            }
-          ],
-          "station": {
-            "date": "janv. 2026"
-          }
-        },
-        {
-          "add": [
+              "x": 0.859,
+              "y": 0.717,
+              "r": 0.04
+            },
             {
-              "id": "headless",
-              "usage": "agent",
-              "kind": "agent",
-              "label": "Claude headless",
-              "x": 0.6,
+              "id": "dev2",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "dev",
+              "x": 0.791,
+              "y": 0.695,
+              "r": 0.04
+            },
+            {
+              "id": "dev3",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "dev",
+              "x": 0.791,
+              "y": 0.625,
+              "r": 0.04
+            },
+            {
+              "id": "dev4",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "dev",
+              "x": 0.859,
+              "y": 0.603,
+              "r": 0.04
+            },
+            {
+              "id": "prod0",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "product",
+              "x": 0.92,
               "y": 0.5,
-              "r": 0.06
-            }
-          ],
-          "size": [
+              "r": 0.04
+            },
             {
-              "id": "claude",
-              "r": 0.12
-            }
-          ],
-          "move": [
-            {
-              "id": "headless",
-              "x": 0.62,
-              "y": 0.52
+              "id": "prod1",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "product",
+              "x": 0.8,
+              "y": 0.5,
+              "r": 0.04
             }
           ]
-        },
-        {
-          "station": {
-            "date": "Wahoo",
-            "mark": true
-          },
-          "caption": "<span class=\"hl--hot\">L'effet Wahoo</span> — analyse ET contre-analyse en 15 min."
         },
         {
           "add": [
@@ -911,13 +1049,67 @@
               "logo": "fivetran.svg"
             },
             {
-              "id": "dev2",
-              "usage": "people_prod",
+              "id": "mkt0",
+              "usage": "people_mkt",
               "kind": "human",
-              "label": "dev",
-              "x": 0.88,
-              "y": 0.7,
-              "r": 0.05
+              "label": "marketing",
+              "x": 0.86,
+              "y": 0.78,
+              "r": 0.04
+            },
+            {
+              "id": "mkt1",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "marketing",
+              "x": 0.8,
+              "y": 0.84,
+              "r": 0.04
+            },
+            {
+              "id": "mkt2",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "marketing",
+              "x": 0.74,
+              "y": 0.78,
+              "r": 0.04
+            },
+            {
+              "id": "mkt3",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "marketing",
+              "x": 0.8,
+              "y": 0.72,
+              "r": 0.04
+            },
+            {
+              "id": "sales0",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "sales",
+              "x": 0.76,
+              "y": 0.82,
+              "r": 0.04
+            },
+            {
+              "id": "sales1",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "sales",
+              "x": 0.67,
+              "y": 0.872,
+              "r": 0.04
+            },
+            {
+              "id": "sales2",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "sales",
+              "x": 0.67,
+              "y": 0.768,
+              "r": 0.04
             }
           ],
           "morph": [
@@ -937,6 +1129,14 @@
             {
               "id": "teams",
               "r": 0.09
+            },
+            {
+              "id": "skills",
+              "r": 0.11
+            },
+            {
+              "id": "dbt",
+              "r": 0.116
             }
           ],
           "station": {
@@ -949,15 +1149,6 @@
           "tempo": 2.0,
           "add": [
             {
-              "id": "metric",
-              "usage": "gouvernance",
-              "kind": "tech",
-              "x": 0.36,
-              "y": 0.4,
-              "r": 0.06,
-              "label": "metric tree"
-            },
-            {
               "id": "autolearn",
               "usage": "agent",
               "kind": "agent",
@@ -967,13 +1158,40 @@
               "r": 0.055
             },
             {
-              "id": "prod",
+              "id": "content0",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "content",
+              "x": 0.68,
+              "y": 0.82,
+              "r": 0.04
+            },
+            {
+              "id": "content1",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "content",
+              "x": 0.56,
+              "y": 0.82,
+              "r": 0.04
+            },
+            {
+              "id": "comex0",
               "usage": "people_prod",
               "kind": "human",
-              "label": "product",
-              "x": 0.84,
-              "y": 0.72,
-              "r": 0.055
+              "label": "comex",
+              "x": 0.61,
+              "y": 0.78,
+              "r": 0.04
+            },
+            {
+              "id": "comex1",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "comex",
+              "x": 0.49,
+              "y": 0.78,
+              "r": 0.04
             }
           ],
           "size": [
@@ -992,6 +1210,14 @@
             {
               "id": "teams",
               "r": 0.12
+            },
+            {
+              "id": "skills",
+              "r": 0.12
+            },
+            {
+              "id": "dbt",
+              "r": 0.104
             }
           ],
           "move": [
@@ -1011,30 +1237,14 @@
           }
         },
         {
-          "add": [
-            {
-              "id": "mkt",
-              "usage": "people_mkt",
-              "kind": "human",
-              "label": "marketing",
-              "x": 0.78,
-              "y": 0.78,
-              "r": 0.06
-            },
-            {
-              "id": "fin",
-              "usage": "people_mkt",
-              "kind": "human",
-              "label": "finance",
-              "x": 0.68,
-              "y": 0.8,
-              "r": 0.055
-            }
-          ],
           "size": [
             {
               "id": "claude",
               "r": 0.15
+            },
+            {
+              "id": "dbt",
+              "r": 0.092
             }
           ],
           "move": [
@@ -1057,6 +1267,44 @@
               "id": "github",
               "label": "GitHub · monorepo"
             }
+          ],
+          "add": [
+            {
+              "id": "fin0",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "finance",
+              "x": 0.56,
+              "y": 0.82,
+              "r": 0.04
+            },
+            {
+              "id": "fin1",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "finance",
+              "x": 0.44,
+              "y": 0.82,
+              "r": 0.04
+            },
+            {
+              "id": "board0",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "board",
+              "x": 0.48,
+              "y": 0.78,
+              "r": 0.04
+            },
+            {
+              "id": "board1",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "board",
+              "x": 0.36,
+              "y": 0.78,
+              "r": 0.04
+            }
           ]
         },
         {
@@ -1071,13 +1319,58 @@
               "r": 0.06
             },
             {
-              "id": "metiers",
+              "id": "supply0",
               "usage": "people_prod",
               "kind": "human",
-              "label": "les métiers",
-              "x": 0.72,
+              "label": "supply",
+              "x": 0.4,
               "y": 0.82,
-              "r": 0.09
+              "r": 0.04
+            },
+            {
+              "id": "supply1",
+              "usage": "people_prod",
+              "kind": "human",
+              "label": "supply",
+              "x": 0.28,
+              "y": 0.82,
+              "r": 0.04
+            },
+            {
+              "id": "clients0",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "clients",
+              "x": 0.3,
+              "y": 0.78,
+              "r": 0.04
+            },
+            {
+              "id": "clients1",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "clients",
+              "x": 0.24,
+              "y": 0.84,
+              "r": 0.04
+            },
+            {
+              "id": "clients2",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "clients",
+              "x": 0.18,
+              "y": 0.78,
+              "r": 0.04
+            },
+            {
+              "id": "clients3",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "clients",
+              "x": 0.24,
+              "y": 0.72,
+              "r": 0.04
             }
           ],
           "size": [
@@ -1086,8 +1379,8 @@
               "r": 0.08
             },
             {
-              "id": "metiers",
-              "r": 0.11
+              "id": "dbt",
+              "r": 0.08
             }
           ],
           "station": {
@@ -1107,12 +1400,6 @@
               "r": 0.1
             }
           ],
-          "absorb": [
-            {
-              "id": "headless",
-              "into": "routines"
-            }
-          ],
           "size": [
             {
               "id": "notion",
@@ -1129,6 +1416,10 @@
             {
               "id": "routines",
               "r": 0.08
+            },
+            {
+              "id": "dbt",
+              "r": 0.068
             }
           ],
           "move": [
@@ -1154,6 +1445,10 @@
               "into": "me"
             },
             {
+              "id": "dev0",
+              "into": "me"
+            },
+            {
               "id": "dev1",
               "into": "me"
             },
@@ -1162,20 +1457,110 @@
               "into": "me"
             },
             {
-              "id": "prod",
+              "id": "dev3",
               "into": "me"
             },
             {
-              "id": "mkt",
+              "id": "dev4",
               "into": "me"
             },
             {
-              "id": "fin",
+              "id": "prod0",
               "into": "me"
             },
             {
-              "id": "metiers",
+              "id": "prod1",
               "into": "me"
+            },
+            {
+              "id": "mkt0",
+              "into": "me"
+            },
+            {
+              "id": "mkt1",
+              "into": "me"
+            },
+            {
+              "id": "mkt2",
+              "into": "me"
+            },
+            {
+              "id": "mkt3",
+              "into": "me"
+            },
+            {
+              "id": "sales0",
+              "into": "me"
+            },
+            {
+              "id": "sales1",
+              "into": "me"
+            },
+            {
+              "id": "sales2",
+              "into": "me"
+            },
+            {
+              "id": "content0",
+              "into": "me"
+            },
+            {
+              "id": "content1",
+              "into": "me"
+            },
+            {
+              "id": "comex0",
+              "into": "me"
+            },
+            {
+              "id": "comex1",
+              "into": "me"
+            },
+            {
+              "id": "fin0",
+              "into": "me"
+            },
+            {
+              "id": "fin1",
+              "into": "me"
+            },
+            {
+              "id": "board0",
+              "into": "me"
+            },
+            {
+              "id": "board1",
+              "into": "me"
+            },
+            {
+              "id": "supply0",
+              "into": "me"
+            },
+            {
+              "id": "supply1",
+              "into": "me"
+            },
+            {
+              "id": "clients0",
+              "into": "me"
+            },
+            {
+              "id": "clients1",
+              "into": "me"
+            },
+            {
+              "id": "clients2",
+              "into": "me"
+            },
+            {
+              "id": "clients3",
+              "into": "me"
+            }
+          ],
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.056
             }
           ]
         },
@@ -1220,10 +1605,6 @@
             },
             {
               "id": "databricks",
-              "r": 0.025
-            },
-            {
-              "id": "dbt",
               "r": 0.025
             },
             {
@@ -1301,6 +1682,10 @@
             {
               "id": "chatgpt",
               "r": 0.025
+            },
+            {
+              "id": "dbt",
+              "r": 0.044
             }
           ]
         },
@@ -1316,7 +1701,13 @@
           ],
           "station": {
             "date": "aujourd'hui"
-          }
+          },
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.032
+            }
+          ]
         }
       ]
     },
