@@ -778,7 +778,13 @@
             "date": "déc. 2025",
             "mark": true
           },
-          "caption": "<span class=\"hl\">Purge du backlog</span> — Genie + semantic layer se déploient."
+          "caption": "<span class=\"hl\">Purge du backlog</span> — Genie + semantic layer se déploient.",
+          "morph": [
+            {
+              "id": "claude",
+              "label": "Claude Code · YOLO"
+            }
+          ]
         },
         {
           "add": [
