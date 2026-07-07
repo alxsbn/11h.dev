@@ -483,14 +483,22 @@
     text-shadow:
       1px 1px 0 #b00, 2px 2px 0 #900, 3px 3px 0 #7a0000, 4px 4px 0 #5a0000,
       5px 5px 0 #400, 6px 6px 8px rgba(0,0,0,.9),
-      0 0 24px rgba(255,26,26,.55), 0 0 46px rgba(255,26,26,.3); }
-  .disc__body { color: #eee; font-size: clamp(1rem, 2vw, 1.4rem); line-height: 1.5; margin-bottom: 1.2rem; }
-  /* items en LIGNE séparés par un point · (pas de puces), révélés au clic un par un */
-  .disc__line { font-size: clamp(1.3rem, 3vw, 2.3rem); font-weight: 600; color: #fff;
-    line-height: 1.5; max-width: 40ch; text-align: center; }
-  .disc__item, .disc__dot { opacity: 0; transition: opacity .5s ease; }
-  .disc__item.on, .disc__dot.on { opacity: 1; }
-  .disc__dot { color: #ff1a1a; font-weight: 900; margin: 0 .5em; }
+      0 0 24px rgba(255,26,26,.55), 0 0 46px rgba(255,26,26,.3);
+    /* petite animation : entrée en "slam" (zoom + shake) puis glow qui pulse */
+    animation: disc-slam .55s cubic-bezier(.2,1.4,.4,1) both, disc-glow 2.4s ease-in-out .6s infinite; }
+  @keyframes disc-slam {
+    0%   { opacity: 0; transform: scale(1.5) rotate(-3deg); }
+    60%  { opacity: 1; transform: scale(.94) rotate(1deg); }
+    80%  { transform: scale(1.03) rotate(-.5deg); }
+    100% { transform: scale(1) rotate(0); } }
+  @keyframes disc-glow {
+    0%,100% { text-shadow: 1px 1px 0 #b00,2px 2px 0 #900,3px 3px 0 #7a0000,4px 4px 0 #5a0000,5px 5px 0 #400,6px 6px 8px rgba(0,0,0,.9), 0 0 22px rgba(255,26,26,.5), 0 0 40px rgba(255,26,26,.25); }
+    50%     { text-shadow: 1px 1px 0 #b00,2px 2px 0 #900,3px 3px 0 #7a0000,4px 4px 0 #5a0000,5px 5px 0 #400,6px 6px 8px rgba(0,0,0,.9), 0 0 34px rgba(255,45,45,.85), 0 0 64px rgba(255,45,45,.5); } }
+  /* message sur UNE seule ligne (pas de retour), révélé segment par segment au clic */
+  .disc__line { font-size: clamp(1.1rem, 2.6vw, 2rem); font-weight: 600; color: #fff;
+    white-space: nowrap; text-align: center; }
+  .disc__item { opacity: 0; transition: opacity .5s ease; }
+  .disc__item.on { opacity: 1; }
 
   /* ============ cellular — soupe métaball WebGL plein écran (signature) ============ */
   .scene--cellular { padding: 0; }
@@ -526,13 +534,17 @@
     filter: drop-shadow(0 1px 2px rgba(20,45,50,.35)); }
   /* caption : bande basse dédiée, au-dessus de la frise — jamais sous les bulles.
      Fond crème dégradé pour détacher le texte de la soupe, quoi qu'il arrive derrière. */
-  .cellular__caption { position: absolute; left: 0; right: 0; bottom: clamp(56px, 9vh, 88px);
+  .cellular__caption { position: absolute; left: 0; right: 0; bottom: clamp(84px, 14vh, 140px);
     z-index: 3; padding: 1.4rem 5vw 1rem;
     background: linear-gradient(0deg, rgba(246,239,228,.96) 60%, rgba(246,239,228,0));
     font-family: var(--font-chapter); font-style: italic;
     font-size: clamp(1.3rem, 3vw, 2.4rem); font-weight: 500; color: var(--fg); line-height: 1.2;
     transition: opacity .45s ease, transform .45s ease; }
   .cellular__caption.off { opacity: 0; transform: translateY(14px); }
+  /* date courante du beat, en gros en bas à DROITE (taille ISO des sous-titres) */
+  .cellular__date { position: absolute; right: 4vw; bottom: clamp(90px, 15vh, 150px); z-index: 4;
+    font-family: var(--font-chapter); font-style: italic; font-weight: 700;
+    font-size: clamp(1.3rem, 3vw, 2.4rem); color: var(--fg); text-shadow: 0 1px 3px rgba(246,239,228,.9); }
   .cellular__caption .hl { color: var(--fg); font-weight: 800; font-style: normal; }
   .cellular__caption .hl--accent { color: var(--accent-deep); font-weight: 800; font-style: normal; }
   .cellular__caption .hl--hot { color: var(--hot-deep); font-weight: 800; font-style: normal; }
@@ -549,7 +561,7 @@
   .cellular__chapter.on span { opacity: 1; transform: scale(1); }
   /* frise fusionnée métro+cardiogramme, bande fine en bas */
   .cellular__frieze { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
-    height: clamp(56px, 9vh, 88px); pointer-events: none; }
+    height: clamp(84px, 14vh, 140px); pointer-events: none; }
   .cellular__frieze canvas { width: 100%; height: 100%; display: block; }
 
   #progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 50; transition: width .2s ease; }

@@ -21,10 +21,11 @@
       "type": "disclaimer",
       "title": "DISCLAIMER",
       "items": [
-        "B2B2C — Retail / MLM",
-        "Empowerment au féminin",
-        "Créé en 2017 par 4 femmes",
-        "Max ~100 employés"
+        "B2B2C.",
+        "Retail.",
+        "MLM.",
+        "Créé en 2017.",
+        "100 employés."
       ]
     },
     {
@@ -369,7 +370,7 @@
           }
         },
         {
-          "caption": "<span class=\"hl--accent\">ChatGPT</span> sort. Tout le monde teste.",
+          "caption": "<span class=\"hl--accent\">ChatGPT</span>",
           "add": [
             {
               "id": "chatgpt",
@@ -1143,7 +1144,7 @@
             "date": "févr. 2026",
             "mark": true
           },
-          "caption": "<span class=\"hl--accent\">Claude Teams</span> se déploie — les métiers interagissent."
+          "caption": "<span class=\"hl--accent\">Claude Teams</span>"
         },
         {
           "tempo": 2.0,
@@ -1723,12 +1724,42 @@
     {
       "type": "metroline",
       "color": "#2f8f9d",
+      "phase": 0.0,
+      "wave": 2.2,
       "items": [
-        "Élément 1 (placeholder)",
-        "Élément 2",
-        "Élément 3",
-        "Élément 4",
-        "Élément 5"
+        "Contexte business",
+        "Lean",
+        "Data-Driven",
+        "Data Fog",
+        "Cost-Center",
+        "Span of control"
+      ]
+    },
+    {
+      "type": "metroline",
+      "color": "#2f8f9d",
+      "phase": 6.9115,
+      "wave": 2.2,
+      "items": [
+        "Palliatif",
+        "Surmultiplication",
+        "Lâcher-prise",
+        "Contraction du temps",
+        "Obsolescence & sédimentation",
+        "Flux"
+      ]
+    },
+    {
+      "type": "metroline",
+      "color": "#2f8f9d",
+      "phase": 13.823,
+      "wave": 2.2,
+      "items": [
+        "Porosité",
+        "Push",
+        "Exploration",
+        "Erosion",
+        "Survie ?"
       ]
     },
     {

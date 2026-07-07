@@ -211,8 +211,10 @@ const renderers = {
   disclaimer(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--disclaimer");
+    // items sur UNE ligne, séparés par une espace (le texte porte déjà sa ponctuation),
+    // révélés un par un au clic.
     const items = (s.items || []).map((it, i) =>
-      `${i > 0 ? '<span class="disc__dot">·</span>' : ""}<span class="disc__item">${it}</span>`).join("");
+      `${i > 0 ? " " : ""}<span class="disc__item">${it}</span>`).join("");
     el.querySelector(".scene__content").innerHTML = `
       <div class="disc__warn reveal">
         <svg viewBox="0 0 100 88" class="disc__tri"><path d="M50 5 L95 83 L5 83 Z" fill="none" stroke="#ee1111" stroke-width="6" stroke-linejoin="round"/><rect x="46" y="30" width="8" height="30" rx="4" fill="#ee1111"/><circle cx="50" cy="70" r="5" fill="#ee1111"/></svg>
@@ -266,7 +268,9 @@ const renderers = {
 
   // Metroline — une ligne « chemin de métro » qui entre hors-écran à gauche, serpente
   // horizontalement et pose des stations (éléments) révélées une par une au clic.
-  // s = { heading?, items:[...], color? }
+  // Multi-slides continues : `phase` décale l'onde pour que la sortie d'une slide
+  // raccorde à l'entrée de la suivante (pas de discontinuité). `wave` = nb d'ondes.
+  // s = { heading?, items:[...], color?, phase?, wave? }
   metroline(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--metro");
@@ -274,7 +278,7 @@ const renderers = {
     el.querySelector(".scene__content").innerHTML = `
       ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
       <svg class="metro__svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
-        <path class="metro__line" fill="none" stroke="${s.color || "var(--accent)"}" stroke-width="5"
+        <path class="metro__line" fill="none" stroke="${s.color || "var(--accent)"}" stroke-width="6"
               stroke-linecap="round" d=""/>
         <g class="metro__stations"></g>
       </svg>`;
@@ -282,15 +286,20 @@ const renderers = {
     const path = el.querySelector(".metro__line");
     const gStations = el.querySelector(".metro__stations");
 
-    // trajet serpentin : entre à gauche hors-champ (x<0), ondule, sort à droite.
+    // trajet serpentin CONTINU : y = H/2 + amp·sin(phase + progression·wave·2π)
+    // `phase` (fourni) fait que la fin d'une slide = le début de la suivante en y.
     const N = items.length;
     const W = 1000, H = 560, m = 90;
+    const amp = H * 0.24, phase = s.phase || 0, wave = s.wave || 2.2;
+    const yAt = (t) => H / 2 + Math.sin(phase + t * Math.PI * wave) * amp;
     const xs = [], ys = [];
     for (let i = 0; i < N; i++) {
       const t = N > 1 ? i / (N - 1) : 0.5;
       xs.push(m + t * (W - 2 * m));
-      ys.push(H / 2 + Math.sin(t * Math.PI * 2.2) * (H * 0.24));   // vagues
+      ys.push(yAt(t));
     }
+    // expose la phase de sortie (pour chaîner la slide suivante) : phase + 1·π·wave
+    el.dataset.exitPhase = String(phase + Math.PI * wave);
     // path lissé (départ hors-écran à gauche)
     let dd = `M -80 ${ys[0] || H / 2}`;
     for (let i = 0; i < N; i++) {

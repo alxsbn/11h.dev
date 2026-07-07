@@ -108,8 +108,10 @@ export class Cellular {
       <div class="cellular__chapter"><span></span></div>
       <div class="cellular__veil"></div>
       <div class="cellular__caption"></div>
+      <div class="cellular__date"></div>
       <div class="cellular__frieze"><canvas></canvas></div>`;
     this.canvasHost = c.querySelector(".cellular__canvas");
+    this.dateEl     = c.querySelector(".cellular__date");
     this.linksCv    = c.querySelector(".cellular__links");
     this.labelsEl   = c.querySelector(".cellular__labels");
     this.chapterEl  = c.querySelector(".cellular__chapter");
@@ -157,6 +159,7 @@ void main(){
     if (this.p) this.exit();
     this.beatIdx = -1; this.cells = []; this.uid = 0; this.tempo = 1;
     this.stations = []; this.labelEls = {}; this.friezeProg = 0; this.links = [];
+    this._lastDate = undefined; if (this.dateEl) this.dateEl.textContent = "";
     const self = this;
     // Le métaball ne sert plus que de HALO de fond léger (regroupe les îlots par couleur)
     // — les cellules elles-mêmes sont dessinées en disques nets à contour par-dessus.
@@ -407,45 +410,45 @@ void main(){
     grad.addColorStop(0, "#5b9dd9");
     grad.addColorStop(0.55, "#b07bb8");
     grad.addColorStop(1, "#d64f7c");
-    ctx.strokeStyle = grad; ctx.lineWidth = 2.6; ctx.lineJoin="round"; ctx.stroke();
+    ctx.strokeStyle = grad; ctx.lineWidth = 3.4; ctx.lineJoin="round"; ctx.stroke();
     // stations (jalons datés) : la pastille se pose toujours ; la DATE ne s'écrit que si
     // elle ne chevauche pas la précédente (sinon illisible). Les dates masquées restent
     // marquées par leur point sur la ligne.
-    ctx.font = "600 12px 'Playfair Display',Georgia,serif";
+    // extrait l'ANNÉE d'une date ("déc. 2022" → "2022", "~2020" → "2020", "Q2 2024" → "2024")
+    const yearOf = (dt) => { const m = String(dt||"").match(/(20\d{2})/); return m ? m[1] : null; };
+    // points de la frise + ANNÉES en petit (une fois par année, dédupliquées)
     ctx.textAlign = "center";
-    let lastLabelRight = -Infinity;
-    const GAP = 8;   // marge mini entre deux étiquettes
+    let curDate = null; const yearsSeen = new Set(); let lastYearX = -Infinity;
     this.stations.forEach((st) => {
       const sx = st.at*(w-46);
       if (sx > xmax+2) return;
+      curDate = st.date || curDate;   // la date la plus récente atteinte = date courante
       if (st.mark) {
-        // jalon « marqueur », sans label. mark:"gold" → point DORÉ ; sinon NOIR.
         const gold = st.mark === "gold";
-        ctx.beginPath(); ctx.arc(sx, mid, 6, 0, Math.PI*2);
-        if (gold) {
-          ctx.fillStyle = "#e0a020"; ctx.fill();
-          ctx.lineWidth = 1.5; ctx.strokeStyle = "#a86e10"; ctx.stroke();
-        } else {
-          ctx.fillStyle = "#1c1c1c"; ctx.fill();
-        }
+        ctx.beginPath(); ctx.arc(sx, mid, 7, 0, Math.PI*2);
+        if (gold) { ctx.fillStyle = "#e0a020"; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = "#a86e10"; ctx.stroke(); }
+        else { ctx.fillStyle = "#1c1c1c"; ctx.fill(); }
       } else {
-        // station datée normale : pastille crème cerclée bleu
-        ctx.beginPath(); ctx.arc(sx, mid, 4.5, 0, Math.PI*2);
+        ctx.beginPath(); ctx.arc(sx, mid, 5, 0, Math.PI*2);
         ctx.fillStyle = "#f6efe4"; ctx.fill();
-        ctx.lineWidth = 2.4; ctx.strokeStyle = "#5b9dd9"; ctx.stroke();
-        if (st.date) {
-          const half = ctx.measureText(st.date).width/2;
-          if (sx - half > lastLabelRight + GAP) {
-            ctx.fillStyle = "rgba(107,93,79,.92)";
-            ctx.fillText(st.date, sx, h-4);
-            lastLabelRight = sx + half;
-          }
-        }
+        ctx.lineWidth = 2.2; ctx.strokeStyle = "#5b9dd9"; ctx.stroke();
+      }
+      // année en PETIT, une seule fois par année (dédup globale + espacement mini)
+      const y = yearOf(st.date);
+      if (y && !yearsSeen.has(y) && sx - lastYearX > 26) {
+        ctx.fillStyle = "rgba(107,93,79,.7)"; ctx.font = "600 12px 'Playfair Display',Georgia,serif";
+        ctx.fillText(y, sx, h-5);
+        yearsSeen.add(y); lastYearX = sx;
       }
     });
     // flèche « demain » au bout de la portion révélée
-    ctx.fillStyle = "#d64f7c"; ctx.font = "700 14px -apple-system,sans-serif";
+    ctx.fillStyle = "#d64f7c"; ctx.font = "700 18px -apple-system,sans-serif";
     ctx.textAlign = "left"; ctx.fillText("▸", Math.min(xmax+8, w-40), mid+4);
+    // DATE COURANTE en gros, en bas à DROITE — via un élément HTML (au-dessus de la frise)
+    if (this.dateEl && curDate !== this._lastDate) {
+      this.dateEl.textContent = curDate || "";
+      this._lastDate = curDate;
+    }
   }
 
   /* ---------- chapitre : voile + titre en fondu ---------- */
