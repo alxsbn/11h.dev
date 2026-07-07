@@ -158,7 +158,7 @@ void main(){
   enter() {
     if (this.p) this.exit();
     this.beatIdx = -1; this.cells = []; this.uid = 0; this.tempo = 1;
-    this.stations = []; this.labelEls = {}; this.friezeProg = 0; this.links = [];
+    this.stations = []; this.labelEls = {}; this.friezeProg = 0; this._friezeX = undefined; this.links = [];
     this._lastDate = undefined; if (this.dateEl) this.dateEl.textContent = "";
     const self = this;
     // Le métaball ne sert plus que de HALO de fond léger (regroupe les îlots par couleur)
@@ -166,7 +166,9 @@ void main(){
     // Réglages inspirés du prototype CellularDeck (seuil haut, douceur, glow modéré).
     // glow métaball réduit : le halo diffus par-forme (shadowBlur, canvas) prend le relais
     // → un carré a un halo carré, un rond un halo rond, plus de halo rond systématique.
-    const CFG = { background:[246,239,228], threshold:1.5, softness:0.3, glow:0.15, speed:1.0, wander:0.55 };
+    // glow RELEVÉ + threshold ABAISSÉ → le champ métaball redéborde entre voisines :
+    // les halos colorés fusionnent → aspect « soupe cellulaire » organique et flou.
+    const CFG = { background:[246,239,228], threshold:1.0, softness:0.55, glow:0.5, speed:1.0, wander:0.55 };
     this.CFG = CFG;
 
     this.p = new p5((sk) => {
@@ -297,17 +299,17 @@ void main(){
       const op = Math.max(0, Math.min(1, c.r/(0.04*this._minDim(sk))));
       // HALO DIFFUS de la MÊME FORME (via shadowBlur) — remplace le halo métaball rond.
       ctx.save();
-      // couche 1 : large + douce
-      ctx.shadowColor = `rgba(${r|0},${g|0},${b|0},${0.62*op})`;
-      ctx.shadowBlur = Math.max(30, c.r*1.15);
-      this._shapePath(ctx, c.kind, c.x, c.y, c.r*0.82);
-      ctx.fillStyle = `rgba(${r|0},${g|0},${b|0},0.015)`;
+      // couche 1 : TRÈS large + douce → nappe colorée qui déborde et fusionne (la « soupe »)
+      ctx.shadowColor = `rgba(${r|0},${g|0},${b|0},${0.8*op})`;
+      ctx.shadowBlur = Math.max(46, c.r*1.8);
+      this._shapePath(ctx, c.kind, c.x, c.y, c.r*0.78);
+      ctx.fillStyle = `rgba(${r|0},${g|0},${b|0},0.06)`;
       ctx.fill();
       // couche 2 : plus serrée, plus intense
-      ctx.shadowBlur = Math.max(14, c.r*0.55);
-      ctx.shadowColor = `rgba(${r|0},${g|0},${b|0},${0.7*op})`;
-      this._shapePath(ctx, c.kind, c.x, c.y, c.r*0.88);
-      ctx.fillStyle = `rgba(${r|0},${g|0},${b|0},0.02)`;
+      ctx.shadowBlur = Math.max(22, c.r*0.9);
+      ctx.shadowColor = `rgba(${r|0},${g|0},${b|0},${0.85*op})`;
+      this._shapePath(ctx, c.kind, c.x, c.y, c.r*0.86);
+      ctx.fillStyle = `rgba(${r|0},${g|0},${b|0},0.08)`;
       ctx.fill();
       ctx.restore();
     }
@@ -383,11 +385,23 @@ void main(){
     // progression FLUIDE : la cible est le beat courant, mais on l'atteint en glissant
     // (le flux avance/recule doucement au clic, jamais de saut sec).
     const target = beats.length ? (this.beatIdx+1)/beats.length : 0;
-    if (this.friezeProg === undefined) this.friezeProg = target;
-    this.friezeProg += (target - this.friezeProg) * 0.12;   // easing exponentiel par frame
-    if (Math.abs(target - this.friezeProg) < 0.0005) this.friezeProg = target;
-    const prog = this.friezeProg;
-    const mid = h*0.55, xmax = (w-46)*prog;
+    // AXE TEMPOREL ISO : chaque année occupe la MÊME largeur. La portion révélée va
+    // jusqu'à la date du beat courant (les stations déjà atteintes), pas jusqu'à un
+    // % de beats. Ainsi l'accumulation de points par année devient visible.
+    const YMIN = 2020, YMAX = 2026.5;                 // bornes de l'axe (juin 2026 = dernier)
+    const axisW = w - 46;
+    const yearToX = (yr) => ((yr - YMIN) / (YMAX - YMIN)) * axisW;
+    // date courante révélée = année max parmi les stations jusqu'au beat courant
+    let curYear = YMIN;
+    for (let k = 0; k <= this.beatIdx && k < this.beats.length; k++) {
+      const st = this.beats[k]?.station;
+      if (st && st.date) { const y = Cellular.dateToYear(st.date); if (y != null) curYear = Math.max(curYear, y); }
+    }
+    const targetX = yearToX(curYear);
+    if (this._friezeX === undefined) this._friezeX = targetX;
+    this._friezeX += (targetX - this._friezeX) * 0.12;   // easing exponentiel par frame
+    if (Math.abs(targetX - this._friezeX) < 0.5) this._friezeX = targetX;
+    const mid = h*0.55, xmax = this._friezeX;
     const now = performance.now()/1000;
     const N = 300;
     ctx.beginPath();
@@ -411,18 +425,25 @@ void main(){
     grad.addColorStop(0.55, "#b07bb8");
     grad.addColorStop(1, "#d64f7c");
     ctx.strokeStyle = grad; ctx.lineWidth = 3.4; ctx.lineJoin="round"; ctx.stroke();
-    // stations (jalons datés) : la pastille se pose toujours ; la DATE ne s'écrit que si
-    // elle ne chevauche pas la précédente (sinon illisible). Les dates masquées restent
-    // marquées par leur point sur la ligne.
-    // extrait l'ANNÉE d'une date ("déc. 2022" → "2022", "~2020" → "2020", "Q2 2024" → "2024")
-    const yearOf = (dt) => { const m = String(dt||"").match(/(20\d{2})/); return m ? m[1] : null; };
-    // points de la frise + ANNÉES en petit (une fois par année, dédupliquées)
+    // GRILLE ANNÉES ISO : un label par année pleine, espacé RÉGULIÈREMENT sur tout l'axe
+    // (2020, 2021, … 2026 à intervalles identiques). Toujours affiché (repère fixe).
     ctx.textAlign = "center";
-    let curDate = null; const yearsSeen = new Set(); let lastYearX = -Infinity;
+    ctx.font = "600 12px 'Playfair Display',Georgia,serif";
+    for (let yr = 2020; yr <= 2026; yr++) {
+      const yx = yearToX(yr);
+      ctx.fillStyle = "rgba(107,93,79,.6)";
+      ctx.fillText(String(yr), yx, h-5);
+      // fin tick vertical léger sous la ligne
+      ctx.strokeStyle = "rgba(107,93,79,.18)"; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(yx, mid+10); ctx.lineTo(yx, h-16); ctx.stroke();
+    }
+    // stations (jalons datés) : positionnées à leur VRAIE date sur l'axe ISO.
+    let curDate = null;
     this.stations.forEach((st) => {
-      const sx = st.at*(w-46);
-      if (sx > xmax+2) return;
-      curDate = st.date || curDate;   // la date la plus récente atteinte = date courante
+      if (st.year == null) return;
+      const sx = yearToX(st.year);
+      if (sx > xmax+2) return;                 // pas encore révélée
+      curDate = st.date || curDate;
       if (st.mark) {
         const gold = st.mark === "gold";
         ctx.beginPath(); ctx.arc(sx, mid, 7, 0, Math.PI*2);
@@ -432,13 +453,6 @@ void main(){
         ctx.beginPath(); ctx.arc(sx, mid, 5, 0, Math.PI*2);
         ctx.fillStyle = "#f6efe4"; ctx.fill();
         ctx.lineWidth = 2.2; ctx.strokeStyle = "#5b9dd9"; ctx.stroke();
-      }
-      // année en PETIT, une seule fois par année (dédup globale + espacement mini)
-      const y = yearOf(st.date);
-      if (y && !yearsSeen.has(y) && sx - lastYearX > 26) {
-        ctx.fillStyle = "rgba(107,93,79,.7)"; ctx.font = "600 12px 'Playfair Display',Georgia,serif";
-        ctx.fillText(y, sx, h-5);
-        yearsSeen.add(y); lastYearX = sx;
       }
     });
     // flèche « demain » au bout de la portion révélée
@@ -540,10 +554,27 @@ void main(){
       this.links = this.links.filter((l) => l.a!==ab.id && l.b!==ab.id);
     });
 
-    // station (jalon frise) — positionnée sur les VRAIS jalons datés
+    // station (jalon frise) — positionnée à sa VRAIE date sur un axe temporel ISO
+    // (chaque année = même largeur ; l'accumulation de points devient visible).
     if (b.station) {
-      this.stations.push({ at: (i+0.0)/(this.beats.length-1), date: b.station.date || null, mark: b.station.mark || false });
+      this.stations.push({ year: Cellular.dateToYear(b.station.date), date: b.station.date || null, mark: b.station.mark || false });
     }
+  }
+
+  /* parse une date FR variée en année décimale : "déc. 2022"→2022.96, "mi-2024"→2024.5,
+     "~2020"/"2021"→année pleine, "Q2 2024"→2024.375. NULL si pas d'année trouvée. */
+  static dateToYear(str) {
+    const s = String(str || "").toLowerCase();
+    const ym = s.match(/(20\d{2})/); if (!ym) return null;
+    const year = +ym[1];
+    const MONTHS = { janv:0, "févr":1, fevr:1, mars:2, avr:3, mai:4, juin:5,
+                     juil:6, "août":7, aout:7, sept:8, oct:9, nov:10, "déc":11, dec:11 };
+    for (const k in MONTHS) { if (s.includes(k)) return year + (MONTHS[k] + 0.5) / 12; }
+    if (s.includes("mi-") || s.startsWith("mi ")) return year + 0.5;
+    const q = s.match(/q([1-4])/); if (q) return year + (+q[1] - 0.5) / 4;
+    if (s.includes("fin")) return year + 0.92;
+    if (s.includes("début") || s.includes("debut")) return year + 0.04;
+    return year + 0.5;   // année seule → milieu d'année
   }
 
   advance() {
