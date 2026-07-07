@@ -1712,90 +1712,27 @@
       ]
     },
     {
-      "type": "bars2",
-      "heading": "Où passe le temps ? <span class=\"hl--hot\">Ça bascule.</span>",
-      "rows": [
-        {
-          "label": "Avant",
-          "segments": [
-            {
-              "name": "Plan / PRD",
-              "pct": 10,
-              "color": "#f2748c"
-            },
-            {
-              "name": "Context eng",
-              "pct": 4,
-              "color": "#e15574"
-            },
-            {
-              "name": "Build",
-              "pct": 5,
-              "color": "#c9a24b"
-            },
-            {
-              "name": "Review",
-              "pct": 15,
-              "color": "#a882dc"
-            },
-            {
-              "name": "Run",
-              "pct": 8,
-              "color": "#5aa0aa"
-            },
-            {
-              "name": "Coding",
-              "pct": 58,
-              "color": "#2f8f9d"
-            }
-          ]
-        },
-        {
-          "label": "Aujourd'hui",
-          "segments": [
-            {
-              "name": "Plan / PRD",
-              "pct": 26,
-              "color": "#f2748c"
-            },
-            {
-              "name": "Context eng",
-              "pct": 24,
-              "color": "#e15574"
-            },
-            {
-              "name": "Build",
-              "pct": 16,
-              "color": "#c9a24b"
-            },
-            {
-              "name": "Review",
-              "pct": 10,
-              "color": "#a882dc"
-            },
-            {
-              "name": "Run",
-              "pct": 18,
-              "color": "#5aa0aa"
-            },
-            {
-              "name": "Coding",
-              "pct": 6,
-              "color": "#2f8f9d"
-            }
-          ]
-        }
-      ],
-      "caption": "Moins de code. Plus de planning, de context engineering, de build out-of-the-box — et le run, lui, augmente."
-    },
-    {
       "type": "text",
       "big": true,
-      "heading": "So what ?"
+      "heading": "So what ?",
+      "items": [
+        "Accélération frénétique.",
+        "Fluidité organique"
+      ]
+    },
+    {
+      "type": "metroline",
+      "color": "#2f8f9d",
+      "items": [
+        "Élément 1 (placeholder)",
+        "Élément 2",
+        "Élément 3",
+        "Élément 4",
+        "Élément 5"
+      ]
     },
     {
       "type": "dashboard",
-      "heading": "Le contexte : <span class=\"hl--hot\">l'argent se resserre</span>.",
       "panels": [
         {
           "kind": "chart",
@@ -1881,6 +1818,83 @@
         "Croissance molle",
         "Financement rare"
       ]
+    },
+    {
+      "type": "bars2",
+      "heading": "Où passe le temps ? <span class=\"hl--hot\">Ça bascule.</span>",
+      "rows": [
+        {
+          "label": "Avant",
+          "segments": [
+            {
+              "name": "Plan / PRD",
+              "pct": 10,
+              "color": "#f2748c"
+            },
+            {
+              "name": "Context eng",
+              "pct": 4,
+              "color": "#e15574"
+            },
+            {
+              "name": "Build",
+              "pct": 5,
+              "color": "#c9a24b"
+            },
+            {
+              "name": "Review",
+              "pct": 15,
+              "color": "#a882dc"
+            },
+            {
+              "name": "Run",
+              "pct": 8,
+              "color": "#5aa0aa"
+            },
+            {
+              "name": "Coding",
+              "pct": 58,
+              "color": "#2f8f9d"
+            }
+          ]
+        },
+        {
+          "label": "Aujourd'hui",
+          "segments": [
+            {
+              "name": "Plan / PRD",
+              "pct": 26,
+              "color": "#f2748c"
+            },
+            {
+              "name": "Context eng",
+              "pct": 24,
+              "color": "#e15574"
+            },
+            {
+              "name": "Build",
+              "pct": 16,
+              "color": "#c9a24b"
+            },
+            {
+              "name": "Review",
+              "pct": 10,
+              "color": "#a882dc"
+            },
+            {
+              "name": "Run",
+              "pct": 18,
+              "color": "#5aa0aa"
+            },
+            {
+              "name": "Coding",
+              "pct": 6,
+              "color": "#2f8f9d"
+            }
+          ]
+        }
+      ],
+      "caption": "Moins de code. Plus de planning, de context engineering, de build out-of-the-box — et le run, lui, augmente."
     },
     {
       "type": "text",

@@ -242,10 +242,100 @@ const renderers = {
   text(s) {
     const el = sceneEl(s.media, s.bgVideo);
     if (s.big) el.classList.add("scene--bigtext");
+    // items optionnels : phrases enchaînées au clic, séparées par « · » (façon disclaimer)
+    const itemsHtml = (s.items && s.items.length)
+      ? `<p class="txt__line">${s.items.map((it, i) =>
+          `${i > 0 ? '<span class="txt__dot">·</span>' : ""}<span class="txt__item">${it}</span>`).join("")}</p>`
+      : "";
     el.querySelector(".scene__content").innerHTML = `
       <h2 class="reveal">${s.heading}</h2>
-      ${s.body ? `<p class="lead reveal">${s.body}</p>` : ""}`;
-    return { el };
+      ${s.body ? `<p class="lead reveal">${s.body}</p>` : ""}
+      ${itemsHtml}`;
+    if (!s.items || !s.items.length) return { el };
+    const parts = [...el.querySelectorAll(".txt__item, .txt__dot")];
+    const steps = []; let cur = [];
+    parts.forEach((n) => { if (n.classList.contains("txt__item")) { cur.push(n); steps.push(cur); cur = []; } else cur.push(n); });
+    let shown = 0;
+    const reset = () => { parts.forEach((n) => n.classList.remove("on")); shown = 0; };
+    return {
+      el,
+      onEnter() { reset(); }, onExit() { reset(); },
+      advance() { if (shown < steps.length) { steps[shown].forEach((n) => n.classList.add("on")); shown++; return true; } return false; }
+    };
+  },
+
+  // Metroline — une ligne « chemin de métro » qui entre hors-écran à gauche, serpente
+  // horizontalement et pose des stations (éléments) révélées une par une au clic.
+  // s = { heading?, items:[...], color? }
+  metroline(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--metro");
+    const items = s.items || [];
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <svg class="metro__svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
+        <path class="metro__line" fill="none" stroke="${s.color || "var(--accent)"}" stroke-width="5"
+              stroke-linecap="round" d=""/>
+        <g class="metro__stations"></g>
+      </svg>`;
+    const svg = el.querySelector(".metro__svg");
+    const path = el.querySelector(".metro__line");
+    const gStations = el.querySelector(".metro__stations");
+
+    // trajet serpentin : entre à gauche hors-champ (x<0), ondule, sort à droite.
+    const N = items.length;
+    const W = 1000, H = 560, m = 90;
+    const xs = [], ys = [];
+    for (let i = 0; i < N; i++) {
+      const t = N > 1 ? i / (N - 1) : 0.5;
+      xs.push(m + t * (W - 2 * m));
+      ys.push(H / 2 + Math.sin(t * Math.PI * 2.2) * (H * 0.24));   // vagues
+    }
+    // path lissé (départ hors-écran à gauche)
+    let dd = `M -80 ${ys[0] || H / 2}`;
+    for (let i = 0; i < N; i++) {
+      const px = xs[i], py = ys[i];
+      const prevx = i === 0 ? -80 : xs[i - 1], prevy = i === 0 ? ys[0] : ys[i - 1];
+      const cx = (prevx + px) / 2;
+      dd += ` C ${cx} ${prevy}, ${cx} ${py}, ${px} ${py}`;
+    }
+    dd += ` L ${W + 80} ${ys[N - 1] || H / 2}`;   // sort à droite hors-champ
+    path.setAttribute("d", dd);
+    const totalLen = path.getTotalLength();
+    path.style.strokeDasharray = totalLen;
+    path.style.strokeDashoffset = totalLen;
+
+    // stations (point + label) posées à chaque item
+    items.forEach((it, i) => {
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      g.setAttribute("class", "metro__st");
+      g.setAttribute("transform", `translate(${xs[i]},${ys[i]})`);
+      const below = ys[i] < H / 2;   // label au-dessus si station en bas, sous sinon
+      g.innerHTML =
+        `<circle r="9" class="metro__dot"/>` +
+        `<text class="metro__lbl" y="${below ? 34 : -22}" text-anchor="middle">${it}</text>`;
+      gStations.appendChild(g);
+    });
+    const sts = [...el.querySelectorAll(".metro__st")];
+
+    let shown = 0;
+    function revealTo(k) {
+      // dessine la ligne jusqu'à la station k (proportion de longueur), révèle les stations 0..k
+      const frac = N > 1 ? (k + 1) / (N + 1) : 1;   // +1 pour laisser un bout après la dernière
+      path.style.strokeDashoffset = totalLen * (1 - frac);
+      sts.forEach((g, i) => g.classList.toggle("on", i <= k));
+    }
+    return {
+      el,
+      onEnter() { shown = 0; path.style.strokeDashoffset = totalLen; sts.forEach((g) => g.classList.remove("on")); },
+      onExit()  { shown = 0; path.style.strokeDashoffset = totalLen; sts.forEach((g) => g.classList.remove("on")); },
+      advance() {
+        if (shown < N) { revealTo(shown); shown++; return true; }
+        // dernier clic : prolonge la ligne jusqu'à la sortie
+        if (shown === N) { path.style.strokeDashoffset = 0; shown++; return true; }
+        return false;
+      }
+    };
   },
 
   // titre + grande image centrée (capture, tweet…), révélée au clic.
