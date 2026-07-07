@@ -18,6 +18,9 @@ const renderers = {
   title(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--title");
+    // sans image de fond → titre CENTRÉ plein écran (le décalage à droite ne sert que
+    // pour l'enseigne néon de la 1re slide). Évite que « continued » soit coupé.
+    if (!s.media) el.classList.add("scene--title-center");
     el.querySelector(".scene__content").innerHTML = `
       <h1 class="reveal">${s.title}</h1>
       ${s.subtitle ? `<p class="lead reveal">${s.subtitle}</p>` : ""}`;
@@ -211,10 +214,11 @@ const renderers = {
   disclaimer(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--disclaimer");
-    // items sur UNE ligne, séparés par une espace (le texte porte déjà sa ponctuation),
-    // révélés un par un au clic.
     const items = (s.items || []).map((it, i) =>
       `${i > 0 ? " " : ""}<span class="disc__item">${it}</span>`).join("");
+    // couches "télé" : canvas de bruit statique + scanlines + vignette CRT
+    el.insertAdjacentHTML("afterbegin",
+      `<canvas class="disc__noise"></canvas><div class="disc__scan"></div><div class="disc__crt"></div>`);
     el.querySelector(".scene__content").innerHTML = `
       <div class="disc__warn reveal">
         <svg viewBox="0 0 100 88" class="disc__tri"><path d="M50 5 L95 83 L5 83 Z" fill="none" stroke="#ee1111" stroke-width="6" stroke-linejoin="round"/><rect x="46" y="30" width="8" height="30" rx="4" fill="#ee1111"/><circle cx="50" cy="70" r="5" fill="#ee1111"/></svg>
@@ -222,21 +226,34 @@ const renderers = {
       <h1 class="disc__title reveal" data-text="${s.title || "DISCLAIMER"}">${s.title || "DISCLAIMER"}</h1>
       ${s.body ? `<p class="disc__body reveal">${s.body}</p>` : ""}
       <p class="disc__line">${items}</p>`;
-    // chaque item + son point précédent forme une unité révélée au clic
-    const parts = [...el.querySelectorAll(".disc__item, .disc__dot")];
-    // regroupe : [item0], [dot,item1], [dot,item2]… → on révèle item par item (avec son point)
-    const steps = [];
-    let cur = [];
-    parts.forEach((node) => {
-      if (node.classList.contains("disc__item")) { cur.push(node); steps.push(cur); cur = []; }
-      else { cur.push(node); }
-    });
+
+    const parts = [...el.querySelectorAll(".disc__item")];
+    const steps = parts.map((n) => [n]);
     let shown = 0;
     const reset = () => { parts.forEach((n) => n.classList.remove("on")); shown = 0; };
+
+    // --- bruit TV : petit buffer redimensionné à l'écran, régénéré à chaque frame ---
+    const noiseCv = el.querySelector(".disc__noise");
+    let raf = null;
+    function drawNoise() {
+      const W = 220, H = 130;   // petit buffer (upscalé par le CSS → gros grain façon TV)
+      if (noiseCv.width !== W) { noiseCv.width = W; noiseCv.height = H; }
+      const ctx = noiseCv.getContext("2d");
+      const img = ctx.createImageData(W, H);
+      const d = img.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const v = (Math.random() * 255) | 0;
+        d[i] = d[i+1] = d[i+2] = v; d[i+3] = 255;
+      }
+      ctx.putImageData(img, 0, 0);
+      raf = requestAnimationFrame(drawNoise);
+    }
+    function stopNoise() { if (raf) cancelAnimationFrame(raf); raf = null; }
+
     return {
       el,
-      onEnter() { reset(); },
-      onExit()  { reset(); },
+      onEnter() { reset(); stopNoise(); drawNoise(); },
+      onExit()  { reset(); stopNoise(); },
       advance() { if (shown < steps.length) { steps[shown].forEach((n) => n.classList.add("on")); shown++; return true; } return false; }
     };
   },
@@ -244,19 +261,17 @@ const renderers = {
   text(s) {
     const el = sceneEl(s.media, s.bgVideo);
     if (s.big) el.classList.add("scene--bigtext");
-    // items optionnels : phrases enchaînées au clic, séparées par « · » (façon disclaimer)
+    // items optionnels : chaque phrase sur SA PROPRE LIGNE, révélée au clic (empilement vertical)
     const itemsHtml = (s.items && s.items.length)
-      ? `<p class="txt__line">${s.items.map((it, i) =>
-          `${i > 0 ? '<span class="txt__dot">·</span>' : ""}<span class="txt__item">${it}</span>`).join("")}</p>`
+      ? s.items.map((it) => `<p class="txt__line"><span class="txt__item">${it}</span></p>`).join("")
       : "";
     el.querySelector(".scene__content").innerHTML = `
       <h2 class="reveal">${s.heading}</h2>
       ${s.body ? `<p class="lead reveal">${s.body}</p>` : ""}
       ${itemsHtml}`;
     if (!s.items || !s.items.length) return { el };
-    const parts = [...el.querySelectorAll(".txt__item, .txt__dot")];
-    const steps = []; let cur = [];
-    parts.forEach((n) => { if (n.classList.contains("txt__item")) { cur.push(n); steps.push(cur); cur = []; } else cur.push(n); });
+    const parts = [...el.querySelectorAll(".txt__item")];
+    const steps = parts.map((n) => [n]);
     let shown = 0;
     const reset = () => { parts.forEach((n) => n.classList.remove("on")); shown = 0; };
     return {
@@ -277,8 +292,8 @@ const renderers = {
     const items = s.items || [];
     el.querySelector(".scene__content").innerHTML = `
       ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
-      <svg class="metro__svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
-        <path class="metro__line" fill="none" stroke="${s.color || "var(--accent)"}" stroke-width="6"
+      <svg class="metro__svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet">
+        <path class="metro__line" fill="none" stroke="${s.color || "var(--accent)"}" stroke-width="8"
               stroke-linecap="round" d=""/>
         <g class="metro__stations"></g>
       </svg>`;
@@ -286,43 +301,44 @@ const renderers = {
     const path = el.querySelector(".metro__line");
     const gStations = el.querySelector(".metro__stations");
 
-    // trajet serpentin CONTINU : y = H/2 + amp·sin(phase + progression·wave·2π)
-    // `phase` (fourni) fait que la fin d'une slide = le début de la suivante en y.
+    // AXE VERTICAL : la ligne descend du HAUT (hors-écran) vers le BAS (hors-écran),
+    // en serpentant latéralement : x = W/2 + amp·sin(phase + progression·wave·2π), y progresse.
+    // « phase » fait que la fin (bas) d'une slide raccorde au début (haut) de la suivante.
     const N = items.length;
-    const W = 1000, H = 560, m = 90;
-    const amp = H * 0.24, phase = s.phase || 0, wave = s.wave || 2.2;
-    const yAt = (t) => H / 2 + Math.sin(phase + t * Math.PI * wave) * amp;
+    const W = 1000, H = 620, m = 70;
+    const amp = W * 0.30, phase = s.phase || 0, wave = s.wave || 2.2;
+    const xAt = (t) => W / 2 + Math.sin(phase + t * Math.PI * wave) * amp;
     const xs = [], ys = [];
     for (let i = 0; i < N; i++) {
       const t = N > 1 ? i / (N - 1) : 0.5;
-      xs.push(m + t * (W - 2 * m));
-      ys.push(yAt(t));
+      ys.push(m + t * (H - 2 * m));
+      xs.push(xAt(t));
     }
-    // expose la phase de sortie (pour chaîner la slide suivante) : phase + 1·π·wave
+    // expose la phase de sortie (pour chaîner la slide suivante)
     el.dataset.exitPhase = String(phase + Math.PI * wave);
-    // path lissé (départ hors-écran à gauche)
-    let dd = `M -80 ${ys[0] || H / 2}`;
+    // path lissé, VERTICAL : entre hors-écran par le haut, sort hors-écran par le bas
+    let dd = `M ${xs[0] || W / 2} -80`;
     for (let i = 0; i < N; i++) {
       const px = xs[i], py = ys[i];
-      const prevx = i === 0 ? -80 : xs[i - 1], prevy = i === 0 ? ys[0] : ys[i - 1];
-      const cx = (prevx + px) / 2;
-      dd += ` C ${cx} ${prevy}, ${cx} ${py}, ${px} ${py}`;
+      const prevx = i === 0 ? xs[0] : xs[i - 1], prevy = i === 0 ? -80 : ys[i - 1];
+      const cy = (prevy + py) / 2;
+      dd += ` C ${prevx} ${cy}, ${px} ${cy}, ${px} ${py}`;
     }
-    dd += ` L ${W + 80} ${ys[N - 1] || H / 2}`;   // sort à droite hors-champ
+    dd += ` L ${xs[N - 1] || W / 2} ${H + 80}`;   // sort par le bas hors-champ
     path.setAttribute("d", dd);
     const totalLen = path.getTotalLength();
     path.style.strokeDasharray = totalLen;
     path.style.strokeDashoffset = totalLen;
 
-    // stations (point + label) posées à chaque item
+    // stations (point + label) posées à chaque item ; label à gauche/droite selon le côté
     items.forEach((it, i) => {
       const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
       g.setAttribute("class", "metro__st");
       g.setAttribute("transform", `translate(${xs[i]},${ys[i]})`);
-      const below = ys[i] < H / 2;   // label au-dessus si station en bas, sous sinon
+      const rightSide = xs[i] < W / 2;   // station à gauche → label à droite, et vice-versa
       g.innerHTML =
-        `<circle r="9" class="metro__dot"/>` +
-        `<text class="metro__lbl" y="${below ? 34 : -22}" text-anchor="middle">${it}</text>`;
+        `<circle r="10" class="metro__dot"/>` +
+        `<text class="metro__lbl" x="${rightSide ? 26 : -26}" y="6" text-anchor="${rightSide ? "start" : "end"}">${it}</text>`;
       gStations.appendChild(g);
     });
     const sts = [...el.querySelectorAll(".metro__st")];
@@ -580,7 +596,8 @@ const renderers = {
     let shown = 0;
     return {
       el,
-      onEnter() { resetAll(); shown = 1; revealPanel(0); },
+      // tous les panels cachés à l'entrée → chaque clic en révèle un (conso, BCE, levées)
+      onEnter() { resetAll(); shown = 0; },
       onExit()  { resetAll(); shown = 0; },
       advance() { if (shown < s.panels.length) { revealPanel(shown); shown++; return true; } return false; }
     };

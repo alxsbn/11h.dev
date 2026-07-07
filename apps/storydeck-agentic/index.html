@@ -59,8 +59,10 @@
   .scene--bigtext h2 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.1; }
   /* metroline — chemin de métro serpentin qui liste des éléments (chaîne de pensée) */
   .scene--metro { align-items: center; }
-  .scene--metro .scene__content { max-width: none; width: 100%; }
-  .metro__svg { width: min(1200px, 94vw); height: min(620px, 74vh); display: block; margin: 0 auto;
+  .scene--metro .scene__content { max-width: none; width: 100%; height: 100%; display: flex;
+    align-items: center; justify-content: center; }
+  /* SVG vertical, plein écran en hauteur : donne l'impression que la ligne sort de l'écran */
+  .metro__svg { width: min(1000px, 92vw); height: 100vh; display: block; margin: 0 auto;
     overflow: visible; }
   .metro__line { transition: stroke-dashoffset 1s cubic-bezier(.4,.1,.3,1); filter: drop-shadow(0 2px 6px rgba(47,143,157,.25)); }
   .metro__dot { fill: var(--bg); stroke: var(--accent); stroke-width: 4; }
@@ -70,8 +72,9 @@
   .metro__st.on { opacity: 1; }
 
   /* items enchaînés sous un heading (So what?) — révélés au clic, séparés par · */
-  .txt__line { margin-top: 1.4rem; font-size: clamp(1.4rem, 3.4vw, 2.6rem); font-weight: 700;
-    color: var(--fg); }
+  .txt__line { margin-top: .9rem; font-size: clamp(1.4rem, 3.4vw, 2.6rem); font-weight: 700;
+    color: var(--fg); line-height: 1.15; }
+  .txt__line:first-of-type { margin-top: 1.6rem; }
   .txt__item, .txt__dot { opacity: 0; transition: opacity .5s ease; }
   .txt__item.on, .txt__dot.on { opacity: 1; }
   .txt__dot { color: var(--hot); font-weight: 900; margin: 0 .5em; }
@@ -101,6 +104,9 @@
      L'enseigne néon est à GAUCHE de l'image → le texte se pose à DROITE, dans le ciel. */
   .scene--title { align-items: flex-end; text-align: center; padding-right: clamp(2rem, 8vw, 9rem); }
   .scene--title .scene__content { max-width: 18ch; margin-left: auto; }
+  /* titre sans image (ex. « To be continued ») : centré, pleine largeur, rien de coupé */
+  .scene--title-center { align-items: center; padding-right: 0; }
+  .scene--title-center .scene__content { max-width: 90vw; margin: 0 auto; }
   /* voile plus léger et localisé à droite (on garde l'enseigne bien visible à gauche) */
   .scene--title .scene__overlay { background:
     linear-gradient(270deg, rgba(246,239,228,.62), rgba(246,239,228,.12) 45%, rgba(246,239,228,0) 70%); }
@@ -164,7 +170,7 @@
   .dash__points .hl--accent { color: var(--accent); font-weight: 800; }
 
   /* slide dense : contenu collé en haut + pleine largeur (box plus larges) */
-  .scene--dash { justify-content: flex-start; padding-top: clamp(2.5rem, 6vh, 4rem); }
+  .scene--dash { justify-content: center; align-items: center; }
   .scene--dash .scene__content { max-width: none; width: 100%; }
   .scene--dash h2 { font-size: clamp(1.5rem, 3vw, 2.3rem); margin-bottom: .3em; }
 
@@ -472,8 +478,22 @@
   .hub__caption { text-align: center; margin-top: 1.5rem; }
 
   /* ============ disclaimer — triangle ⚠️ + DISCLAIMER rouge sur fond noir (façon meme) ============ */
-  .scene--disclaimer { background: #000; align-items: center; text-align: center; }
-  .scene--disclaimer .scene__content { max-width: 60ch; display: flex; flex-direction: column; align-items: center; }
+  .scene--disclaimer { background: #000; align-items: center; text-align: center; overflow: hidden;
+    animation: crt-flicker 5s steps(60) infinite; }
+  @keyframes crt-flicker { 0%,100%{opacity:1} 3%{opacity:.94} 6%{opacity:1} 47%{opacity:.97} 48%{opacity:.88} 49%{opacity:1} }
+  .scene--disclaimer .scene__content { max-width: 60ch; display: flex; flex-direction: column; align-items: center;
+    position: relative; z-index: 3; }
+  /* bruit TV : canvas petit buffer upscalé → gros grain, mélange en écran, discret */
+  .disc__noise { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
+    image-rendering: pixelated; opacity: .16; mix-blend-mode: screen; pointer-events: none; }
+  /* scanlines horizontales (vieux tube) */
+  .disc__scan { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: .5;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,.35) 3px, rgba(0,0,0,.35) 3px);
+    animation: scan-roll 8s linear infinite; }
+  @keyframes scan-roll { from{background-position:0 0} to{background-position:0 100vh} }
+  /* vignette CRT (bords assombris + légère courbure) */
+  .disc__crt { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.75) 100%); }
   .disc__tri { width: clamp(70px, 10vw, 120px); height: auto; margin-bottom: .3rem;
     filter: drop-shadow(0 0 14px rgba(230,20,20,.6)); }
   /* DISCLAIMER — rouge vif, très bold, relief 3D (empilement d'ombres foncées) façon meme */

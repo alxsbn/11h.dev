@@ -46,7 +46,7 @@
             },
             {
               "id": "mysql",
-              "usage": "source",
+              "usage": "ingestion",
               "kind": "tech",
               "x": 0.58,
               "y": 0.5,
@@ -479,7 +479,7 @@
         },
         {
           "station": {
-            "date": "Q2 2024",
+            "date": "mi-2024",
             "mark": "gold"
           },
           "caption": "<span class=\"hl\">Prompt like a star</span>"
@@ -604,8 +604,7 @@
           "station": {
             "date": "2024",
             "mark": true
-          },
-          "caption": "<span class=\"hl--hot\">Contraction</span>"
+          }
         },
         {
           "size": [
@@ -699,10 +698,10 @@
               "id": "claude",
               "usage": "agent",
               "kind": "agent",
-              "label": "Claude Code",
+              "label": "Claude Code · headless · routine",
               "x": 0.52,
               "y": 0.52,
-              "r": 0.045,
+              "r": 0.06,
               "logo": "claude.svg"
             }
           ],
@@ -743,60 +742,9 @@
               "id": "claude",
               "r": 0.07
             }
-          ]
-        },
-        {
-          "size": [
-            {
-              "id": "dbt",
-              "r": 0.2
-            }
           ],
           "station": {
             "date": "juil. 2025"
-          }
-        },
-        {
-          "absorb": [
-            {
-              "id": "sre",
-              "into": "me"
-            }
-          ],
-          "add": [
-            {
-              "id": "skills",
-              "usage": "agent",
-              "kind": "agent",
-              "label": "skills",
-              "x": 0.46,
-              "y": 0.62,
-              "r": 0.05
-            }
-          ],
-          "size": [
-            {
-              "id": "claude",
-              "r": 0.1
-            },
-            {
-              "id": "skills",
-              "r": 0.05
-            },
-            {
-              "id": "dbt",
-              "r": 0.188
-            }
-          ],
-          "move": [
-            {
-              "id": "skills",
-              "x": 0.5,
-              "y": 0.6
-            }
-          ],
-          "station": {
-            "date": "nov. 2025"
           }
         },
         {
@@ -810,21 +758,8 @@
               "y": 0.58,
               "r": 0.07,
               "logo": "genie.svg"
-            },
-            {
-              "id": "semantic",
-              "usage": "gouvernance",
-              "kind": "tech",
-              "x": 0.36,
-              "y": 0.3,
-              "r": 0.06,
-              "label": "semantic layer"
             }
           ],
-          "station": {
-            "date": "déc. 2025",
-            "mark": true
-          },
           "caption": "<span class=\"hl\">Purge du backlog</span>",
           "morph": [
             {
@@ -877,7 +812,77 @@
               "id": "dbt",
               "r": 0.164
             }
+          ],
+          "station": {
+            "date": "août 2025"
+          }
+        },
+        {
+          "absorb": [
+            {
+              "id": "sre",
+              "into": "me"
+            }
+          ],
+          "add": [
+            {
+              "id": "skills",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "skills",
+              "x": 0.46,
+              "y": 0.62,
+              "r": 0.05
+            }
+          ],
+          "size": [
+            {
+              "id": "claude",
+              "r": 0.1
+            },
+            {
+              "id": "skills",
+              "r": 0.05
+            },
+            {
+              "id": "dbt",
+              "r": 0.188
+            }
+          ],
+          "move": [
+            {
+              "id": "skills",
+              "x": 0.5,
+              "y": 0.6
+            }
+          ],
+          "station": {
+            "date": "nov. 2025"
+          }
+        },
+        {
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.2
+            }
           ]
+        },
+        {
+          "add": [
+            {
+              "id": "semantic",
+              "usage": "gouvernance",
+              "kind": "tech",
+              "x": 0.36,
+              "y": 0.3,
+              "r": 0.06,
+              "label": "semantic layer"
+            }
+          ],
+          "station": {
+            "date": "déc. 2025"
+          }
         },
         {
           "morph": [
@@ -912,7 +917,7 @@
             },
             {
               "id": "claude",
-              "r": 0.15
+              "r": 0.13
             },
             {
               "id": "dbt",
@@ -938,14 +943,13 @@
         },
         {
           "station": {
-            "date": "Agentic at scale",
-            "mark": true
+            "mark": "gold"
           },
           "caption": "<span class=\"hl--hot\">Agentic at scale</span>",
           "size": [
             {
               "id": "skills",
-              "r": 0.1
+              "r": 0.12
             },
             {
               "id": "dbt",
@@ -1016,6 +1020,64 @@
               "y": 0.5,
               "r": 0.04
             }
+          ],
+          "link": [
+            [
+              "dev0",
+              "dbt"
+            ],
+            [
+              "dev0",
+              "skills"
+            ],
+            [
+              "dev1",
+              "dbt"
+            ],
+            [
+              "dev1",
+              "skills"
+            ],
+            [
+              "dev2",
+              "dbt"
+            ],
+            [
+              "dev2",
+              "skills"
+            ],
+            [
+              "dev3",
+              "dbt"
+            ],
+            [
+              "dev3",
+              "skills"
+            ],
+            [
+              "dev4",
+              "dbt"
+            ],
+            [
+              "dev4",
+              "skills"
+            ],
+            [
+              "prod0",
+              "dbt"
+            ],
+            [
+              "prod0",
+              "skills"
+            ],
+            [
+              "prod1",
+              "dbt"
+            ],
+            [
+              "prod1",
+              "skills"
+            ]
           ]
         },
         {
@@ -1129,11 +1191,11 @@
           "size": [
             {
               "id": "teams",
-              "r": 0.09
+              "r": 0.1
             },
             {
               "id": "skills",
-              "r": 0.11
+              "r": 0.1
             },
             {
               "id": "dbt",
@@ -1144,7 +1206,37 @@
             "date": "févr. 2026",
             "mark": true
           },
-          "caption": "<span class=\"hl--accent\">Claude Teams</span>"
+          "caption": "<span class=\"hl--accent\">Claude Teams</span>",
+          "link": [
+            [
+              "mkt0",
+              "teams"
+            ],
+            [
+              "mkt1",
+              "teams"
+            ],
+            [
+              "mkt2",
+              "teams"
+            ],
+            [
+              "mkt3",
+              "teams"
+            ],
+            [
+              "sales0",
+              "teams"
+            ],
+            [
+              "sales1",
+              "teams"
+            ],
+            [
+              "sales2",
+              "teams"
+            ]
+          ]
         },
         {
           "tempo": 2.0,
@@ -1206,19 +1298,27 @@
             },
             {
               "id": "claude",
-              "r": 0.14
+              "r": 0.13
             },
             {
               "id": "teams",
-              "r": 0.12
+              "r": 0.095
             },
             {
               "id": "skills",
-              "r": 0.12
+              "r": 0.085
             },
             {
               "id": "dbt",
               "r": 0.104
+            },
+            {
+              "id": "metric",
+              "r": 0.045
+            },
+            {
+              "id": "semantic",
+              "r": 0.045
             }
           ],
           "move": [
@@ -1235,17 +1335,51 @@
           ],
           "station": {
             "date": "mars 2026"
-          }
+          },
+          "link": [
+            [
+              "content0",
+              "teams"
+            ],
+            [
+              "content1",
+              "teams"
+            ],
+            [
+              "comex0",
+              "teams"
+            ],
+            [
+              "comex1",
+              "teams"
+            ]
+          ]
         },
         {
           "size": [
             {
               "id": "claude",
-              "r": 0.15
+              "r": 0.14
             },
             {
               "id": "dbt",
               "r": 0.092
+            },
+            {
+              "id": "skills",
+              "r": 0.07
+            },
+            {
+              "id": "teams",
+              "r": 0.08
+            },
+            {
+              "id": "metric",
+              "r": 0.035
+            },
+            {
+              "id": "semantic",
+              "r": 0.035
             }
           ],
           "move": [
@@ -1306,6 +1440,24 @@
               "y": 0.78,
               "r": 0.04
             }
+          ],
+          "link": [
+            [
+              "fin0",
+              "teams"
+            ],
+            [
+              "fin1",
+              "teams"
+            ],
+            [
+              "board0",
+              "teams"
+            ],
+            [
+              "board1",
+              "teams"
+            ]
           ]
         },
         {
@@ -1336,79 +1488,55 @@
               "x": 0.28,
               "y": 0.82,
               "r": 0.04
-            },
-            {
-              "id": "clients0",
-              "usage": "people_data",
-              "kind": "human",
-              "label": "clients",
-              "x": 0.3,
-              "y": 0.78,
-              "r": 0.04
-            },
-            {
-              "id": "clients1",
-              "usage": "people_data",
-              "kind": "human",
-              "label": "clients",
-              "x": 0.24,
-              "y": 0.84,
-              "r": 0.04
-            },
-            {
-              "id": "clients2",
-              "usage": "people_data",
-              "kind": "human",
-              "label": "clients",
-              "x": 0.18,
-              "y": 0.78,
-              "r": 0.04
-            },
-            {
-              "id": "clients3",
-              "usage": "people_data",
-              "kind": "human",
-              "label": "clients",
-              "x": 0.24,
-              "y": 0.72,
-              "r": 0.04
             }
           ],
           "size": [
             {
               "id": "skills",
-              "r": 0.08
+              "r": 0.06
             },
             {
               "id": "dbt",
               "r": 0.08
+            },
+            {
+              "id": "teams",
+              "r": 0.07
+            },
+            {
+              "id": "metric",
+              "r": 0.028
+            },
+            {
+              "id": "semantic",
+              "r": 0.028
+            },
+            {
+              "id": "claude",
+              "r": 0.15
             }
           ],
           "station": {
             "date": "mai 2026"
-          }
+          },
+          "link": [
+            [
+              "supply0",
+              "teams"
+            ],
+            [
+              "supply1",
+              "teams"
+            ]
+          ]
         },
         {
           "tempo": 2.3,
-          "add": [
-            {
-              "id": "autonomous",
-              "usage": "agent",
-              "kind": "agent",
-              "label": "agents autonomes",
-              "x": 0.34,
-              "y": 0.5,
-              "r": 0.1
-            }
-          ],
+          "add": [],
           "size": [
             {
               "id": "notion",
               "r": 0.1
-            },
-            {
-              "id": "autonomous",
-              "r": 0.11
             },
             {
               "id": "genie",
@@ -1421,6 +1549,10 @@
             {
               "id": "dbt",
               "r": 0.068
+            },
+            {
+              "id": "claude",
+              "r": 0.17
             }
           ],
           "move": [
@@ -1562,151 +1694,6 @@
             {
               "id": "dbt",
               "r": 0.056
-            }
-          ]
-        },
-        {
-          "tempo": 2.7,
-          "size": [
-            {
-              "id": "mysql",
-              "r": 0.025
-            },
-            {
-              "id": "metabase",
-              "r": 0.025
-            },
-            {
-              "id": "dms",
-              "r": 0.025
-            },
-            {
-              "id": "census",
-              "r": 0.025
-            },
-            {
-              "id": "airflow",
-              "r": 0.025
-            },
-            {
-              "id": "newrelic",
-              "r": 0.025
-            },
-            {
-              "id": "elementary",
-              "r": 0.025
-            },
-            {
-              "id": "fivetran",
-              "r": 0.025
-            },
-            {
-              "id": "linear",
-              "r": 0.025
-            },
-            {
-              "id": "databricks",
-              "r": 0.025
-            },
-            {
-              "id": "catalog",
-              "r": 0.025
-            },
-            {
-              "id": "metric",
-              "r": 0.025
-            },
-            {
-              "id": "semantic",
-              "r": 0.025
-            },
-            {
-              "id": "github",
-              "r": 0.025
-            },
-            {
-              "id": "genie",
-              "r": 0.025
-            },
-            {
-              "id": "bench",
-              "r": 0.025
-            },
-            {
-              "id": "mcp",
-              "r": 0.025
-            },
-            {
-              "id": "claude",
-              "r": 0.025
-            },
-            {
-              "id": "skills",
-              "r": 0.025
-            },
-            {
-              "id": "automl",
-              "r": 0.025
-            },
-            {
-              "id": "customapp",
-              "r": 0.025
-            },
-            {
-              "id": "bedrock",
-              "r": 0.025
-            },
-            {
-              "id": "autolearn",
-              "r": 0.025
-            },
-            {
-              "id": "teams",
-              "r": 0.025
-            },
-            {
-              "id": "website",
-              "r": 0.025
-            },
-            {
-              "id": "autonomous",
-              "r": 0.025
-            },
-            {
-              "id": "notion",
-              "r": 0.025
-            },
-            {
-              "id": "routines",
-              "r": 0.025
-            },
-            {
-              "id": "chatgpt",
-              "r": 0.025
-            },
-            {
-              "id": "dbt",
-              "r": 0.044
-            }
-          ]
-        },
-        {
-          "tempo": 3.0,
-          "morph": [
-            {
-              "id": "me",
-              "kind": "human",
-              "label": "1",
-              "r": 0.22
-            }
-          ],
-          "station": {
-            "date": "aujourd'hui"
-          },
-          "size": [
-            {
-              "id": "dbt",
-              "r": 0.032
             }
           ]
         }
@@ -1851,228 +1838,8 @@
       ]
     },
     {
-      "type": "bars2",
-      "heading": "Où passe le temps ? <span class=\"hl--hot\">Ça bascule.</span>",
-      "rows": [
-        {
-          "label": "Avant",
-          "segments": [
-            {
-              "name": "Plan / PRD",
-              "pct": 10,
-              "color": "#f2748c"
-            },
-            {
-              "name": "Context eng",
-              "pct": 4,
-              "color": "#e15574"
-            },
-            {
-              "name": "Build",
-              "pct": 5,
-              "color": "#c9a24b"
-            },
-            {
-              "name": "Review",
-              "pct": 15,
-              "color": "#a882dc"
-            },
-            {
-              "name": "Run",
-              "pct": 8,
-              "color": "#5aa0aa"
-            },
-            {
-              "name": "Coding",
-              "pct": 58,
-              "color": "#2f8f9d"
-            }
-          ]
-        },
-        {
-          "label": "Aujourd'hui",
-          "segments": [
-            {
-              "name": "Plan / PRD",
-              "pct": 26,
-              "color": "#f2748c"
-            },
-            {
-              "name": "Context eng",
-              "pct": 24,
-              "color": "#e15574"
-            },
-            {
-              "name": "Build",
-              "pct": 16,
-              "color": "#c9a24b"
-            },
-            {
-              "name": "Review",
-              "pct": 10,
-              "color": "#a882dc"
-            },
-            {
-              "name": "Run",
-              "pct": 18,
-              "color": "#5aa0aa"
-            },
-            {
-              "name": "Coding",
-              "pct": 6,
-              "color": "#2f8f9d"
-            }
-          ]
-        }
-      ],
-      "caption": "Moins de code. Plus de planning, de context engineering, de build out-of-the-box — et le run, lui, augmente."
-    },
-    {
-      "type": "text",
-      "heading": "Le coût de produire une analyse <span class=\"hl--accent\">tend vers zéro</span>.",
-      "body": "Comme le code. Dix analyses en parallèle. Relancez dix fois : dix résultats différents. On a quitté le déterministe pour le probabiliste."
-    },
-    {
-      "type": "tricol",
-      "heading": "L'agent absorbe la production. Trois choses lui échappent.",
-      "cols": [
-        {
-          "title": "Interpréter",
-          "accent": "buy",
-          "items": [
-            "Il produit une réduction du réel…",
-            "…mais ne sait pas ce qu'il OMET",
-            "Le réel n'est jamais dans la table"
-          ]
-        },
-        {
-          "title": "Douter",
-          "accent": "build",
-          "items": [
-            "Il répond aux questions posées",
-            "Jamais à celle que personne ne pose",
-            "« et les partis silencieux ? »"
-          ]
-        },
-        {
-          "title": "Tenir le sens",
-          "items": [
-            "Chacun encode SA réalité",
-            "N vérités, zéro traduction",
-            "→ hallucination collective"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "quote",
-      "text": "Qui vérifie que l'histoire est <span class=\"hl--accent\">vraie</span>,<br>et pas seulement <span class=\"hl\">belle</span> ?",
-      "cite": "Ça, aucun agent ne le fait."
-    },
-    {
-      "type": "table",
-      "heading": "Le scepticisme n'est pas une chose. C'est trois.",
-      "columns": [
-        "Couche",
-        "Nature",
-        "Encodable ?"
-      ],
-      "rows": [
-        [
-          "Procédural",
-          "Doute mis en conserve (règles, fact-checker)",
-          "✅ oui"
-        ],
-        [
-          "Adversarial",
-          "Le tiers qui dit non",
-          "⚠️ fragile"
-        ],
-        [
-          "Génératif",
-          "Le doute que personne n'a demandé",
-          "❌ non — il naît du hors-cadre"
-        ]
-      ]
-    },
-    {
-      "type": "quote",
-      "text": "Pour qu'une carte soit fiable à 100 %,<br>elle doit être <span class=\"hl--accent\">grande comme le territoire</span>.",
-      "cite": "Borges — et donc : impossible. Le bon système connaît ses propres bords."
-    },
-    {
-      "type": "tricol",
-      "heading": "Alors on ne code pas le réel. On code où il se fracture.",
-      "cols": [
-        {
-          "title": "Sémantique",
-          "items": [
-            "Datée, versionnée, contestable",
-            "« churn = ça, décidé le… par… »",
-            "+ alarme de dérive"
-          ]
-        },
-        {
-          "title": "Divergence",
-          "accent": "buy",
-          "items": [
-            "La machine DÉTECTE le désaccord",
-            "L'humain TRANCHE",
-            "Le zèle reste humain"
-          ]
-        },
-        {
-          "title": "Signature",
-          "accent": "build",
-          "items": [
-            "Aucun output → décision",
-            "…sans un humain qui assume",
-            "L'erreur redevient jugeable"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "quote",
-      "text": "Produire une analyse → <span class=\"hl--accent\">0</span>.<br>Savoir si elle est vraie → <span class=\"hl--hot\">ça monte</span>.",
-      "cite": "C'est là qu'est le métier de demain."
-    },
-    {
-      "type": "tricol",
-      "heading": "À vous, qui grandissez.",
-      "cols": [
-        {
-          "title": "A-t-on encore besoin…",
-          "items": [
-            "…d'une data team centralisée ?",
-            "…de teams ? de silos ?",
-            "…dans un monde où chacun accède à tout ?"
-          ]
-        },
-        {
-          "title": "Le fact-check humain…",
-          "accent": "buy",
-          "items": [
-            "…de chaque décision",
-            "…est-il tenable à l'échelle ?",
-            "Déplacez-le vers la décision, pas l'output"
-          ]
-        },
-        {
-          "title": "Le data analyst…",
-          "accent": "build",
-          "items": [
-            "…est-il devenu un artiste ?",
-            "Goût, recul, invention",
-            "Gardien du monde commun"
-          ]
-        }
-      ]
-    },
-    {
       "type": "title",
-      "title": "To be continued.",
-      "subtitle": "Contraction ici. Éclosion ailleurs. Le rôle ne meurt pas — il migre. ▸"
+      "title": "To be continued."
     }
   ]
 }
