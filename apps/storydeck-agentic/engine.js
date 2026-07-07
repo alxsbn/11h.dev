@@ -365,6 +365,34 @@ const renderers = {
     };
   },
 
+  // Wiki — reproduit une entête d'article Wikipédia + paragraphe ; au clic, un
+  // surlignage jaune (feutre) balaie le span .wiki__hl du texte fourni.
+  wiki(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--wiki");
+    el.querySelector(".scene__content").innerHTML = `
+      <div class="wiki">
+        <div class="wiki__head">
+          <h1 class="wiki__title">${s.title}</h1>
+          <span class="wiki__langs">⌂A ${s.langs || ""} ⌄</span>
+        </div>
+        <div class="wiki__tabs">
+          <span class="wiki__tab wiki__tab--on">Article</span><span class="wiki__tab">Talk</span>
+          <span class="wiki__tabs-r">Read&nbsp;&nbsp;Edit&nbsp;&nbsp;View history&nbsp;&nbsp;⋮</span>
+        </div>
+        <div class="wiki__from">From Wikipedia, the free encyclopedia</div>
+        <div class="wiki__body">${s.html}</div>
+      </div>`;
+    const hl = el.querySelector(".wiki__hl");
+    let done = false;
+    return {
+      el,
+      onEnter() { done = false; hl?.classList.remove("on"); },
+      onExit()  { done = false; hl?.classList.remove("on"); },
+      advance() { if (!done) { done = true; hl?.classList.add("on"); return true; } return false; }
+    };
+  },
+
   // titre + grande image centrée (capture, tweet…), révélée au clic.
   figure(s) {
     const el = sceneEl(s.media, s.bgVideo);

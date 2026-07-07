@@ -1712,35 +1712,10 @@
       ]
     },
     {
-      "type": "list",
-      "heading": "Impacts opérationnels",
-      "noBullet": true,
-      "items": [
-        "<span class=\"imp__minus\">−</span> <span class=\"imp__lead\">Ce qui disparaît</span>",
-        "<span class=\"imp__sub\">Backlog, sprints, tickets, modèles, analyses, run, confiance</span>",
-        "<span class=\"imp__plus\">+</span> <span class=\"imp__lead\">Ce qui émerge</span>",
-        "<span class=\"imp__sub\">Harness, contexte, attentes, budget</span>"
-      ],
-      "cascClass": true
-    },
-    {
-      "type": "list",
-      "heading": "Et le Data Analyst dans tout ça ?",
-      "noBullet": true,
-      "items": [
-        "<span class=\"da3 da3--1\">Data Analytics</span>",
-        "<span class=\"da3 da3--2\">Self-Analytics</span>",
-        "<span class=\"da3 da3--3\">Agentic Analytics</span>"
-      ]
-    },
-    {
-      "type": "text",
-      "heading": "Définition",
-      "items": [
-        "Inspection, nettoyage, transformation et modélisation des données.",
-        "Découvrir des informations utiles.",
-        "Éclairer les conclusions et soutenir la prise de décision."
-      ]
+      "type": "wiki",
+      "title": "Data analysis",
+      "langs": "43 languages",
+      "html": "<p><span class=\"wiki__hl\"><strong>Data analysis</strong> is the process of inspecting, <a>cleansing</a>, <a>transforming</a>, and <a>modeling data</a> with the goal of discovering useful information, informing conclusions, and supporting <a>decision-making</a></span>.<sup>[1]</sup> Data analysis has multiple facets and approaches, encompassing diverse techniques under a variety of names, and is used in different business, science, and social science domains.<sup>[2]</sup> In today’s business world, data analysis plays an important role in making decisions more scientific and helping businesses operate more effectively.<sup>[3]</sup> It is widely used in fields such as business analytics, healthcare, and artificial intelligence to extract meaningful insights from data.</p>"
     },
     {
       "type": "title",
