@@ -283,6 +283,28 @@
   /* variante sans puce : items plus grands, alignés à gauche, sur photo de fond */
   .stacklist--plain li { padding-left: 0; font-size: clamp(1.6rem, 4vw, 3rem); font-weight: 800;
     color: var(--fg); text-shadow: 0 2px 16px rgba(80,60,40,.2); line-height: 1.5; }
+  /* Cascade : paires « avant → après », compact, la partie droite en accent */
+  .scene:has(.casc__a) .stacklist--plain li { font-size: clamp(1.05rem, 2.5vw, 1.85rem);
+    line-height: 1.25; text-shadow: none; display: flex; align-items: baseline; gap: .55em; }
+  .casc__a { color: var(--ink-soft); font-weight: 700; white-space: nowrap; }
+  .casc__arrow { color: var(--hot-deep); font-weight: 900; }
+  .casc__b { color: var(--accent-deep); font-weight: 800; white-space: nowrap; }
+  .casc__solo { color: var(--hot-deep); font-weight: 900; font-size: 1.15em; }
+  /* Impacts opérationnels : « − ce qui disparaît » / « + ce qui émerge » */
+  .scene:has(.imp__lead) .stacklist--plain li { font-size: clamp(1.1rem, 2.6vw, 2rem);
+    line-height: 1.35; text-shadow: none; }
+  .imp__minus, .imp__plus { font-weight: 900; font-size: 1.3em; display: inline-block;
+    width: 1.1em; }
+  .imp__minus { color: var(--hot-deep); }
+  .imp__plus  { color: var(--accent-deep); }
+  .imp__lead  { color: var(--fg); font-weight: 800; }
+  .imp__sub   { color: var(--ink-soft); font-weight: 600; padding-left: 1.6em; display: inline-block; }
+  /* « Et le Data Analyst dans tout ça ? » : gradation en 3 temps */
+  .scene:has(.da3) .stacklist--plain li { text-shadow: none; }
+  .da3 { font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 3.4rem); }
+  .da3--1 { color: var(--ink-soft); }
+  .da3--2 { color: var(--accent-deep); }
+  .da3--3 { color: var(--hot-deep); }
   .stacklist--plain li::before { content: none; }
   /* photo claire en fond → voile gauche renforcé pour lisibilité du texte */
   .scene:has(.stacklist--plain) .scene__overlay {

@@ -1700,44 +1700,50 @@
       ]
     },
     {
-      "type": "metroline",
-      "color": "#2f8f9d",
-      "phase": 0.0,
-      "wave": 2.2,
+      "type": "list",
+      "heading": "Cascade",
+      "noBullet": true,
       "items": [
-        "Contexte business",
-        "Lean",
-        "Data-Driven",
-        "Data Fog",
-        "Cost-Center",
-        "Span of control"
+        "<span class=\"casc__a\">Contexte business</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Lean</span>",
+        "<span class=\"casc__a\">Data-Driven</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Data Fog</span>",
+        "<span class=\"casc__a\">Cost-Center</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Span of control</span>",
+        "<span class=\"casc__a\">Palliatif</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Surmultiplication</span>",
+        "<span class=\"casc__a\">Lâcher-prise</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Contraction du temps</span>",
+        "<span class=\"casc__a\">Obsolescence & sédimentation</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Flux</span>",
+        "<span class=\"casc__a\">Porosité</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Push/Pull</span>",
+        "<span class=\"casc__a\">Exploration</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Erosion</span>",
+        "<span class=\"casc__a casc__solo\">Survie ?</span>"
       ]
     },
     {
-      "type": "metroline",
-      "color": "#2f8f9d",
-      "phase": 6.9115,
-      "wave": 2.2,
+      "type": "list",
+      "heading": "Impacts opérationnels",
+      "noBullet": true,
       "items": [
-        "Palliatif",
-        "Surmultiplication",
-        "Lâcher-prise",
-        "Contraction du temps",
-        "Obsolescence & sédimentation",
-        "Flux"
+        "<span class=\"imp__minus\">−</span> <span class=\"imp__lead\">Ce qui disparaît</span>",
+        "<span class=\"imp__sub\">Backlog, sprints, tickets, modèles, analyses, run, confiance</span>",
+        "<span class=\"imp__plus\">+</span> <span class=\"imp__lead\">Ce qui émerge</span>",
+        "<span class=\"imp__sub\">Harness, contexte, attentes, budget</span>"
+      ],
+      "cascClass": true
+    },
+    {
+      "type": "list",
+      "heading": "Et le Data Analyst dans tout ça ?",
+      "noBullet": true,
+      "items": [
+        "<span class=\"da3 da3--1\">Data Analytics</span>",
+        "<span class=\"da3 da3--2\">Self-Analytics</span>",
+        "<span class=\"da3 da3--3\">Agentic Analytics</span>"
       ]
     },
     {
-      "type": "metroline",
-      "color": "#2f8f9d",
-      "phase": 13.823,
-      "wave": 2.2,
+      "type": "text",
+      "heading": "Définition",
       "items": [
-        "Porosité",
-        "Push",
-        "Exploration",
-        "Erosion",
-        "Survie ?"
+        "Inspection, nettoyage, transformation et modélisation des données.",
+        "Découvrir des informations utiles.",
+        "Éclairer les conclusions et soutenir la prise de décision."
       ]
     },
     {
