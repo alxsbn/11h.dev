@@ -261,23 +261,34 @@ const renderers = {
   text(s) {
     const el = sceneEl(s.media, s.bgVideo);
     if (s.big) el.classList.add("scene--bigtext");
+    if (s.image) el.classList.add("scene--text-img");
     // items optionnels : chaque phrase sur SA PROPRE LIGNE, révélée au clic (empilement vertical)
     const itemsHtml = (s.items && s.items.length)
       ? s.items.map((it) => `<p class="txt__line"><span class="txt__item">${it}</span></p>`).join("")
       : "";
-    el.querySelector(".scene__content").innerHTML = `
+    const textBlock = `
       <h2 class="reveal">${s.heading}</h2>
       ${s.body ? `<p class="lead reveal">${s.body}</p>` : ""}
       ${itemsHtml}`;
+    // image optionnelle à DROITE, révélée en dernier (illustration qui accompagne le propos)
+    el.querySelector(".scene__content").innerHTML = s.image
+      ? `<div class="txt-split"><div class="txt-split__text">${textBlock}</div>
+           <img class="txt-split__img" src="${s.image}" alt="" /></div>`
+      : textBlock;
     if (!s.items || !s.items.length) return { el };
     const parts = [...el.querySelectorAll(".txt__item")];
-    const steps = parts.map((n) => [n]);
-    let shown = 0;
-    const reset = () => { parts.forEach((n) => n.classList.remove("on")); shown = 0; };
+    const img = el.querySelector(".txt-split__img");
+    let shown = 0, imgShown = false;
+    const reset = () => { parts.forEach((n) => n.classList.remove("on")); shown = 0;
+      imgShown = false; img?.classList.remove("on"); };
     return {
       el,
       onEnter() { reset(); }, onExit() { reset(); },
-      advance() { if (shown < steps.length) { steps[shown].forEach((n) => n.classList.add("on")); shown++; return true; } return false; }
+      advance() {
+        if (shown < parts.length) { parts[shown].classList.add("on"); shown++; return true; }
+        if (img && !imgShown) { imgShown = true; img.classList.add("on"); return true; }
+        return false;
+      }
     };
   },
 

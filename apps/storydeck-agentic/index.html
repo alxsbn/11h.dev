@@ -365,6 +365,16 @@
     box-shadow: 0 18px 60px rgba(0,0,0,.22);
     opacity: 0; transform: scale(.97); transition: opacity .6s ease, transform .6s ease; }
   .tent__img.on { opacity: 1; transform: scale(1); }
+  /* slide text + image à droite (ex. « Le réel » avec une couverture illustrant le propos) */
+  .scene--text-img .scene__content { max-width: none; width: 100%; }
+  .txt-split { display: flex; align-items: center; gap: clamp(2rem, 6vw, 5rem);
+    max-width: 1300px; margin: 0 auto; }
+  .txt-split__text { flex: 1 1 auto; min-width: 0; }
+  .txt-split__img { flex: 0 0 auto; width: clamp(180px, 22vw, 320px); height: auto;
+    border-radius: 6px; box-shadow: 0 14px 44px rgba(0,0,0,.28);
+    opacity: 0; transform: translateY(18px) rotate(-2deg);
+    transition: opacity .6s ease, transform .6s cubic-bezier(.22,1.2,.36,1); }
+  .txt-split__img.on { opacity: 1; transform: none; }
   .stacklist--plain li::before { content: none; }
   /* photo claire en fond → voile gauche renforcé pour lisibilité du texte */
   .scene:has(.stacklist--plain) .scene__overlay {

@@ -1726,6 +1726,26 @@
       ]
     },
     {
+      "type": "text",
+      "heading": "Le piège",
+      "items": [
+        "Un agent n'est l'obligé de personne.",
+        "Froid. Infatigable. Inconscient."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Le réel",
+      "image": "assets/img/dejours-travail-vivant.jpg",
+      "items": [
+        "Le travail vit entre la prescription et le réel.",
+        "Le réel, c'est ce qui résiste à la prescription. Par l'échec.",
+        "Le réel déborde toujours.",
+        "Le respect strict de la prescription, c'est la grève du zèle.",
+        "Un agent est zélé par nature."
+      ]
+    },
+    {
       "type": "title",
       "title": "To be continued."
     }
