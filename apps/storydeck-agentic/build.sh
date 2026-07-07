@@ -77,6 +77,10 @@ for scene in deck.get("scenes", []):
     for it in scene.get("items", []) or []:
         if isinstance(it, dict) and is_local(it.get("img")):
             it["img"] = inline_img(it["img"]); n_inlined += 1
+    # tableau `images` (slide tentation : plusieurs captures montrées tour à tour)
+    if isinstance(scene.get("images"), list):
+        scene["images"] = [inline_img(v) if is_local(v) else v for v in scene["images"]]
+        n_inlined += len(scene["images"])
 
 deck_js = json.dumps(deck, ensure_ascii=False)
 

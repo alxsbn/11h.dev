@@ -365,6 +365,33 @@ const renderers = {
     };
   },
 
+  // Tentation — titre centré (comme To be continued) puis les captures défilent
+  // TOUR À TOUR au clic (crossfade), façon slide « saaspocalypse » du deck fivetran.
+  tentation(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--tentation");
+    const imgs = (s.images || []).map((src, i) =>
+      `<img class="tent__img" data-i="${i}" src="${src}" alt="" />`).join("");
+    el.querySelector(".scene__content").innerHTML = `
+      <h1 class="tent__title reveal">${s.title}</h1>
+      <div class="tent__stage">${imgs}</div>`;
+    const shots = [...el.querySelectorAll(".tent__img")];
+    let idx = -1;                                   // -1 = seul le titre, aucune image
+    const show = (k) => shots.forEach((im, i) => im.classList.toggle("on", i === k));
+    return {
+      el,
+      onEnter() { idx = -1; show(-1); el.classList.remove("tent__shown"); },
+      onExit()  { idx = -1; show(-1); el.classList.remove("tent__shown"); },
+      advance() {
+        if (idx < shots.length - 1) {
+          idx++; show(idx); el.classList.add("tent__shown");   // masque le titre dès la 1re image
+          return true;
+        }
+        return false;
+      }
+    };
+  },
+
   // Wiki — reproduit une entête d'article Wikipédia + paragraphe ; au clic, un
   // surlignage jaune (feutre) balaie le span .wiki__hl du texte fourni.
   wiki(s) {

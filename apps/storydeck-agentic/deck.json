@@ -1718,6 +1718,14 @@
       "html": "<p><span class=\"wiki__hl\"><strong>Data analysis</strong> is the process of inspecting, <a>cleansing</a>, <a>transforming</a>, and <a>modeling data</a> with the goal of discovering useful information, informing conclusions, and supporting <a>decision-making</a></span>.<sup>[1]</sup> Data analysis has multiple facets and approaches, encompassing diverse techniques under a variety of names, and is used in different business, science, and social science domains.<sup>[2]</sup> In today’s business world, data analysis plays an important role in making decisions more scientific and helping businesses operate more effectively.<sup>[3]</sup> It is widely used in fields such as business analytics, healthcare, and artificial intelligence to extract meaningful insights from data.</p>"
     },
     {
+      "type": "tentation",
+      "title": "La tentation",
+      "images": [
+        "assets/img/block-hierarchy.png",
+        "assets/img/palantir-ontology.png"
+      ]
+    },
+    {
       "type": "title",
       "title": "To be continued."
     }
