@@ -166,9 +166,9 @@ void main(){
     // Réglages inspirés du prototype CellularDeck (seuil haut, douceur, glow modéré).
     // glow métaball réduit : le halo diffus par-forme (shadowBlur, canvas) prend le relais
     // → un carré a un halo carré, un rond un halo rond, plus de halo rond systématique.
-    // glow RELEVÉ + threshold ABAISSÉ → le champ métaball redéborde entre voisines :
-    // les halos colorés fusionnent → aspect « soupe cellulaire » organique et flou.
-    const CFG = { background:[246,239,228], threshold:1.0, softness:0.55, glow:0.5, speed:1.0, wander:0.55 };
+    // réglages du cellular-deck (fusion organique visible) : seuil 0.73, glow 0.55,
+    // bord doux → les blobs se fondent par un pont de matière (« soupe cellulaire »).
+    const CFG = { background:[246,239,228], threshold:0.73, softness:0.55, glow:0.55, speed:1.0, wander:0.55 };
     this.CFG = CFG;
 
     this.p = new p5((sk) => {
@@ -299,17 +299,11 @@ void main(){
       const op = Math.max(0, Math.min(1, c.r/(0.04*this._minDim(sk))));
       // HALO DIFFUS de la MÊME FORME (via shadowBlur) — remplace le halo métaball rond.
       ctx.save();
-      // couche 1 : TRÈS large + douce → nappe colorée qui déborde et fusionne (la « soupe »)
-      ctx.shadowColor = `rgba(${r|0},${g|0},${b|0},${0.8*op})`;
-      ctx.shadowBlur = Math.max(46, c.r*1.8);
-      this._shapePath(ctx, c.kind, c.x, c.y, c.r*0.78);
-      ctx.fillStyle = `rgba(${r|0},${g|0},${b|0},0.06)`;
-      ctx.fill();
-      // couche 2 : plus serrée, plus intense
-      ctx.shadowBlur = Math.max(22, c.r*0.9);
-      ctx.shadowColor = `rgba(${r|0},${g|0},${b|0},${0.85*op})`;
-      this._shapePath(ctx, c.kind, c.x, c.y, c.r*0.86);
-      ctx.fillStyle = `rgba(${r|0},${g|0},${b|0},0.08)`;
+      // halo léger seulement (la fusion « soupe » vient désormais du métaball WebGL sous-jacent)
+      ctx.shadowColor = `rgba(${r|0},${g|0},${b|0},${0.4*op})`;
+      ctx.shadowBlur = Math.max(18, c.r*0.6);
+      this._shapePath(ctx, c.kind, c.x, c.y, c.r*0.88);
+      ctx.fillStyle = `rgba(${r|0},${g|0},${b|0},0.03)`;
       ctx.fill();
       ctx.restore();
     }

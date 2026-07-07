@@ -1572,7 +1572,7 @@
               "id": "website",
               "usage": "agent",
               "kind": "agent",
-              "label": "skills website",
+              "label": "Skills Portal",
               "x": 0.6,
               "y": 0.76,
               "r": 0.06
@@ -1693,11 +1693,7 @@
     {
       "type": "text",
       "big": true,
-      "heading": "So what ?",
-      "items": [
-        "Accélération frénétique.",
-        "Fluidité organique"
-      ]
+      "heading": "So what ?"
     },
     {
       "type": "list",
