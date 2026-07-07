@@ -1031,12 +1031,20 @@
               "skills"
             ],
             [
+              "dev0",
+              "claude"
+            ],
+            [
               "dev1",
               "dbt"
             ],
             [
               "dev1",
               "skills"
+            ],
+            [
+              "dev1",
+              "claude"
             ],
             [
               "dev2",
@@ -1047,12 +1055,20 @@
               "skills"
             ],
             [
+              "dev2",
+              "claude"
+            ],
+            [
               "dev3",
               "dbt"
             ],
             [
               "dev3",
               "skills"
+            ],
+            [
+              "dev3",
+              "claude"
             ],
             [
               "dev4",
@@ -1063,6 +1079,10 @@
               "skills"
             ],
             [
+              "dev4",
+              "claude"
+            ],
+            [
               "prod0",
               "dbt"
             ],
@@ -1071,12 +1091,20 @@
               "skills"
             ],
             [
+              "prod0",
+              "claude"
+            ],
+            [
               "prod1",
               "dbt"
             ],
             [
               "prod1",
               "skills"
+            ],
+            [
+              "prod1",
+              "claude"
             ]
           ]
         },
@@ -1213,28 +1241,84 @@
               "teams"
             ],
             [
+              "mkt0",
+              "skills"
+            ],
+            [
+              "mkt0",
+              "customapp"
+            ],
+            [
               "mkt1",
               "teams"
+            ],
+            [
+              "mkt1",
+              "skills"
+            ],
+            [
+              "mkt1",
+              "customapp"
             ],
             [
               "mkt2",
               "teams"
             ],
             [
+              "mkt2",
+              "skills"
+            ],
+            [
+              "mkt2",
+              "customapp"
+            ],
+            [
               "mkt3",
               "teams"
+            ],
+            [
+              "mkt3",
+              "skills"
+            ],
+            [
+              "mkt3",
+              "customapp"
             ],
             [
               "sales0",
               "teams"
             ],
             [
+              "sales0",
+              "skills"
+            ],
+            [
+              "sales0",
+              "customapp"
+            ],
+            [
               "sales1",
               "teams"
             ],
             [
+              "sales1",
+              "skills"
+            ],
+            [
+              "sales1",
+              "customapp"
+            ],
+            [
               "sales2",
               "teams"
+            ],
+            [
+              "sales2",
+              "skills"
+            ],
+            [
+              "sales2",
+              "customapp"
             ]
           ]
         },
@@ -1270,7 +1354,7 @@
             },
             {
               "id": "comex0",
-              "usage": "people_prod",
+              "usage": "people_mkt",
               "kind": "human",
               "label": "comex",
               "x": 0.61,
@@ -1279,7 +1363,7 @@
             },
             {
               "id": "comex1",
-              "usage": "people_prod",
+              "usage": "people_mkt",
               "kind": "human",
               "label": "comex",
               "x": 0.49,
@@ -1342,16 +1426,48 @@
               "teams"
             ],
             [
+              "content0",
+              "skills"
+            ],
+            [
+              "content0",
+              "customapp"
+            ],
+            [
               "content1",
               "teams"
+            ],
+            [
+              "content1",
+              "skills"
+            ],
+            [
+              "content1",
+              "customapp"
             ],
             [
               "comex0",
               "teams"
             ],
             [
+              "comex0",
+              "skills"
+            ],
+            [
+              "comex0",
+              "customapp"
+            ],
+            [
               "comex1",
               "teams"
+            ],
+            [
+              "comex1",
+              "skills"
+            ],
+            [
+              "comex1",
+              "customapp"
             ]
           ]
         },
@@ -1421,24 +1537,6 @@
               "x": 0.44,
               "y": 0.82,
               "r": 0.04
-            },
-            {
-              "id": "board0",
-              "usage": "people_prod",
-              "kind": "human",
-              "label": "board",
-              "x": 0.48,
-              "y": 0.78,
-              "r": 0.04
-            },
-            {
-              "id": "board1",
-              "usage": "people_prod",
-              "kind": "human",
-              "label": "board",
-              "x": 0.36,
-              "y": 0.78,
-              "r": 0.04
             }
           ],
           "link": [
@@ -1447,16 +1545,24 @@
               "teams"
             ],
             [
+              "fin0",
+              "skills"
+            ],
+            [
+              "fin0",
+              "customapp"
+            ],
+            [
               "fin1",
               "teams"
             ],
             [
-              "board0",
-              "teams"
+              "fin1",
+              "skills"
             ],
             [
-              "board1",
-              "teams"
+              "fin1",
+              "customapp"
             ]
           ]
         },
@@ -1525,8 +1631,24 @@
               "teams"
             ],
             [
+              "supply0",
+              "skills"
+            ],
+            [
+              "supply0",
+              "customapp"
+            ],
+            [
               "supply1",
               "teams"
+            ],
+            [
+              "supply1",
+              "skills"
+            ],
+            [
+              "supply1",
+              "customapp"
             ]
           ]
         },
@@ -1565,137 +1687,6 @@
           "station": {
             "date": "juin 2026"
           }
-        },
-        {
-          "tempo": 2.5,
-          "absorb": [
-            {
-              "id": "ae",
-              "into": "me"
-            },
-            {
-              "id": "sr",
-              "into": "me"
-            },
-            {
-              "id": "dev0",
-              "into": "me"
-            },
-            {
-              "id": "dev1",
-              "into": "me"
-            },
-            {
-              "id": "dev2",
-              "into": "me"
-            },
-            {
-              "id": "dev3",
-              "into": "me"
-            },
-            {
-              "id": "dev4",
-              "into": "me"
-            },
-            {
-              "id": "prod0",
-              "into": "me"
-            },
-            {
-              "id": "prod1",
-              "into": "me"
-            },
-            {
-              "id": "mkt0",
-              "into": "me"
-            },
-            {
-              "id": "mkt1",
-              "into": "me"
-            },
-            {
-              "id": "mkt2",
-              "into": "me"
-            },
-            {
-              "id": "mkt3",
-              "into": "me"
-            },
-            {
-              "id": "sales0",
-              "into": "me"
-            },
-            {
-              "id": "sales1",
-              "into": "me"
-            },
-            {
-              "id": "sales2",
-              "into": "me"
-            },
-            {
-              "id": "content0",
-              "into": "me"
-            },
-            {
-              "id": "content1",
-              "into": "me"
-            },
-            {
-              "id": "comex0",
-              "into": "me"
-            },
-            {
-              "id": "comex1",
-              "into": "me"
-            },
-            {
-              "id": "fin0",
-              "into": "me"
-            },
-            {
-              "id": "fin1",
-              "into": "me"
-            },
-            {
-              "id": "board0",
-              "into": "me"
-            },
-            {
-              "id": "board1",
-              "into": "me"
-            },
-            {
-              "id": "supply0",
-              "into": "me"
-            },
-            {
-              "id": "supply1",
-              "into": "me"
-            },
-            {
-              "id": "clients0",
-              "into": "me"
-            },
-            {
-              "id": "clients1",
-              "into": "me"
-            },
-            {
-              "id": "clients2",
-              "into": "me"
-            },
-            {
-              "id": "clients3",
-              "into": "me"
-            }
-          ],
-          "size": [
-            {
-              "id": "dbt",
-              "r": 0.056
-            }
-          ]
         }
       ]
     },
@@ -1747,94 +1738,6 @@
         "Exploration",
         "Erosion",
         "Survie ?"
-      ]
-    },
-    {
-      "type": "dashboard",
-      "panels": [
-        {
-          "kind": "chart",
-          "chart": "line",
-          "title": "Conso des ménages (France, vol. %/an)",
-          "data": [
-            {
-              "label": "2021",
-              "value": 5.2
-            },
-            {
-              "label": "2022",
-              "value": 3.2
-            },
-            {
-              "label": "2023",
-              "value": 0.8
-            },
-            {
-              "label": "2024",
-              "value": 0.8
-            },
-            {
-              "label": "2025",
-              "value": 0.4,
-              "note": "stagnation"
-            }
-          ],
-          "highlight": 4,
-          "delta": "stagnation",
-          "deltaDir": "down",
-          "source": "INSEE"
-        },
-        {
-          "kind": "chart",
-          "chart": "line",
-          "title": "Taux directeur BCE (dépôt, %)",
-          "data": [
-            {
-              "label": "mi-22",
-              "value": -0.5
-            },
-            {
-              "label": "déc 22",
-              "value": 2.0
-            },
-            {
-              "label": "juin 23",
-              "value": 3.5
-            },
-            {
-              "label": "sept 23",
-              "value": 4.0,
-              "note": "+4 %"
-            },
-            {
-              "label": "déc 24",
-              "value": 3.0
-            },
-            {
-              "label": "juin 25",
-              "value": 2.0
-            }
-          ],
-          "highlight": 3,
-          "delta": "+450 pb",
-          "deltaDir": "up",
-          "source": "BCE"
-        },
-        {
-          "kind": "stat",
-          "title": "Levées French Tech",
-          "value": -47,
-          "unit": "%",
-          "format": "integer",
-          "delta": "13 → 6,9 Md€ (2022→2024)",
-          "deltaDir": "down",
-          "source": "Maddyness"
-        }
-      ],
-      "points": [
-        "Argent cher",
-        "Croissance molle",
-        "Financement rare"
       ]
     },
     {

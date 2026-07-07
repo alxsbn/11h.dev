@@ -293,7 +293,7 @@ const renderers = {
     el.querySelector(".scene__content").innerHTML = `
       ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
       <svg class="metro__svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet">
-        <path class="metro__line" fill="none" stroke="${s.color || "var(--accent)"}" stroke-width="8"
+        <path class="metro__line" fill="none" stroke="${s.color || "var(--accent)"}" stroke-width="12"
               stroke-linecap="round" d=""/>
         <g class="metro__stations"></g>
       </svg>`;
@@ -306,7 +306,9 @@ const renderers = {
     // « phase » fait que la fin (bas) d'une slide raccorde au début (haut) de la suivante.
     const N = items.length;
     const W = 1000, H = 620, m = 70;
-    const amp = W * 0.30, phase = s.phase || 0, wave = s.wave || 2.2;
+    // amplitude plus GRANDE ; chaque slide DÉMARRE au centre-haut (sin(0)=0 → x=W/2) puis
+    // serpente : la ligne « descend d'en haut » sur CHAQUE slide (indépendant du chaînage).
+    const amp = W * 0.34, phase = s.phase || 0, wave = s.wave || 2.2;
     const xAt = (t) => W / 2 + Math.sin(phase + t * Math.PI * wave) * amp;
     const xs = [], ys = [];
     for (let i = 0; i < N; i++) {
@@ -314,17 +316,17 @@ const renderers = {
       ys.push(m + t * (H - 2 * m));
       xs.push(xAt(t));
     }
-    // expose la phase de sortie (pour chaîner la slide suivante)
     el.dataset.exitPhase = String(phase + Math.PI * wave);
-    // path lissé, VERTICAL : entre hors-écran par le haut, sort hors-écran par le bas
-    let dd = `M ${xs[0] || W / 2} -80`;
+    // path lissé, VERTICAL : amorce depuis le HAUT-CENTRE (W/2, -80) vers la 1re station,
+    // puis serpente jusqu'en bas hors-écran.
+    let dd = `M ${W / 2} -120`;
     for (let i = 0; i < N; i++) {
       const px = xs[i], py = ys[i];
-      const prevx = i === 0 ? xs[0] : xs[i - 1], prevy = i === 0 ? -80 : ys[i - 1];
+      const prevx = i === 0 ? W / 2 : xs[i - 1], prevy = i === 0 ? -120 : ys[i - 1];
       const cy = (prevy + py) / 2;
       dd += ` C ${prevx} ${cy}, ${px} ${cy}, ${px} ${py}`;
     }
-    dd += ` L ${xs[N - 1] || W / 2} ${H + 80}`;   // sort par le bas hors-champ
+    dd += ` L ${xs[N - 1] || W / 2} ${H + 120}`;   // sort par le bas hors-champ
     path.setAttribute("d", dd);
     const totalLen = path.getTotalLength();
     path.style.strokeDasharray = totalLen;
