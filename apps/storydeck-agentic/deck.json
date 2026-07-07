@@ -1746,6 +1746,15 @@
       ]
     },
     {
+      "type": "text",
+      "heading": "Le nouveau DA",
+      "items": [
+        "L'humain capture les signaux non-modélisés.",
+        "Confiance. Culture. Terrain. Intuition.",
+        "La délibération mutualise le risque."
+      ]
+    },
+    {
       "type": "title",
       "title": "To be continued."
     }
