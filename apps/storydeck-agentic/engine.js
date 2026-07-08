@@ -263,7 +263,7 @@ const renderers = {
     const el = sceneEl(s.media, s.bgVideo);
     if (s.big) el.classList.add("scene--bigtext");
     if (s.image) el.classList.add("scene--text-img");
-    if (s.heading && !s.big) el.classList.add("scene--titled");
+    if (s.heading && !s.big && !s.plainTitle) el.classList.add("scene--titled");
     // items optionnels : chaque phrase sur SA PROPRE LIGNE, révélée au clic (empilement vertical)
     const itemsHtml = (s.items && s.items.length)
       ? s.items.map((it) => `<p class="txt__line"><span class="txt__item">${it}</span></p>`).join("")
