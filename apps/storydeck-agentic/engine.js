@@ -387,35 +387,49 @@ const renderers = {
   },
 
   // Tentation — titre centré (comme To be continued) puis les captures défilent
-  // Chaque capture tombe et RESTE comme une COUPURE DE PRESSE : posée en biais, avec
-  // une ombre portée (léger relief 3D), empilée par-dessus la précédente au clic.
+  // Coupures de journaux qui TOMBENT du haut et s'écrasent avec rebond (façon slide
+  // « SaaSpocalypse » du deck fivetran) : chaque capture chute au clic, avec overshoot
+  // à l'atterrissage, et BOUSCULE les coupures déjà posées (micro-secousse).
   tentation(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--tentation");
-    // positions/rotations façon coupures de presse jetées sur la table
+    // positions/rotations d'atterrissage façon coupures jetées sur la table
     const POSE = [
-      { x: "-8%", y: "-4%", rot: "-5deg" },
-      { x: "9%",  y: "6%",  rot: "5deg"  },
-      { x: "-4%", y: "10%", rot: "-3deg" },
-      { x: "6%",  y: "-8%", rot: "4deg"  },
+      { x: "-6%", y: "-2%", rot: "-5deg" },
+      { x: "8%",  y: "7%",  rot: "5deg"  },
+      { x: "-3%", y: "11%", rot: "-3deg" },
+      { x: "5%",  y: "-7%", rot: "4deg"  },
     ];
     const imgs = (s.images || []).map((src, i) => {
       const p = POSE[i % POSE.length];
-      return `<img class="tent__clip" data-i="${i}" src="${src}" alt=""
-        style="--x:${p.x}; --y:${p.y}; --rot:${p.rot}; z-index:${i + 1}" />`;
+      return `<figure class="tent__clip" data-i="${i}"
+        style="--x:${p.x}; --y:${p.y}; --rot:${p.rot}; z-index:${i + 1}">
+        <img src="${src}" alt="" /></figure>`;
     }).join("");
     el.querySelector(".scene__content").innerHTML = `
       <h1 class="tent__title reveal">${s.title}</h1>
       <div class="tent__stage">${imgs}</div>`;
     const clips = [...el.querySelectorAll(".tent__clip")];
     let shown = 0;
+    // bousculade : quand une coupure tombe, décale légèrement celles déjà posées
+    function jostle(landed) {
+      landed.forEach((d, k) => {
+        const depth = landed.length - 1 - k, dir = (k % 2 === 0) ? 1 : -1;
+        d.style.setProperty("--nx", dir * (3 + depth * 2) + "px");
+        d.style.setProperty("--ny", depth * 3 + "px");
+        d.style.setProperty("--nr", dir * (1 + depth * 0.6) + "deg");
+      });
+    }
+    const reset = () => { shown = 0; clips.forEach((c) => { c.classList.remove("on");
+      c.style.removeProperty("--nx"); c.style.removeProperty("--ny"); c.style.removeProperty("--nr"); });
+      el.classList.remove("tent__shown"); };
     return {
       el,
-      onEnter() { shown = 0; clips.forEach((c) => c.classList.remove("on")); el.classList.remove("tent__shown"); },
-      onExit()  { shown = 0; clips.forEach((c) => c.classList.remove("on")); el.classList.remove("tent__shown"); },
+      onEnter() { reset(); }, onExit() { reset(); },
       advance() {
         if (shown < clips.length) {
-          clips[shown].classList.add("on"); shown++;   // la coupure suivante se pose par-dessus
+          clips[shown].classList.add("on"); shown++;
+          jostle(clips.slice(0, shown));    // secoue toutes les coupures déjà tombées
           el.classList.add("tent__shown");
           return true;
         }

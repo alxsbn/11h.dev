@@ -379,16 +379,18 @@
     transition: height .4s ease; }
   .scene--tentation.tent__shown .tent__title { display: none; }
   .scene--tentation.tent__shown .tent__stage { height: min(78vh, 760px); }
-  /* coupures de presse : posées en biais, ombre portée (relief 3D), empilées */
-  .tent__clip { position: absolute; inset: 0; margin: auto; max-width: 78%; max-height: 82%;
-    width: auto; height: auto; object-fit: contain;
-    border-radius: 6px; border: 6px solid #fff;
-    box-shadow: 0 22px 50px rgba(0,0,0,.32), 0 4px 12px rgba(0,0,0,.2);
-    opacity: 0;
-    transform: translate(var(--x), calc(var(--y) - 40px)) rotate(var(--rot)) scale(.94);
-    transition: opacity .5s ease, transform .6s cubic-bezier(.22,1.25,.36,1); }
+  /* coupures de journaux qui TOMBENT du haut et s'écrasent avec rebond (SaaSpocalypse) */
+  .tent__clip { position: absolute; inset: 0; margin: auto; width: min(72%, 900px);
+    height: max-content; --nx: 0px; --ny: 0px; --nr: 0deg;
+    border-radius: 4px; border: 6px solid #fff;
+    box-shadow: 0 22px 55px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.12);
+    opacity: 0; will-change: transform, opacity; margin: auto;
+    transform: translate(0, -120vh) rotate(calc(var(--rot) * 2.5)) scale(1.18); }
+  /* atterrissage avec overshoot (ressort) → donne du poids à la chute */
   .tent__clip.on { opacity: 1;
-    transform: translate(var(--x), var(--y)) rotate(var(--rot)) scale(1); }
+    transform: translate(var(--x), var(--y)) rotate(calc(var(--rot) + var(--nr))) scale(1);
+    transition: transform .72s cubic-bezier(.34,1.4,.5,1), opacity .3s ease; }
+  .tent__clip img { display: block; width: 100%; height: auto; border-radius: 2px; }
   /* slide text + image à droite (ex. « Le réel » avec une couverture illustrant le propos) */
   .scene--text-img .scene__content { max-width: none; width: 100%; }
   .txt-split { display: flex; align-items: center; gap: clamp(2rem, 6vw, 5rem);
