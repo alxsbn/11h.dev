@@ -438,6 +438,32 @@ const renderers = {
     };
   },
 
+  // Roles — grille 3×2 de cartes « rôle ». Chaque carte affiche son titre d'emblée ;
+  // au clic, les étiquettes (sous-points) apparaissent EN DESSOUS du titre, dans la carte,
+  // sans recouvrir le titre ni s'empiler hors de la carte (une carte révélée par clic).
+  roles(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--roles");
+    if (s.heading && !s.plainTitle) el.classList.add("scene--titled");
+    const cards = (s.roles || []).map((r, i) => `
+      <div class="role" data-role="${i}">
+        <div class="role__title">${r.title}</div>
+        <ul class="role__labels">${(r.labels || []).map((l) =>
+          `<li class="role__lbl">${l}</li>`).join("")}</ul>
+      </div>`).join("");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="roles">${cards}</div>`;
+    const roleEls = [...el.querySelectorAll(".role")];
+    let shown = 0;   // nb de cartes dont les labels sont révélés
+    const reset = () => { shown = 0; roleEls.forEach((r) => r.classList.remove("on")); };
+    return {
+      el,
+      onEnter() { reset(); }, onExit() { reset(); },
+      advance() { if (shown < roleEls.length) { roleEls[shown].classList.add("on"); shown++; return true; } return false; }
+    };
+  },
+
   // Travail vivant — 2 colonnes : à GAUCHE des couvertures (coupures de presse qui
   // tombent), à DROITE des citations (mêmes coupures). Tout se pose au clic, en biais,
   // avec l'effet SaaSpocalypse (chute + rebond + bousculade).

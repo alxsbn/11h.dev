@@ -1780,12 +1780,55 @@
       ]
     },
     {
-      "type": "text",
+      "type": "roles",
       "heading": "Le nouveau DA",
-      "items": [
-        "L'humain capture les signaux non-modélisés.",
-        "Confiance. Culture. Terrain. Intuition.",
-        "La délibération mutualise le risque."
+      "roles": [
+        {
+          "title": "Gardien de la DQ",
+          "labels": [
+            "Business as usual"
+          ]
+        },
+        {
+          "title": "Traducteur du savoir métier",
+          "labels": [
+            "Structure la connaissance des stakeholders",
+            "Produit la source de vérité"
+          ]
+        },
+        {
+          "title": "Capteur du non-modélisé",
+          "labels": [
+            "Confiance, culture, terrain, intuition",
+            "Anti-biais d'interprétation (causalité, cherry-picking, bruit, vanity metrics)"
+          ]
+        },
+        {
+          "title": "Défenseur du réel",
+          "labels": [
+            "Porte le réel face aux décideurs",
+            "Agit sous mandat explicite",
+            "Ancrage métier vérifié par cas concrets",
+            "Revue par les pairs, pas auto-certifié"
+          ]
+        },
+        {
+          "title": "Organisateur de la délibération",
+          "labels": [
+            "Convoque les stakeholders",
+            "Tranche collectivement",
+            "Produit des règles de décision",
+            "Fixe une sortie si non-convergence (délai + décideur nommé)"
+          ]
+        },
+        {
+          "title": "Garant de la gouvernance",
+          "labels": [
+            "Arbitre ce qui doit être délibéré",
+            "Permet l'auditabilité",
+            "Contrôle le harness via un mandat explicite"
+          ]
+        }
       ]
     },
     {
