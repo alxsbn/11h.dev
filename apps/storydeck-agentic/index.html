@@ -370,11 +370,16 @@
     transition: height .4s ease; }
   .scene--tentation.tent__shown .tent__title { display: none; }
   .scene--tentation.tent__shown .tent__stage { height: min(78vh, 760px); }
-  .tent__img { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%;
-    width: auto; height: auto; object-fit: contain; border-radius: 10px;
-    box-shadow: 0 18px 60px rgba(0,0,0,.22);
-    opacity: 0; transform: scale(.97); transition: opacity .6s ease, transform .6s ease; }
-  .tent__img.on { opacity: 1; transform: scale(1); }
+  /* coupures de presse : posées en biais, ombre portée (relief 3D), empilées */
+  .tent__clip { position: absolute; inset: 0; margin: auto; max-width: 78%; max-height: 82%;
+    width: auto; height: auto; object-fit: contain;
+    border-radius: 6px; border: 6px solid #fff;
+    box-shadow: 0 22px 50px rgba(0,0,0,.32), 0 4px 12px rgba(0,0,0,.2);
+    opacity: 0;
+    transform: translate(var(--x), calc(var(--y) - 40px)) rotate(var(--rot)) scale(.94);
+    transition: opacity .5s ease, transform .6s cubic-bezier(.22,1.25,.36,1); }
+  .tent__clip.on { opacity: 1;
+    transform: translate(var(--x), var(--y)) rotate(var(--rot)) scale(1); }
   /* slide text + image à droite (ex. « Le réel » avec une couverture illustrant le propos) */
   .scene--text-img .scene__content { max-width: none; width: 100%; }
   .txt-split { display: flex; align-items: center; gap: clamp(2rem, 6vw, 5rem);

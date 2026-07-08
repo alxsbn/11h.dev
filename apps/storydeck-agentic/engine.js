@@ -387,25 +387,36 @@ const renderers = {
   },
 
   // Tentation — titre centré (comme To be continued) puis les captures défilent
-  // TOUR À TOUR au clic (crossfade), façon slide « saaspocalypse » du deck fivetran.
+  // Chaque capture tombe et RESTE comme une COUPURE DE PRESSE : posée en biais, avec
+  // une ombre portée (léger relief 3D), empilée par-dessus la précédente au clic.
   tentation(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--tentation");
-    const imgs = (s.images || []).map((src, i) =>
-      `<img class="tent__img" data-i="${i}" src="${src}" alt="" />`).join("");
+    // positions/rotations façon coupures de presse jetées sur la table
+    const POSE = [
+      { x: "-8%", y: "-4%", rot: "-5deg" },
+      { x: "9%",  y: "6%",  rot: "5deg"  },
+      { x: "-4%", y: "10%", rot: "-3deg" },
+      { x: "6%",  y: "-8%", rot: "4deg"  },
+    ];
+    const imgs = (s.images || []).map((src, i) => {
+      const p = POSE[i % POSE.length];
+      return `<img class="tent__clip" data-i="${i}" src="${src}" alt=""
+        style="--x:${p.x}; --y:${p.y}; --rot:${p.rot}; z-index:${i + 1}" />`;
+    }).join("");
     el.querySelector(".scene__content").innerHTML = `
       <h1 class="tent__title reveal">${s.title}</h1>
       <div class="tent__stage">${imgs}</div>`;
-    const shots = [...el.querySelectorAll(".tent__img")];
-    let idx = -1;                                   // -1 = seul le titre, aucune image
-    const show = (k) => shots.forEach((im, i) => im.classList.toggle("on", i === k));
+    const clips = [...el.querySelectorAll(".tent__clip")];
+    let shown = 0;
     return {
       el,
-      onEnter() { idx = -1; show(-1); el.classList.remove("tent__shown"); },
-      onExit()  { idx = -1; show(-1); el.classList.remove("tent__shown"); },
+      onEnter() { shown = 0; clips.forEach((c) => c.classList.remove("on")); el.classList.remove("tent__shown"); },
+      onExit()  { shown = 0; clips.forEach((c) => c.classList.remove("on")); el.classList.remove("tent__shown"); },
       advance() {
-        if (idx < shots.length - 1) {
-          idx++; show(idx); el.classList.add("tent__shown");   // masque le titre dès la 1re image
+        if (shown < clips.length) {
+          clips[shown].classList.add("on"); shown++;   // la coupure suivante se pose par-dessus
+          el.classList.add("tent__shown");
           return true;
         }
         return false;
