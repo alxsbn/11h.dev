@@ -436,7 +436,8 @@
             "date": "sept. 2023",
             "mark": true
           },
-          "caption": "<span class=\"hl--hot\">Bascule stratégique</span>"
+          "caption": "<span class=\"hl--hot\">Bascule stratégique</span>",
+          "chapter": "II — Transition"
         },
         {},
         {
@@ -599,7 +600,6 @@
           }
         },
         {
-          "chapter": "II — Transition",
           "tempo": 1.35,
           "station": {
             "date": "2024",
