@@ -454,6 +454,7 @@ const renderers = {
     // couleurs des nuages
     const COL = {
       neutral: [150, 150, 158], zele: [80, 150, 205], reel: [226, 84, 92],
+      travail: [46, 160, 90],
     };
     let raf = null, shown = 0, t0 = 0;
     // état d'animation par blob : centre (cx,cy en px), rayon, wobble seed
@@ -473,6 +474,21 @@ const renderers = {
       ctx.clearRect(0, 0, W, H);
       const time = (now - (t0 || now)) / 1000;
 
+      // trace le chemin d'un nuage (sans le remplir) — réutilisable pour clip + fill
+      function blobPath(cx, cy, rr, sx, sy, seed) {
+        const lobes = 7;
+        ctx.beginPath();
+        for (let k = 0; k <= 44; k++) {
+          const ang = k / 44 * Math.PI * 2;
+          const wob = 1 + 0.10 * Math.sin(ang * lobes + time * 1.6 + seed)
+                        + 0.06 * Math.sin(ang * 3 - time * 1.1 + seed);
+          const px = cx + Math.cos(ang) * rr * wob * sx;
+          const py = cy + Math.sin(ang) * rr * wob * sy;
+          if (k === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+      }
+
       // 1) NUAGES vivants (dessinés SOUS les cadres pour qu'on voie le débordement)
       blobs.forEach((b, i) => {
         if (i >= shown) return;
@@ -480,47 +496,56 @@ const renderers = {
         if (a.born < 0) a.born = time;
         const age = Math.min(1, (time - a.born) / 0.6);       // apparition 0.6s
         const ease = 1 - Math.pow(1 - age, 3);
+        if (b.arrow) return;                                   // la flèche est dessinée en dernier
         const host = frameRect(b.in); if (!host) return;
         const [r, g, bl] = COL[b.color] || COL.neutral;
-        // centre : dans le cadre hôte, décalé vers le cadre "over"/"spill" si présent
-        let cx = host.x + host.w * 0.5, cy = host.y + host.h * 0.55;
         const partner = b.over || b.spill;
+        // centre : dans le cadre hôte, décalé vers le cadre partenaire si présent
+        let cx = host.x + host.w * 0.5, cy = host.y + host.h * 0.5;
         if (partner) { const p = frameRect(partner); if (p) cx = (cx + (p.x + p.w * 0.5)) * 0.5; }
-        // rayon : proportion `fill` de la taille du cadre ; overflow autorise >1
-        const base = Math.min(host.w, host.h) * 0.5;
+        // Zèle « colle » au cadre → rayon quasi = demi-cadre, peu d'étirement.
+        const tight = b.fill >= 0.95 && !b.overflow;
+        const base = tight ? Math.min(host.w, host.h) * 0.52 : Math.min(host.w, host.h) * 0.5;
         const rr = base * (b.fill || 0.6) * ease;
-        // wobble organique (le nuage « respire »)
-        const lobes = 7;
-        ctx.beginPath();
-        for (let k = 0; k <= 40; k++) {
-          const ang = k / 40 * Math.PI * 2;
-          const wob = 1 + 0.10 * Math.sin(ang * lobes + time * 1.6 + a.seed)
-                        + 0.06 * Math.sin(ang * 3 - time * 1.1 + a.seed);
-          // étirement horizontal si empiète sur un partenaire
-          const sx = partner ? 1.55 : 1.15, sy = 1.0;
-          const px = cx + Math.cos(ang) * rr * wob * sx;
-          const py = cy + Math.sin(ang) * rr * wob * sy;
-          if (k === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        const sx = tight ? host.w / host.h * 0.95 : (partner ? 1.55 : 1.2), sy = 1.0;
+        const alpha = 0.34 + 0.10 * Math.sin(time * 1.4 + a.seed);
+        const drawFill = (col, al) => {
+          ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${al})`;
+          ctx.shadowColor = `rgba(${col[0]},${col[1]},${col[2]},${0.45 * ease})`;
+          ctx.shadowBlur = 26; ctx.fill(); ctx.shadowBlur = 0;
+        };
+        if (b.overflow) {
+          // RÉEL : neutre à l'INTÉRIEUR du cadre, ROUGE seulement là où il DÉBORDE.
+          // (a) partie dans le cadre → neutre, clippée au cadre
+          ctx.save(); roundRect(ctx, host.x, host.y, host.w, host.h, 14); ctx.clip();
+          blobPath(cx, cy, rr, sx, sy, a.seed); drawFill(COL.neutral, alpha * ease);
+          ctx.restore();
+          // (b) partie hors cadre → rouge, clippée au COMPLÉMENT du cadre
+          ctx.save();
+          ctx.beginPath(); ctx.rect(0, 0, W, H);              // tout l'écran…
+          roundRect(ctx, host.x, host.y, host.w, host.h, 14); // …moins le cadre (evenodd)
+          ctx.clip("evenodd");
+          blobPath(cx, cy, rr, sx, sy, a.seed); drawFill(COL.reel, (alpha + 0.12) * ease);
+          ctx.restore();
+        } else if (b.contained) {
+          // ZÈLE : rayon > cadre MAIS clippé au cadre → il PRESSE les bords sans jamais
+          // sortir (la tension du zèle : il pourrait déborder, il ne le fait pas).
+          ctx.save(); roundRect(ctx, host.x, host.y, host.w, host.h, 14); ctx.clip();
+          blobPath(cx, cy, rr, sx, sy, a.seed); drawFill([r, g, bl], (alpha + 0.08) * ease);
+          ctx.restore();
+        } else {
+          blobPath(cx, cy, rr, sx, sy, a.seed); drawFill([r, g, bl], alpha * ease);
         }
-        ctx.closePath();
-        const alpha = 0.32 + 0.10 * Math.sin(time * 1.4 + a.seed);
-        ctx.fillStyle = `rgba(${r},${g},${bl},${alpha * ease})`;
-        ctx.shadowColor = `rgba(${r},${g},${bl},${0.5 * ease})`;
-        ctx.shadowBlur = 28;
-        ctx.fill();
-        ctx.shadowBlur = 0;
         // label centré (Zèle / Réel)
         if (b.label) {
           ctx.fillStyle = `rgba(${r},${g},${bl},${ease})`;
-          ctx.font = "700 " + Math.round(base * 0.42) + "px 'Playfair Display',Georgia,serif";
+          ctx.font = "700 " + Math.round(base * 0.4) + "px 'Playfair Display',Georgia,serif";
           ctx.textAlign = "center"; ctx.textBaseline = "middle";
-          ctx.globalAlpha = ease;
-          ctx.fillText(b.label, cx, cy);
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = ease; ctx.fillText(b.label, cx, cy); ctx.globalAlpha = 1;
         }
       });
 
-      // 2) CADRES pointillés (prescription) — PAR-DESSUS, sauf le débordement "Réel"
+      // 2) CADRES pointillés (prescription) + légende au-dessus du 1er cadre
       ctx.setLineDash([9, 8]); ctx.lineWidth = 2.2;
       ctx.strokeStyle = "rgba(107,93,79,.62)";
       frames.forEach((f) => {
@@ -528,6 +553,51 @@ const renderers = {
         roundRect(ctx, R.x, R.y, R.w, R.h, 14); ctx.stroke();
       });
       ctx.setLineDash([]);
+      // légende « Prescription » en gris au-dessus du cadre de gauche
+      if (frames.length) {
+        const R0 = frameRect(frames[0].id);
+        ctx.fillStyle = "rgba(107,93,79,.7)";
+        ctx.font = "600 " + Math.round(cv.width * 0.017) + "px 'Playfair Display',Georgia,serif";
+        ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+        ctx.fillText("Prescription", R0.x + 4, R0.y - 12);
+      }
+
+      // 3) FLÈCHE « Travail » (verte) — pont de l'intérieur gris vers la zone rouge du débordement
+      const ai = blobs.findIndex((x) => x.arrow);
+      if (ai >= 0 && ai < shown) {
+        const arw = blobs[ai], an = anim[ai];
+        if (an.born < 0) an.born = time;
+        const aage = Math.min(1, (time - an.born) / 0.7), aease = 1 - Math.pow(1 - aage, 3);
+        const F = frameRect(arw.from), T = frameRect(arw.to);
+        if (F && T) {
+          const [gr, gg, gb] = COL.travail;
+          // départ : centre de la zone grise (cadre "from") ; arrivée : hors du cadre "to" (le rouge)
+          const x0 = F.x + F.w * 0.55, y0 = F.y + F.h * 0.5;
+          const x1 = T.x + T.w + 0.10 * T.w, y1 = T.y + T.h * 0.42;   // au-delà du bord droit = zone rouge
+          const xe = x0 + (x1 - x0) * aease, ye = y0 + (y1 - y0) * aease;
+          ctx.strokeStyle = `rgba(${gr},${gg},${gb},${aease})`;
+          ctx.fillStyle = `rgba(${gr},${gg},${gb},${aease})`;
+          ctx.lineWidth = 5; ctx.lineCap = "round";
+          // corps courbe (léger arc vers le haut)
+          const mx = (x0 + xe) / 2, my = Math.min(y0, ye) - 40;
+          ctx.beginPath(); ctx.moveTo(x0, y0); ctx.quadraticCurveTo(mx, my, xe, ye); ctx.stroke();
+          // pointe de flèche (tangente approx via le point de contrôle)
+          if (aease > 0.8) {
+            const ang = Math.atan2(ye - my, xe - mx), ah = 16;
+            ctx.beginPath();
+            ctx.moveTo(xe, ye);
+            ctx.lineTo(xe - ah * Math.cos(ang - 0.4), ye - ah * Math.sin(ang - 0.4));
+            ctx.lineTo(xe - ah * Math.cos(ang + 0.4), ye - ah * Math.sin(ang + 0.4));
+            ctx.closePath(); ctx.fill();
+          }
+          // label « Travail »
+          if (arw.label && aease > 0.5) {
+            ctx.font = "700 " + Math.round(cv.width * 0.019) + "px 'Playfair Display',Georgia,serif";
+            ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+            ctx.globalAlpha = aease; ctx.fillText(arw.label, mx, my - 6); ctx.globalAlpha = 1;
+          }
+        }
+      }
       raf = requestAnimationFrame(draw);
     }
     function roundRect(ctx, x, y, w, h, r) {

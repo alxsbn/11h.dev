@@ -1696,8 +1696,9 @@
           "label": "Zèle",
           "color": "zele",
           "in": "B",
-          "fill": 0.98,
-          "note": "colle à la taille du cadre"
+          "fill": 1.15,
+          "note": "colle à la taille du cadre",
+          "contained": true
         },
         {
           "id": "n5",
@@ -1705,8 +1706,16 @@
           "color": "reel",
           "in": "C",
           "overflow": true,
-          "fill": 1.1,
+          "fill": 1.05,
           "note": "déborde du cadre"
+        },
+        {
+          "id": "arrow",
+          "arrow": true,
+          "from": "B",
+          "to": "C",
+          "label": "Travail",
+          "color": "travail"
         }
       ]
     },
