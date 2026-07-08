@@ -438,6 +438,115 @@ const renderers = {
     };
   },
 
+  // Prescription — métaphore visuelle du travail (Dejours) : 3 cadres pointillés
+  // (la prescription, rigide) et des NUAGES VIVANTS (le réel) qui, au clic, se posent
+  // dans les cadres, débordent de l'un sur l'autre, puis le « Réel » (rouge) sort du cadre.
+  prescription(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--prescription");
+    if (s.heading && !s.plainTitle) el.classList.add("scene--titled");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="presc__stage"><canvas class="presc__cv"></canvas></div>`;
+    const stage = el.querySelector(".presc__stage");
+    const cv = el.querySelector(".presc__cv");
+    const frames = s.frames || [], blobs = s.blobs || [];
+    // couleurs des nuages
+    const COL = {
+      neutral: [150, 150, 158], zele: [80, 150, 205], reel: [226, 84, 92],
+    };
+    let raf = null, shown = 0, t0 = 0;
+    // état d'animation par blob : centre (cx,cy en px), rayon, wobble seed
+    const anim = blobs.map((b, i) => ({ born: -1, seed: i * 1.7 }));
+
+    // rectangle px d'un cadre (à partir des % du stage)
+    function frameRect(id) {
+      const f = frames.find((x) => x.id === id); if (!f) return null;
+      const W = cv.width, H = cv.height;
+      return { x: f.x / 100 * W, y: f.y / 100 * H, w: f.w / 100 * W, h: f.h / 100 * H };
+    }
+
+    function draw(now) {
+      const W = cv.clientWidth || 1000, H = cv.clientHeight || 560;
+      if (cv.width !== W) cv.width = W; if (cv.height !== H) cv.height = H;
+      const ctx = cv.getContext("2d");
+      ctx.clearRect(0, 0, W, H);
+      const time = (now - (t0 || now)) / 1000;
+
+      // 1) NUAGES vivants (dessinés SOUS les cadres pour qu'on voie le débordement)
+      blobs.forEach((b, i) => {
+        if (i >= shown) return;
+        const a = anim[i];
+        if (a.born < 0) a.born = time;
+        const age = Math.min(1, (time - a.born) / 0.6);       // apparition 0.6s
+        const ease = 1 - Math.pow(1 - age, 3);
+        const host = frameRect(b.in); if (!host) return;
+        const [r, g, bl] = COL[b.color] || COL.neutral;
+        // centre : dans le cadre hôte, décalé vers le cadre "over"/"spill" si présent
+        let cx = host.x + host.w * 0.5, cy = host.y + host.h * 0.55;
+        const partner = b.over || b.spill;
+        if (partner) { const p = frameRect(partner); if (p) cx = (cx + (p.x + p.w * 0.5)) * 0.5; }
+        // rayon : proportion `fill` de la taille du cadre ; overflow autorise >1
+        const base = Math.min(host.w, host.h) * 0.5;
+        const rr = base * (b.fill || 0.6) * ease;
+        // wobble organique (le nuage « respire »)
+        const lobes = 7;
+        ctx.beginPath();
+        for (let k = 0; k <= 40; k++) {
+          const ang = k / 40 * Math.PI * 2;
+          const wob = 1 + 0.10 * Math.sin(ang * lobes + time * 1.6 + a.seed)
+                        + 0.06 * Math.sin(ang * 3 - time * 1.1 + a.seed);
+          // étirement horizontal si empiète sur un partenaire
+          const sx = partner ? 1.55 : 1.15, sy = 1.0;
+          const px = cx + Math.cos(ang) * rr * wob * sx;
+          const py = cy + Math.sin(ang) * rr * wob * sy;
+          if (k === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        const alpha = 0.32 + 0.10 * Math.sin(time * 1.4 + a.seed);
+        ctx.fillStyle = `rgba(${r},${g},${bl},${alpha * ease})`;
+        ctx.shadowColor = `rgba(${r},${g},${bl},${0.5 * ease})`;
+        ctx.shadowBlur = 28;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        // label centré (Zèle / Réel)
+        if (b.label) {
+          ctx.fillStyle = `rgba(${r},${g},${bl},${ease})`;
+          ctx.font = "700 " + Math.round(base * 0.42) + "px 'Playfair Display',Georgia,serif";
+          ctx.textAlign = "center"; ctx.textBaseline = "middle";
+          ctx.globalAlpha = ease;
+          ctx.fillText(b.label, cx, cy);
+          ctx.globalAlpha = 1;
+        }
+      });
+
+      // 2) CADRES pointillés (prescription) — PAR-DESSUS, sauf le débordement "Réel"
+      ctx.setLineDash([9, 8]); ctx.lineWidth = 2.2;
+      ctx.strokeStyle = "rgba(107,93,79,.62)";
+      frames.forEach((f) => {
+        const R = frameRect(f.id);
+        roundRect(ctx, R.x, R.y, R.w, R.h, 14); ctx.stroke();
+      });
+      ctx.setLineDash([]);
+      raf = requestAnimationFrame(draw);
+    }
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+    function start() { if (!raf) { t0 = performance.now(); raf = requestAnimationFrame(draw); } }
+    function stop() { if (raf) cancelAnimationFrame(raf); raf = null; }
+    return {
+      el,
+      onEnter() { shown = 0; anim.forEach((a) => (a.born = -1)); stop(); start(); },
+      onExit()  { shown = 0; stop(); },
+      advance() { if (shown < blobs.length) { shown++; return true; } return false; }
+    };
+  },
+
   // Wiki — reproduit une entête d'article Wikipédia + paragraphe ; au clic, un
   // surlignage jaune (feutre) balaie le span .wiki__hl du texte fourni.
   wiki(s) {

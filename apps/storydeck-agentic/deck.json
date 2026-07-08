@@ -1639,17 +1639,76 @@
       ]
     },
     {
-      "type": "text",
+      "type": "prescription",
       "heading": "Le réel",
-      "image": "assets/img/dejours-travail-vivant.jpg",
-      "items": [
-        "Le travail vit entre la prescription et le réel.",
-        "Le réel, c'est ce qui résiste à la prescription. Par l'échec.",
-        "Le réel déborde toujours.",
-        "Le respect strict de la prescription, c'est la grève du zèle.",
-        "Un agent est zélé par nature."
+      "frames": [
+        {
+          "id": "A",
+          "x": 8,
+          "y": 22,
+          "w": 34,
+          "h": 48
+        },
+        {
+          "id": "B",
+          "x": 36,
+          "y": 30,
+          "w": 34,
+          "h": 48
+        },
+        {
+          "id": "C",
+          "x": 66,
+          "y": 22,
+          "w": 28,
+          "h": 48
+        }
       ],
-      "imageAtStart": true
+      "blobs": [
+        {
+          "id": "n1",
+          "label": "",
+          "color": "neutral",
+          "in": "A",
+          "fill": 0.5,
+          "note": "s'intercale dans un cadre"
+        },
+        {
+          "id": "n2",
+          "label": "",
+          "color": "neutral",
+          "in": "A",
+          "over": "B",
+          "fill": 0.7,
+          "note": "mange sur deux"
+        },
+        {
+          "id": "n3",
+          "label": "",
+          "color": "neutral",
+          "in": "C",
+          "spill": "B",
+          "fill": 0.8,
+          "note": "stocké dans un, déborde sur l'autre"
+        },
+        {
+          "id": "n4",
+          "label": "Zèle",
+          "color": "zele",
+          "in": "B",
+          "fill": 0.98,
+          "note": "colle à la taille du cadre"
+        },
+        {
+          "id": "n5",
+          "label": "Réel",
+          "color": "reel",
+          "in": "C",
+          "overflow": true,
+          "fill": 1.1,
+          "note": "déborde du cadre"
+        }
+      ]
     },
     {
       "type": "text",
