@@ -534,18 +534,20 @@ const renderers = {
         if (a.born < 0) a.born = time;
         const age = Math.min(1, (time - a.born) / 0.6);       // apparition 0.6s
         const ease = 1 - Math.pow(1 - age, 3);
-        if (b.arrow) return;                                   // la flèche est dessinée en dernier
+        if (b.arrow || b.travailZone) return;                  // dessinés en dernier
         const host = frameRect(b.in); if (!host) return;
         const [r, g, bl] = COL[b.color] || COL.neutral;
         const partner = b.over || b.spill;
-        // centre : dans le cadre hôte, décalé vers le cadre partenaire si présent
-        let cx = host.x + host.w * 0.5, cy = host.y + host.h * 0.5;
+        // centre : dans le cadre hôte, décalé vers le cadre partenaire si présent.
+        // Réel (overflow) : ancré vers la GAUCHE du cadre → l'essentiel reste gris DEDANS,
+        // seul le bord droit déborde (rouge).
+        let cx = host.x + host.w * (b.overflow ? 0.42 : 0.5), cy = host.y + host.h * 0.5;
         if (partner) { const p = frameRect(partner); if (p) cx = (cx + (p.x + p.w * 0.5)) * 0.5; }
         // Zèle « colle » au cadre → rayon quasi = demi-cadre, peu d'étirement.
         const tight = b.fill >= 0.95 && !b.overflow;
         const base = tight ? Math.min(host.w, host.h) * 0.52 : Math.min(host.w, host.h) * 0.5;
         const rr = base * (b.fill || 0.6) * ease;
-        const sx = tight ? host.w / host.h * 0.95 : (partner ? 1.55 : 1.2), sy = 1.0;
+        const sx = tight ? host.w / host.h * 0.95 : (b.overflow ? 1.0 : (partner ? 1.55 : 1.2)), sy = 1.0;
         const alpha = 0.34 + 0.10 * Math.sin(time * 1.4 + a.seed);
         const drawFill = (col, al) => {
           ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${al})`;
@@ -574,9 +576,10 @@ const renderers = {
         } else {
           blobPath(cx, cy, rr, sx, sy, a.seed); drawFill([r, g, bl], alpha * ease);
         }
-        // label centré (Zèle / Réel)
+        // label centré (Zèle / Réel) — le « Réel » reste ROUGE même si le corps est gris
         if (b.label) {
-          ctx.fillStyle = `rgba(${r},${g},${bl},${ease})`;
+          const lc = b.overflow ? COL.reel : [r, g, bl];
+          ctx.fillStyle = `rgba(${lc[0]},${lc[1]},${lc[2]},${ease})`;
           ctx.font = "700 " + Math.round(base * 0.4) + "px 'Playfair Display',Georgia,serif";
           ctx.textAlign = "center"; ctx.textBaseline = "middle";
           ctx.globalAlpha = ease; ctx.fillText(b.label, cx, cy); ctx.globalAlpha = 1;
@@ -600,39 +603,37 @@ const renderers = {
         ctx.fillText("Prescription", R0.x + 4, R0.y - 12);
       }
 
-      // 3) FLÈCHE « Travail » (verte) — pont de l'intérieur gris vers la zone rouge du débordement
-      const ai = blobs.findIndex((x) => x.arrow);
-      if (ai >= 0 && ai < shown) {
-        const arw = blobs[ai], an = anim[ai];
-        if (an.born < 0) an.born = time;
-        const aage = Math.min(1, (time - an.born) / 0.7), aease = 1 - Math.pow(1 - aage, 3);
-        const F = frameRect(arw.from), T = frameRect(arw.to);
-        if (F && T) {
+      // 3) ZONE « Travail » (verte) — petit halo là où le nuage DÉBORDE du cadre.
+      // C'est le débordement lui-même qu'on nomme « le travail » (pas de flèche).
+      const ti = blobs.findIndex((x) => x.travailZone);
+      if (ti >= 0 && ti < shown) {
+        const tz = blobs[ti], tn = anim[ti];
+        if (tn.born < 0) tn.born = time;
+        const tage = Math.min(1, (time - tn.born) / 0.6), tease = 1 - Math.pow(1 - tage, 3);
+        const T = frameRect(tz.at);
+        if (T) {
           const [gr, gg, gb] = COL.travail;
-          // départ : centre de la zone grise (cadre "from") ; arrivée : hors du cadre "to" (le rouge)
-          const x0 = F.x + F.w * 0.55, y0 = F.y + F.h * 0.5;
-          const x1 = T.x + T.w + 0.10 * T.w, y1 = T.y + T.h * 0.42;   // au-delà du bord droit = zone rouge
-          const xe = x0 + (x1 - x0) * aease, ye = y0 + (y1 - y0) * aease;
-          ctx.strokeStyle = `rgba(${gr},${gg},${gb},${aease})`;
-          ctx.fillStyle = `rgba(${gr},${gg},${gb},${aease})`;
-          ctx.lineWidth = 5; ctx.lineCap = "round";
-          // corps courbe (léger arc vers le haut)
-          const mx = (x0 + xe) / 2, my = Math.min(y0, ye) - 40;
-          ctx.beginPath(); ctx.moveTo(x0, y0); ctx.quadraticCurveTo(mx, my, xe, ye); ctx.stroke();
-          // pointe de flèche (tangente approx via le point de contrôle)
-          if (aease > 0.8) {
-            const ang = Math.atan2(ye - my, xe - mx), ah = 16;
-            ctx.beginPath();
-            ctx.moveTo(xe, ye);
-            ctx.lineTo(xe - ah * Math.cos(ang - 0.4), ye - ah * Math.sin(ang - 0.4));
-            ctx.lineTo(xe - ah * Math.cos(ang + 0.4), ye - ah * Math.sin(ang + 0.4));
-            ctx.closePath(); ctx.fill();
-          }
-          // label « Travail »
-          if (arw.label && aease > 0.5) {
+          // centre de la zone : juste SUR le bord droit du cadre (là où le rouge sort),
+          // sans dépasser l'écran.
+          const zx = Math.min(T.x + T.w + T.w * 0.02, W - Math.min(T.w, T.h) * 0.28);
+          const zy = T.y + T.h * 0.5;
+          const rz = Math.min(T.w, T.h) * 0.30 * tease;
+          // petit blob vert vivant, clippé au COMPLÉMENT du cadre (visible hors-cadre seulement)
+          ctx.save();
+          ctx.beginPath(); ctx.rect(0, 0, W, H);
+          roundRect(ctx, T.x, T.y, T.w, T.h, 14); ctx.clip("evenodd");
+          blobPath(zx, zy, rz, 1.1, 1.0, tn.seed);
+          const ga = 0.5 + 0.10 * Math.sin(time * 1.5 + tn.seed);
+          ctx.fillStyle = `rgba(${gr},${gg},${gb},${ga * tease})`;
+          ctx.shadowColor = `rgba(${gr},${gg},${gb},${0.5 * tease})`;
+          ctx.shadowBlur = 26; ctx.fill(); ctx.shadowBlur = 0;
+          ctx.restore();
+          // label « Travail » au-dessus de la zone (ancré à droite pour ne pas sortir de l'écran)
+          if (tz.label && tease > 0.4) {
+            ctx.fillStyle = `rgba(${gr},${gg},${gb},${tease})`;
             ctx.font = "700 " + Math.round(cv.width * 0.019) + "px 'Playfair Display',Georgia,serif";
-            ctx.textAlign = "center"; ctx.textBaseline = "bottom";
-            ctx.globalAlpha = aease; ctx.fillText(arw.label, mx, my - 6); ctx.globalAlpha = 1;
+            ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+            ctx.globalAlpha = tease; ctx.fillText(tz.label, Math.min(zx + rz, W - 4), zy - rz - 8); ctx.globalAlpha = 1;
           }
         }
       }
@@ -684,14 +685,24 @@ const renderers = {
   },
 
   // titre + grande image centrée (capture, tweet…), révélée au clic.
+  // dark:true → plein écran fond noir, titre clair centré. centerTitle:true → titre centré.
   figure(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--figure");
+    if (s.dark) el.classList.add("scene--figure-dark");
+    if (s.centerTitle) el.classList.add("scene--figure-center");
     el.querySelector(".scene__content").innerHTML = `
       ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
-      <img class="figure__img reveal" src="${s.image}" alt="${s.alt || ""}" />
+      <img class="figure__img" src="${s.image}" alt="${s.alt || ""}" />
       ${s.caption ? `<p class="lead reveal figure__cap">${s.caption}</p>` : ""}`;
-    return { el };
+    const img = el.querySelector(".figure__img");
+    let revealed = false;
+    return {
+      el,
+      onEnter() { revealed = false; img.classList.remove("on"); },
+      onExit()  { revealed = false; img.classList.remove("on"); },
+      advance() { if (!revealed) { revealed = true; img.classList.add("on"); return true; } return false; }
+    };
   },
 
   compare(s) {

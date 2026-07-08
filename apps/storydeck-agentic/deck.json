@@ -848,6 +848,10 @@
             {
               "id": "dbt",
               "r": 0.188
+            },
+            {
+              "id": "sr",
+              "r": 0.075
             }
           ],
           "move": [
@@ -923,6 +927,10 @@
             {
               "id": "dbt",
               "r": 0.152
+            },
+            {
+              "id": "sr",
+              "r": 0.085
             }
           ]
         },
@@ -963,6 +971,14 @@
             {
               "id": "product",
               "r": 0.035
+            },
+            {
+              "id": "me",
+              "r": 0.12
+            },
+            {
+              "id": "sr",
+              "r": 0.095
             }
           ],
           "add": [
@@ -1103,6 +1119,10 @@
             {
               "id": "sales",
               "r": 0.035
+            },
+            {
+              "id": "me",
+              "r": 0.11
             }
           ],
           "station": {
@@ -1224,6 +1244,14 @@
             {
               "id": "comex",
               "r": 0.035
+            },
+            {
+              "id": "me",
+              "r": 0.1
+            },
+            {
+              "id": "sr",
+              "r": 0.105
             }
           ],
           "move": [
@@ -1321,6 +1349,10 @@
             {
               "id": "finance",
               "r": 0.04
+            },
+            {
+              "id": "me",
+              "r": 0.09
             }
           ],
           "move": [
@@ -1447,6 +1479,14 @@
             {
               "id": "supply",
               "r": 0.04
+            },
+            {
+              "id": "me",
+              "r": 0.085
+            },
+            {
+              "id": "sr",
+              "r": 0.115
             }
           ],
           "station": {
@@ -1523,12 +1563,12 @@
           "label": "Avant",
           "segments": [
             {
-              "name": "ETL 35%",
+              "name": "ETL/Coding 35%",
               "pct": 35,
               "color": "#3b82d6"
             },
             {
-              "name": "Analyse 30%",
+              "name": "Analysis/Modeling 30%",
               "pct": 30,
               "color": "#2fa56a"
             },
@@ -1553,7 +1593,7 @@
           "label": "Compression",
           "segments": [
             {
-              "name": "ETL 10%",
+              "name": "ETL/Coding 10%",
               "pct": 10,
               "color": "#3b82d6"
             },
@@ -1589,7 +1629,7 @@
           "label": "Après",
           "segments": [
             {
-              "name": "ETL 10%",
+              "name": "ETL/Coding 10%",
               "pct": 10,
               "color": "#3b82d6"
             },
@@ -1646,12 +1686,11 @@
       ]
     },
     {
-      "type": "text",
+      "type": "figure",
       "heading": "Le piège",
-      "items": [
-        "Un agent n'est l'obligé de personne.",
-        "Froid. Infatigable. Inconscient."
-      ]
+      "dark": true,
+      "image": "assets/img/piege-nyt.jpg",
+      "centerTitle": true
     },
     {
       "type": "prescription",
@@ -1718,19 +1757,17 @@
         {
           "id": "n5",
           "label": "Réel",
-          "color": "reel",
+          "color": "neutral",
           "in": "C",
           "overflow": true,
           "fill": 1.05,
           "note": "déborde du cadre"
         },
         {
-          "id": "arrow",
-          "arrow": true,
-          "from": "B",
-          "to": "C",
-          "label": "Travail",
-          "color": "travail"
+          "id": "travail",
+          "travailZone": true,
+          "at": "C",
+          "label": "Travail"
         }
       ]
     },
