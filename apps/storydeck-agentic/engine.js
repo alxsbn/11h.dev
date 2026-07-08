@@ -686,13 +686,14 @@ const renderers = {
   bars2(s) {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--bars2");
+    if (s.heading) el.classList.add("scene--titled");
     const palette = { spec: "#6ea8fe", code: "#9aa3b2", review: "#c9a2ff", value: "#ff5d6c" };
     // un segment avec `reveal:true` affiche "?" d'abord, puis son nom au clic (fondu)
     const rowHtml = (row, ri) => `
       <div class="b2__row" data-row="${ri}">
         <div class="b2__label">${row.label}</div>
         <div class="b2__track">${row.segments.map((seg, si) => `
-          <div class="b2__seg${seg.reveal ? " b2__seg--q" : ""}" data-row="${ri}" data-seg="${si}"
+          <div class="b2__seg${seg.reveal ? " b2__seg--q" : ""}${seg.empty ? " b2__seg--empty" : ""}" data-row="${ri}" data-seg="${si}"
                style="--pct:${seg.pct}%; --c:${seg.color || palette[seg.key] || "#6ea8fe"}">
             <span>${seg.reveal ? "?" : seg.name}</span>
           </div>`).join("")}</div>

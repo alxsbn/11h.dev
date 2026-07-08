@@ -200,9 +200,14 @@
     overflow: hidden; white-space: nowrap; transition: width .7s cubic-bezier(.34,1.1,.5,1);
     border-right: 2px solid #0b0d12; }
   .b2__seg.on { width: var(--pct); }
-  .b2__seg span { font-size: clamp(.8rem, 1.5vw, 1.1rem); font-weight: 700; color: #0b0d12; opacity: 0;
-    transition: opacity .4s ease .3s; padding: 0 .4em; }
+  .b2__seg span { font-size: clamp(.8rem, 1.5vw, 1.1rem); font-weight: 700; color: #fff; opacity: 0;
+    transition: opacity .4s ease .3s; padding: 0 .4em;
+    text-shadow: 0 1px 3px rgba(0,0,0,.35); }
   .b2__seg.on span { opacity: 1; }
+  /* segment « Disponible » : cadre pointillé vide (capacité libérée), texte discret */
+  .b2__seg--empty { background: transparent !important; border: 1px dashed rgba(107,93,79,.5);
+    border-radius: 8px; }
+  .b2__seg--empty span { color: var(--ink-soft); text-shadow: none; font-weight: 600; }
   .b2__cap { text-align: center; margin-top: 1.5rem; }
 
   /* stack — logos en grille par couches, grands, SANS cadre, sur fond sombre */

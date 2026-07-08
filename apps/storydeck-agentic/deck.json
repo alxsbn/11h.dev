@@ -1510,6 +1510,113 @@
       "heading": "So what ?"
     },
     {
+      "type": "bars2",
+      "heading": "Où passe le temps ?",
+      "rows": [
+        {
+          "label": "Avant",
+          "segments": [
+            {
+              "name": "ETL 35%",
+              "pct": 35,
+              "color": "#3b82d6"
+            },
+            {
+              "name": "Analyse 30%",
+              "pct": 30,
+              "color": "#2fa56a"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#f0a020"
+            },
+            {
+              "name": "Run 15%",
+              "pct": 15,
+              "color": "#6a4bc4"
+            },
+            {
+              "name": "Stakeholder 15%",
+              "pct": 15,
+              "color": "#e8574f"
+            }
+          ]
+        },
+        {
+          "label": "Compression",
+          "segments": [
+            {
+              "name": "ETL 10%",
+              "pct": 10,
+              "color": "#3b82d6"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#2fa56a"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#f0a020"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#6a4bc4"
+            },
+            {
+              "name": "Stakeholder 15%",
+              "pct": 15,
+              "color": "#e8574f"
+            },
+            {
+              "name": "Disponible 60%",
+              "pct": 60,
+              "color": "#2a2a2a",
+              "empty": true
+            }
+          ]
+        },
+        {
+          "label": "Après",
+          "segments": [
+            {
+              "name": "ETL 10%",
+              "pct": 10,
+              "color": "#3b82d6"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#2fa56a"
+            },
+            {
+              "name": "Review 25%",
+              "pct": 25,
+              "color": "#f0a020"
+            },
+            {
+              "name": "Run 10%",
+              "pct": 10,
+              "color": "#6a4bc4"
+            },
+            {
+              "name": "Stakeholder 35%",
+              "pct": 35,
+              "color": "#e8574f"
+            },
+            {
+              "name": "Context eng 15%",
+              "pct": 15,
+              "color": "#f0a020"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "type": "list",
       "heading": "Cascade",
       "noBullet": true,
