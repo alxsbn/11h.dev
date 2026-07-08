@@ -56,6 +56,11 @@
 
   h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -.02em; }
   h2 { font-size: clamp(1.6rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.01em; margin-bottom: .6em; }
+  /* titres de slides de contenu en cursive Tangerine (comme « To be continued »),
+     le texte dessous fait office de sous-titre */
+  .scene--titled h2 { font-family: var(--font-tale); font-weight: 700;
+    font-size: clamp(3.4rem, 8vw, 6.4rem); line-height: .9; letter-spacing: 0;
+    color: var(--fg); margin-bottom: .35em; text-shadow: 0 2px 20px rgba(232,97,140,.12); }
   .scene--bigtext h2 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.1; }
   /* metroline — chemin de métro serpentin qui liste des éléments (chaîne de pensée) */
   .scene--metro { align-items: center; }

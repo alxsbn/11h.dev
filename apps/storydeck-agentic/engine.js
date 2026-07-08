@@ -32,6 +32,7 @@ const renderers = {
   //   au clic « Build » est barré + patch « Agentic ? » en travers.
   list(s) {
     const el = sceneEl(s.media, s.bgVideo);
+    if (s.heading) el.classList.add("scene--titled");
     if (s.image) el.classList.add("scene--list-img");
     if (s.decision) el.classList.add("scene--list-img", "scene--decision");
     const cls = "stacklist" + (s.noBullet ? " stacklist--plain" : "");
@@ -262,6 +263,7 @@ const renderers = {
     const el = sceneEl(s.media, s.bgVideo);
     if (s.big) el.classList.add("scene--bigtext");
     if (s.image) el.classList.add("scene--text-img");
+    if (s.heading && !s.big) el.classList.add("scene--titled");
     // items optionnels : chaque phrase sur SA PROPRE LIGNE, révélée au clic (empilement vertical)
     const itemsHtml = (s.items && s.items.length)
       ? s.items.map((it) => `<p class="txt__line"><span class="txt__item">${it}</span></p>`).join("")
@@ -275,15 +277,23 @@ const renderers = {
       ? `<div class="txt-split"><div class="txt-split__text">${textBlock}</div>
            <img class="txt-split__img" src="${s.image}" alt="" /></div>`
       : textBlock;
-    if (!s.items || !s.items.length) return { el };
+    if (!s.items || !s.items.length) {
+      // pas d'items : si image « au démarrage », l'afficher à l'entrée
+      const img0 = el.querySelector(".txt-split__img");
+      if (img0 && s.imageAtStart) return { el, onEnter() { img0.classList.add("on"); } };
+      return { el };
+    }
     const parts = [...el.querySelectorAll(".txt__item")];
     const img = el.querySelector(".txt-split__img");
+    // imageAtStart : la capture apparaît dès l'entrée (pas au dernier clic)
+    const startImg = !!s.imageAtStart;
     let shown = 0, imgShown = false;
     const reset = () => { parts.forEach((n) => n.classList.remove("on")); shown = 0;
       imgShown = false; img?.classList.remove("on"); };
     return {
       el,
-      onEnter() { reset(); }, onExit() { reset(); },
+      onEnter() { reset(); if (startImg && img) { img.classList.add("on"); imgShown = true; } },
+      onExit() { reset(); },
       advance() {
         if (shown < parts.length) { parts[shown].classList.add("on"); shown++; return true; }
         if (img && !imgShown) { imgShown = true; img.classList.add("on"); return true; }
