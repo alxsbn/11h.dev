@@ -438,6 +438,44 @@ const renderers = {
     };
   },
 
+  // Travail vivant — 2 colonnes : à GAUCHE des couvertures (coupures de presse qui
+  // tombent), à DROITE des citations (mêmes coupures). Tout se pose au clic, en biais,
+  // avec l'effet SaaSpocalypse (chute + rebond + bousculade).
+  travailvivant(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--travail");
+    if (s.heading && !s.plainTitle) el.classList.add("scene--titled");
+    const POSE_L = [{ x: "-4%", y: "-6%", rot: "-5deg" }, { x: "6%", y: "8%", rot: "4deg" }];
+    const POSE_R = [
+      { x: "-6%", y: "-24%", rot: "-4deg" }, { x: "8%", y: "-12%", rot: "3deg" },
+      { x: "-4%", y: "2%", rot: "-3deg" }, { x: "7%", y: "14%", rot: "4deg" },
+      { x: "-2%", y: "26%", rot: "-2deg" },
+    ];
+    const imgs = (s.images || []).map((src, i) => {
+      const p = POSE_L[i % POSE_L.length];
+      return `<figure class="tv__clip tv__img" data-k="img" style="--x:${p.x};--y:${p.y};--rot:${p.rot};z-index:${i + 1}"><img src="${src}" alt=""/></figure>`;
+    }).join("");
+    const quotes = (s.quotes || []).map((q, i) => {
+      const p = POSE_R[i % POSE_R.length];
+      return `<figure class="tv__clip tv__quote" data-k="q" style="--x:${p.x};--y:${p.y};--rot:${p.rot};z-index:${i + 10}"><blockquote>${q}</blockquote></figure>`;
+    }).join("");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="tv">
+        <div class="tv__col tv__left">${imgs}</div>
+        <div class="tv__col tv__right">${quotes}</div>
+      </div>`;
+    // ordre de révélation : d'abord les 2 couvertures, puis les citations une à une
+    const order = [...el.querySelectorAll(".tv__img"), ...el.querySelectorAll(".tv__quote")];
+    let shown = 0;
+    const reset = () => { shown = 0; order.forEach((c) => c.classList.remove("on")); };
+    return {
+      el,
+      onEnter() { reset(); }, onExit() { reset(); },
+      advance() { if (shown < order.length) { order[shown].classList.add("on"); shown++; return true; } return false; }
+    };
+  },
+
   // Prescription — métaphore visuelle du travail (Dejours) : 3 cadres pointillés
   // (la prescription, rigide) et des NUAGES VIVANTS (le réel) qui, au clic, se posent
   // dans les cadres, débordent de l'un sur l'autre, puis le « Réel » (rouge) sort du cadre.
