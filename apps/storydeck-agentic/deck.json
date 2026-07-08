@@ -1511,22 +1511,6 @@
       "heading": "So what ?"
     },
     {
-      "type": "list",
-      "heading": "Cascade",
-      "noBullet": true,
-      "items": [
-        "<span class=\"casc__a\">Contexte business</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Lean</span>",
-        "<span class=\"casc__a\">Data-Driven</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Data Fog</span>",
-        "<span class=\"casc__a\">Cost-Center</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Span of control</span>",
-        "<span class=\"casc__a\">Palliatif</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Surmultiplication</span>",
-        "<span class=\"casc__a\">Lâcher-prise</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Contraction du temps</span>",
-        "<span class=\"casc__a\">Obsolescence & sédimentation</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Flux</span>",
-        "<span class=\"casc__a\">Porosité</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Push/Pull</span>",
-        "<span class=\"casc__a\">Exploration</span><span class=\"casc__arrow\">→</span><span class=\"casc__b\">Erosion</span>",
-        "<span class=\"casc__a casc__solo\">Survie ?</span>"
-      ]
-    },
-    {
       "type": "wiki",
       "title": "Data analysis",
       "langs": "43 languages",
