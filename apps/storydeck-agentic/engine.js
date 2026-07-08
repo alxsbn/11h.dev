@@ -541,13 +541,16 @@ const renderers = {
         // centre : dans le cadre hôte, décalé vers le cadre partenaire si présent.
         // Réel (overflow) : ancré vers la GAUCHE du cadre → l'essentiel reste gris DEDANS,
         // seul le bord droit déborde (rouge).
-        let cx = host.x + host.w * (b.overflow ? 0.42 : 0.5), cy = host.y + host.h * 0.5;
+        // Réel (overflow) : nuage posé DANS le cadre (corps gris bien dedans), assez grand
+        // pour que seule sa frange droite dépasse le bord (rouge).
+        let cx = host.x + host.w * 0.5;
+        let cy = host.y + host.h * 0.5;
         if (partner) { const p = frameRect(partner); if (p) cx = (cx + (p.x + p.w * 0.5)) * 0.5; }
         // Zèle « colle » au cadre → rayon quasi = demi-cadre, peu d'étirement.
         const tight = b.fill >= 0.95 && !b.overflow;
         const base = tight ? Math.min(host.w, host.h) * 0.52 : Math.min(host.w, host.h) * 0.5;
         const rr = base * (b.fill || 0.6) * ease;
-        const sx = tight ? host.w / host.h * 0.95 : (b.overflow ? 1.0 : (partner ? 1.55 : 1.2)), sy = 1.0;
+        const sx = tight ? host.w / host.h * 0.95 : (b.overflow ? 0.92 : (partner ? 1.55 : 1.2)), sy = b.overflow ? 1.05 : 1.0;
         const alpha = 0.34 + 0.10 * Math.sin(time * 1.4 + a.seed);
         const drawFill = (col, al) => {
           ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${al})`;
@@ -613,11 +616,11 @@ const renderers = {
         const T = frameRect(tz.at);
         if (T) {
           const [gr, gg, gb] = COL.travail;
-          // centre de la zone : juste SUR le bord droit du cadre (là où le rouge sort),
+          // centre de la zone : sur le bord droit du cadre, à hauteur de la bosse rouge,
           // sans dépasser l'écran.
-          const zx = Math.min(T.x + T.w + T.w * 0.02, W - Math.min(T.w, T.h) * 0.28);
-          const zy = T.y + T.h * 0.5;
-          const rz = Math.min(T.w, T.h) * 0.30 * tease;
+          const zx = Math.min(T.x + T.w + T.w * 0.02, W - Math.min(T.w, T.h) * 0.26);
+          const zy = T.y + T.h * 0.42;
+          const rz = Math.min(T.w, T.h) * 0.26 * tease;
           // petit blob vert vivant, clippé au COMPLÉMENT du cadre (visible hors-cadre seulement)
           ctx.save();
           ctx.beginPath(); ctx.rect(0, 0, W, H);
