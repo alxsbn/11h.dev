@@ -453,14 +453,21 @@ const renderers = {
       </div>`).join("");
     el.querySelector(".scene__content").innerHTML = `
       ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
-      <div class="roles">${cards}</div>`;
+      <div class="roles${(s.roles || []).every((r) => !(r.labels && r.labels.length)) ? " roles--tiles" : ""}"${s.cols ? ` style="grid-template-columns:repeat(${s.cols},1fr)"` : ""}>${cards}</div>`;
+    // étiquettes simples (cartes titre seul) → révélées par colonne (paquet de `cols`) au clic
+    const labelOnly = (s.roles || []).every((r) => !(r.labels && r.labels.length));
+    const step = labelOnly && s.cols ? s.cols : 1;
     const roleEls = [...el.querySelectorAll(".role")];
     let shown = 0;   // nb de cartes dont les labels sont révélés
     const reset = () => { shown = 0; roleEls.forEach((r) => r.classList.remove("on")); };
     return {
       el,
       onEnter() { reset(); }, onExit() { reset(); },
-      advance() { if (shown < roleEls.length) { roleEls[shown].classList.add("on"); shown++; return true; } return false; }
+      advance() {
+        if (shown >= roleEls.length) return false;
+        for (let k = 0; k < step && shown < roleEls.length; k++) { roleEls[shown].classList.add("on"); shown++; }
+        return true;
+      }
     };
   },
 

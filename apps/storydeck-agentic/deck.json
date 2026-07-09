@@ -1815,52 +1815,47 @@
       "heading": "Le nouveau DA",
       "roles": [
         {
-          "title": "Gardien de la DQ",
-          "labels": [
-            "Business as usual"
-          ]
+          "title": "Data Engineering",
+          "labels": []
         },
         {
-          "title": "Traducteur du savoir métier",
-          "labels": [
-            "Structure la connaissance des stakeholders",
-            "Produit la source de vérité"
-          ]
+          "title": "Context Engineering",
+          "labels": []
         },
         {
-          "title": "Capteur du non-modélisé",
-          "labels": [
-            "Confiance, culture, terrain, intuition",
-            "Anti-biais d'interprétation (causalité, cherry-picking, bruit, vanity metrics)"
-          ]
+          "title": "Capter le non-modélisé",
+          "labels": []
         },
         {
-          "title": "Défenseur du réel",
-          "labels": [
-            "Porte le réel face aux décideurs",
-            "Agit sous mandat explicite",
-            "Ancrage métier vérifié par cas concrets",
-            "Revue par les pairs, pas auto-certifié"
-          ]
+          "title": "Challenger les interprétations",
+          "labels": []
         },
         {
-          "title": "Organisateur de la délibération",
-          "labels": [
-            "Convoque les stakeholders",
-            "Tranche collectivement",
-            "Produit des règles de décision",
-            "Fixe une sortie si non-convergence (délai + décideur nommé)"
-          ]
+          "title": "Contenir l'auto-certification",
+          "labels": []
         },
         {
-          "title": "Garant de la gouvernance",
-          "labels": [
-            "Arbitre ce qui doit être délibéré",
-            "Permet l'auditabilité",
-            "Contrôle le harness via un mandat explicite"
-          ]
+          "title": "Agit sous mandat explicite",
+          "labels": []
+        },
+        {
+          "title": "Capturer le réel",
+          "labels": []
+        },
+        {
+          "title": "Sortir de sa bulle",
+          "labels": []
+        },
+        {
+          "title": "Organiser la délibération",
+          "labels": []
+        },
+        {
+          "title": "Arbitre les conflits",
+          "labels": []
         }
-      ]
+      ],
+      "cols": 5
     },
     {
       "type": "title",
