@@ -654,13 +654,15 @@ const renderers = {
           clipOutsideAllFrames();                                        // …ET hors des cadres
           redHatch(0.85 * ease);
           ctx.restore();
-          // (c) LISERÉ VERT = la FRONTIÈRE bleu↔rouge du HAUT uniquement : l'arête HAUTE du
-          //     cadre HÔTE du nuage, là où le nuage la franchit, clippée DANS le nuage.
-          //     (une seule ligne, en haut — pas de ligne en bas)
+          // (c) LISERÉ VERT = la FRONTIÈRE bleu↔rouge : l'arête BASSE du cadre hôte (le nuage
+          //     déborde SOUS les cadres), là où le nuage la franchit, clippée DANS le nuage.
           ctx.save(); blobPath(cx, cy, rr, sx, sy, a.seed); ctx.clip();  // clip au nuage
           ctx.lineWidth = 10; ctx.lineCap = "round";
           ctx.strokeStyle = `rgba(${COL.travail[0]},${COL.travail[1]},${COL.travail[2]},${0.85 * ease})`;
-          ctx.beginPath(); ctx.moveTo(host.x, host.y); ctx.lineTo(host.x + host.w, host.y); ctx.stroke();
+          // couvre l'arête basse des cadres du HAUT (HG+HD) sur toute la largeur qu'ils occupent
+          const topFrames = frames.filter((f) => f.id === "HG" || f.id === "HD" || f.id === host.id);
+          topFrames.forEach((f) => { const R = frameRect(f.id);
+            ctx.beginPath(); ctx.moveTo(R.x, R.y + R.h); ctx.lineTo(R.x + R.w, R.y + R.h); ctx.stroke(); });
           ctx.restore();
         }
         // label (« réel » en rouge)
