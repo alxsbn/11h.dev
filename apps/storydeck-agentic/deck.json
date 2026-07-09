@@ -1,0 +1,1964 @@
+{
+  "meta": {
+    "title": "Once upon a time — Agentic Analytics",
+    "source": "vault/Récapitulatif Détaillé — Talk « Agentic Analytics » v2.md",
+    "generated": "2026-07-06",
+    "lang": "fr"
+  },
+  "scenes": [
+    {
+      "type": "title",
+      "title": "Once upon a time",
+      "subtitle": "l'histoire d'une data team — et du métier qui lui survit",
+      "media": "assets/img/hero-jolimoi.png"
+    },
+    {
+      "type": "text",
+      "bgVideo": "assets/video/meetup.mp4",
+      "heading": "<span class=\"hl\">Marketplace beauté &amp; bien-être</span> en réseau de vente directe, opérée par des <span class=\"hl--accent\">micro-influenceuses indépendantes</span>",
+      "plainTitle": true
+    },
+    {
+      "type": "disclaimer",
+      "title": "DISCLAIMER",
+      "items": [
+        "B2B2C.",
+        "Retail.",
+        "MLM.",
+        "Créé en 2017.",
+        "100 employés."
+      ]
+    },
+    {
+      "type": "cellular",
+      "beats": [
+        {
+          "chapter": "I — Fondation",
+          "tempo": 0.8,
+          "add": [
+            {
+              "id": "cto",
+              "usage": "me",
+              "kind": "human",
+              "label": "CTO",
+              "x": 0.44,
+              "y": 0.46,
+              "r": 0.05
+            },
+            {
+              "id": "mysql",
+              "usage": "ingestion",
+              "kind": "tech",
+              "x": 0.58,
+              "y": 0.5,
+              "r": 0.05,
+              "label": "MySQL",
+              "logo": "mysql.svg"
+            }
+          ],
+          "station": {
+            "date": "~2020"
+          }
+        },
+        {
+          "size": [
+            {
+              "id": "cto",
+              "r": 0.12
+            },
+            {
+              "id": "mysql",
+              "r": 0.065
+            }
+          ]
+        },
+        {
+          "add": [
+            {
+              "id": "metabase",
+              "usage": "serving",
+              "kind": "tech",
+              "x": 0.6,
+              "y": 0.6,
+              "r": 0.055,
+              "label": "Metabase",
+              "logo": "metabase.svg"
+            }
+          ],
+          "move": [
+            {
+              "id": "cto",
+              "x": 0.4,
+              "y": 0.42
+            }
+          ],
+          "size": [
+            {
+              "id": "cto",
+              "r": 0.1
+            }
+          ],
+          "station": {
+            "date": "2021"
+          }
+        },
+        {
+          "add": [
+            {
+              "id": "me",
+              "usage": "me",
+              "kind": "human",
+              "label": "Founding SRE",
+              "x": 0.36,
+              "y": 0.56,
+              "r": 0.07
+            },
+            {
+              "id": "databricks",
+              "usage": "storage",
+              "kind": "tech",
+              "x": 0.28,
+              "y": 0.4,
+              "r": 0.075,
+              "label": "Databricks",
+              "logo": "databricks.svg"
+            },
+            {
+              "id": "github",
+              "usage": "gouvernance",
+              "kind": "tech",
+              "x": 0.34,
+              "y": 0.32,
+              "r": 0.055,
+              "label": "GitHub",
+              "logo": "github.svg"
+            }
+          ],
+          "size": [
+            {
+              "id": "cto",
+              "r": 0.09
+            }
+          ],
+          "station": {
+            "date": "déc. 2020"
+          }
+        },
+        {
+          "add": [
+            {
+              "id": "de",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "Data Eng",
+              "x": 0.22,
+              "y": 0.42,
+              "r": 0.055
+            },
+            {
+              "id": "dms",
+              "usage": "ingestion",
+              "kind": "tech",
+              "x": 0.5,
+              "y": 0.52,
+              "r": 0.05,
+              "label": "AWS DMS",
+              "logo": "dms.svg"
+            },
+            {
+              "id": "airbyte",
+              "usage": "ingestion",
+              "kind": "tech",
+              "x": 0.16,
+              "y": 0.55,
+              "r": 0.048,
+              "label": "Airbyte",
+              "logo": "airbyte.svg"
+            }
+          ],
+          "size": [
+            {
+              "id": "cto",
+              "r": 0.075
+            },
+            {
+              "id": "databricks",
+              "r": 0.1
+            }
+          ],
+          "station": {
+            "date": "août 2022"
+          }
+        },
+        {
+          "morph": [
+            {
+              "id": "me",
+              "label": "Head of Platform",
+              "r": 0.095
+            }
+          ],
+          "add": [
+            {
+              "id": "spark",
+              "usage": "ingestion",
+              "kind": "tech",
+              "x": 0.3,
+              "y": 0.42,
+              "r": 0.048,
+              "label": "Spark",
+              "logo": "spark.svg"
+            },
+            {
+              "id": "linear",
+              "usage": "gouvernance",
+              "kind": "tech",
+              "x": 0.5,
+              "y": 0.72,
+              "r": 0.05,
+              "label": "Linear",
+              "logo": "linear.svg"
+            }
+          ],
+          "size": [
+            {
+              "id": "cto",
+              "r": 0.07
+            }
+          ],
+          "station": {
+            "date": "sept. 2022"
+          }
+        },
+        {
+          "add": [
+            {
+              "id": "ds",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "Data Scientist",
+              "x": 0.72,
+              "y": 0.32,
+              "r": 0.055
+            },
+            {
+              "id": "da",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "Data Analyst",
+              "x": 0.8,
+              "y": 0.5,
+              "r": 0.055
+            },
+            {
+              "id": "ae",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "Analytics Eng",
+              "x": 0.34,
+              "y": 0.66,
+              "r": 0.055
+            },
+            {
+              "id": "da2",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "Data Analyst",
+              "x": 0.8600000000000001,
+              "y": 0.54,
+              "r": 0.055
+            }
+          ],
+          "size": [
+            {
+              "id": "metabase",
+              "r": 0.085
+            },
+            {
+              "id": "cto",
+              "r": 0.06
+            }
+          ],
+          "move": [
+            {
+              "id": "metabase",
+              "x": 0.66,
+              "y": 0.46
+            }
+          ],
+          "station": {
+            "date": "fin 2022"
+          }
+        },
+        {
+          "caption": "<span class=\"hl\">KO data team</span>",
+          "station": {
+            "date": "déc. 2022",
+            "mark": "gold"
+          }
+        },
+        {
+          "tempo": 1.0,
+          "morph": [
+            {
+              "id": "me",
+              "label": "Head of Data",
+              "r": 0.1
+            }
+          ],
+          "add": [
+            {
+              "id": "dbt",
+              "usage": "transfo",
+              "kind": "tech",
+              "x": 0.6,
+              "y": 0.6,
+              "r": 0.09,
+              "label": "dbt",
+              "logo": "dbt_icon.svg"
+            },
+            {
+              "id": "airflow",
+              "usage": "orchestration",
+              "kind": "tech",
+              "x": 0.28,
+              "y": 0.6,
+              "r": 0.05,
+              "label": "Airflow",
+              "logo": "airflow.svg"
+            },
+            {
+              "id": "ml",
+              "usage": "transfo",
+              "kind": "tech",
+              "x": 0.82,
+              "y": 0.34,
+              "r": 0.05,
+              "label": "ML",
+              "logo": "spark.svg"
+            }
+          ],
+          "station": {
+            "date": "déc. 2022"
+          }
+        },
+        {
+          "caption": "<span class=\"hl--accent\">ChatGPT</span>",
+          "add": [
+            {
+              "id": "chatgpt",
+              "usage": "agent",
+              "kind": "agent",
+              "x": 0.7,
+              "y": 0.68,
+              "r": 0.06,
+              "label": "ChatGPT",
+              "logo": "chatgpt.svg"
+            }
+          ],
+          "station": {
+            "date": "mars 2023",
+            "mark": "gold"
+          }
+        },
+        {
+          "tempo": 1.1,
+          "add": [
+            {
+              "id": "sre",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "SRE",
+              "x": 0.2,
+              "y": 0.5,
+              "r": 0.055
+            },
+            {
+              "id": "newrelic",
+              "usage": "monitoring",
+              "kind": "tech",
+              "x": 0.14,
+              "y": 0.62,
+              "r": 0.045,
+              "label": "New Relic",
+              "logo": "newrelic.svg"
+            },
+            {
+              "id": "elementary",
+              "usage": "monitoring",
+              "kind": "tech",
+              "x": 0.34,
+              "y": 0.6,
+              "r": 0.045,
+              "label": "Elementary",
+              "logo": "elementary.svg"
+            }
+          ],
+          "station": {
+            "date": "mai 2023"
+          }
+        },
+        {
+          "caption": "<span class=\"hl\">AI Code of Conduct</span>",
+          "station": {
+            "date": "juil. 2023",
+            "mark": "gold"
+          },
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.13
+            },
+            {
+              "id": "metabase",
+              "r": 0.1
+            }
+          ]
+        },
+        {
+          "size": [
+            {
+              "id": "me",
+              "r": 0.115
+            }
+          ],
+          "move": [
+            {
+              "id": "dbt",
+              "x": 0.54,
+              "y": 0.5
+            }
+          ],
+          "add": [
+            {
+              "id": "census",
+              "usage": "ingestion",
+              "kind": "tech",
+              "x": 0.88,
+              "y": 0.42,
+              "r": 0.05,
+              "label": "Census",
+              "logo": "census_new.png"
+            }
+          ]
+        },
+        {
+          "tempo": 1.2,
+          "station": {
+            "date": "sept. 2023",
+            "mark": true
+          },
+          "caption": "<span class=\"hl--hot\">Bascule stratégique</span>",
+          "chapter": "II — Transition",
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.15
+            },
+            {
+              "id": "metabase",
+              "r": 0.115
+            }
+          ]
+        },
+        {},
+        {
+          "tempo": 1.3,
+          "absorb": [
+            {
+              "id": "de",
+              "into": "me"
+            }
+          ],
+          "morph": [
+            {
+              "id": "da",
+              "label": "DA / DE",
+              "r": 0.08
+            },
+            {
+              "id": "ds",
+              "label": "DS / Analytics Eng",
+              "r": 0.08
+            }
+          ],
+          "size": [
+            {
+              "id": "me",
+              "r": 0.131
+            },
+            {
+              "id": "ae",
+              "r": 0.07
+            },
+            {
+              "id": "sre",
+              "r": 0.07
+            }
+          ],
+          "station": {
+            "date": "août 2023"
+          }
+        },
+        {
+          "station": {
+            "date": "mi-2024",
+            "mark": "gold"
+          },
+          "caption": "<span class=\"hl\">Prompt like a star</span>",
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.17
+            },
+            {
+              "id": "metabase",
+              "r": 0.13
+            }
+          ]
+        },
+        {
+          "add": [
+            {
+              "id": "make",
+              "usage": "orchestration",
+              "kind": "tech",
+              "label": "Make",
+              "x": 0.6,
+              "y": 0.68,
+              "r": 0.05,
+              "logo": "make.svg"
+            }
+          ],
+          "station": {
+            "date": "mi-2024"
+          }
+        },
+        {
+          "add": [
+            {
+              "id": "notion",
+              "usage": "serving",
+              "kind": "tech",
+              "x": 0.7,
+              "y": 0.68,
+              "r": 0.06,
+              "label": "Notion",
+              "logo": "notion.svg"
+            }
+          ]
+        },
+        {
+          "station": {
+            "date": "juin 2024",
+            "mark": true
+          }
+        },
+        {
+          "size": [
+            {
+              "id": "databricks",
+              "r": 0.07
+            },
+            {
+              "id": "airbyte",
+              "r": 0.035
+            },
+            {
+              "id": "da",
+              "r": 0.06
+            },
+            {
+              "id": "ae",
+              "r": 0.06
+            },
+            {
+              "id": "newrelic",
+              "r": 0.03
+            },
+            {
+              "id": "spark",
+              "r": 0.03
+            },
+            {
+              "id": "make",
+              "r": 0.058
+            },
+            {
+              "id": "dbt",
+              "r": 0.19
+            },
+            {
+              "id": "metabase",
+              "r": 0.115
+            },
+            {
+              "id": "da2",
+              "r": 0.06
+            }
+          ],
+          "move": [
+            {
+              "id": "newrelic",
+              "x": 0.1,
+              "y": 0.62
+            },
+            {
+              "id": "spark",
+              "x": 0.1,
+              "y": 0.5
+            },
+            {
+              "id": "dms",
+              "x": 0.14,
+              "y": 0.46
+            }
+          ],
+          "station": {
+            "date": "juil. 2024",
+            "mark": true
+          },
+          "caption": "<span class=\"hl--hot\">Audit Data</span>"
+        },
+        {
+          "absorb": [
+            {
+              "id": "ds",
+              "into": "me"
+            },
+            {
+              "id": "ml",
+              "into": "da"
+            },
+            {
+              "id": "cto",
+              "into": "me"
+            }
+          ],
+          "add": [
+            {
+              "id": "automl",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "AutoML",
+              "x": 0.84,
+              "y": 0.4,
+              "r": 0.05
+            },
+            {
+              "id": "bedrock",
+              "usage": "transfo",
+              "kind": "tech",
+              "x": 0.86,
+              "y": 0.52,
+              "r": 0.05,
+              "label": "Bedrock"
+            }
+          ],
+          "size": [
+            {
+              "id": "da",
+              "r": 0.09
+            },
+            {
+              "id": "ae",
+              "r": 0.075
+            },
+            {
+              "id": "make",
+              "r": 0.045
+            },
+            {
+              "id": "dbt",
+              "r": 0.2
+            },
+            {
+              "id": "metabase",
+              "r": 0.1
+            },
+            {
+              "id": "da2",
+              "r": 0.09
+            }
+          ],
+          "station": {
+            "date": "sept. 2024"
+          },
+          "morph": [
+            {
+              "id": "da",
+              "label": "Full Stack",
+              "r": 0.085
+            },
+            {
+              "id": "ae",
+              "label": "Full Stack",
+              "r": 0.085
+            }
+          ]
+        },
+        {
+          "add": [
+            {
+              "id": "metric",
+              "usage": "gouvernance",
+              "kind": "tech",
+              "x": 0.34,
+              "y": 0.3,
+              "r": 0.07,
+              "label": "metric tree"
+            }
+          ],
+          "station": {
+            "date": "nov. 2024"
+          },
+          "size": [
+            {
+              "id": "make",
+              "r": 0.05
+            },
+            {
+              "id": "metabase",
+              "r": 0.09
+            },
+            {
+              "id": "da",
+              "r": 0.075
+            },
+            {
+              "id": "da2",
+              "r": 0.075
+            }
+          ]
+        },
+        {
+          "add": [
+            {
+              "id": "catalog",
+              "usage": "gouvernance",
+              "kind": "tech",
+              "x": 0.3,
+              "y": 0.4,
+              "r": 0.06,
+              "label": "data catalog"
+            }
+          ],
+          "station": {
+            "date": "janv. 2025"
+          },
+          "size": [
+            {
+              "id": "make",
+              "r": 0.055
+            },
+            {
+              "id": "metabase",
+              "r": 0.08
+            },
+            {
+              "id": "da",
+              "r": 0.065
+            },
+            {
+              "id": "da2",
+              "r": 0.065
+            }
+          ]
+        },
+        {
+          "tempo": 1.35,
+          "station": {
+            "date": "2024",
+            "mark": true
+          }
+        },
+        {},
+        {
+          "add": [
+            {
+              "id": "sr",
+              "usage": "people_data",
+              "kind": "human",
+              "label": "Senior DA",
+              "x": 0.82,
+              "y": 0.5,
+              "r": 0.065
+            }
+          ],
+          "station": {
+            "date": "avr. 2025"
+          },
+          "size": [
+            {
+              "id": "da",
+              "r": 0.055
+            },
+            {
+              "id": "da2",
+              "r": 0.055
+            }
+          ]
+        },
+        {
+          "chapter": "III — Agentique",
+          "tempo": 1.7,
+          "morph": [
+            {
+              "id": "me",
+              "label": "Head of Data",
+              "r": 0.13
+            }
+          ],
+          "add": [
+            {
+              "id": "claude",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "Claude Code",
+              "x": 0.52,
+              "y": 0.52,
+              "r": 0.06,
+              "logo": "claude.svg"
+            }
+          ],
+          "size": [
+            {
+              "id": "linear",
+              "r": 0.04
+            },
+            {
+              "id": "da",
+              "r": 0.045
+            },
+            {
+              "id": "da2",
+              "r": 0.045
+            }
+          ],
+          "station": {
+            "date": "mai 2025"
+          }
+        },
+        {
+          "size": [
+            {
+              "id": "claude",
+              "r": 0.07
+            }
+          ]
+        },
+        {
+          "absorb": [
+            {
+              "id": "sre",
+              "into": "me"
+            }
+          ],
+          "add": [
+            {
+              "id": "skills",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "skills",
+              "x": 0.46,
+              "y": 0.62,
+              "r": 0.05
+            }
+          ],
+          "size": [
+            {
+              "id": "claude",
+              "r": 0.1
+            },
+            {
+              "id": "skills",
+              "r": 0.05
+            },
+            {
+              "id": "dbt",
+              "r": 0.188
+            },
+            {
+              "id": "sr",
+              "r": 0.065
+            },
+            {
+              "id": "da",
+              "r": 0.035
+            },
+            {
+              "id": "da2",
+              "r": 0.035
+            }
+          ],
+          "move": [
+            {
+              "id": "skills",
+              "x": 0.5,
+              "y": 0.6
+            }
+          ],
+          "station": {
+            "date": "nov. 2025"
+          }
+        },
+        {
+          "add": [
+            {
+              "id": "genie",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "Genie",
+              "x": 0.32,
+              "y": 0.58,
+              "r": 0.07,
+              "logo": "genie.svg"
+            }
+          ],
+          "caption": "<span class=\"hl\">Purge du backlog</span>",
+          "morph": [
+            {
+              "id": "claude",
+              "label": "Claude Code · YOLO"
+            }
+          ],
+          "size": [
+            {
+              "id": "skills",
+              "r": 0.06
+            },
+            {
+              "id": "dbt",
+              "r": 0.176
+            },
+            {
+              "id": "metabase",
+              "r": 0.07
+            }
+          ],
+          "station": {
+            "date": "déc. 2025"
+          }
+        },
+        {
+          "add": [
+            {
+              "id": "bench",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "benchmarks",
+              "x": 0.24,
+              "y": 0.5,
+              "r": 0.05
+            },
+            {
+              "id": "darkmine",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "Dark mine",
+              "x": 0.28,
+              "y": 0.66,
+              "r": 0.055
+            }
+          ],
+          "size": [
+            {
+              "id": "genie",
+              "r": 0.09
+            },
+            {
+              "id": "skills",
+              "r": 0.07
+            },
+            {
+              "id": "dbt",
+              "r": 0.164
+            },
+            {
+              "id": "metabase",
+              "r": 0.062000000000000006
+            }
+          ],
+          "station": {
+            "date": "déc. 2025"
+          }
+        },
+        {
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.2
+            }
+          ]
+        },
+        {
+          "add": [
+            {
+              "id": "semantic",
+              "usage": "gouvernance",
+              "kind": "tech",
+              "x": 0.36,
+              "y": 0.3,
+              "r": 0.06,
+              "label": "semantic layer"
+            }
+          ],
+          "station": {
+            "date": "déc. 2025"
+          },
+          "absorb": [
+            {
+              "id": "da",
+              "into": "me"
+            },
+            {
+              "id": "da2",
+              "into": "me"
+            }
+          ],
+          "size": [
+            {
+              "id": "metabase",
+              "r": 0.054000000000000006
+            }
+          ]
+        },
+        {
+          "morph": [
+            {
+              "id": "linear",
+              "label": "Linear · agents logs",
+              "r": 0.055
+            },
+            {
+              "id": "claude",
+              "label": "Claude Code · headless"
+            }
+          ],
+          "add": [
+            {
+              "id": "mcp",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "MCP",
+              "x": 0.22,
+              "y": 0.46,
+              "r": 0.055
+            }
+          ],
+          "station": {
+            "date": "janv. 2026"
+          },
+          "size": [
+            {
+              "id": "skills",
+              "r": 0.08
+            },
+            {
+              "id": "claude",
+              "r": 0.13
+            },
+            {
+              "id": "dbt",
+              "r": 0.152
+            },
+            {
+              "id": "sr",
+              "r": 0.065
+            }
+          ]
+        },
+        {
+          "size": [
+            {
+              "id": "claude",
+              "r": 0.12
+            },
+            {
+              "id": "skills",
+              "r": 0.09
+            },
+            {
+              "id": "dbt",
+              "r": 0.14
+            }
+          ]
+        },
+        {
+          "station": {
+            "mark": "gold"
+          },
+          "caption": "<span class=\"hl--hot\">Agentic at scale</span>",
+          "size": [
+            {
+              "id": "skills",
+              "r": 0.12
+            },
+            {
+              "id": "dbt",
+              "r": 0.128
+            },
+            {
+              "id": "dev",
+              "r": 0.04
+            },
+            {
+              "id": "product",
+              "r": 0.035
+            },
+            {
+              "id": "me",
+              "r": 0.12
+            },
+            {
+              "id": "sr",
+              "r": 0.06
+            }
+          ],
+          "add": [
+            {
+              "id": "dev",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "dev",
+              "x": 0.9,
+              "y": 0.66,
+              "r": 0.035
+            },
+            {
+              "id": "product",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "product",
+              "x": 0.92,
+              "y": 0.5,
+              "r": 0.035
+            }
+          ],
+          "link": [
+            [
+              "product",
+              "dbt"
+            ],
+            [
+              "product",
+              "skills"
+            ],
+            [
+              "product",
+              "claude"
+            ],
+            [
+              "dev",
+              "dbt"
+            ],
+            [
+              "dev",
+              "skills"
+            ],
+            [
+              "dev",
+              "claude"
+            ]
+          ]
+        },
+        {
+          "add": [
+            {
+              "id": "teams",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "Claude Teams",
+              "x": 0.5,
+              "y": 0.44,
+              "r": 0.07,
+              "logo": "anthropic.svg"
+            },
+            {
+              "id": "customapp",
+              "usage": "serving",
+              "kind": "tech",
+              "x": 0.72,
+              "y": 0.64,
+              "r": 0.07,
+              "label": "app métiers"
+            },
+            {
+              "id": "fivetran",
+              "usage": "ingestion",
+              "kind": "tech",
+              "x": 0.14,
+              "y": 0.54,
+              "r": 0.04,
+              "label": "Fivetran",
+              "logo": "fivetran.svg"
+            },
+            {
+              "id": "marketing",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "marketing",
+              "x": 0.86,
+              "y": 0.78,
+              "r": 0.035
+            },
+            {
+              "id": "sales",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "sales",
+              "x": 0.76,
+              "y": 0.82,
+              "r": 0.035
+            }
+          ],
+          "morph": [
+            {
+              "id": "notion",
+              "label": "Notion · stockage output",
+              "r": 0.06
+            }
+          ],
+          "absorb": [
+            {
+              "id": "airbyte",
+              "into": "me"
+            }
+          ],
+          "size": [
+            {
+              "id": "teams",
+              "r": 0.1
+            },
+            {
+              "id": "skills",
+              "r": 0.1
+            },
+            {
+              "id": "dbt",
+              "r": 0.116
+            },
+            {
+              "id": "dev",
+              "r": 0.06
+            },
+            {
+              "id": "product",
+              "r": 0.05
+            },
+            {
+              "id": "marketing",
+              "r": 0.04
+            },
+            {
+              "id": "sales",
+              "r": 0.035
+            },
+            {
+              "id": "me",
+              "r": 0.11
+            },
+            {
+              "id": "sr",
+              "r": 0.055
+            }
+          ],
+          "station": {
+            "date": "févr. 2026",
+            "mark": true
+          },
+          "caption": "<span class=\"hl--accent\">Claude Teams</span>",
+          "link": [
+            [
+              "marketing",
+              "teams"
+            ],
+            [
+              "marketing",
+              "skills"
+            ],
+            [
+              "marketing",
+              "customapp"
+            ],
+            [
+              "sales",
+              "teams"
+            ],
+            [
+              "sales",
+              "skills"
+            ],
+            [
+              "sales",
+              "customapp"
+            ]
+          ]
+        },
+        {
+          "tempo": 2.0,
+          "add": [
+            {
+              "id": "autolearn",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "auto-learning",
+              "x": 0.24,
+              "y": 0.72,
+              "r": 0.055
+            },
+            {
+              "id": "content",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "content",
+              "x": 0.68,
+              "y": 0.82,
+              "r": 0.035
+            },
+            {
+              "id": "comex",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "comex",
+              "x": 0.61,
+              "y": 0.78,
+              "r": 0.035
+            }
+          ],
+          "size": [
+            {
+              "id": "genie",
+              "r": 0.05
+            },
+            {
+              "id": "catalog",
+              "r": 0.035
+            },
+            {
+              "id": "claude",
+              "r": 0.13
+            },
+            {
+              "id": "teams",
+              "r": 0.095
+            },
+            {
+              "id": "skills",
+              "r": 0.085
+            },
+            {
+              "id": "dbt",
+              "r": 0.104
+            },
+            {
+              "id": "metric",
+              "r": 0.045
+            },
+            {
+              "id": "semantic",
+              "r": 0.045
+            },
+            {
+              "id": "dev",
+              "r": 0.08
+            },
+            {
+              "id": "product",
+              "r": 0.065
+            },
+            {
+              "id": "marketing",
+              "r": 0.06
+            },
+            {
+              "id": "sales",
+              "r": 0.052
+            },
+            {
+              "id": "content",
+              "r": 0.04
+            },
+            {
+              "id": "comex",
+              "r": 0.035
+            },
+            {
+              "id": "me",
+              "r": 0.1
+            },
+            {
+              "id": "sr",
+              "r": 0.05
+            }
+          ],
+          "move": [
+            {
+              "id": "metric",
+              "x": 0.3,
+              "y": 0.5
+            },
+            {
+              "id": "genie",
+              "x": 0.28,
+              "y": 0.42
+            }
+          ],
+          "station": {
+            "date": "mars 2026"
+          },
+          "link": [
+            [
+              "comex",
+              "teams"
+            ],
+            [
+              "comex",
+              "skills"
+            ],
+            [
+              "comex",
+              "customapp"
+            ],
+            [
+              "content",
+              "teams"
+            ],
+            [
+              "content",
+              "skills"
+            ],
+            [
+              "content",
+              "customapp"
+            ]
+          ]
+        },
+        {
+          "size": [
+            {
+              "id": "claude",
+              "r": 0.14
+            },
+            {
+              "id": "dbt",
+              "r": 0.092
+            },
+            {
+              "id": "skills",
+              "r": 0.07
+            },
+            {
+              "id": "teams",
+              "r": 0.08
+            },
+            {
+              "id": "metric",
+              "r": 0.035
+            },
+            {
+              "id": "semantic",
+              "r": 0.035
+            },
+            {
+              "id": "dev",
+              "r": 0.095
+            },
+            {
+              "id": "product",
+              "r": 0.078
+            },
+            {
+              "id": "marketing",
+              "r": 0.075
+            },
+            {
+              "id": "sales",
+              "r": 0.066
+            },
+            {
+              "id": "content",
+              "r": 0.056
+            },
+            {
+              "id": "comex",
+              "r": 0.05
+            },
+            {
+              "id": "finance",
+              "r": 0.04
+            },
+            {
+              "id": "me",
+              "r": 0.09
+            },
+            {
+              "id": "sr",
+              "r": 0.045
+            }
+          ],
+          "move": [
+            {
+              "id": "skills",
+              "x": 0.72,
+              "y": 0.72
+            },
+            {
+              "id": "teams",
+              "x": 0.66,
+              "y": 0.7
+            }
+          ],
+          "station": {
+            "date": "avr. 2026"
+          },
+          "morph": [
+            {
+              "id": "github",
+              "label": "GitHub · monorepo"
+            }
+          ],
+          "add": [
+            {
+              "id": "finance",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "finance",
+              "x": 0.56,
+              "y": 0.82,
+              "r": 0.035
+            }
+          ],
+          "link": [
+            [
+              "finance",
+              "teams"
+            ],
+            [
+              "finance",
+              "skills"
+            ],
+            [
+              "finance",
+              "customapp"
+            ]
+          ]
+        },
+        {
+          "add": [
+            {
+              "id": "website",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "Skills Portal",
+              "x": 0.6,
+              "y": 0.76,
+              "r": 0.06
+            },
+            {
+              "id": "supply",
+              "usage": "people_mkt",
+              "kind": "human",
+              "label": "supply",
+              "x": 0.4,
+              "y": 0.82,
+              "r": 0.035
+            }
+          ],
+          "size": [
+            {
+              "id": "skills",
+              "r": 0.06
+            },
+            {
+              "id": "dbt",
+              "r": 0.08
+            },
+            {
+              "id": "teams",
+              "r": 0.07
+            },
+            {
+              "id": "metric",
+              "r": 0.028
+            },
+            {
+              "id": "semantic",
+              "r": 0.028
+            },
+            {
+              "id": "claude",
+              "r": 0.15
+            },
+            {
+              "id": "dev",
+              "r": 0.11
+            },
+            {
+              "id": "product",
+              "r": 0.09
+            },
+            {
+              "id": "marketing",
+              "r": 0.088
+            },
+            {
+              "id": "sales",
+              "r": 0.078
+            },
+            {
+              "id": "content",
+              "r": 0.07
+            },
+            {
+              "id": "comex",
+              "r": 0.062
+            },
+            {
+              "id": "finance",
+              "r": 0.056
+            },
+            {
+              "id": "supply",
+              "r": 0.04
+            },
+            {
+              "id": "me",
+              "r": 0.085
+            },
+            {
+              "id": "sr",
+              "r": 0.04
+            }
+          ],
+          "station": {
+            "date": "mai 2026"
+          },
+          "link": [
+            [
+              "supply",
+              "teams"
+            ],
+            [
+              "supply",
+              "skills"
+            ],
+            [
+              "supply",
+              "customapp"
+            ]
+          ]
+        },
+        {
+          "add": [
+            {
+              "id": "routines",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "routines",
+              "x": 0.16,
+              "y": 0.66,
+              "r": 0.05
+            }
+          ],
+          "absorb": [
+            {
+              "id": "spark",
+              "into": "routines"
+            }
+          ],
+          "station": {
+            "date": "mai 2026"
+          }
+        },
+        {
+          "tempo": 2.3,
+          "add": [],
+          "size": [
+            {
+              "id": "notion",
+              "r": 0.1
+            },
+            {
+              "id": "genie",
+              "r": 0.04
+            },
+            {
+              "id": "routines",
+              "r": 0.08
+            },
+            {
+              "id": "dbt",
+              "r": 0.068
+            },
+            {
+              "id": "claude",
+              "r": 0.17
+            }
+          ],
+          "move": [
+            {
+              "id": "notion",
+              "x": 0.74,
+              "y": 0.5
+            }
+          ],
+          "station": {
+            "date": "juin 2026"
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "So what ?"
+    },
+    {
+      "type": "wiki",
+      "title": "Data analysis",
+      "langs": "43 languages",
+      "html": "<p><span class=\"wiki__hl\"><strong>Data analysis</strong> is the process of inspecting, <a>cleansing</a>, <a>transforming</a>, and <a>modeling data</a> with the goal of discovering useful information, informing conclusions, and supporting <a>decision-making</a></span>.<sup>[1]</sup> Data analysis has multiple facets and approaches, encompassing diverse techniques under a variety of names, and is used in different business, science, and social science domains.<sup>[2]</sup> In today’s business world, data analysis plays an important role in making decisions more scientific and helping businesses operate more effectively.<sup>[3]</sup> It is widely used in fields such as business analytics, healthcare, and artificial intelligence to extract meaningful insights from data.</p>"
+    },
+    {
+      "type": "bars2",
+      "rows": [
+        {
+          "label": "Avant",
+          "segments": [
+            {
+              "name": "ETL/Coding 35%",
+              "pct": 35,
+              "color": "#3b82d6"
+            },
+            {
+              "name": "Analysis/Modeling 30%",
+              "pct": 30,
+              "color": "#2fa56a"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#f0a020"
+            },
+            {
+              "name": "Run 15%",
+              "pct": 15,
+              "color": "#6a4bc4"
+            },
+            {
+              "name": "Stakeholder 15%",
+              "pct": 15,
+              "color": "#e8574f"
+            }
+          ]
+        },
+        {
+          "label": "Compression",
+          "segments": [
+            {
+              "name": "ETL/Coding 10%",
+              "pct": 10,
+              "color": "#3b82d6"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#2fa56a"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#f0a020"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#6a4bc4"
+            },
+            {
+              "name": "Stakeholder 15%",
+              "pct": 15,
+              "color": "#e8574f"
+            },
+            {
+              "name": "Disponible 60%",
+              "pct": 60,
+              "color": "#2a2a2a",
+              "empty": true
+            }
+          ]
+        },
+        {
+          "label": "Après",
+          "segments": [
+            {
+              "name": "ETL/Coding 10%",
+              "pct": 10,
+              "color": "#3b82d6"
+            },
+            {
+              "name": "5%",
+              "pct": 5,
+              "color": "#2fa56a"
+            },
+            {
+              "name": "Review 25%",
+              "pct": 25,
+              "color": "#f0a020"
+            },
+            {
+              "name": "Run 10%",
+              "pct": 10,
+              "color": "#6a4bc4"
+            },
+            {
+              "name": "Stakeholder 35%",
+              "pct": 35,
+              "color": "#e8574f"
+            },
+            {
+              "name": "Context eng 15%",
+              "pct": 15,
+              "color": "#f0a020"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "tentation",
+      "title": "La tentation",
+      "images": [
+        "assets/img/block-hierarchy.png",
+        "assets/img/palantir-ontology.png"
+      ]
+    },
+    {
+      "type": "figure",
+      "dark": true,
+      "image": "assets/img/piege-nyt.jpg",
+      "centerTitle": true
+    },
+    {
+      "type": "prescription",
+      "heading": "Le réel",
+      "frames": [
+        {
+          "id": "HG",
+          "x": 48,
+          "y": 12,
+          "w": 19,
+          "h": 34
+        },
+        {
+          "id": "HD",
+          "x": 67,
+          "y": 12,
+          "w": 21,
+          "h": 34
+        },
+        {
+          "id": "BG",
+          "x": 8,
+          "y": 42,
+          "w": 30,
+          "h": 38
+        },
+        {
+          "id": "BD",
+          "x": 28,
+          "y": 54,
+          "w": 26,
+          "h": 32
+        }
+      ],
+      "blobs": [
+        {
+          "id": "n1",
+          "color": "zele",
+          "in": "BG",
+          "fill": 0.6,
+          "cx": 0.5,
+          "cy": 0.45
+        },
+        {
+          "id": "n2",
+          "color": "zele",
+          "in": "BG",
+          "fill": 0.32,
+          "cx": 0.3,
+          "cy": 0.82
+        },
+        {
+          "id": "n3",
+          "color": "zele",
+          "in": "BD",
+          "fill": 0.32,
+          "cx": 0.7,
+          "cy": 0.6
+        },
+        {
+          "id": "reel",
+          "color": "zele",
+          "in": "HD",
+          "overflow": true,
+          "label": "réel",
+          "fill": 1.7,
+          "cx": -0.05,
+          "cy": 0.75,
+          "spillDir": "up-right"
+        },
+        {
+          "id": "zele",
+          "color": "zelejaune",
+          "contained": true,
+          "in": "BG",
+          "frames": [
+            "BG",
+            "BD"
+          ],
+          "label": "Zèle"
+        }
+      ]
+    },
+    {
+      "type": "travailvivant",
+      "heading": "Travail vivant",
+      "images": [
+        "assets/img/boetie-servitude.jpg",
+        "assets/img/souffrance-en-france.jpg"
+      ],
+      "quotes": [
+        "La femme de ménage en sait plus sur le malade que le psychiatre.",
+        "L'opérateur adapte la procédure pour absorber la panne.",
+        "La couturière triche l'ourlet pour l'adapter à la morphologie du client.",
+        "Une armée qui n'interprète pas les ordres est une armée vaincue.",
+        "Durant le Covid, si les infirmières avaient obéi strictement aux médecins, il y aurait eu plus de morts."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Quel avenir pour le Data Analyst ?"
+    },
+    {
+      "type": "rolesplit",
+      "top": [
+        "Data Engineering",
+        "Context Engineering"
+      ],
+      "bottom": [
+        "Challenger les interprétations",
+        "Capturer le réel",
+        "Sortir de sa bulle",
+        "Contenir l'auto-certification",
+        "Agit sous mandat explicite",
+        "Organiser la délibération",
+        "Arbitre les conflits"
+      ]
+    },
+    {
+      "type": "title",
+      "title": "To be continued."
+    }
+  ]
+}
