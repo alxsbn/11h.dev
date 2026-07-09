@@ -554,65 +554,69 @@ const renderers = {
         ctx.closePath();
       }
 
-      // 1) NUAGES vivants (dessinés SOUS les cadres pour qu'on voie le débordement)
+      // clip au COMPLÉMENT de TOUS les cadres (zone « hors prescription »)
+      function clipOutsideAllFrames() {
+        ctx.beginPath(); ctx.rect(0, 0, W, H);
+        frames.forEach((f) => { const R = frameRect(f.id); roundRect(ctx, R.x, R.y, R.w, R.h, 14); });
+        ctx.clip("evenodd");
+      }
+      // hachures rouges diagonales (remplit le chemin de clip courant)
+      function redHatch(al) {
+        ctx.save(); ctx.strokeStyle = `rgba(226,72,72,${al})`; ctx.lineWidth = 3;
+        const step = 13;
+        for (let x = -H; x < W + H; x += step) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + H, H); ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      // 1) NUAGES bleus (style Magic). Le nuage `overflow` porte le rouge hachuré hors-cadre
+      //    + un liseré vert au franchissement (le « travail » = bypasser la prescription).
       blobs.forEach((b, i) => {
         if (i >= shown) return;
         const a = anim[i];
         if (a.born < 0) a.born = time;
         const age = Math.min(1, (time - a.born) / 0.6);       // apparition 0.6s
         const ease = 1 - Math.pow(1 - age, 3);
-        if (b.arrow || b.travailZone) return;                  // dessinés en dernier
         const host = frameRect(b.in); if (!host) return;
-        const [r, g, bl] = COL[b.color] || COL.neutral;
-        const partner = b.over || b.spill;
-        // centre : dans le cadre hôte, décalé vers le cadre partenaire si présent.
-        // Réel (overflow) : ancré vers la GAUCHE du cadre → l'essentiel reste gris DEDANS,
-        // seul le bord droit déborde (rouge).
-        // Réel (overflow) : nuage posé DANS le cadre (corps gris bien dedans), assez grand
-        // pour que seule sa frange droite dépasse le bord (rouge).
-        let cx = host.x + host.w * 0.5;
-        let cy = host.y + host.h * 0.5;
-        if (partner) { const p = frameRect(partner); if (p) cx = (cx + (p.x + p.w * 0.5)) * 0.5; }
-        // Zèle « colle » au cadre → rayon quasi = demi-cadre, peu d'étirement.
-        const tight = b.fill >= 0.95 && !b.overflow;
-        const base = tight ? Math.min(host.w, host.h) * 0.52 : Math.min(host.w, host.h) * 0.5;
+        const [r, g, bl] = COL[b.color] || COL.zele;
+        // position via cx/cy (fractions du cadre hôte) — placement fidèle au croquis
+        const cx = host.x + host.w * (b.cx ?? 0.5);
+        const cy = host.y + host.h * (b.cy ?? 0.5);
+        const base = Math.min(host.w, host.h) * 0.5;
         const rr = base * (b.fill || 0.6) * ease;
-        const sx = tight ? host.w / host.h * 0.95 : (b.overflow ? 0.92 : (partner ? 1.55 : 1.2)), sy = b.overflow ? 1.05 : 1.0;
-        const alpha = 0.34 + 0.10 * Math.sin(time * 1.4 + a.seed);
+        const sx = b.overflow ? 1.25 : 1.15, sy = b.overflow ? 1.0 : 1.0;
+        const alpha = 0.4 + 0.08 * Math.sin(time * 1.4 + a.seed);
         const drawFill = (col, al) => {
           ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${al})`;
-          ctx.shadowColor = `rgba(${col[0]},${col[1]},${col[2]},${0.45 * ease})`;
-          ctx.shadowBlur = 26; ctx.fill(); ctx.shadowBlur = 0;
+          ctx.shadowColor = `rgba(${col[0]},${col[1]},${col[2]},${0.4 * ease})`;
+          ctx.shadowBlur = 22; ctx.fill(); ctx.shadowBlur = 0;
         };
+
+        // (a) corps BLEU du nuage (tous les nuages)
+        blobPath(cx, cy, rr, sx, sy, a.seed); drawFill([r, g, bl], alpha * ease);
+
         if (b.overflow) {
-          // RÉEL : neutre à l'INTÉRIEUR du cadre, ROUGE seulement là où il DÉBORDE.
-          // (a) partie dans le cadre → neutre, clippée au cadre
-          ctx.save(); roundRect(ctx, host.x, host.y, host.w, host.h, 14); ctx.clip();
-          blobPath(cx, cy, rr, sx, sy, a.seed); drawFill(COL.neutral, alpha * ease);
+          // (b) liseré VERT au franchissement : contour épais du nuage clippé HORS des cadres
+          //     (le vert marque le bord là où la forme sort du prescrit = le travail)
+          ctx.save(); clipOutsideAllFrames();
+          blobPath(cx, cy, rr * 1.06, sx, sy, a.seed);
+          ctx.lineWidth = 16; ctx.strokeStyle = `rgba(${COL.travail[0]},${COL.travail[1]},${COL.travail[2]},${0.6 * ease})`;
+          ctx.stroke();
           ctx.restore();
-          // (b) partie hors cadre → rouge, clippée au COMPLÉMENT du cadre
-          ctx.save();
-          ctx.beginPath(); ctx.rect(0, 0, W, H);              // tout l'écran…
-          roundRect(ctx, host.x, host.y, host.w, host.h, 14); // …moins le cadre (evenodd)
-          ctx.clip("evenodd");
-          blobPath(cx, cy, rr, sx, sy, a.seed); drawFill(COL.reel, (alpha + 0.12) * ease);
+          // (c) HACHURES ROUGES sur la partie du nuage HORS des cadres
+          ctx.save(); blobPath(cx, cy, rr, sx, sy, a.seed); ctx.clip();  // dans le nuage…
+          clipOutsideAllFrames();                                        // …ET hors des cadres
+          redHatch(0.85 * ease);
           ctx.restore();
-        } else if (b.contained) {
-          // ZÈLE : rayon > cadre MAIS clippé au cadre → il PRESSE les bords sans jamais
-          // sortir (la tension du zèle : il pourrait déborder, il ne le fait pas).
-          ctx.save(); roundRect(ctx, host.x, host.y, host.w, host.h, 14); ctx.clip();
-          blobPath(cx, cy, rr, sx, sy, a.seed); drawFill([r, g, bl], (alpha + 0.08) * ease);
-          ctx.restore();
-        } else {
-          blobPath(cx, cy, rr, sx, sy, a.seed); drawFill([r, g, bl], alpha * ease);
         }
-        // label centré (Zèle / Réel) — le « Réel » reste ROUGE même si le corps est gris
+        // label (« réel » en rouge)
         if (b.label) {
           const lc = b.overflow ? COL.reel : [r, g, bl];
           ctx.fillStyle = `rgba(${lc[0]},${lc[1]},${lc[2]},${ease})`;
-          ctx.font = "700 " + Math.round(base * 0.4) + "px 'Playfair Display',Georgia,serif";
+          ctx.font = "700 " + Math.round(base * 0.42) + "px 'Playfair Display',Georgia,serif";
           ctx.textAlign = "center"; ctx.textBaseline = "middle";
-          ctx.globalAlpha = ease; ctx.fillText(b.label, cx, cy); ctx.globalAlpha = 1;
+          ctx.globalAlpha = ease; ctx.fillText(b.label, cx, cy - rr * 0.3); ctx.globalAlpha = 1;
         }
       });
 
@@ -633,38 +637,15 @@ const renderers = {
         ctx.fillText("Prescription", R0.x + 4, R0.y - 12);
       }
 
-      // 3) ZONE « Travail » (verte) — petit halo là où le nuage DÉBORDE du cadre.
-      // C'est le débordement lui-même qu'on nomme « le travail » (pas de flèche).
-      const ti = blobs.findIndex((x) => x.travailZone);
-      if (ti >= 0 && ti < shown) {
-        const tz = blobs[ti], tn = anim[ti];
-        if (tn.born < 0) tn.born = time;
-        const tage = Math.min(1, (time - tn.born) / 0.6), tease = 1 - Math.pow(1 - tage, 3);
-        const T = frameRect(tz.at);
+      // 3) label « travail » (vert) au-dessus du nuage qui déborde
+      const ov = blobs.findIndex((x) => x.overflow);
+      if (ov >= 0 && ov < shown) {
+        const T = frameRect(blobs[ov].in);
         if (T) {
-          const [gr, gg, gb] = COL.travail;
-          // centre de la zone : sur le bord droit du cadre, à hauteur de la bosse rouge,
-          // sans dépasser l'écran.
-          const zx = Math.min(T.x + T.w + T.w * 0.02, W - Math.min(T.w, T.h) * 0.26);
-          const zy = T.y + T.h * 0.42;
-          const rz = Math.min(T.w, T.h) * 0.26 * tease;
-          // petit blob vert vivant, clippé au COMPLÉMENT du cadre (visible hors-cadre seulement)
-          ctx.save();
-          ctx.beginPath(); ctx.rect(0, 0, W, H);
-          roundRect(ctx, T.x, T.y, T.w, T.h, 14); ctx.clip("evenodd");
-          blobPath(zx, zy, rz, 1.1, 1.0, tn.seed);
-          const ga = 0.5 + 0.10 * Math.sin(time * 1.5 + tn.seed);
-          ctx.fillStyle = `rgba(${gr},${gg},${gb},${ga * tease})`;
-          ctx.shadowColor = `rgba(${gr},${gg},${gb},${0.5 * tease})`;
-          ctx.shadowBlur = 26; ctx.fill(); ctx.shadowBlur = 0;
-          ctx.restore();
-          // label « Travail » au-dessus de la zone (ancré à droite pour ne pas sortir de l'écran)
-          if (tz.label && tease > 0.4) {
-            ctx.fillStyle = `rgba(${gr},${gg},${gb},${tease})`;
-            ctx.font = "700 " + Math.round(cv.width * 0.019) + "px 'Playfair Display',Georgia,serif";
-            ctx.textAlign = "right"; ctx.textBaseline = "bottom";
-            ctx.globalAlpha = tease; ctx.fillText(tz.label, Math.min(zx + rz, W - 4), zy - rz - 8); ctx.globalAlpha = 1;
-          }
+          ctx.fillStyle = `rgba(${COL.travail[0]},${COL.travail[1]},${COL.travail[2]},.85)`;
+          ctx.font = "italic 700 " + Math.round(cv.width * 0.02) + "px 'Playfair Display',Georgia,serif";
+          ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+          ctx.fillText("travail", T.x + T.w * 0.9, T.y - 6);
         }
       }
       raf = requestAnimationFrame(draw);

@@ -1729,77 +1729,69 @@
       "heading": "Le réel",
       "frames": [
         {
-          "id": "A",
-          "x": 8,
-          "y": 22,
+          "id": "HG",
+          "x": 10,
+          "y": 16,
           "w": 34,
-          "h": 48
+          "h": 40
         },
         {
-          "id": "B",
-          "x": 36,
-          "y": 30,
+          "id": "BG",
+          "x": 6,
+          "y": 42,
           "w": 34,
-          "h": 48
+          "h": 42
         },
         {
-          "id": "C",
-          "x": 64,
-          "y": 22,
-          "w": 26,
-          "h": 48
+          "id": "BD",
+          "x": 58,
+          "y": 42,
+          "w": 30,
+          "h": 40
+        },
+        {
+          "id": "HD",
+          "x": 48,
+          "y": 26,
+          "w": 30,
+          "h": 38
         }
       ],
       "blobs": [
         {
           "id": "n1",
-          "label": "",
-          "color": "neutral",
-          "in": "A",
-          "fill": 0.5,
-          "note": "s'intercale dans un cadre"
+          "color": "zele",
+          "in": "BG",
+          "fill": 0.62,
+          "cx": 0.5,
+          "cy": 0.42
         },
         {
           "id": "n2",
-          "label": "",
-          "color": "neutral",
-          "in": "A",
-          "over": "B",
-          "fill": 0.7,
-          "note": "mange sur deux"
+          "color": "zele",
+          "in": "BG",
+          "fill": 0.32,
+          "cx": 0.28,
+          "cy": 0.82
         },
         {
           "id": "n3",
-          "label": "",
-          "color": "neutral",
-          "in": "C",
-          "spill": "B",
-          "fill": 0.8,
-          "note": "stocké dans un, déborde sur l'autre"
-        },
-        {
-          "id": "n4",
-          "label": "Zèle",
           "color": "zele",
-          "in": "B",
-          "fill": 1.15,
-          "note": "colle à la taille du cadre",
-          "contained": true
+          "in": "BD",
+          "fill": 0.42,
+          "cx": 0.55,
+          "cy": 0.6
         },
         {
-          "id": "n5",
-          "label": "Réel",
-          "color": "neutral",
-          "in": "C",
+          "id": "reel",
+          "color": "zele",
+          "in": "HD",
           "overflow": true,
-          "fill": 0.92,
-          "note": "déborde du cadre"
-        },
-        {
-          "id": "travail",
-          "travailZone": true,
-          "at": "C",
-          "label": "Travail"
+          "label": "réel",
+          "fill": 1.05,
+          "cx": 0.5,
+          "cy": 0.1,
+          "spillDir": "up-right"
         }
       ]
     },
