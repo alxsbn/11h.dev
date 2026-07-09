@@ -715,31 +715,58 @@
           }
         },
         {
-          "add": [
-            {
-              "id": "routines",
-              "usage": "agent",
-              "kind": "agent",
-              "label": "routines",
-              "x": 0.16,
-              "y": 0.66,
-              "r": 0.05
-            }
-          ],
-          "absorb": [
-            {
-              "id": "spark",
-              "into": "routines"
-            }
-          ],
           "size": [
             {
               "id": "claude",
               "r": 0.07
             }
+          ]
+        },
+        {
+          "absorb": [
+            {
+              "id": "sre",
+              "into": "me"
+            }
+          ],
+          "add": [
+            {
+              "id": "skills",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "skills",
+              "x": 0.46,
+              "y": 0.62,
+              "r": 0.05
+            }
+          ],
+          "size": [
+            {
+              "id": "claude",
+              "r": 0.1
+            },
+            {
+              "id": "skills",
+              "r": 0.05
+            },
+            {
+              "id": "dbt",
+              "r": 0.188
+            },
+            {
+              "id": "sr",
+              "r": 0.065
+            }
+          ],
+          "move": [
+            {
+              "id": "skills",
+              "x": 0.5,
+              "y": 0.6
+            }
           ],
           "station": {
-            "date": "mai 2026"
+            "date": "nov. 2025"
           }
         },
         {
@@ -813,53 +840,6 @@
           ],
           "station": {
             "date": "déc. 2025"
-          }
-        },
-        {
-          "absorb": [
-            {
-              "id": "sre",
-              "into": "me"
-            }
-          ],
-          "add": [
-            {
-              "id": "skills",
-              "usage": "agent",
-              "kind": "agent",
-              "label": "skills",
-              "x": 0.46,
-              "y": 0.62,
-              "r": 0.05
-            }
-          ],
-          "size": [
-            {
-              "id": "claude",
-              "r": 0.1
-            },
-            {
-              "id": "skills",
-              "r": 0.05
-            },
-            {
-              "id": "dbt",
-              "r": 0.188
-            },
-            {
-              "id": "sr",
-              "r": 0.065
-            }
-          ],
-          "move": [
-            {
-              "id": "skills",
-              "x": 0.5,
-              "y": 0.6
-            }
-          ],
-          "station": {
-            "date": "nov. 2025"
           }
         },
         {
@@ -1517,6 +1497,28 @@
               "customapp"
             ]
           ]
+        },
+        {
+          "add": [
+            {
+              "id": "routines",
+              "usage": "agent",
+              "kind": "agent",
+              "label": "routines",
+              "x": 0.16,
+              "y": 0.66,
+              "r": 0.05
+            }
+          ],
+          "absorb": [
+            {
+              "id": "spark",
+              "into": "routines"
+            }
+          ],
+          "station": {
+            "date": "mai 2026"
+          }
         },
         {
           "tempo": 2.3,
