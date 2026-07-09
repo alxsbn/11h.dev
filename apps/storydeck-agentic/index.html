@@ -425,13 +425,13 @@
   .role.on { border-color: rgba(47,143,157,.4); box-shadow: 0 8px 26px rgba(47,143,157,.12); }
 
   .scene--travail .scene__content { max-width: none; width: 100%; height: 100%;
-    display: flex; flex-direction: column; justify-content: flex-start; padding-top: 2vh; }
-  .scene--travail h2 { margin-bottom: .2em; }
+    display: flex; flex-direction: column; justify-content: flex-start; padding-top: 0; }
+  .scene--travail h2 { margin-bottom: .1em; }
   .tv { flex: 1; display: grid; grid-template-columns: 38% 62%; gap: 2vw;
-    margin-top: 4vh; min-height: 0; }
+    margin-top: 3vh; min-height: 0; }
   .tv__col { position: relative; }
-  /* la colonne des couvertures démarre plus bas → jamais sous le titre de la slide */
-  .tv__left { margin-top: 6vh; }
+  /* la colonne des couvertures démarre nettement plus bas → jamais sous le titre remonté */
+  .tv__left { margin-top: 12vh; }
   /* coupure de presse : tombe du haut, rebond ressort, bordure blanche + ombre (SaaSpocalypse) */
   .tv__clip { position: absolute; inset: 0; margin: auto; --nx:0px; --ny:0px; --nr:0deg;
     border: 6px solid #fff; border-radius: 4px;
@@ -441,9 +441,12 @@
   .tv__clip.on { opacity: 1;
     transform: translate(var(--x), var(--y)) rotate(var(--rot)) scale(1);
     transition: transform .7s cubic-bezier(.34,1.4,.5,1), opacity .3s ease; }
-  /* couvertures ancrées en BAS-DROITE de la colonne gauche (le titre reste libre en haut) */
-  .tv__img { width: min(40%, 220px); height: max-content; inset: auto 6% 3% auto; }
-  .tv__img img { display: block; width: 100%; height: auto; border-radius: 2px; }
+  /* couvertures ancrées BAS de la colonne gauche, hauteur bridée → ne remontent pas
+     dans la bande du titre (le titre reste libre en haut) */
+  .tv__img { width: min(44%, 210px); height: max-content; max-height: 52vh;
+    inset: auto auto 2% 50%; margin-left: -22%; }
+  .tv__img img { display: block; width: 100%; height: auto; max-height: 52vh;
+    object-fit: contain; border-radius: 2px; }
   .tv__quote { width: min(62%, 560px); height: max-content; background: #fff;
     padding: 1.1em 1.3em; }
   .tv__quote blockquote { margin: 0; font-family: var(--font-chapter), Georgia, serif;

@@ -471,7 +471,8 @@ const renderers = {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--travail");
     if (s.heading && !s.plainTitle) el.classList.add("scene--titled");
-    const POSE_L = [{ x: "-4%", y: "-6%", rot: "-5deg" }, { x: "6%", y: "8%", rot: "4deg" }];
+    // deux couvertures superposées seulement d'un peu (~1/3), la 2e (Souffrance) devant
+    const POSE_L = [{ x: "-16%", y: "-4%", rot: "-5deg" }, { x: "16%", y: "6%", rot: "4deg" }];
     const POSE_R = [
       { x: "-6%", y: "-24%", rot: "-4deg" }, { x: "8%", y: "-12%", rot: "3deg" },
       { x: "-4%", y: "2%", rot: "-3deg" }, { x: "7%", y: "14%", rot: "4deg" },

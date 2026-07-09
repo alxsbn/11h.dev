@@ -1719,21 +1719,6 @@
       ]
     },
     {
-      "type": "travailvivant",
-      "heading": "Travail vivant",
-      "images": [
-        "assets/img/boetie-servitude.jpg",
-        "assets/img/souffrance-en-france.jpg"
-      ],
-      "quotes": [
-        "La femme de ménage en sait plus sur le malade que le psychiatre.",
-        "L'opérateur adapte la procédure pour absorber la panne.",
-        "La couturière triche l'ourlet pour l'adapter à la morphologie du client.",
-        "Une armée qui n'interprète pas les ordres est une armée vaincue.",
-        "Durant le Covid, si les infirmières avaient obéi strictement aux médecins, il y aurait eu plus de morts."
-      ]
-    },
-    {
       "type": "figure",
       "dark": true,
       "image": "assets/img/piege-nyt.jpg",
@@ -1816,6 +1801,21 @@
           "at": "C",
           "label": "Travail"
         }
+      ]
+    },
+    {
+      "type": "travailvivant",
+      "heading": "Travail vivant",
+      "images": [
+        "assets/img/boetie-servitude.jpg",
+        "assets/img/souffrance-en-france.jpg"
+      ],
+      "quotes": [
+        "La femme de ménage en sait plus sur le malade que le psychiatre.",
+        "L'opérateur adapte la procédure pour absorber la panne.",
+        "La couturière triche l'ourlet pour l'adapter à la morphologie du client.",
+        "Une armée qui n'interprète pas les ordres est une armée vaincue.",
+        "Durant le Covid, si les infirmières avaient obéi strictement aux médecins, il y aurait eu plus de morts."
       ]
     },
     {
