@@ -1792,12 +1792,6 @@
       ]
     },
     {
-      "type": "figure",
-      "dark": true,
-      "image": "assets/img/piege-nyt.jpg",
-      "centerTitle": true
-    },
-    {
       "type": "prescription",
       "heading": "Le réel",
       "frames": [
@@ -1884,6 +1878,12 @@
       ]
     },
     {
+      "type": "figure",
+      "dark": true,
+      "image": "assets/img/piege-nyt.jpg",
+      "centerTitle": true
+    },
+    {
       "type": "text",
       "heading": "Quel avenir pour le Data Analyst ?"
     },
@@ -1894,7 +1894,6 @@
         "Context Engineering"
       ],
       "bottom": [
-        "Capter le non-modélisé",
         "Challenger les interprétations",
         "Contenir l'auto-certification",
         "Agit sous mandat explicite",
