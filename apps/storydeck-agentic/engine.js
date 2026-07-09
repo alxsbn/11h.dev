@@ -501,9 +501,10 @@ const renderers = {
     const tops = [...el.querySelectorAll(".rs__top")];
     const box = el.querySelector(".rs__box");
     const chipEls = [...el.querySelectorAll(".rs__chip")];
-    // ordre de révélation : les 2 blocs du haut (ensemble), puis le bloc bas, puis chaque chip
+    // ordre de révélation : chaque bloc du haut au clic (Data, puis Context), puis le bloc bas,
+    // puis chaque étiquette
     let shown = 0;
-    const steps = [() => tops.forEach((t) => t.classList.add("on")),
+    const steps = [...tops.map((t) => () => t.classList.add("on")),
                    () => box.classList.add("on"),
                    ...chipEls.map((c) => () => c.classList.add("on"))];
     const reset = () => { shown = 0; tops.forEach((t) => t.classList.remove("on"));
@@ -653,12 +654,13 @@ const renderers = {
           clipOutsideAllFrames();                                        // …ET hors des cadres
           redHatch(0.85 * ease);
           ctx.restore();
-          // (c) LISERÉ VERT = la FRONTIÈRE bleu↔rouge, c.-à-d. le bord des cadres LÀ OÙ il
-          //     traverse le nuage. On trace le contour des cadres, clippé DANS le nuage.
+          // (c) LISERÉ VERT = la FRONTIÈRE bleu↔rouge du HAUT uniquement : l'arête HAUTE du
+          //     cadre HÔTE du nuage, là où le nuage la franchit, clippée DANS le nuage.
+          //     (une seule ligne, en haut — pas de ligne en bas)
           ctx.save(); blobPath(cx, cy, rr, sx, sy, a.seed); ctx.clip();  // clip au nuage
-          ctx.lineWidth = 10; ctx.lineJoin = "round";
+          ctx.lineWidth = 10; ctx.lineCap = "round";
           ctx.strokeStyle = `rgba(${COL.travail[0]},${COL.travail[1]},${COL.travail[2]},${0.85 * ease})`;
-          frames.forEach((f) => { const R = frameRect(f.id); roundRect(ctx, R.x, R.y, R.w, R.h, 14); ctx.stroke(); });
+          ctx.beginPath(); ctx.moveTo(host.x, host.y); ctx.lineTo(host.x + host.w, host.y); ctx.stroke();
           ctx.restore();
         }
         // label (« réel » en rouge)
