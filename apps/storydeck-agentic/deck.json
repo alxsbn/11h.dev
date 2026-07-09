@@ -334,6 +334,25 @@
           }
         },
         {
+          "caption": "<span class=\"hl--accent\">ChatGPT</span>",
+          "add": [
+            {
+              "id": "chatgpt",
+              "usage": "agent",
+              "kind": "agent",
+              "x": 0.7,
+              "y": 0.68,
+              "r": 0.06,
+              "label": "ChatGPT",
+              "logo": "chatgpt.svg"
+            }
+          ],
+          "station": {
+            "date": "mars 2023",
+            "mark": "gold"
+          }
+        },
+        {
           "tempo": 1.1,
           "add": [
             {
@@ -368,25 +387,6 @@
           ],
           "station": {
             "date": "mai 2023"
-          }
-        },
-        {
-          "caption": "<span class=\"hl--accent\">ChatGPT</span>",
-          "add": [
-            {
-              "id": "chatgpt",
-              "usage": "agent",
-              "kind": "agent",
-              "x": 0.7,
-              "y": 0.68,
-              "r": 0.06,
-              "label": "ChatGPT",
-              "logo": "chatgpt.svg"
-            }
-          ],
-          "station": {
-            "date": "mars 2023",
-            "mark": "gold"
           }
         },
         {
@@ -679,7 +679,7 @@
           }
         },
         {
-          "chapter": "III — L'agentique",
+          "chapter": "III — Agentique",
           "tempo": 1.7,
           "morph": [
             {
@@ -693,7 +693,7 @@
               "id": "claude",
               "usage": "agent",
               "kind": "agent",
-              "label": "Claude Code · headless · routine",
+              "label": "Claude Code",
               "x": 0.52,
               "y": 0.52,
               "r": 0.06,
@@ -739,7 +739,7 @@
             }
           ],
           "station": {
-            "date": "juil. 2025"
+            "date": "mai 2026"
           }
         },
         {
@@ -771,7 +771,10 @@
               "id": "dbt",
               "r": 0.176
             }
-          ]
+          ],
+          "station": {
+            "date": "déc. 2025"
+          }
         },
         {
           "add": [
@@ -809,7 +812,7 @@
             }
           ],
           "station": {
-            "date": "août 2025"
+            "date": "déc. 2025"
           }
         },
         {
@@ -984,7 +987,7 @@
           "add": [
             {
               "id": "dev",
-              "usage": "people_prod",
+              "usage": "people_mkt",
               "kind": "human",
               "label": "dev",
               "x": 0.9,
@@ -993,7 +996,7 @@
             },
             {
               "id": "product",
-              "usage": "people_prod",
+              "usage": "people_mkt",
               "kind": "human",
               "label": "product",
               "x": 0.92,
@@ -1423,7 +1426,7 @@
             },
             {
               "id": "supply",
-              "usage": "people_prod",
+              "usage": "people_mkt",
               "kind": "human",
               "label": "supply",
               "x": 0.4,
