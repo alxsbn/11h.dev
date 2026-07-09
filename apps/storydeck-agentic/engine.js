@@ -478,8 +478,20 @@ const renderers = {
     const el = sceneEl(s.media, s.bgVideo);
     el.classList.add("scene--rolesplit");
     if (s.heading && !s.plainTitle) el.classList.add("scene--titled");
-    const top = (s.top || []).map((t) => `<div class="rs__top">${t}</div>`).join("");
-    const chips = (s.bottom || []).map((t) => `<span class="rs__chip">${t}</span>`).join("");
+    // 2 blocs du haut colorés (couleurs pétantes de la slide barres) : bleu + orange
+    const TOP_COL = ["#3b82d6", "#f0a020"];
+    const top = (s.top || []).map((t, i) =>
+      `<div class="rs__top" style="--c:${TOP_COL[i % TOP_COL.length]}">${t}</div>`).join("");
+    // étiquettes du bas = coupures de presse : inclinées + décalées haut/bas (quinconce)
+    const CHIP_POSE = [
+      { rot: "-3deg", dy: "-8px" }, { rot: "2.5deg", dy: "10px" }, { rot: "-2deg", dy: "-6px" },
+      { rot: "3deg", dy: "8px" }, { rot: "-2.5deg", dy: "-10px" }, { rot: "2deg", dy: "6px" },
+      { rot: "-3deg", dy: "9px" }, { rot: "2.5deg", dy: "-7px" },
+    ];
+    const chips = (s.bottom || []).map((t, i) => {
+      const p = CHIP_POSE[i % CHIP_POSE.length];
+      return `<span class="rs__chip" style="--rot:${p.rot};--dy:${p.dy}">${t}</span>`;
+    }).join("");
     el.querySelector(".scene__content").innerHTML = `
       ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
       <div class="rs">
