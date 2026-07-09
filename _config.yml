@@ -57,6 +57,13 @@ exclude:
   - apps/storydeck/deck.schema.json
   - apps/storydeck/slide-angle-mort-run.json
   - apps/storydeck/scripts
+  # StoryDeck Agentic Analytics : idem — seul talk.html + assets sont publiés.
+  - apps/storydeck-agentic/index.html
+  - apps/storydeck-agentic/engine.js
+  - apps/storydeck-agentic/cellular.js
+  - apps/storydeck-agentic/build.sh
+  - apps/storydeck-agentic/deck.json
+  - apps/storydeck-agentic/vendor
 
 # Plugins
 plugins:

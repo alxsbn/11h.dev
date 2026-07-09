@@ -1,0 +1,37 @@
+---
+layout: none
+permalink: /talk/agentic-analytics/
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Once upon a time — Agentic Analytics</title>
+  <meta name="description" content="Talk Agentic Analytics : l'histoire d'une data team — et du métier qui lui survit. Un deck interactif.">
+  <meta property="og:title" content="Once upon a time — Agentic Analytics">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://11h.dev/talk/agentic-analytics/">
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #f6efe4; overflow: hidden; }
+    /* Le deck vit dans son propre document (chemins relatifs assets/ intacts),
+       affiché ici en plein écran via une iframe sans bordure. */
+    iframe#deck {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      border: 0;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="deck"
+          src="/apps/storydeck-agentic/talk.html"
+          title="Once upon a time — Agentic Analytics"
+          allow="fullscreen"
+          allowfullscreen></iframe>
+</body>
+</html>
