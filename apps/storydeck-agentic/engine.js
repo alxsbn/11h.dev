@@ -612,6 +612,14 @@ const renderers = {
         frames.forEach((f) => { const R = frameRect(f.id); roundRect(ctx, R.x, R.y, R.w, R.h, 14); });
         ctx.clip("evenodd");
       }
+      // clip au complément des cadres du HAUT seulement (HG/HD) : le rouge doit remplir tout
+      // le débordement du nuage réel sous ces cadres, sans être "protégé" par un cadre du bas (BD).
+      function clipOutsideTopFrames() {
+        ctx.beginPath(); ctx.rect(0, 0, W, H);
+        frames.filter((f) => f.id === "HG" || f.id === "HD").forEach((f) => {
+          const R = frameRect(f.id); roundRect(ctx, R.x, R.y, R.w, R.h, 14); });
+        ctx.clip("evenodd");
+      }
       // hachures rouges diagonales (remplit le chemin de clip courant)
       function redHatch(al) {
         ctx.save(); ctx.strokeStyle = `rgba(226,72,72,${al})`; ctx.lineWidth = 3;
@@ -649,9 +657,12 @@ const renderers = {
         blobPath(cx, cy, rr, sx, sy, a.seed); drawFill([r, g, bl], alpha * ease);
 
         if (b.overflow) {
-          // (b) HACHURES ROUGES = partie du nuage À L'EXTÉRIEUR des cadres (le débordement).
+          // (b) HACHURES ROUGES = tout le nuage SOUS la ligne verte (l'arête basse des cadres
+          //     du haut). Demi-plan y > bottom(HG/HD) → le débordement bas devient rouge,
+          //     sans mordre au-dessus de la frontière ni dépendre des cadres du bas.
+          const topB = frameRect(host.id); const cutY = topB.y + topB.h;
           ctx.save(); blobPath(cx, cy, rr, sx, sy, a.seed); ctx.clip();  // dans le nuage…
-          clipOutsideAllFrames();                                        // …ET hors des cadres
+          ctx.beginPath(); ctx.rect(0, cutY, W, H - cutY); ctx.clip();   // …ET sous la ligne verte
           redHatch(0.85 * ease);
           ctx.restore();
           // (c) LISERÉ VERT = la FRONTIÈRE bleu↔rouge : l'arête BASSE du cadre hôte (le nuage
