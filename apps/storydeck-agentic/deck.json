@@ -524,6 +524,64 @@
           }
         },
         {
+          "size": [
+            {
+              "id": "metabase",
+              "r": 0.06
+            },
+            {
+              "id": "databricks",
+              "r": 0.07
+            },
+            {
+              "id": "airbyte",
+              "r": 0.035
+            },
+            {
+              "id": "da",
+              "r": 0.06
+            },
+            {
+              "id": "ae",
+              "r": 0.06
+            },
+            {
+              "id": "newrelic",
+              "r": 0.03
+            },
+            {
+              "id": "spark",
+              "r": 0.03
+            },
+            {
+              "id": "make",
+              "r": 0.058
+            }
+          ],
+          "move": [
+            {
+              "id": "newrelic",
+              "x": 0.1,
+              "y": 0.62
+            },
+            {
+              "id": "spark",
+              "x": 0.1,
+              "y": 0.5
+            },
+            {
+              "id": "dms",
+              "x": 0.14,
+              "y": 0.46
+            }
+          ],
+          "station": {
+            "date": "juil. 2024",
+            "mark": true
+          },
+          "caption": "<span class=\"hl--hot\">Audit Data</span>"
+        },
+        {
           "absorb": [
             {
               "id": "ds",
@@ -638,64 +696,6 @@
             "date": "2024",
             "mark": true
           }
-        },
-        {
-          "size": [
-            {
-              "id": "metabase",
-              "r": 0.06
-            },
-            {
-              "id": "databricks",
-              "r": 0.07
-            },
-            {
-              "id": "airbyte",
-              "r": 0.035
-            },
-            {
-              "id": "da",
-              "r": 0.06
-            },
-            {
-              "id": "ae",
-              "r": 0.06
-            },
-            {
-              "id": "newrelic",
-              "r": 0.03
-            },
-            {
-              "id": "spark",
-              "r": 0.03
-            },
-            {
-              "id": "make",
-              "r": 0.058
-            }
-          ],
-          "move": [
-            {
-              "id": "newrelic",
-              "x": 0.1,
-              "y": 0.62
-            },
-            {
-              "id": "spark",
-              "x": 0.1,
-              "y": 0.5
-            },
-            {
-              "id": "dms",
-              "x": 0.14,
-              "y": 0.46
-            }
-          ],
-          "station": {
-            "date": "janv. 2025",
-            "mark": true
-          },
-          "caption": "<span class=\"hl--hot\">Audit Data</span>"
         },
         {},
         {
