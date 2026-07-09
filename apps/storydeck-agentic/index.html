@@ -60,7 +60,8 @@
      le texte dessous fait office de sous-titre */
   .scene--titled h2 { font-family: var(--font-tale); font-weight: 700;
     font-size: clamp(3.4rem, 8vw, 6.4rem); line-height: .9; letter-spacing: 0;
-    color: var(--fg); margin-bottom: .35em; text-shadow: 0 2px 20px rgba(232,97,140,.12); }
+    color: var(--fg); margin-bottom: .35em; text-shadow: 0 2px 20px rgba(232,97,140,.12);
+    -webkit-text-stroke: .6px var(--fg); }
   .scene--bigtext h2 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.1; }
   /* metroline — chemin de métro serpentin qui liste des éléments (chaîne de pensée) */
   .scene--metro { align-items: center; }
@@ -127,7 +128,8 @@
     linear-gradient(270deg, rgba(246,239,228,.62), rgba(246,239,228,.12) 45%, rgba(246,239,228,0) 70%); }
   .scene--title h1 { font-family: var(--font-tale); font-weight: 700;
     font-size: clamp(3.6rem, 11vw, 9rem); line-height: .82; letter-spacing: 0;
-    color: var(--fg); text-shadow: 0 2px 20px rgba(232,97,140,.15); }
+    color: var(--fg); text-shadow: 0 2px 20px rgba(232,97,140,.15);
+    -webkit-text-stroke: .7px var(--fg); }
   .scene--title .lead { font-family: var(--font-chapter); font-style: italic;
     color: var(--ink-soft); font-size: clamp(1rem, 1.8vw, 1.5rem); font-weight: 500; margin-top: 1em; }
   /* mots-clés mis en avant : accents pastel soutenus (lisibles sur crème) */
@@ -383,7 +385,8 @@
     height: 100%; }
   .tent__title { font-family: var(--font-tale); font-weight: 700;
     font-size: clamp(3.6rem, 11vw, 9rem); line-height: .82; color: var(--fg);
-    text-shadow: 0 2px 20px rgba(232,97,140,.15); transition: opacity .5s ease; }
+    text-shadow: 0 2px 20px rgba(232,97,140,.15); transition: opacity .5s ease;
+    -webkit-text-stroke: .7px var(--fg); }
   /* tant qu'aucune image n'est montrée, le stage ne réserve AUCUN espace (titre centré) */
   .tent__stage { position: relative; width: min(1200px, 92vw); height: 0;
     transition: height .4s ease; }
@@ -425,8 +428,10 @@
     display: flex; flex-direction: column; justify-content: flex-start; padding-top: 2vh; }
   .scene--travail h2 { margin-bottom: .2em; }
   .tv { flex: 1; display: grid; grid-template-columns: 38% 62%; gap: 2vw;
-    margin-top: 2vh; min-height: 0; }
+    margin-top: 4vh; min-height: 0; }
   .tv__col { position: relative; }
+  /* la colonne des couvertures démarre plus bas → jamais sous le titre de la slide */
+  .tv__left { margin-top: 6vh; }
   /* coupure de presse : tombe du haut, rebond ressort, bordure blanche + ombre (SaaSpocalypse) */
   .tv__clip { position: absolute; inset: 0; margin: auto; --nx:0px; --ny:0px; --nr:0deg;
     border: 6px solid #fff; border-radius: 4px;
