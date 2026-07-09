@@ -660,7 +660,7 @@ const renderers = {
           // (b) HACHURES ROUGES = tout le nuage SOUS la ligne verte (l'arête basse des cadres
           //     du haut). Demi-plan y > bottom(HG/HD) → le débordement bas devient rouge,
           //     sans mordre au-dessus de la frontière ni dépendre des cadres du bas.
-          const topB = frameRect(host.id); const cutY = topB.y + topB.h;
+          const cutY = host.y + host.h;   // host EST déjà le rect du cadre hôte
           ctx.save(); blobPath(cx, cy, rr, sx, sy, a.seed); ctx.clip();  // dans le nuage…
           ctx.beginPath(); ctx.rect(0, cutY, W, H - cutY); ctx.clip();   // …ET sous la ligne verte
           redHatch(0.85 * ease);
@@ -671,7 +671,7 @@ const renderers = {
           ctx.lineWidth = 10; ctx.lineCap = "round";
           ctx.strokeStyle = `rgba(${COL.travail[0]},${COL.travail[1]},${COL.travail[2]},${0.85 * ease})`;
           // couvre l'arête basse des cadres du HAUT (HG+HD) sur toute la largeur qu'ils occupent
-          const topFrames = frames.filter((f) => f.id === "HG" || f.id === "HD" || f.id === host.id);
+          const topFrames = frames.filter((f) => f.id === "HG" || f.id === "HD");
           topFrames.forEach((f) => { const R = frameRect(f.id);
             ctx.beginPath(); ctx.moveTo(R.x, R.y + R.h); ctx.lineTo(R.x + R.w, R.y + R.h); ctx.stroke(); });
           ctx.restore();
