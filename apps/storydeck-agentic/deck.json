@@ -1907,6 +1907,17 @@
           "cx": -0.05,
           "cy": 0.75,
           "spillDir": "up-right"
+        },
+        {
+          "id": "zele",
+          "color": "zelejaune",
+          "contained": true,
+          "in": "BG",
+          "frames": [
+            "BG",
+            "BD"
+          ],
+          "label": "Zèle"
         }
       ]
     },

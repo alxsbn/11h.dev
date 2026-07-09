@@ -571,6 +571,7 @@ const renderers = {
     // couleurs des nuages
     const COL = {
       neutral: [150, 150, 158], zele: [80, 150, 205], reel: [226, 84, 92],
+      zelejaune: [230, 190, 70],
       travail: [46, 160, 90],
     };
     let raf = null, shown = 0, t0 = 0;
@@ -640,18 +641,47 @@ const renderers = {
         const ease = 1 - Math.pow(1 - age, 3);
         const host = frameRect(b.in); if (!host) return;
         const [r, g, bl] = COL[b.color] || COL.zele;
-        // position via cx/cy (fractions du cadre hôte) — placement fidèle au croquis
-        const cx = host.x + host.w * (b.cx ?? 0.5);
-        const cy = host.y + host.h * (b.cy ?? 0.5);
-        const base = Math.min(host.w, host.h) * 0.5;
-        const rr = base * (b.fill || 0.6) * ease;
-        const sx = b.overflow ? 1.25 : 1.15, sy = b.overflow ? 1.0 : 1.0;
         const alpha = 0.4 + 0.08 * Math.sin(time * 1.4 + a.seed);
         const drawFill = (col, al) => {
           ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${al})`;
           ctx.shadowColor = `rgba(${col[0]},${col[1]},${col[2]},${0.4 * ease})`;
           ctx.shadowBlur = 22; ctx.fill(); ctx.shadowBlur = 0;
         };
+
+        // CONTAINED : nuage qui REMPLIT l'union de plusieurs cadres (b.frames) sans dépasser
+        // → gros blob centré sur l'union, CLIPPÉ à cette union (façon « Zèle » contenu).
+        if (b.contained && Array.isArray(b.frames)) {
+          const rects = b.frames.map(frameRect).filter(Boolean);
+          if (!rects.length) return;
+          const minX = Math.min(...rects.map(R => R.x)), minY = Math.min(...rects.map(R => R.y));
+          const maxX = Math.max(...rects.map(R => R.x + R.w)), maxY = Math.max(...rects.map(R => R.y + R.h));
+          const ux = (minX + maxX) / 2, uy = (minY + maxY) / 2;
+          // remplit CHAQUE cadre séparément : pour chaque cadre, clip à CE cadre puis un gros
+          // blob qui le déborde → toute sa surface devient jaune, sans dépasser (garanti par le clip).
+          rects.forEach((R, k) => {
+            ctx.save();
+            roundRect(ctx, R.x, R.y, R.w, R.h, 14); ctx.clip();
+            const bx = R.x + R.w / 2, by = R.y + R.h / 2;
+            const brr = Math.hypot(R.w, R.h) * 0.75 * ease;   // > diagonale → couvre tout le cadre
+            blobPath(bx, by, brr, 1.0, 1.0, a.seed + k * 2.3);
+            drawFill([r, g, bl], (alpha + 0.06) * ease);
+            ctx.restore();
+          });
+          if (b.label) {
+            ctx.fillStyle = `rgba(${r},${g},${bl},${ease})`;
+            ctx.font = "700 " + Math.round((maxY - minY) * 0.28) + "px 'Playfair Display',Georgia,serif";
+            ctx.textAlign = "center"; ctx.textBaseline = "middle";
+            ctx.globalAlpha = ease; ctx.fillText(b.label, ux, uy); ctx.globalAlpha = 1;
+          }
+          return;
+        }
+
+        // position via cx/cy (fractions du cadre hôte) — placement fidèle au croquis
+        const cx = host.x + host.w * (b.cx ?? 0.5);
+        const cy = host.y + host.h * (b.cy ?? 0.5);
+        const base = Math.min(host.w, host.h) * 0.5;
+        const rr = base * (b.fill || 0.6) * ease;
+        const sx = b.overflow ? 1.25 : 1.15, sy = b.overflow ? 1.0 : 1.0;
 
         // (a) corps BLEU du nuage (tous les nuages)
         blobPath(cx, cy, rr, sx, sy, a.seed); drawFill([r, g, bl], alpha * ease);
