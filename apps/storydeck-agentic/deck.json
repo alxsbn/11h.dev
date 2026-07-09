@@ -489,6 +489,22 @@
         {
           "add": [
             {
+              "id": "make",
+              "usage": "orchestration",
+              "kind": "tech",
+              "label": "Make",
+              "x": 0.3,
+              "y": 0.72,
+              "r": 0.04
+            }
+          ],
+          "station": {
+            "date": "mi-2024"
+          }
+        },
+        {
+          "add": [
+            {
               "id": "notion",
               "usage": "serving",
               "kind": "tech",
@@ -550,6 +566,10 @@
             {
               "id": "ae",
               "r": 0.075
+            },
+            {
+              "id": "make",
+              "r": 0.045
             }
           ],
           "station": {
@@ -582,7 +602,13 @@
           ],
           "station": {
             "date": "nov. 2024"
-          }
+          },
+          "size": [
+            {
+              "id": "make",
+              "r": 0.05
+            }
+          ]
         },
         {
           "add": [
@@ -598,7 +624,13 @@
           ],
           "station": {
             "date": "janv. 2025"
-          }
+          },
+          "size": [
+            {
+              "id": "make",
+              "r": 0.055
+            }
+          ]
         },
         {
           "tempo": 1.35,
@@ -636,6 +668,10 @@
             {
               "id": "spark",
               "r": 0.03
+            },
+            {
+              "id": "make",
+              "r": 0.058
             }
           ],
           "move": [
