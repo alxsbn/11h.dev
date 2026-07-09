@@ -471,6 +471,38 @@ const renderers = {
     };
   },
 
+  // Rolesplit — 2 grands blocs en HAUT (Data/Context Engineering) au même niveau,
+  // puis 1 grand bloc EN BAS regroupant les autres tâches en étiquettes. Révélé au clic :
+  // les 2 blocs du haut d'abord, puis les étiquettes du bas une à une.
+  rolesplit(s) {
+    const el = sceneEl(s.media, s.bgVideo);
+    el.classList.add("scene--rolesplit");
+    if (s.heading && !s.plainTitle) el.classList.add("scene--titled");
+    const top = (s.top || []).map((t) => `<div class="rs__top">${t}</div>`).join("");
+    const chips = (s.bottom || []).map((t) => `<span class="rs__chip">${t}</span>`).join("");
+    el.querySelector(".scene__content").innerHTML = `
+      ${s.heading ? `<h2 class="reveal">${s.heading}</h2>` : ""}
+      <div class="rs">
+        <div class="rs__row">${top}</div>
+        <div class="rs__box"><div class="rs__chips">${chips}</div></div>
+      </div>`;
+    const tops = [...el.querySelectorAll(".rs__top")];
+    const box = el.querySelector(".rs__box");
+    const chipEls = [...el.querySelectorAll(".rs__chip")];
+    // ordre de révélation : les 2 blocs du haut (ensemble), puis le bloc bas, puis chaque chip
+    let shown = 0;
+    const steps = [() => tops.forEach((t) => t.classList.add("on")),
+                   () => box.classList.add("on"),
+                   ...chipEls.map((c) => () => c.classList.add("on"))];
+    const reset = () => { shown = 0; tops.forEach((t) => t.classList.remove("on"));
+      box.classList.remove("on"); chipEls.forEach((c) => c.classList.remove("on")); };
+    return {
+      el,
+      onEnter() { reset(); }, onExit() { reset(); },
+      advance() { if (shown < steps.length) { steps[shown](); shown++; return true; } return false; }
+    };
+  },
+
   // Travail vivant — 2 colonnes : à GAUCHE des couvertures (coupures de presse qui
   // tombent), à DROITE des citations (mêmes coupures). Tout se pose au clic, en biais,
   // avec l'effet SaaSpocalypse (chute + rebond + bousculade).
@@ -604,17 +636,17 @@ const renderers = {
         blobPath(cx, cy, rr, sx, sy, a.seed); drawFill([r, g, bl], alpha * ease);
 
         if (b.overflow) {
-          // (b) liseré VERT au franchissement : contour épais du nuage clippé HORS des cadres
-          //     (le vert marque le bord là où la forme sort du prescrit = le travail)
-          ctx.save(); clipOutsideAllFrames();
-          blobPath(cx, cy, rr * 1.06, sx, sy, a.seed);
-          ctx.lineWidth = 16; ctx.strokeStyle = `rgba(${COL.travail[0]},${COL.travail[1]},${COL.travail[2]},${0.6 * ease})`;
-          ctx.stroke();
-          ctx.restore();
-          // (c) HACHURES ROUGES sur la partie du nuage HORS des cadres
+          // (b) HACHURES ROUGES = partie du nuage À L'EXTÉRIEUR des cadres (le débordement).
           ctx.save(); blobPath(cx, cy, rr, sx, sy, a.seed); ctx.clip();  // dans le nuage…
           clipOutsideAllFrames();                                        // …ET hors des cadres
           redHatch(0.85 * ease);
+          ctx.restore();
+          // (c) LISERÉ VERT = la FRONTIÈRE bleu↔rouge, c.-à-d. le bord des cadres LÀ OÙ il
+          //     traverse le nuage. On trace le contour des cadres, clippé DANS le nuage.
+          ctx.save(); blobPath(cx, cy, rr, sx, sy, a.seed); ctx.clip();  // clip au nuage
+          ctx.lineWidth = 10; ctx.lineJoin = "round";
+          ctx.strokeStyle = `rgba(${COL.travail[0]},${COL.travail[1]},${COL.travail[2]},${0.85 * ease})`;
+          frames.forEach((f) => { const R = frameRect(f.id); roundRect(ctx, R.x, R.y, R.w, R.h, 14); ctx.stroke(); });
           ctx.restore();
         }
         // label (« réel » en rouge)

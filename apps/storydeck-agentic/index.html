@@ -428,6 +428,30 @@
     opacity: 0; transform: translateY(8px); transition: opacity .4s ease, transform .4s ease; }
   .roles--tiles .role.on { opacity: 1; transform: none; }
   .roles--tiles .role__title { font-size: clamp(.9rem, 1.5vw, 1.25rem); }
+  /* Rolesplit — 2 blocs en haut (Data/Context Eng) + 1 grand bloc d'étiquettes en bas */
+  .scene--rolesplit .scene__content { max-width: none; width: 100%; height: 100%;
+    display: flex; flex-direction: column; }
+  .rs { flex: 1; display: flex; flex-direction: column; gap: clamp(1rem, 2.5vh, 2rem);
+    margin-top: 2vh; min-height: 0; }
+  .rs__row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2vw, 1.8rem); }
+  .rs__top { background: var(--card); border: 1px solid rgba(47,143,157,.25); border-radius: 16px;
+    padding: clamp(1.1rem, 3vh, 2rem); text-align: center;
+    font-family: var(--font-chapter), Georgia, serif; font-weight: 800;
+    font-size: clamp(1.3rem, 2.6vw, 2.1rem); color: var(--accent-deep);
+    box-shadow: 0 8px 24px rgba(47,143,157,.1);
+    opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+  .rs__top.on { opacity: 1; transform: none; }
+  .rs__box { flex: 1; background: var(--card); border: 1px dashed rgba(107,93,79,.3);
+    border-radius: 16px; padding: clamp(1rem, 3vh, 2rem); display: flex; align-items: center;
+    opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+  .rs__box.on { opacity: 1; transform: none; }
+  .rs__chips { display: flex; flex-wrap: wrap; gap: clamp(.6rem, 1.4vw, 1.1rem);
+    justify-content: center; width: 100%; }
+  .rs__chip { background: var(--bg); border: 1px solid rgba(107,93,79,.2); border-radius: 999px;
+    padding: .5em 1.1em; font-family: var(--font-chapter), Georgia, serif; font-weight: 600;
+    font-size: clamp(.9rem, 1.5vw, 1.25rem); color: var(--fg);
+    opacity: 0; transform: scale(.92); transition: opacity .35s ease, transform .35s ease; }
+  .rs__chip.on { opacity: 1; transform: none; }
 
   .scene--travail .scene__content { max-width: none; width: 100%; height: 100%;
     display: flex; flex-direction: column; justify-content: flex-start; padding-top: 0; }

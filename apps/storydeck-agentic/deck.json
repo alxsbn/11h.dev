@@ -263,7 +263,7 @@
           "size": [
             {
               "id": "metabase",
-              "r": 0.13
+              "r": 0.085
             },
             {
               "id": "cto",
@@ -394,18 +394,20 @@
           "station": {
             "date": "juil. 2023",
             "mark": "gold"
-          }
-        },
-        {
+          },
           "size": [
             {
               "id": "dbt",
-              "r": 0.2
+              "r": 0.13
             },
             {
               "id": "metabase",
-              "r": 0.11
-            },
+              "r": 0.1
+            }
+          ]
+        },
+        {
+          "size": [
             {
               "id": "me",
               "r": 0.115
@@ -438,7 +440,17 @@
             "mark": true
           },
           "caption": "<span class=\"hl--hot\">Bascule stratégique</span>",
-          "chapter": "II — Transition"
+          "chapter": "II — Transition",
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.15
+            },
+            {
+              "id": "metabase",
+              "r": 0.115
+            }
+          ]
         },
         {},
         {
@@ -484,7 +496,17 @@
             "date": "mi-2024",
             "mark": "gold"
           },
-          "caption": "<span class=\"hl\">Prompt like a star</span>"
+          "caption": "<span class=\"hl\">Prompt like a star</span>",
+          "size": [
+            {
+              "id": "dbt",
+              "r": 0.17
+            },
+            {
+              "id": "metabase",
+              "r": 0.13
+            }
+          ]
         },
         {
           "add": [
@@ -517,7 +539,6 @@
           ]
         },
         {
-          "caption": "<span class=\"hl--hot\">Lean progressif</span>",
           "station": {
             "date": "juin 2024",
             "mark": true
@@ -525,10 +546,6 @@
         },
         {
           "size": [
-            {
-              "id": "metabase",
-              "r": 0.06
-            },
             {
               "id": "databricks",
               "r": 0.07
@@ -556,6 +573,14 @@
             {
               "id": "make",
               "r": 0.058
+            },
+            {
+              "id": "dbt",
+              "r": 0.19
+            },
+            {
+              "id": "metabase",
+              "r": 0.115
             }
           ],
           "move": [
@@ -628,6 +653,14 @@
             {
               "id": "make",
               "r": 0.045
+            },
+            {
+              "id": "dbt",
+              "r": 0.2
+            },
+            {
+              "id": "metabase",
+              "r": 0.1
             }
           ],
           "station": {
@@ -665,6 +698,10 @@
             {
               "id": "make",
               "r": 0.05
+            },
+            {
+              "id": "metabase",
+              "r": 0.09
             }
           ]
         },
@@ -687,6 +724,10 @@
             {
               "id": "make",
               "r": 0.055
+            },
+            {
+              "id": "metabase",
+              "r": 0.08
             }
           ]
         },
@@ -737,10 +778,6 @@
             }
           ],
           "size": [
-            {
-              "id": "metabase",
-              "r": 0.045
-            },
             {
               "id": "linear",
               "r": 0.04
@@ -833,6 +870,10 @@
             {
               "id": "dbt",
               "r": 0.176
+            },
+            {
+              "id": "metabase",
+              "r": 0.07
             }
           ],
           "station": {
@@ -872,6 +913,10 @@
             {
               "id": "dbt",
               "r": 0.164
+            },
+            {
+              "id": "metabase",
+              "r": 0.062000000000000006
             }
           ],
           "station": {
@@ -905,6 +950,12 @@
             {
               "id": "da",
               "into": "me"
+            }
+          ],
+          "size": [
+            {
+              "id": "metabase",
+              "r": 0.054000000000000006
             }
           ]
         },
@@ -1811,51 +1862,25 @@
       ]
     },
     {
-      "type": "roles",
-      "heading": "Le nouveau DA",
-      "roles": [
-        {
-          "title": "Data Engineering",
-          "labels": []
-        },
-        {
-          "title": "Context Engineering",
-          "labels": []
-        },
-        {
-          "title": "Capter le non-modélisé",
-          "labels": []
-        },
-        {
-          "title": "Challenger les interprétations",
-          "labels": []
-        },
-        {
-          "title": "Contenir l'auto-certification",
-          "labels": []
-        },
-        {
-          "title": "Agit sous mandat explicite",
-          "labels": []
-        },
-        {
-          "title": "Capturer le réel",
-          "labels": []
-        },
-        {
-          "title": "Sortir de sa bulle",
-          "labels": []
-        },
-        {
-          "title": "Organiser la délibération",
-          "labels": []
-        },
-        {
-          "title": "Arbitre les conflits",
-          "labels": []
-        }
+      "type": "text",
+      "heading": "Quel avenir pour le Data Analyst ?"
+    },
+    {
+      "type": "rolesplit",
+      "top": [
+        "Data Engineering",
+        "Context Engineering"
       ],
-      "cols": 5
+      "bottom": [
+        "Capter le non-modélisé",
+        "Challenger les interprétations",
+        "Contenir l'auto-certification",
+        "Agit sous mandat explicite",
+        "Capturer le réel",
+        "Sortir de sa bulle",
+        "Organiser la délibération",
+        "Arbitre les conflits"
+      ]
     },
     {
       "type": "title",
