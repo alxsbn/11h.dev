@@ -1,0 +1,154 @@
+{% comment %}
+  Figure interactive : où passe le temps de l'équipe, avant et aujourd'hui.
+  Usage : {% include bob/time-bars.html lang=page.lang %}
+  Données reprises du deck apps/storydeck (scène bars2). Sans JS : barres pleines, segment révélé.
+  Avec JS : les barres poussent au scroll, le segment mystère « ? » se révèle au clic.
+{% endcomment %}
+{% if include.lang == "fr" %}
+  {% assign bob_bars_before = "Avant" %}
+  {% assign bob_bars_today = "Aujourd'hui" %}
+  {% assign bob_bars_reveal = "Révéler le dernier segment" %}
+  {% assign bob_bars_mystery = "Configuration agentique · Business value" %}
+  {% assign bob_bars_caption = "Avant : 20 % de spec, 60 % de code et de run, 20 % de review. Aujourd'hui : 40 % de plan et de spec, 8 % de code, 22 % de review, et 30 % consacrés à la configuration agentique et à la business value." %}
+{% else %}
+  {% assign bob_bars_before = "Before" %}
+  {% assign bob_bars_today = "Today" %}
+  {% assign bob_bars_reveal = "Reveal the last segment" %}
+  {% assign bob_bars_mystery = "Agentic configuration · Business value" %}
+  {% assign bob_bars_caption = "Before: 20% spec, 60% code and run, 20% review. Today: 40% plan and spec, 8% code, 22% review, and 30% spent on agentic configuration and business value." %}
+{% endif %}
+<figure class="bob-fig bob-bars" id="bob-bars">
+  <div class="bob-bars__rows">
+    <div class="bob-bars__row">
+      <span class="bob-bars__rowlabel">{{ bob_bars_before }}</span>
+      <div class="bob-bars__bar">
+        <div class="bob-bars__seg bob-bars__seg--spec" style="--w:20%"><span>Spec 20%</span></div>
+        <div class="bob-bars__seg bob-bars__seg--code" style="--w:60%"><span>Code / Run 60%</span></div>
+        <div class="bob-bars__seg bob-bars__seg--review" style="--w:20%"><span>Review 20%</span></div>
+      </div>
+    </div>
+    <div class="bob-bars__row">
+      <span class="bob-bars__rowlabel">{{ bob_bars_today }}</span>
+      <div class="bob-bars__bar">
+        <div class="bob-bars__seg bob-bars__seg--spec" style="--w:40%"><span>Plan / Spec 40%</span></div>
+        <div class="bob-bars__seg bob-bars__seg--code" style="--w:8%"><span>Code 8%</span></div>
+        <div class="bob-bars__seg bob-bars__seg--review" style="--w:22%"><span>Review 22%</span></div>
+        <div class="bob-bars__seg bob-bars__seg--mystery" style="--w:30%">
+          <span class="bob-bars__q" aria-hidden="true">?</span>
+          <span class="bob-bars__answer">{{ bob_bars_mystery }} · 30%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bob-bars__nav" hidden>
+    <button type="button" class="bob-bars__btn">{{ bob_bars_reveal }}</button>
+  </div>
+  <figcaption class="bob-fig__caption">{{ bob_bars_caption }}</figcaption>
+</figure>
+
+<style>
+  .bob-bars__rows { display: grid; gap: 18px; }
+  .bob-bars__rowlabel {
+    display: block;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary, #6b6b6b);
+    margin-bottom: 6px;
+  }
+  .bob-bars__bar { display: flex; width: 100%; border-radius: 8px; overflow: hidden; }
+  .bob-bars__seg {
+    width: var(--w);
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: width 0.9s cubic-bezier(0.25, 1, 0.35, 1);
+  }
+  .bob-bars__seg span {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.72em;
+    padding: 0 6px;
+    color: #fff;
+  }
+  .bob-bars__answer {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+  .bob-bars__seg--spec { background: #5a7fa8; }
+  .bob-bars__seg--code { background: #8a93a3; }
+  .bob-bars__seg--review { background: #b0876a; }
+  .bob-bars__seg--mystery { background: var(--color-accent, #c9453c); position: relative; }
+  .bob-bars__q {
+    display: none;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #fff;
+  }
+  .bob-bars__nav { display: flex; justify-content: center; margin-top: 0.9em; }
+  .bob-bars__nav[hidden] { display: none; }
+  .bob-bars__btn {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85em;
+    padding: 6px 16px;
+    border: 1px solid var(--color-border, #e6e6e6);
+    border-radius: 999px;
+    background: var(--color-bg, #fff);
+    color: var(--color-text, #1a1a1a);
+    cursor: pointer;
+  }
+
+  /* JS actif, avant le scroll : barres à zéro */
+  .bob-bars.bob-js:not(.is-on) .bob-bars__seg { width: 0; }
+  .bob-bars.bob-js.is-on .bob-bars__row:nth-child(2) .bob-bars__seg { transition-delay: 0.35s; }
+  /* JS actif, avant révélation : le segment mystère est rayé et affiche « ? » */
+  .bob-bars.bob-js:not(.is-revealed) .bob-bars__seg--mystery {
+    background: repeating-linear-gradient(45deg, #6b6b6b 0 10px, #7d7d7d 10px 20px);
+  }
+  .bob-bars.bob-js:not(.is-revealed) .bob-bars__seg--mystery .bob-bars__answer { display: none; }
+  .bob-bars.bob-js:not(.is-revealed) .bob-bars__q { display: block; }
+  .bob-bars.bob-js.is-revealed .bob-bars__seg--mystery { transition: background 0.5s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bob-bars__seg { transition: none !important; }
+  }
+  @media (max-width: 560px) {
+    .bob-bars__seg span { font-size: 0.62em; }
+    .bob-bars__seg { min-height: 44px; }
+  }
+</style>
+
+<script>
+  (function () {
+    var fig = document.getElementById("bob-bars");
+    if (!fig || fig.dataset.bobInit) return;
+    fig.dataset.bobInit = "1";
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    fig.classList.add("bob-js");
+    if (reduce) fig.classList.add("is-on");
+    var nav = fig.querySelector(".bob-bars__nav");
+    var btn = fig.querySelector(".bob-bars__btn");
+    nav.removeAttribute("hidden");
+    btn.addEventListener("click", function () {
+      fig.classList.add("is-revealed");
+      nav.setAttribute("hidden", "");
+    });
+    if (!reduce) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            fig.classList.add("is-on");
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      io.observe(fig);
+    }
+  })();
+</script>

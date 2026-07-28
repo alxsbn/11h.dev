@@ -1,0 +1,56 @@
+{% comment %}
+  Figure : le SaaSpocalypse Survival Scanner (« Are you just a .md file? »).
+  Usage : {% include bob/scanner.html lang=page.lang %}
+  Vidéo reprise du deck apps/storydeck. Sans JS (ou en reduced motion) : lecteur avec contrôles.
+  Avec JS : lecture/pause automatique quand la figure entre/sort du viewport.
+{% endcomment %}
+{% if include.lang == "fr" %}
+  {% assign bob_scan_caption = "fivetran.com passé au « SaaSpocalypse Survival Scanner » : environ 52 % jugé remplaçable par un Skill. Le reste, le scanner ne sait pas le mesurer." %}
+{% else %}
+  {% assign bob_scan_caption = "fivetran.com fed to the “SaaSpocalypse Survival Scanner”: about 52% deemed replaceable by a Skill. The rest, the scanner has no way to measure." %}
+{% endif %}
+<figure class="bob-fig bob-scan" id="bob-scan">
+  <div class="bob-scan__frame">
+    <video class="bob-scan__video"
+           src="/apps/storydeck/assets/video/deathbyclawd.mp4"
+           poster="/apps/storydeck/assets/video/deathbyclawd-home.png"
+           muted loop playsinline controls preload="none"></video>
+  </div>
+  <figcaption class="bob-fig__caption">{{ bob_scan_caption }}</figcaption>
+</figure>
+
+<style>
+  .bob-scan__frame {
+    border: 1px solid var(--color-border, #e6e6e6);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+  }
+  .bob-scan__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+</style>
+
+<script>
+  (function () {
+    var fig = document.getElementById("bob-scan");
+    if (!fig || fig.dataset.bobInit) return;
+    fig.dataset.bobInit = "1";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var video = fig.querySelector(".bob-scan__video");
+    video.removeAttribute("controls");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          video.play().catch(function () { video.setAttribute("controls", ""); });
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+    io.observe(fig);
+  })();
+</script>

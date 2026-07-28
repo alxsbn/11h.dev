@@ -1,0 +1,128 @@
+{% comment %}
+  Figure interactive : le duel build or buy (Airbyte / dlt Hub / Fivetran).
+  Usage : {% include bob/duel.html lang=page.lang %}
+  Sans JS : verdict affiché (perdants barrés). Avec JS : bouton « Trancher » qui rejoue la décision.
+{% endcomment %}
+{% if include.lang == "fr" %}
+  {% assign bob_duel_btn = "Trancher" %}
+  {% assign bob_duel_verdict = "Verdict : Fivetran. Le build a perdu contre le run." %}
+  {% assign bob_duel_caption = "Trois options sur la table : rester sur Airbyte, tout recoder avec dlt, ou acheter Fivetran. Deux options barrées, une retenue." %}
+{% else %}
+  {% assign bob_duel_btn = "Call it" %}
+  {% assign bob_duel_verdict = "Verdict: Fivetran. Build lost to the run." %}
+  {% assign bob_duel_caption = "Three options on the table: stay on Airbyte, recode everything with dlt, or buy Fivetran. Two get crossed out, one stays." %}
+{% endif %}
+<figure class="bob-fig bob-duel is-decided" id="bob-duel">
+  <div class="bob-duel__cards">
+    <div class="bob-duel__card bob-duel__card--loser">
+      <img src="/apps/storydeck/assets/stack/tiles/airbyte.png" alt="Airbyte" loading="lazy" width="200" height="200">
+      <span>Airbyte</span>
+      <svg class="bob-duel__cross" viewBox="0 0 100 100" aria-hidden="true"><path d="M18 18 L82 82 M82 18 L18 82" /></svg>
+    </div>
+    <div class="bob-duel__card bob-duel__card--loser">
+      <img src="/apps/storydeck/assets/stack/tiles/dlt.png" alt="dlt Hub" loading="lazy" width="200" height="200">
+      <span>dlt Hub</span>
+      <svg class="bob-duel__cross" viewBox="0 0 100 100" aria-hidden="true"><path d="M18 18 L82 82 M82 18 L18 82" /></svg>
+    </div>
+    <div class="bob-duel__card bob-duel__card--winner">
+      <img src="/apps/storydeck/assets/stack/tiles/fivetran.png" alt="Fivetran" loading="lazy" width="200" height="200">
+      <span>Fivetran</span>
+    </div>
+  </div>
+  <p class="bob-duel__verdict">{{ bob_duel_verdict }}</p>
+  <div class="bob-duel__nav" hidden>
+    <button type="button" class="bob-duel__btn">{{ bob_duel_btn }}</button>
+  </div>
+  <figcaption class="bob-fig__caption">{{ bob_duel_caption }}</figcaption>
+</figure>
+
+<style>
+  .bob-duel__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    align-items: stretch;
+  }
+  .bob-duel__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 10px;
+    border: 1px solid var(--color-border, #e6e6e6);
+    border-radius: 12px;
+    background: var(--color-bg, #fff);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
+  }
+  .bob-duel__card img { width: 64px; height: 64px; object-fit: contain; border-radius: 10px; }
+  .bob-duel__card span { font-family: var(--font-sans, sans-serif); font-size: 0.85em; color: var(--color-text, #1a1a1a); }
+  .bob-duel__cross {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .bob-duel__cross path {
+    stroke: var(--color-accent, #c9453c);
+    stroke-width: 7;
+    stroke-linecap: round;
+    fill: none;
+  }
+  .bob-duel__verdict {
+    font-family: var(--font-sans, sans-serif);
+    font-weight: 700;
+    text-align: center;
+    margin: 1em 0 0;
+  }
+  .bob-duel__nav { display: flex; justify-content: center; margin-top: 0.8em; }
+  .bob-duel__nav[hidden] { display: none; }
+  .bob-duel__btn {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.9em;
+    padding: 8px 22px;
+    border: 1px solid var(--color-accent, #c9453c);
+    border-radius: 999px;
+    background: var(--color-accent, #c9453c);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  /* Verdict rendu */
+  .bob-duel.is-decided .bob-duel__card--loser { opacity: 0.45; filter: grayscale(1); }
+  .bob-duel.is-decided .bob-duel__card--winner {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 0 0 3px var(--color-accent, #c9453c);
+  }
+  /* En attente de décision (JS actif) */
+  .bob-duel.bob-js:not(.is-decided) .bob-duel__cross { transform: scale(0); opacity: 0; }
+  .bob-duel.bob-js:not(.is-decided) .bob-duel__verdict { visibility: hidden; }
+  .bob-duel.bob-js .bob-duel__cross { transition: transform 0.45s cubic-bezier(0.22, 1.4, 0.36, 1), opacity 0.3s ease; }
+  .bob-duel.bob-js.is-decided .bob-duel__cards .bob-duel__card--loser:nth-child(2) .bob-duel__cross { transition-delay: 0.25s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bob-duel__card, .bob-duel.bob-js .bob-duel__cross { transition: none !important; }
+  }
+  @media (max-width: 420px) {
+    .bob-duel__cards { gap: 8px; }
+    .bob-duel__card { padding: 12px 6px; }
+  }
+</style>
+
+<script>
+  (function () {
+    var fig = document.getElementById("bob-duel");
+    if (!fig || fig.dataset.bobInit) return;
+    fig.dataset.bobInit = "1";
+    fig.classList.add("bob-js");
+    fig.classList.remove("is-decided");
+    var nav = fig.querySelector(".bob-duel__nav");
+    var btn = fig.querySelector(".bob-duel__btn");
+    nav.removeAttribute("hidden");
+    btn.addEventListener("click", function () {
+      fig.classList.add("is-decided");
+      nav.setAttribute("hidden", "");
+    });
+  })();
+</script>

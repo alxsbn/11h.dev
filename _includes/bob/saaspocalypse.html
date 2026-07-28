@@ -1,0 +1,128 @@
+{% comment %}
+  Figure interactive : la chute de l'indice SaaS (SaaSpocalypse).
+  Usage : {% include bob/saaspocalypse.html lang=page.lang %}
+  Données et coupures de presse reprises du deck apps/storydeck (talk Fivetran × Databricks).
+  Sans JS : la figure affiche son état final (courbe tracée, coupures posées).
+{% endcomment %}
+{% if include.lang == "fr" %}
+  {% assign bob_saas_note = "≈ 1 000 Md$ effacés" %}
+  {% assign bob_saas_caption = "L'indice des valorisations SaaS : 100 en 2023, 95 en 2024, 92 en janvier 2026, 28 en février 2026. Environ 1 000 milliards de dollars effacés en quelques semaines." %}
+{% else %}
+  {% assign bob_saas_note = "≈ $1T wiped out" %}
+  {% assign bob_saas_caption = "The SaaS valuation index: 100 in 2023, 95 in 2024, 92 in January 2026, 28 in February 2026. Roughly one trillion dollars erased in a few weeks." %}
+{% endif %}
+<figure class="bob-fig bob-saas" id="bob-saas">
+  <div class="bob-saas__stage">
+    <svg class="bob-saas__svg" viewBox="0 0 640 360" role="img" aria-label="{{ bob_saas_caption }}">
+      <line x1="60" y1="330" x2="600" y2="330" class="bob-saas__axis" />
+      <line x1="60" y1="330" x2="60" y2="40" class="bob-saas__axis" />
+      <path class="bob-saas__path" pathLength="1"
+            d="M 80 70 L 240 83 L 400 90.8 L 560 257.2" />
+      <circle class="bob-saas__dot" cx="80" cy="70" r="5" />
+      <circle class="bob-saas__dot" cx="240" cy="83" r="5" />
+      <circle class="bob-saas__dot" cx="400" cy="90.8" r="5" />
+      <circle class="bob-saas__dot bob-saas__dot--crash" cx="560" cy="257.2" r="7" />
+      <text x="80" y="350" class="bob-saas__label" text-anchor="middle">2023</text>
+      <text x="240" y="350" class="bob-saas__label" text-anchor="middle">2024</text>
+      <text x="400" y="350" class="bob-saas__label" text-anchor="middle">Jan 26</text>
+      <text x="560" y="350" class="bob-saas__label" text-anchor="middle">{% if include.lang == "fr" %}Fév 26{% else %}Feb 26{% endif %}</text>
+      <text x="598" y="58" class="bob-saas__note" text-anchor="end">{{ bob_saas_note }}</text>
+    </svg>
+    <div class="bob-saas__clips" aria-hidden="true">
+      <img class="bob-saas__clip" style="--x:40%; --y:14%; --rot:-5deg" src="/apps/storydeck/assets/press/01-fortune.png" alt="" loading="lazy" width="640" height="360">
+      <img class="bob-saas__clip" style="--x:52%; --y:22%; --rot:4deg"  src="/apps/storydeck/assets/press/02-forbes.png" alt="" loading="lazy" width="640" height="360">
+      <img class="bob-saas__clip" style="--x:38%; --y:34%; --rot:-3deg" src="/apps/storydeck/assets/press/03-economist.png" alt="" loading="lazy" width="640" height="360">
+      <img class="bob-saas__clip" style="--x:50%; --y:32%; --rot:5deg"  src="/apps/storydeck/assets/press/05-techcrunch.png" alt="" loading="lazy" width="640" height="360">
+      <img class="bob-saas__clip" style="--x:42%; --y:46%; --rot:-2deg" src="/apps/storydeck/assets/press/06-forbes-500.png" alt="" loading="lazy" width="640" height="360">
+      <img class="bob-saas__clip" style="--x:54%; --y:44%; --rot:7deg"  src="/apps/storydeck/assets/press/04-businesstimes.png" alt="" loading="lazy" width="640" height="360">
+    </div>
+  </div>
+  <figcaption class="bob-fig__caption">{{ bob_saas_caption }}</figcaption>
+</figure>
+
+<style>
+  .bob-fig { margin: 2em 0; }
+  .bob-fig__caption {
+    font-size: 0.85em;
+    color: var(--color-text-secondary, #6b6b6b);
+    margin-top: 0.6em;
+    text-align: center;
+  }
+  .bob-saas__stage { position: relative; }
+  .bob-saas__svg { width: 100%; height: auto; display: block; }
+  .bob-saas__axis { stroke: var(--color-border, #e6e6e6); stroke-width: 1.5; }
+  .bob-saas__path {
+    fill: none;
+    stroke: var(--color-accent, #c9453c);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  .bob-saas__dot { fill: var(--color-text-secondary, #6b6b6b); }
+  .bob-saas__dot--crash { fill: var(--color-accent, #c9453c); }
+  .bob-saas__label { font-family: var(--font-sans, sans-serif); font-size: 13px; fill: var(--color-text-secondary, #6b6b6b); }
+  .bob-saas__note { font-family: var(--font-sans, sans-serif); font-size: 14px; font-weight: 700; fill: var(--color-accent, #c9453c); }
+  .bob-saas__clips { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .bob-saas__clip {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 30%;
+    height: auto;
+    transform: rotate(var(--rot));
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+  }
+  /* États animés : uniquement quand le JS a pris la main */
+  .bob-saas.bob-js .bob-saas__path { stroke-dashoffset: 1; }
+  .bob-saas.bob-js .bob-saas__dot,
+  .bob-saas.bob-js .bob-saas__note { opacity: 0; }
+  .bob-saas.bob-js .bob-saas__clip { opacity: 0; transform: translateY(-160%) rotate(var(--rot)); }
+  .bob-saas.bob-js.is-on .bob-saas__path {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.4s ease-out;
+  }
+  .bob-saas.bob-js.is-on .bob-saas__dot { opacity: 1; transition: opacity 0.4s ease-out 0.3s; }
+  .bob-saas.bob-js.is-on .bob-saas__note { opacity: 1; transition: opacity 0.5s ease-out 1.3s; }
+  .bob-saas.bob-js.is-on .bob-saas__clip {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--rot));
+    transition:
+      transform 0.7s cubic-bezier(0.22, 1.4, 0.36, 1),
+      opacity 0.4s ease-out;
+  }
+  .bob-saas.bob-js.is-on .bob-saas__clip:nth-child(1) { transition-delay: 1.2s; }
+  .bob-saas.bob-js.is-on .bob-saas__clip:nth-child(2) { transition-delay: 1.38s; }
+  .bob-saas.bob-js.is-on .bob-saas__clip:nth-child(3) { transition-delay: 1.56s; }
+  .bob-saas.bob-js.is-on .bob-saas__clip:nth-child(4) { transition-delay: 1.74s; }
+  .bob-saas.bob-js.is-on .bob-saas__clip:nth-child(5) { transition-delay: 1.92s; }
+  .bob-saas.bob-js.is-on .bob-saas__clip:nth-child(6) { transition-delay: 2.1s; }
+  @media (prefers-reduced-motion: reduce) {
+    .bob-saas.bob-js .bob-saas__path,
+    .bob-saas.bob-js .bob-saas__dot,
+    .bob-saas.bob-js .bob-saas__note,
+    .bob-saas.bob-js .bob-saas__clip { transition: none !important; }
+  }
+</style>
+
+<script>
+  (function () {
+    var fig = document.getElementById("bob-saas");
+    if (!fig || fig.dataset.bobInit) return;
+    fig.dataset.bobInit = "1";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    fig.classList.add("bob-js");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          fig.classList.add("is-on");
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.35 });
+    io.observe(fig);
+  })();
+</script>

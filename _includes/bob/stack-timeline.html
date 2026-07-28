@@ -1,0 +1,176 @@
+{% comment %}
+  Figure interactive : l'évolution de la stack en cinq actes.
+  Usage : {% include bob/stack-timeline.html lang=page.lang %}
+  Tuiles logos reprises du deck apps/storydeck. Sans JS : état final (acte V) + légende finale.
+  Avec JS : navigation par boutons, les tuiles apparaissent, se remplacent, s'absorbent.
+{% endcomment %}
+{% if include.lang == "fr" %}
+  {% assign bob_stack_caption = "La stack en cinq actes : DMS, Airbyte, Databricks, dbt, Airflow et Metabase au départ. Puis Census arrive, puis Claude Code. Airbyte est remplacé par Fivetran, et Census finit absorbé par Fivetran." %}
+  {% assign bob_stack_next = "Étape suivante" %}
+  {% assign bob_stack_prev = "Étape précédente" %}
+{% else %}
+  {% assign bob_stack_caption = "The stack in five acts: DMS, Airbyte, Databricks, dbt, Airflow and Metabase at the start. Then Census comes in, then Claude Code. Airbyte gets replaced by Fivetran, and Census ends up absorbed into Fivetran." %}
+  {% assign bob_stack_next = "Next step" %}
+  {% assign bob_stack_prev = "Previous step" %}
+{% endif %}
+<figure class="bob-fig bob-stack" id="bob-stack">
+  <div class="bob-stack__grid">
+    <div class="bob-stack__col">
+      <div class="bob-stack__tile bob-stack__tile--dms"><img src="/apps/storydeck/assets/stack/tiles/dms.png" alt="AWS DMS" loading="lazy" width="200" height="200"><span>AWS DMS</span></div>
+      <div class="bob-stack__swap">
+        <div class="bob-stack__tile bob-stack__tile--airbyte"><img src="/apps/storydeck/assets/stack/tiles/airbyte.png" alt="Airbyte" loading="lazy" width="200" height="200"><span>Airbyte</span></div>
+        <div class="bob-stack__tile bob-stack__tile--fivetran"><img src="/apps/storydeck/assets/stack/tiles/fivetran.png" alt="Fivetran" loading="lazy" width="200" height="200"><span>Fivetran</span></div>
+      </div>
+    </div>
+    <div class="bob-stack__col">
+      <div class="bob-stack__tile bob-stack__tile--databricks"><img src="/apps/storydeck/assets/stack/tiles/databricks.png" alt="Databricks" loading="lazy" width="200" height="200"><span>Databricks</span></div>
+      <div class="bob-stack__tile bob-stack__tile--dbt"><img src="/apps/storydeck/assets/stack/tiles/dbt.png" alt="dbt" loading="lazy" width="200" height="200"><span>dbt</span></div>
+      <div class="bob-stack__tile bob-stack__tile--airflow"><img src="/apps/storydeck/assets/stack/tiles/airflow.png" alt="Airflow" loading="lazy" width="200" height="200"><span>Airflow</span></div>
+    </div>
+    <div class="bob-stack__col">
+      <div class="bob-stack__tile bob-stack__tile--metabase"><img src="/apps/storydeck/assets/stack/tiles/metabase.png" alt="Metabase" loading="lazy" width="200" height="200"><span>Metabase</span></div>
+      <div class="bob-stack__tile bob-stack__tile--census"><img src="/apps/storydeck/assets/stack/tiles/census.png" alt="Census" loading="lazy" width="200" height="200"><span>Census</span></div>
+    </div>
+    <div class="bob-stack__col">
+      <div class="bob-stack__tile bob-stack__tile--claude"><img src="/apps/storydeck/assets/stack/tiles/claude.png" alt="Claude Code" loading="lazy" width="200" height="200"><span>Claude Code</span></div>
+    </div>
+  </div>
+  <div class="bob-stack__legends" aria-live="polite">
+    {% if include.lang == "fr" %}
+    <p class="bob-stack__leg bob-stack__leg--0">Acte I. La stack d'origine : DMS, Airbyte, Databricks, dbt, Airflow, Metabase.</p>
+    <p class="bob-stack__leg bob-stack__leg--1">Acte II. Census arrive : le reverse ETL est délégué.</p>
+    <p class="bob-stack__leg bob-stack__leg--2">Acte III. Claude Code entre dans la stack.</p>
+    <p class="bob-stack__leg bob-stack__leg--3">Acte IV. Airbyte est remplacé par Fivetran.</p>
+    <p class="bob-stack__leg bob-stack__leg--4">Acte V. Census est absorbé par Fivetran.</p>
+    {% else %}
+    <p class="bob-stack__leg bob-stack__leg--0">Act I. The original stack: DMS, Airbyte, Databricks, dbt, Airflow, Metabase.</p>
+    <p class="bob-stack__leg bob-stack__leg--1">Act II. Census comes in: reverse ETL gets delegated.</p>
+    <p class="bob-stack__leg bob-stack__leg--2">Act III. Claude Code joins the stack.</p>
+    <p class="bob-stack__leg bob-stack__leg--3">Act IV. Airbyte is replaced by Fivetran.</p>
+    <p class="bob-stack__leg bob-stack__leg--4">Act V. Census is absorbed into Fivetran.</p>
+    {% endif %}
+  </div>
+  <div class="bob-stack__nav" hidden>
+    <button type="button" class="bob-stack__btn bob-stack__btn--prev" aria-label="{{ bob_stack_prev }}">‹</button>
+    <button type="button" class="bob-stack__btn bob-stack__btn--next">{{ bob_stack_next }} ›</button>
+  </div>
+  <figcaption class="bob-fig__caption">{{ bob_stack_caption }}</figcaption>
+</figure>
+
+<style>
+  .bob-stack__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+  .bob-stack__col { display: grid; gap: 12px; }
+  .bob-stack__swap { display: grid; }
+  .bob-stack__swap > .bob-stack__tile { grid-area: 1 / 1; }
+  .bob-stack__tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 6px;
+    border: 1px solid var(--color-border, #e6e6e6);
+    border-radius: 10px;
+    background: var(--color-bg, #fff);
+    transition: opacity 0.55s ease, transform 0.55s ease, visibility 0.55s;
+  }
+  .bob-stack__tile img { width: 56px; height: 56px; object-fit: contain; border-radius: 8px; }
+  .bob-stack__tile span {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.72em;
+    color: var(--color-text-secondary, #6b6b6b);
+    text-align: center;
+  }
+  .bob-stack__leg { display: none; font-family: var(--font-sans, sans-serif); font-size: 0.9em; margin: 0.9em 0 0; text-align: center; min-height: 1.4em; }
+  .bob-stack__nav { display: flex; justify-content: center; gap: 10px; margin-top: 0.8em; }
+  .bob-stack__nav[hidden] { display: none; }
+  .bob-stack__btn {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.85em;
+    padding: 6px 14px;
+    border: 1px solid var(--color-border, #e6e6e6);
+    border-radius: 999px;
+    background: var(--color-bg, #fff);
+    color: var(--color-text, #1a1a1a);
+    cursor: pointer;
+  }
+  .bob-stack__btn:disabled { opacity: 0.35; cursor: default; }
+
+  /* Tuile éteinte */
+  .bob-stack__tile.is-off { opacity: 0; transform: scale(0.6); visibility: hidden; }
+  /* Absorption Census → Fivetran (delta calculé en JS) */
+  .bob-stack__tile.is-absorbed {
+    opacity: 0;
+    transform: translate(var(--dx, 0px), var(--dy, 0px)) scale(0.1);
+    visibility: hidden;
+    transition: opacity 0.7s ease, transform 0.7s ease-in, visibility 0.7s;
+  }
+  .bob-stack__tile.is-pulse { animation: bob-stack-pulse 0.9s ease-out 0.5s 1; }
+  @keyframes bob-stack-pulse {
+    0% { box-shadow: 0 0 0 0 var(--color-accent, #c9453c); }
+    100% { box-shadow: 0 0 0 14px rgba(0, 0, 0, 0); }
+  }
+
+  /* Sans JS : état final (acte V) */
+  .bob-stack:not(.bob-js) .bob-stack__tile--airbyte,
+  .bob-stack:not(.bob-js) .bob-stack__tile--census { opacity: 0; visibility: hidden; }
+  .bob-stack:not(.bob-js) .bob-stack__leg--4 { display: block; }
+  .bob-stack.bob-js .bob-stack__leg.is-current { display: block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bob-stack__tile, .bob-stack__tile.is-absorbed { transition: none !important; }
+    .bob-stack__tile.is-pulse { animation: none; }
+  }
+  @media (max-width: 520px) {
+    .bob-stack__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<script>
+  (function () {
+    var fig = document.getElementById("bob-stack");
+    if (!fig || fig.dataset.bobInit) return;
+    fig.dataset.bobInit = "1";
+    fig.classList.add("bob-js");
+
+    var tiles = {
+      airbyte: fig.querySelector(".bob-stack__tile--airbyte"),
+      fivetran: fig.querySelector(".bob-stack__tile--fivetran"),
+      census: fig.querySelector(".bob-stack__tile--census"),
+      claude: fig.querySelector(".bob-stack__tile--claude")
+    };
+    var legends = fig.querySelectorAll(".bob-stack__leg");
+    var nav = fig.querySelector(".bob-stack__nav");
+    var prev = fig.querySelector(".bob-stack__btn--prev");
+    var next = fig.querySelector(".bob-stack__btn--next");
+    var step = 0;
+
+    function setStep(n) {
+      if (n === 4 && step < 4) {
+        var c = tiles.census.getBoundingClientRect();
+        var f = tiles.fivetran.getBoundingClientRect();
+        tiles.census.style.setProperty("--dx", (f.left + f.width / 2 - c.left - c.width / 2) + "px");
+        tiles.census.style.setProperty("--dy", (f.top + f.height / 2 - c.top - c.height / 2) + "px");
+      }
+      step = n;
+      tiles.census.classList.toggle("is-off", n < 1);
+      tiles.census.classList.toggle("is-absorbed", n >= 4);
+      tiles.claude.classList.toggle("is-off", n < 2);
+      tiles.airbyte.classList.toggle("is-off", n >= 3);
+      tiles.fivetran.classList.toggle("is-off", n < 3);
+      tiles.fivetran.classList.toggle("is-pulse", n >= 4);
+      legends.forEach(function (leg, i) { leg.classList.toggle("is-current", i === n); });
+      prev.disabled = n === 0;
+      next.disabled = n === 4;
+    }
+
+    nav.removeAttribute("hidden");
+    prev.addEventListener("click", function () { if (step > 0) setStep(step - 1); });
+    next.addEventListener("click", function () { if (step < 4) setStep(step + 1); });
+    setStep(0);
+  })();
+</script>
