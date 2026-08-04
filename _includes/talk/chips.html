@@ -1,0 +1,15 @@
+{%- comment -%}
+  Accumulation de pastilles en cascade — l'accumulation EST l'argument.
+  Params : items (csv), caption
+{%- endcomment -%}
+<div class="figure">
+  <div class="figure__frame reveal">
+    <div class="tk-chips">
+      {%- assign it = include.items | split: "," -%}
+      {%- for i in it -%}
+      <span class="tk-chip" style="transition-delay:{{ forloop.index0 | times: 65 }}ms">{{ i | strip }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- if include.caption -%}<p class="figure__cap">{{ include.caption }}</p>{%- endif -%}
+</div>

@@ -1,0 +1,30 @@
+{%- comment -%}
+  Deux colonnes : ce qui est réglé (rythme rapide) / ce qui reste (rythme lent).
+  La lenteur de la colonne droite est le message.
+  Params : title_a, title_b, a (csv), b (csv), caption
+{%- endcomment -%}
+<div class="figure">
+  <div class="figure__frame reveal">
+    <div class="tk-verdict">
+      <div class="tk-vcol is-solved">
+        <h4>{{ include.title_a }}</h4>
+        {%- assign xa = include.a | split: "," -%}
+        {%- for i in xa -%}
+        <div class="tk-vitem" style="transition-delay:{{ forloop.index0 | times: 90 | plus: 60 }}ms">
+          <span class="tk-vmark" aria-hidden="true">✓</span>{{ i | strip }}
+        </div>
+        {%- endfor -%}
+      </div>
+      <div class="tk-vcol is-rest">
+        <h4>{{ include.title_b }}</h4>
+        {%- assign xb = include.b | split: "," -%}
+        {%- for i in xb -%}
+        <div class="tk-vitem" style="transition-delay:{{ forloop.index0 | times: 260 | plus: 700 }}ms">
+          <span class="tk-vmark" aria-hidden="true">✗</span>{{ i | strip }}
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  {%- if include.caption -%}<p class="figure__cap">{{ include.caption }}</p>{%- endif -%}
+</div>

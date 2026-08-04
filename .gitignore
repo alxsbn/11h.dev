@@ -1,0 +1,9 @@
+# Jekyll build artifacts (local preview)
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Bundler — GitHub Pages resolves gems itself, the lock is machine-local
+Gemfile.lock
+vendor/bundle/
+.bundle/

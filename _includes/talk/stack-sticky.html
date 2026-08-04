@@ -1,0 +1,40 @@
+{%- comment -%}
+  Section sticky : le panneau de stack reste fixé pendant que les étapes de texte
+  défilent à côté et pilotent son état. Le seul sticky de l'article.
+  Les vignettes viennent des assets réels du deck (apps/storydeck/assets/stack/tiles/).
+  Params : steps (blocs <div data-step> passés en include content via page markdown)
+{%- endcomment -%}
+<section class="tk-sticky" id="stack-sticky">
+  <div class="tk-sticky__grid">
+
+    <div class="tk-sticky__steps">
+      {%- assign steps = include.steps | split: "|" -%}
+      {%- for s in steps -%}
+        {%- assign parts = s | split: "::" -%}
+        <div class="tk-step" data-step="{{ forloop.index0 }}">
+          <p class="tk-step__n">{{ forloop.index }}</p>
+          <h3>{{ parts[0] | strip }}</h3>
+          <p>{{ parts[1] | strip }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="tk-sticky__viz">
+      <div class="tk-sticky__panel">
+        <div class="tk-tiles">
+          <span class="tk-tile" data-k="cdc"><img src="{{ '/apps/storydeck/assets/stack/tiles/dms.png' | relative_url }}" alt=""><em>Ingestion CDC</em></span>
+          <span class="tk-tile" data-k="oss"><img src="{{ '/apps/storydeck/assets/stack/tiles/airbyte.png' | relative_url }}" alt=""><em>ETL open source</em></span>
+          <span class="tk-tile" data-k="wh"><img src="{{ '/apps/storydeck/assets/stack/tiles/databricks.png' | relative_url }}" alt=""><em>Entrepôt</em></span>
+          <span class="tk-tile" data-k="dbt"><img src="{{ '/apps/storydeck/assets/stack/tiles/dbt.png' | relative_url }}" alt=""><em>Transformation</em></span>
+          <span class="tk-tile" data-k="orch"><img src="{{ '/apps/storydeck/assets/stack/tiles/airflow.png' | relative_url }}" alt=""><em>Orchestration</em></span>
+          <span class="tk-tile" data-k="bi"><img src="{{ '/apps/storydeck/assets/stack/tiles/metabase.png' | relative_url }}" alt=""><em>Restitution</em></span>
+          <span class="tk-tile" data-k="rev"><img src="{{ '/apps/storydeck/assets/stack/tiles/census.png' | relative_url }}" alt=""><em>Reverse ETL</em></span>
+          <span class="tk-tile" data-k="agent"><img src="{{ '/apps/storydeck/assets/stack/tiles/claude.png' | relative_url }}" alt=""><em>Agent</em></span>
+          <span class="tk-tile" data-k="saas"><img src="{{ '/apps/storydeck/assets/stack/tiles/fivetran.png' | relative_url }}" alt=""><em>ETL managé</em></span>
+        </div>
+        <p class="tk-tiles__cap" id="stack-cap">La stack de départ</p>
+      </div>
+    </div>
+
+  </div>
+</section>

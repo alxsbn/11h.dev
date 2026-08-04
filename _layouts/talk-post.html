@@ -1,0 +1,385 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.default_lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ page.title | escape }} — {{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
+
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  {% if page.header_image %}<meta property="og:image" content="{{ page.header_image }}">{% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+
+  {% if page.ref %}
+    {% assign fr_post = site.posts | where: "ref", page.ref | where: "lang", "fr" | first %}
+    {% assign en_post = site.posts | where: "ref", page.ref | where: "lang", "en" | first %}
+    {% if fr_post %}<link rel="alternate" hreflang="fr" href="{{ fr_post.url | absolute_url }}">{% endif %}
+    {% if en_post %}<link rel="alternate" hreflang="en" href="{{ en_post.url | absolute_url }}">{% endif %}
+  {% endif %}
+
+<style>
+/* ============================================================
+   talk-post — layout d'article dérivé du StoryDeck.
+   Hérite de la grammaire du deck (fond nuit, accent bleu, reveals
+   séquencés) mais en mode lecture longue : colonne de texte + visuels
+   ancrés, plutôt que scènes plein écran.
+   ============================================================ */
+:root{
+  --bg:#0b0d12; --bg-2:#12151d; --panel:#161a24;
+  --fg:#f4f5f7; --fg-soft:#c3c8d4; --muted:#9aa3b2; --rule:#242938;
+  --accent:#6ea8fe; --accent-dim:#1c2942;
+  --hot:#ff2d55; --ok:#4ade80; --warn:#fbbf24;
+  --measure:38rem;
+  --sans:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"SFMono-Regular",Menlo,Consolas,"DejaVu Sans Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);
+  line-height:1.65;font-size:18px;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:var(--accent);}
+
+/* ---------- progress ---------- */
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);
+  width:0;z-index:99;transition:width .1s linear;}
+
+/* ---------- top bar ---------- */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:98;display:flex;
+  align-items:center;justify-content:space-between;gap:16px;
+  padding:14px clamp(16px,4vw,40px);
+  background:linear-gradient(to bottom,rgba(11,13,18,.92),rgba(11,13,18,0));
+  backdrop-filter:blur(6px);pointer-events:none;}
+.topbar a{pointer-events:auto;text-decoration:none;}
+.brand{font-weight:800;letter-spacing:-.02em;color:var(--fg);font-size:.95rem;}
+.brand span{color:var(--accent);}
+.topbar .back{font-size:.8rem;color:var(--muted);font-family:var(--mono);}
+.topbar .back:hover{color:var(--accent);}
+
+/* ---------- hero ---------- */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(4rem,10vh,8rem) clamp(1.5rem,5vw,6rem) clamp(3rem,8vh,6rem);
+  position:relative;overflow:hidden;}
+.hero__media{position:absolute;inset:0;z-index:0;}
+.hero__media img{width:100%;height:100%;object-fit:cover;opacity:.28;}
+.hero__media::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 80% at 70% 30%,transparent,rgba(11,13,18,.75) 55%,var(--bg) 100%);}
+.hero__inner{position:relative;z-index:1;max-width:56rem;}
+.hero__eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:1.6rem;}
+.hero h1{font-size:clamp(2.4rem,7.5vw,5.4rem);line-height:1.02;letter-spacing:-.03em;
+  font-weight:800;margin-bottom:1.2rem;text-wrap:balance;}
+.hero__sub{font-size:clamp(1.1rem,2.4vw,1.6rem);color:var(--fg-soft);
+  max-width:36ch;font-weight:400;line-height:1.4;}
+.hero__meta{margin-top:2.6rem;display:flex;flex-wrap:wrap;gap:10px 20px;
+  font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.05em;}
+.hero__scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;color:var(--muted);
+  z-index:1;animation:bob 2.4s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);opacity:.55;}
+  50%{transform:translateX(-50%) translateY(6px);opacity:1;}}
+@media(prefers-reduced-motion:reduce){.hero__scroll{animation:none;}}
+
+/* ---------- reading column ---------- */
+.flow{max-width:var(--measure);margin:0 auto;padding:0 clamp(1.25rem,5vw,2rem);}
+.flow > * + *{margin-top:1.15em;}
+.flow p{color:var(--fg-soft);}
+.flow h2{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.12;letter-spacing:-.02em;
+  font-weight:800;color:var(--fg);margin-top:2.6em;margin-bottom:.5em;text-wrap:balance;}
+.flow h2:first-child{margin-top:0;}
+.flow h3{font-size:1.15rem;font-weight:700;color:var(--fg);margin-top:2em;margin-bottom:.3em;}
+.flow strong{color:var(--fg);font-weight:700;}
+.flow em{color:var(--fg);}
+.flow blockquote{border-left:2px solid var(--accent);padding-left:1.1rem;
+  color:var(--muted);font-style:italic;}
+.flow ul,.flow ol{padding-left:1.3rem;color:var(--fg-soft);}
+.flow li + li{margin-top:.4em;}
+.flow code{font-family:var(--mono);font-size:.88em;background:var(--bg-2);
+  padding:.15em .4em;border-radius:3px;color:var(--fg);}
+.flow hr{border:0;border-top:1px solid var(--rule);margin:3em 0;}
+
+/* highlight helpers, repris du deck */
+.hl{color:#fff;font-weight:800;}
+.hl--accent{color:var(--accent);font-weight:800;}
+
+/* ---------- section rhythm ---------- */
+.act{padding:clamp(3.5rem,9vh,7rem) 0;}
+.act--tint{background:var(--bg-2);}
+
+/* full-bleed figure slot */
+.figure{max-width:64rem;margin:2.6rem auto;padding:0 clamp(1.25rem,5vw,2rem);}
+.figure__frame{background:var(--panel);border:1px solid var(--rule);border-radius:6px;
+  padding:clamp(1.25rem,3vw,2rem);}
+.figure__cap{font-family:var(--mono);font-size:.72rem;color:var(--muted);
+  margin-top:.9rem;letter-spacing:.04em;}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(18px);
+  transition:opacity .7s ease,transform .7s ease;}
+.reveal.is-in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+}
+
+/* ---------- big stat, repris du deck ---------- */
+.stat{font-size:clamp(3.4rem,13vw,9rem);font-weight:800;letter-spacing:-.045em;
+  color:var(--accent);font-variant-numeric:tabular-nums;line-height:.9;}
+.stat__label{color:var(--muted);font-family:var(--mono);font-size:.76rem;
+  letter-spacing:.14em;text-transform:uppercase;margin-top:.8rem;}
+
+/* ============================================================
+   Composants (_includes/talk/*)
+   ============================================================ */
+.tk-chart{display:block;width:100%;height:auto;overflow:visible;}
+.tk-grid{stroke:var(--rule);stroke-width:1;}
+.tk-axis{font-family:var(--mono);font-size:9px;fill:var(--muted);}
+
+.tk-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;
+  stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+  transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1);}
+.is-in .tk-line{stroke-dashoffset:0;}
+.tk-dot{fill:var(--bg);stroke:var(--accent);stroke-width:2.5;opacity:0;
+  transition:opacity .4s ease;}
+.is-in .tk-dot{opacity:1;}
+.tk-dot.is-crash{stroke:var(--hot);fill:var(--hot);}
+.tk-crashnote{font-family:var(--mono);font-size:10px;fill:var(--hot);opacity:0;
+  transition:opacity .6s ease 1.5s;}
+.is-in .tk-crashnote{opacity:1;}
+
+.tk-dbar{fill:var(--muted);opacity:0;transition:opacity .6s ease;}
+.is-in .tk-dbar{opacity:.75;}
+.tk-dline{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+  transition:stroke-dashoffset 1.7s cubic-bezier(.4,0,.2,1) .4s;}
+.is-in .tk-dline{stroke-dashoffset:0;}
+
+.tk-legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);
+  font-size:.7rem;color:var(--muted);margin-top:1rem;letter-spacing:.03em;}
+.tk-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;
+  margin-right:6px;vertical-align:-1px;background:var(--muted);}
+.tk-legend i.is-line,.tk-legend i.is-code{background:var(--accent);}
+.tk-legend i.is-bar,.tk-legend i.is-review{background:var(--muted);}
+.tk-legend i.is-spec{background:#5a6478;}
+.tk-legend i.is-value{background:var(--ok);}
+
+.tk-barrow + .tk-barrow{margin-top:1.4rem;}
+.tk-barlab{display:flex;justify-content:space-between;font-family:var(--mono);
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.5rem;}
+.tk-bar{display:flex;height:44px;border-radius:4px;overflow:hidden;background:var(--bg-2);}
+.tk-seg{display:flex;align-items:center;justify-content:center;width:0;
+  font-family:var(--mono);font-size:.66rem;color:#fff;white-space:nowrap;overflow:hidden;
+  transition:width 1s cubic-bezier(.2,.7,.3,1);}
+.is-in .tk-seg{width:var(--w);}
+.tk-seg.is-spec{background:#5a6478;}
+.tk-seg.is-code{background:var(--accent);color:#0b0d12;font-weight:700;}
+.tk-seg.is-review{background:#6b7486;}
+.tk-seg.is-value{background:var(--ok);color:#0b0d12;font-weight:700;}
+
+.tk-chips{display:flex;flex-wrap:wrap;gap:9px;}
+.tk-chip{font-family:var(--mono);font-size:.74rem;padding:8px 13px;border-radius:3px;
+  border:1px solid var(--rule);background:var(--bg-2);color:var(--fg-soft);
+  opacity:0;transform:translateY(10px);
+  transition:opacity .45s ease,transform .45s ease;}
+.is-in .tk-chip{opacity:1;transform:none;}
+
+.tk-verdict{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.tk-verdict{grid-template-columns:1fr;}}
+.tk-vcol{border:1px solid var(--rule);border-radius:5px;padding:16px 18px;background:var(--bg-2);}
+.tk-vcol h4{font-size:1rem;font-weight:700;margin-bottom:.9rem;}
+.tk-vcol.is-solved h4{color:var(--ok);}
+.tk-vcol.is-rest h4{color:var(--hot);}
+.tk-vitem{display:flex;gap:10px;font-size:.9rem;color:var(--fg-soft);
+  padding:7px 0;border-bottom:1px solid var(--rule);
+  opacity:0;transform:translateX(-8px);
+  transition:opacity .5s ease,transform .5s ease;}
+.is-in .tk-vitem{opacity:1;transform:none;}
+.tk-vitem:last-child{border-bottom:0;}
+.tk-vmark{font-family:var(--mono);flex:none;}
+.is-solved .tk-vmark{color:var(--ok);}
+.is-rest .tk-vmark{color:var(--hot);}
+
+/* ---------- sticky stack ---------- */
+.tk-sticky{margin:clamp(3rem,8vh,6rem) auto;max-width:76rem;
+  padding:0 clamp(1.25rem,5vw,2rem);}
+.tk-sticky__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,4rem);}
+@media(max-width:900px){.tk-sticky__grid{grid-template-columns:1fr;}}
+.tk-step{min-height:78vh;display:flex;flex-direction:column;justify-content:center;
+  opacity:.28;transition:opacity .5s ease;}
+.tk-step.is-active{opacity:1;}
+@media(max-width:900px){.tk-step{min-height:auto;padding:2rem 0;opacity:1;}}
+.tk-step__n{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;
+  color:var(--accent);margin-bottom:.7rem;}
+.tk-step h3{font-size:1.5rem;font-weight:800;letter-spacing:-.015em;margin-bottom:.6rem;}
+.tk-step p{color:var(--fg-soft);font-size:1rem;}
+.tk-sticky__viz{position:relative;}
+.tk-sticky__panel{position:sticky;top:calc(50vh - 11rem);
+  background:var(--panel);border:1px solid var(--rule);border-radius:8px;
+  padding:clamp(1.25rem,3vw,1.75rem);}
+@media(max-width:900px){.tk-sticky__panel{position:static;margin-top:1rem;}}
+.tk-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.tk-tile{display:flex;flex-direction:column;align-items:center;gap:7px;
+  padding:12px 8px;border:1px solid var(--rule);border-radius:5px;background:var(--bg-2);
+  opacity:0;transform:scale(.92);
+  transition:opacity .45s ease,transform .45s ease,border-color .45s ease,background .45s ease;}
+.tk-tile img{width:32px;height:32px;object-fit:contain;}
+.tk-tile em{font-family:var(--mono);font-size:.6rem;font-style:normal;
+  color:var(--muted);text-align:center;letter-spacing:.02em;line-height:1.3;}
+.tk-tile.is-on{opacity:1;transform:none;}
+.tk-tile.is-new{border-color:var(--accent);background:var(--accent-dim);}
+.tk-tile.is-new em{color:var(--accent);}
+.tk-tile.is-gone{opacity:.25;border-style:dashed;}
+.tk-tile.is-gone em{text-decoration:line-through;}
+.tk-tiles__cap{font-family:var(--mono);font-size:.7rem;color:var(--muted);
+  margin-top:1rem;text-align:center;letter-spacing:.04em;min-height:1.2em;}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--rule);margin-top:5rem;padding:3rem clamp(1.5rem,5vw,4rem) 4rem;}
+.foot__inner{max-width:var(--measure);margin:0 auto;display:flex;flex-wrap:wrap;
+  gap:1.5rem;align-items:center;justify-content:space-between;}
+.foot__who{display:flex;align-items:center;gap:.9rem;}
+.foot__who img{width:44px;height:44px;border-radius:50%;}
+.foot__name{font-weight:700;color:var(--fg);text-decoration:none;font-size:.95rem;}
+.foot__date{font-family:var(--mono);font-size:.72rem;color:var(--muted);}
+.foot__links{display:flex;gap:1.2rem;font-family:var(--mono);font-size:.76rem;}
+.foot__links a{color:var(--muted);text-decoration:none;}
+.foot__links a:hover{color:var(--accent);}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="topbar">
+  <a class="brand" href="{{ '/' | append: page.lang | append: '/' | relative_url }}">11h<span>.dev</span></a>
+  <a class="back" href="{{ '/' | append: page.lang | append: '/' | relative_url }}">← {% if page.lang == 'en' %}all posts{% else %}tous les billets{% endif %}</a>
+</nav>
+
+<header class="hero">
+  {% if page.header_image %}
+  <div class="hero__media">
+    <img src="{{ page.header_image }}" alt="{{ page.header_image_alt | default: '' | escape }}">
+  </div>
+  {% endif %}
+  <div class="hero__inner">
+    {% if page.eyebrow %}<p class="hero__eyebrow">{{ page.eyebrow }}</p>{% endif %}
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.subtitle %}<p class="hero__sub">{{ page.subtitle }}</p>{% endif %}
+    <div class="hero__meta">
+      {%- assign words = content | strip_html | number_of_words -%}
+      {%- assign rt = words | plus: 199 | divided_by: 200 -%}
+      <span>{{ page.date | date: "%-d %b %Y" }}</span>
+      <span>{{ rt }} min</span>
+      {% if page.categories %}<span>{{ page.categories | join: " · " }}</span>{% endif %}
+    </div>
+  </div>
+  <div class="hero__scroll">↓ {% if page.lang == 'en' %}scroll{% else %}défiler{% endif %}</div>
+</header>
+
+<main>
+  {{ content }}
+</main>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__who">
+      <img src="https://avatars.githubusercontent.com/u/4458879?v=4" alt="Alexis Blandin">
+      <div>
+        <a class="foot__name" href="{{ '/' | append: page.lang | append: '/about/' | relative_url }}">Alexis Blandin</a>
+        <div class="foot__date">{{ page.date | date: "%-d %B %Y" }}</div>
+      </div>
+    </div>
+    <div class="foot__links">
+      <a href="{{ '/' | append: page.lang | append: '/' | relative_url }}">{% if page.lang == 'en' %}Blog{% else %}Blog{% endif %}</a>
+      <a href="https://linkedin.com/in/alexisblandin">LinkedIn</a>
+      <a href="https://github.com/alxsbn">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // reveal on scroll
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.2, rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // sticky stack : chaque étape de texte pilote l'état du panneau
+  var STEPS = [
+    {on:['cdc','oss','wh','dbt','orch','bi'], neu:[], gone:[],
+     cap:'La stack de départ'},
+    {on:['cdc','oss','wh','dbt','orch','bi','rev'], neu:['rev'], gone:[],
+     cap:'+ reverse ETL — on délègue le run'},
+    {on:['cdc','oss','wh','dbt','orch','bi','rev','agent'], neu:['agent'], gone:[],
+     cap:'+ l’agent — la tentation devient concrète'},
+    {on:['cdc','oss','wh','dbt','orch','bi','rev','agent','saas'], neu:['saas'], gone:['oss','rev'],
+     cap:'On remplace un éditeur par un autre éditeur, pas par l’agent'}
+  ];
+  var tiles = document.querySelectorAll('.tk-tile');
+  var cap   = document.getElementById('stack-cap');
+  var stepEls = document.querySelectorAll('.tk-step');
+  var current = -1;
+
+  function applyStack(i){
+    if(i === current || !STEPS[i]) return;
+    current = i;
+    var s = STEPS[i];
+    tiles.forEach(function(t){
+      var k = t.dataset.k;
+      t.classList.toggle('is-on',   s.on.indexOf(k) > -1);
+      t.classList.toggle('is-new',  s.neu.indexOf(k) > -1);
+      t.classList.toggle('is-gone', s.gone.indexOf(k) > -1);
+    });
+    if(cap){ cap.textContent = s.cap; }
+    stepEls.forEach(function(el, n){ el.classList.toggle('is-active', n === i); });
+  }
+
+  if(stepEls.length){
+    // bande étroite au centre du viewport : l'étape qui la croise pilote le panneau
+    var stepIo = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){ applyStack(+e.target.dataset.step); }
+      });
+    }, {rootMargin:'-45% 0px -45% 0px', threshold:0});
+    stepEls.forEach(function(el){ stepIo.observe(el); });
+
+    // état initial dès que le bloc entre en vue
+    var wrap = document.getElementById('stack-sticky');
+    if(wrap){
+      var initIo = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ applyStack(0); initIo.disconnect(); } });
+      }, {threshold:0.05});
+      initIo.observe(wrap);
+    }
+  }
+
+  // reading progress
+  var bar = document.getElementById('progress');
+  function onScroll(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = max > 0 ? (h.scrollTop / max * 100) + '%' : '0%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+
+{% include google-analytics.html %}
+</body>
+</html>

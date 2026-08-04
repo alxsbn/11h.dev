@@ -1,0 +1,35 @@
+{%- comment -%}
+  Courbe qui se trace à l'entrée dans le viewport.
+  Params : points (ex "60,22 175,32"), labels (csv), caption, alt, crash (bool),
+           crashnote, len (longueur du tracé pour l'animation)
+{%- endcomment -%}
+<div class="figure">
+  <div class="figure__frame reveal">
+    <svg class="tk-chart" viewBox="0 0 420 200" role="img" aria-label="{{ include.alt | escape }}">
+      <line class="tk-grid" x1="34" y1="24" x2="412" y2="24"></line>
+      <line class="tk-grid" x1="34" y1="80" x2="412" y2="80"></line>
+      <line class="tk-grid" x1="34" y1="136" x2="412" y2="136"></line>
+      <line class="tk-grid" x1="34" y1="166" x2="412" y2="166"></line>
+      <polyline class="tk-line" style="--len:{{ include.len | default: 560 }}"
+                points="{{ include.points }}"></polyline>
+      {%- assign pts = include.points | split: " " -%}
+      {%- for p in pts -%}
+        {%- assign xy = p | split: "," -%}
+        {%- assign last = pts.size | minus: 1 -%}
+        <circle class="tk-dot{% if include.crash and forloop.index0 == last %} is-crash{% endif %}"
+                cx="{{ xy[0] }}" cy="{{ xy[1] }}"
+                r="{% if include.crash and forloop.index0 == last %}5.5{% else %}4{% endif %}"
+                style="transition-delay:{{ forloop.index0 | times: 12 | plus: 900 }}ms"></circle>
+      {%- endfor -%}
+      {%- if include.crashnote -%}
+      <text class="tk-crashnote" x="412" y="192" text-anchor="end">{{ include.crashnote }}</text>
+      {%- endif -%}
+      {%- assign labs = include.labels | split: "," -%}
+      {%- for l in labs -%}
+        {%- assign xy = pts[forloop.index0] | split: "," -%}
+        <text class="tk-axis" x="{{ xy[0] }}" y="192" text-anchor="middle">{{ l }}</text>
+      {%- endfor -%}
+    </svg>
+  </div>
+  {%- if include.caption -%}<p class="figure__cap">{{ include.caption }}</p>{%- endif -%}
+</div>

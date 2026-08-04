@@ -1,0 +1,42 @@
+{%- comment -%}
+  Deux barres empilées (avant / après) qui se remplissent en séquence.
+  Params : label_a, label_b, a (csv "nom:pct:classe"), b (idem), caption
+  Classes de segment : spec | code | review | value
+{%- endcomment -%}
+<div class="figure">
+  <div class="figure__frame reveal">
+    {%- assign rows = "a,b" | split: "," -%}
+    {%- for r in rows -%}
+      {%- if r == "a" -%}
+        {%- assign segs = include.a | split: "," -%}
+        {%- assign lab = include.label_a -%}
+        {%- assign base = 0 -%}
+      {%- else -%}
+        {%- assign segs = include.b | split: "," -%}
+        {%- assign lab = include.label_b -%}
+        {%- assign base = 450 -%}
+      {%- endif -%}
+      <div class="tk-barrow">
+        <div class="tk-barlab"><span>{{ lab }}</span><span>100 %</span></div>
+        <div class="tk-bar">
+          {%- for s in segs -%}
+            {%- assign f = s | split: ":" -%}
+            <div class="tk-seg is-{{ f[2] }}" style="--w:{{ f[1] }}%;transition-delay:{{ forloop.index0 | times: 110 | plus: base }}ms">
+              <span>{{ f[0] }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endfor -%}
+    {%- if include.legend -%}
+    <div class="tk-legend">
+      {%- assign lg = include.legend | split: "," -%}
+      {%- for l in lg -%}
+        {%- assign f = l | split: ":" -%}
+        <span><i class="is-{{ f[1] }}"></i>{{ f[0] }}</span>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </div>
+  {%- if include.caption -%}<p class="figure__cap">{{ include.caption }}</p>{%- endif -%}
+</div>

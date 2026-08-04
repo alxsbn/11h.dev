@@ -1,0 +1,12 @@
+{%- comment -%}
+  Chiffre géant, repris du .stat du deck. Params : value, label, sub
+{%- endcomment -%}
+<div class="figure">
+  <div class="figure__frame reveal" style="text-align:center;padding-block:clamp(2rem,6vw,3.5rem);">
+    <div class="stat">{{ include.value }}</div>
+    <div class="stat__label">{{ include.label }}</div>
+    {%- if include.sub -%}
+    <p style="color:var(--fg-soft);max-width:34ch;margin:1.4rem auto 0;font-size:.95rem;">{{ include.sub }}</p>
+    {%- endif -%}
+  </div>
+</div>

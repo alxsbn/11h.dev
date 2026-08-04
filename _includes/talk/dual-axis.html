@@ -1,0 +1,30 @@
+{%- comment -%}
+  Barres décroissantes + courbe croissante sur le même cadre.
+  Params : bars (csv "x:y:w:h"), line (points), labels (csv), legend_bars, legend_line, alt, caption
+{%- endcomment -%}
+<div class="figure">
+  <div class="figure__frame reveal">
+    <svg class="tk-chart" viewBox="0 0 420 200" role="img" aria-label="{{ include.alt | escape }}">
+      <line class="tk-grid" x1="30" y1="166" x2="412" y2="166"></line>
+      {%- assign bs = include.bars | split: "," -%}
+      {%- for b in bs -%}
+        {%- assign f = b | split: ":" -%}
+        <rect class="tk-dbar" x="{{ f[0] }}" y="{{ f[1] }}" width="{{ f[2] }}" height="{{ f[3] }}"
+              style="transition-delay:{{ forloop.index0 | times: 100 }}ms"></rect>
+      {%- endfor -%}
+      <polyline class="tk-dline" style="--len:{{ include.len | default: 520 }}"
+                points="{{ include.line }}"></polyline>
+      {%- assign labs = include.labels | split: "," -%}
+      {%- for l in labs -%}
+        {%- assign f = bs[forloop.index0] | split: ":" -%}
+        {%- assign cx = f[0] | plus: 17 -%}
+        <text class="tk-axis" x="{{ cx }}" y="186" text-anchor="middle">{{ l }}</text>
+      {%- endfor -%}
+    </svg>
+    <div class="tk-legend">
+      <span><i class="is-bar"></i>{{ include.legend_bars }}</span>
+      <span><i class="is-line"></i>{{ include.legend_line }}</span>
+    </div>
+  </div>
+  {%- if include.caption -%}<p class="figure__cap">{{ include.caption }}</p>{%- endif -%}
+</div>
