@@ -88,15 +88,21 @@ But production cost was never the binding constraint. What you buy from a vendor
 
 Rewriting your connectors with an agent therefore does not remove the transaction, but repatriates it inside the firm, where it becomes a coordination cost that shows up on no budget line.
 
+If that reasoning holds, it should show up in practice, and this is where the observation becomes awkward for the prophecy. The teams that already had agents, and therefore every opportunity to bring ingestion back in-house, did not make that move, and many did the exact opposite by consolidating with a vendor what they were still maintaining themselves.
+
 </div>
 
-{% include talk/stack-sticky.html
-   steps="The starting stack :: Ingestion, warehouse, transformation, orchestration and reporting. Nothing exotic, and that is precisely the point, since each brick does one thing and does it well.|
-          Delegating the run :: The first trade-off was not about ingestion but about reverse ETL, because in-house scripting cost time without producing any differentiating value. Nobody ever won a customer because their CRM push was hand-rolled.|
-          The agent enters the stack :: This is where the temptation becomes concrete, since the tool that writes the code is now in the room and rewriting everything yourself is no longer theoretical.|
-          And yet :: The replacement did happen, but we did not replace a vendor with an agent. We replaced a vendor with another vendor, then folded the second into the first, so the move ran opposite to the prophecy." %}
+{% include talk/counterfact.html
+   title_a="The predicted path"
+   path_a="Vendor licence,Agent rewrites it,In-house stack"
+   title_b="The observed path"
+   path_b="In-house scripts,Vendor licence,Consolidation on one"
+   verdict="The replacement did happen, but it was not a vendor replaced by an agent. It was a vendor replaced by another vendor."
+   caption="The real move ran opposite to the one the market had priced in." %}
 
 <div class="flow" markdown="1">
+
+There is nothing paradoxical about that inversion once you read it through Coase, because agents lowered the cost of writing without touching the cost of coordinating, and it is the second term that sets the boundary. What remains is what that choice costs, because it does cost something.
 
 ## The price you pay
 

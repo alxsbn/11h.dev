@@ -88,15 +88,21 @@ Or le coût de production n'a jamais été le facteur limitant. Ce qu'on achète
 
 Réécrire ses connecteurs avec un agent ne supprime donc pas la transaction, mais la rapatrie à l'intérieur de l'entreprise, où elle devient un coût de coordination qui n'apparaît sur aucune ligne budgétaire.
 
+Si ce raisonnement tient, il doit se vérifier dans les faits, et c'est là que l'observation devient gênante pour la prophétie. Les équipes qui disposaient déjà d'agents et qui avaient donc tout loisir de réinternaliser leur ingestion n'ont pas fait ce mouvement, et beaucoup ont fait exactement l'inverse en consolidant chez un éditeur ce qu'elles maintenaient encore elles-mêmes.
+
 </div>
 
-{% include talk/stack-sticky.html
-   steps="La stack de départ :: Ingestion, entrepôt, transformation, orchestration et restitution. Rien d'exotique, et c'est précisément le but, puisque chaque brique fait une chose et la fait bien.|
-          On délègue le run :: Le premier arbitrage n'a pas porté sur l'ingestion mais sur le reverse ETL, car le scripting maison coûtait cher en temps sans produire aucune valeur différenciante. Personne n'a jamais gagné un client parce que son push vers le CRM était fait main.|
-          L'agent entre dans la stack :: C'est là que la tentation devient concrète, puisque l'outil qui écrit le code est désormais dans la pièce et que la question de tout réécrire soi-même n'est plus théorique.|
-          Et pourtant :: Le remplacement a bien eu lieu, mais on n'a pas remplacé un éditeur par un agent. On a remplacé un éditeur par un autre éditeur, avant d'absorber le second dans le premier, et le mouvement est donc allé dans le sens inverse de la prophétie." %}
+{% include talk/counterfact.html
+   title_a="La trajectoire annoncée"
+   path_a="Licence éditeur,Agent qui réécrit,Stack maison"
+   title_b="La trajectoire observée"
+   path_b="Scripts maison,Licence éditeur,Consolidation chez un seul"
+   verdict="Le remplacement a bien eu lieu, mais ce n'est pas un éditeur qui a été remplacé par un agent. C'est un éditeur qui a été remplacé par un autre éditeur."
+   caption="Le mouvement réel est allé dans le sens inverse de celui que le marché avait anticipé." %}
 
 <div class="flow" markdown="1">
+
+Cette inversion n'a rien de paradoxal une fois qu'on la lit avec Coase, car les agents ont fait baisser le coût d'écrire sans toucher au coût de coordonner, et c'est ce second terme qui décide de la frontière. Reste à savoir ce que coûte ce choix, parce qu'il coûte quelque chose.
 
 ## Le prix à payer
 

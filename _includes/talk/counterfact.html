@@ -1,0 +1,43 @@
+{%- comment -%}
+  Deux trajectoires opposées : celle que la thèse annonçait, celle qui a eu lieu.
+  Abstrait par construction — aucune marque, aucune chronologie d'entreprise.
+  Params : title_a, path_a (csv d'étapes), title_b, path_b (csv), verdict, caption
+{%- endcomment -%}
+<div class="figure">
+  <div class="figure__frame reveal">
+    <div class="tk-cf">
+
+      <div class="tk-cf__row is-predicted">
+        <p class="tk-cf__label">{{ include.title_a }}</p>
+        <div class="tk-cf__path">
+          {%- assign a = include.path_a | split: "," -%}
+          {%- for s in a -%}
+            <span class="tk-cf__node" style="transition-delay:{{ forloop.index0 | times: 130 }}ms">{{ s | strip }}</span>
+            {%- unless forloop.last -%}
+            <span class="tk-cf__arrow" aria-hidden="true" style="transition-delay:{{ forloop.index0 | times: 130 | plus: 65 }}ms">→</span>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="tk-cf__row is-actual">
+        <p class="tk-cf__label">{{ include.title_b }}</p>
+        <div class="tk-cf__path">
+          {%- assign b = include.path_b | split: "," -%}
+          {%- for s in b -%}
+            <span class="tk-cf__node" style="transition-delay:{{ forloop.index0 | times: 130 | plus: 700 }}ms">{{ s | strip }}</span>
+            {%- unless forloop.last -%}
+            <span class="tk-cf__arrow" aria-hidden="true" style="transition-delay:{{ forloop.index0 | times: 130 | plus: 765 }}ms">→</span>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- if include.verdict -%}
+      <p class="tk-cf__verdict">{{ include.verdict }}</p>
+      {%- endif -%}
+
+    </div>
+  </div>
+  {%- if include.caption -%}<p class="figure__cap">{{ include.caption }}</p>{%- endif -%}
+</div>
