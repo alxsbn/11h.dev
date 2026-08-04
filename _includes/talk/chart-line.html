@@ -5,7 +5,7 @@
 {%- endcomment -%}
 <div class="figure">
   <div class="figure__frame reveal">
-    <svg class="tk-chart" viewBox="0 0 420 200" role="img" aria-label="{{ include.alt | escape }}">
+    <svg class="tk-chart" viewBox="0 0 420 218" role="img" aria-label="{{ include.alt | escape }}">
       <line class="tk-grid" x1="34" y1="24" x2="412" y2="24"></line>
       <line class="tk-grid" x1="34" y1="80" x2="412" y2="80"></line>
       <line class="tk-grid" x1="34" y1="136" x2="412" y2="136"></line>
@@ -21,14 +21,17 @@
                 r="{% if include.crash and forloop.index0 == last %}5.5{% else %}4{% endif %}"
                 style="transition-delay:{{ forloop.index0 | times: 12 | plus: 900 }}ms"></circle>
       {%- endfor -%}
-      {%- if include.crashnote -%}
-      <text class="tk-crashnote" x="412" y="192" text-anchor="end">{{ include.crashnote }}</text>
-      {%- endif -%}
       {%- assign labs = include.labels | split: "," -%}
       {%- for l in labs -%}
         {%- assign xy = pts[forloop.index0] | split: "," -%}
-        <text class="tk-axis" x="{{ xy[0] }}" y="192" text-anchor="middle">{{ l }}</text>
+        <text class="tk-axis" x="{{ xy[0] }}" y="188" text-anchor="middle">{{ l }}</text>
       {%- endfor -%}
+      {%- comment -%}
+        La note de chute est ancrée SOUS les labels d'axe pour ne jamais les recouvrir.
+      {%- endcomment -%}
+      {%- if include.crashnote -%}
+      <text class="tk-crashnote" x="412" y="210" text-anchor="end">{{ include.crashnote }}</text>
+      {%- endif -%}
     </svg>
   </div>
   {%- if include.caption -%}<p class="figure__cap">{{ include.caption }}</p>{%- endif -%}
