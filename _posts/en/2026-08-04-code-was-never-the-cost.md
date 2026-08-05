@@ -15,7 +15,7 @@ lang: en
 <div class="act" markdown="1">
 <div class="flow" markdown="1">
 
-It took only a handful of Claude files published on a GitHub repository for the panic to start. Those Skills showed that an agent could reproduce, in a few hundred lines of configuration, what vendors charge for by seat and by year, and the idea that every piece of software was now rewritable on demand circulated for a few days. It was neither a demo nor a benchmark, and roughly a trillion dollars of market value evaporated.
+It took only a handful of Claude files published on a GitHub repository for the panic to start. Those Skills showed that an agent could reproduce, in a few hundred lines of configuration, what vendors charge for by seat and by year, and the idea that every piece of software was now rewritable on demand circulated for a few days. The result: roughly a trillion dollars of market value evaporated.
 
 You can call the reaction disproportionate, and it was. It is mostly revealing, since an entire market had just settled an engineering question by reflex, without once looking inside the software in question.
 
@@ -32,11 +32,11 @@ You can call the reaction disproportionate, and it was. It is mostly revealing, 
 
 <div class="flow" markdown="1">
 
-There is a serious question underneath, and it deserves better than a stock-market mood swing. A data team that has spent three years automating its own work eventually meets that question up close, which is the case for the one I work on.
-
 ## What agents actually moved
 
 Automation delivered on its promise, but not where we expected. Most of our days used to go into writing code and keeping the stack running, and that block collapsed. The temptation is to conclude that we gained time, when in fact we moved it.
+
+In my own professional context, here is what that looks like in practice:
 
 </div>
 
@@ -45,12 +45,12 @@ Automation delivered on its promise, but not where we expected. Most of our days
    label_b="Today"
    a="Spec 20:20:spec,Code / Run 60:60:code,Review 20:20:review"
    b="Spec 40:40:spec,8:8:code,Review 22:22:review,Agent configuration 30:30:value"
-   legend="Specification:spec,Code &amp; run:code,Review:review,Agent configuration:value"
+   legend="Spec with the business:spec,Code &amp; run:code,Review:review,Agent configuration:value"
    caption="The block that vanishes does not free up time, it pushes it upstream." %}
 
 <div class="flow" markdown="1">
 
-Specification doubled, and above all a category appeared that had not existed three years earlier. We now call it *context engineering*, and it consists of describing the domain, setting the rules, documenting the traps and deciding what should be automated as much as what should never be.
+Specification work, the kind carried out with business stakeholders, rose sharply to the point of nearly doubling, and above all a category appeared that had not existed three years earlier. We now call it *context engineering*, and it consists of describing the domain, setting the rules, documenting the traps and deciding what should be automated as much as what should never be.
 
 That work is entirely new and irreducibly human, because no agent can decide on your behalf what your company needs to know. This is where the freed-up time went, and it is also what makes what follows interesting.
 

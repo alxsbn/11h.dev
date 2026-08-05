@@ -167,16 +167,20 @@ a{color:var(--accent);}
 .tk-grid{stroke:var(--rule);stroke-width:1;}
 .tk-axis{font-family:var(--mono);font-size:9px;fill:var(--muted);}
 
+/* Le tracé dure 1,8 s ; chaque point s'allume quand la ligne l'atteint
+   (délais calculés dans _includes/talk/chart-line.html), et la note de
+   chute ferme la séquence. */
 .tk-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;
   stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
-  transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1);}
+  transition:stroke-dashoffset 1.8s cubic-bezier(.35,0,.25,1);}
 .is-in .tk-line{stroke-dashoffset:0;}
 .tk-dot{fill:var(--bg);stroke:var(--accent);stroke-width:2.5;opacity:0;
-  transition:opacity .4s ease;}
-.is-in .tk-dot{opacity:1;}
+  transform:scale(.4);transform-origin:center;transform-box:fill-box;
+  transition:opacity .35s ease,transform .35s cubic-bezier(.2,1.4,.4,1);}
+.is-in .tk-dot{opacity:1;transform:scale(1);}
 .tk-dot.is-crash{stroke:var(--hot);fill:var(--hot);}
 .tk-crashnote{font-family:var(--mono);font-size:10px;fill:var(--hot);opacity:0;
-  transition:opacity .6s ease 1.5s;}
+  transition:opacity .5s ease 1.85s;}
 .is-in .tk-crashnote{opacity:1;}
 
 .tk-dbar{fill:var(--muted);opacity:0;transition:opacity .6s ease;}
@@ -382,7 +386,11 @@ a{color:var(--accent);}
     es.forEach(function(e){
       if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
     });
-  }, {threshold:0.2, rootMargin:'0px 0px -60px 0px'});
+  // rootMargin bas à -25% : l'élément ne déclenche qu'une fois franchement
+  // entré dans le champ de lecture, pas dès qu'il pointe en bas d'écran.
+  // Sans ça, une grande figure s'anime avant que le lecteur ne l'atteigne
+  // et il n'en voit que l'état final.
+  }, {threshold:0.35, rootMargin:'0px 0px -25% 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
   // copier le lien

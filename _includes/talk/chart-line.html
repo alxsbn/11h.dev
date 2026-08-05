@@ -16,10 +16,15 @@
       {%- for p in pts -%}
         {%- assign xy = p | split: "," -%}
         {%- assign last = pts.size | minus: 1 -%}
+        {%- comment -%}
+          Chaque point s'allume au moment où le tracé (1,8 s) l'atteint :
+          le délai est proportionnel à sa position dans la série.
+        {%- endcomment -%}
+        {%- assign step = 1800 | divided_by: last -%}
         <circle class="tk-dot{% if include.crash and forloop.index0 == last %} is-crash{% endif %}"
                 cx="{{ xy[0] }}" cy="{{ xy[1] }}"
                 r="{% if include.crash and forloop.index0 == last %}5.5{% else %}4{% endif %}"
-                style="transition-delay:{{ forloop.index0 | times: 12 | plus: 900 }}ms"></circle>
+                style="transition-delay:{{ forloop.index0 | times: step }}ms"></circle>
       {%- endfor -%}
       {%- assign labs = include.labels | split: "," -%}
       {%- for l in labs -%}

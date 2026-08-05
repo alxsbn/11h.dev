@@ -15,7 +15,7 @@ lang: fr
 <div class="act" markdown="1">
 <div class="flow" markdown="1">
 
-Il aura suffi de quelques fichiers Claude publiés sur un repo GitHub pour que la panique démarre. Ces Skills montraient qu'un agent pouvait reproduire, en quelques centaines de lignes de configuration, ce que des éditeurs facturent au siège et à l'année, et l'idée que tout le logiciel du monde était désormais réécrivable à la demande a circulé pendant quelques jours. Ce n'était ni une démonstration ni un benchmark, et l'équivalent de mille milliards de dollars de valorisation s'est évaporé.
+Il aura suffi de quelques fichiers Claude publiés sur un repo GitHub pour que la panique démarre. Ces Skills montraient qu'un agent pouvait reproduire, en quelques centaines de lignes de configuration, ce que des éditeurs facturent au siège et à l'année, et l'idée que tout le logiciel du monde était désormais réécrivable à la demande a circulé pendant quelques jours. Résultat : l'équivalent de mille milliards de dollars de valorisation s'est évaporé.
 
 On peut trouver la réaction disproportionnée, et elle l'était. Elle est surtout révélatrice, puisqu'un marché entier venait de trancher une question d'ingénierie par réflexe, sans avoir regardé ce qu'il y avait à l'intérieur des logiciels en question.
 
@@ -32,11 +32,11 @@ On peut trouver la réaction disproportionnée, et elle l'était. Elle est surto
 
 <div class="flow" markdown="1">
 
-Il y a pourtant une question sérieuse là-dessous, et elle mérite mieux qu'un mouvement d'humeur boursier. Une équipe data qui automatise son propre travail depuis trois ans finit par la rencontrer de près, et c'est le cas de celle où je travaille.
-
 ## Ce que les agents ont vraiment déplacé
 
 L'automatisation a tenu ses promesses, mais pas là où on l'attendait. Avant, l'essentiel des journées partait dans l'écriture de code et le maintien de la stack en état de marche, et ce bloc s'est effondré. La tentation est alors de conclure qu'on a gagné du temps, alors qu'en réalité on l'a déplacé.
+
+Sur mon contexte professionnel, voilà ce que cela donne en pratique :
 
 </div>
 
@@ -45,12 +45,12 @@ L'automatisation a tenu ses promesses, mais pas là où on l'attendait. Avant, l
    label_b="Aujourd'hui"
    a="Spec 20:20:spec,Code / Run 60:60:code,Review 20:20:review"
    b="Spec 40:40:spec,8:8:code,Review 22:22:review,Configuration agentique 30:30:value"
-   legend="Spécification:spec,Code &amp; run:code,Review:review,Configuration agentique:value"
+   legend="Spécification avec le métier:spec,Code &amp; run:code,Review:review,Configuration agentique:value"
    caption="Le bloc qui disparaît ne libère pas du temps, il le déporte vers l'amont." %}
 
 <div class="flow" markdown="1">
 
-La spécification a doublé, et surtout une catégorie est apparue qui n'existait pas trois ans plus tôt. On l'appelle désormais le *context engineering*, et elle consiste à décrire le domaine, poser les règles, documenter les pièges et arbitrer ce qui doit être automatisé comme ce qui ne doit surtout pas l'être.
+Les tâches de spécification, celles qui se mènent avec les stakeholders métiers, ont drastiquement augmenté jusqu'à presque doubler, et surtout une catégorie est apparue qui n'existait pas trois ans plus tôt. On l'appelle désormais le *context engineering*, et elle consiste à décrire le domaine, poser les règles, documenter les pièges et arbitrer ce qui doit être automatisé comme ce qui ne doit surtout pas l'être.
 
 Ce travail est entièrement neuf et il est irréductiblement humain, car aucun agent ne peut décider à votre place ce que votre entreprise a besoin de savoir. C'est là que le temps libéré est allé, et c'est aussi ce qui rend la suite intéressante.
 
