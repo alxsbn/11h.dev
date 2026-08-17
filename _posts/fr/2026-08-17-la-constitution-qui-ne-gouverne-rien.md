@@ -1,16 +1,16 @@
 ---
 layout: post
-title: "Amodei répond, et parle d'autre chose"
+title: "La constitution qui ne gouverne rien"
 date: 2026-08-17
 categories: [ai, governance, ethics]
-excerpt: 'Six mois après la Constitution de Claude, Dario Amodei détaille enfin sa position. Il concède que l''IA concentre le pouvoir par nature, puis ne propose que des instruments de sécurité, là où la question porte sur les valeurs.'
+excerpt: 'Dario Amodei sort de son silence et concède que l''IA concentre le pouvoir par nature, avant de ne proposer que des tests de sécurité. Personne ne demande qui vérifie que la constitution d''un modèle gouverne effectivement son comportement.'
 header_image: "https://images.unsplash.com/photo-1643804926339-e94f0a655185?w=1600&q=80"
 header_image_alt: "Trousseau de clés posé sur une table en bois sombre patiné"
 header_image_credit: "Filip Szalbot"
 header_image_credit_url: "https://unsplash.com/@fess0"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: amodei-repond-et-parle-dautre-chose
+ref: the-constitution-that-governs-nothing
 lang: fr
 ---
 
@@ -78,4 +78,4 @@ Il reste une question que ce fil m'a fait voir et que mon billet de février ne 
 
 Une constitution d'IA n'est pas une loi que l'on applique, mais une donnée d'entraînement dont on espère qu'elle façonne un comportement. Anthropic elle-même ne peut pas démontrer que Claude s'y conforme, et personne ne dispose aujourd'hui d'un instrument pour le mesurer de l'extérieur. Cela change la nature de mon propre reproche, car un contre-pouvoir sur la rédaction d'un texte non vérifiable serait un théâtre, et une salle où l'on débattrait longuement des clés d'une serrure que personne n'a jamais essayée.
 
-La question n'est donc plus seulement de savoir qui écrit la constitution des machines, mais si ce texte gouverne quoi que ce soit.
+Ce qui rend ma question de février plus difficile qu'elle n'y paraissait, car réclamer un mandat pour rédiger ce texte suppose résolu ce que personne n'a établi, à savoir qu'il gouverne quelque chose.

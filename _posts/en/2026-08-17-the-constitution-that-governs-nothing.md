@@ -1,16 +1,16 @@
 ---
 layout: post
-title: "Amodei answers, and talks about something else"
+title: "The constitution that governs nothing"
 date: 2026-08-17
 categories: [ai, governance, ethics]
-excerpt: 'Six months after Claude''s Constitution, Dario Amodei finally sets out his position. He concedes that AI concentrates power by nature, then offers only safety instruments where the question is about values.'
+excerpt: 'Dario Amodei breaks his silence and concedes that AI concentrates power by nature, then offers nothing but safety testing. Nobody is asking who verifies that a model''s constitution actually governs its behaviour.'
 header_image: "https://images.unsplash.com/photo-1643804926339-e94f0a655185?w=1600&q=80"
 header_image_alt: "Trousseau de clés posé sur une table en bois sombre patiné"
 header_image_credit: "Filip Szalbot"
 header_image_credit_url: "https://unsplash.com/@fess0"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: amodei-repond-et-parle-dautre-chose
+ref: the-constitution-that-governs-nothing
 lang: en
 ---
 
@@ -78,4 +78,4 @@ One question this thread made visible was absent from my February piece too, whi
 
 An AI constitution is not a law that gets applied but a piece of training data one hopes will shape a behaviour. Anthropic itself cannot demonstrate that Claude conforms to it, and nobody currently holds an instrument to measure that from outside. This changes the nature of my own complaint, because a check on the drafting of an unverifiable text would be theatre, a room where people argue at length about the keys to a lock nobody has ever tried.
 
-The question is no longer only who writes the constitution of machines, but whether that text governs anything at all.
+Which makes February's question harder than it looked, because demanding a mandate to write that text assumes something nobody has established, namely that it governs anything at all.
