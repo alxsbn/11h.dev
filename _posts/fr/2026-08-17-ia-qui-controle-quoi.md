@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "La constitution qui ne gouverne rien"
+title: "IA, qui contrôle quoi ?"
 date: 2026-08-17
 categories: [ai, governance, ethics]
 excerpt: 'Dario Amodei sort de son silence et concède que l''IA concentre le pouvoir par nature, avant de ne proposer que des tests de sécurité. Mais aucune ligne sur qui décide des valeurs des modèles.'
@@ -10,7 +10,7 @@ header_image_credit: "Filip Szalbot"
 header_image_credit_url: "https://unsplash.com/@fess0"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: the-constitution-that-governs-nothing
+ref: ai-who-controls-what
 lang: fr
 ---
 
@@ -30,8 +30,6 @@ Sauf que toute sa réponse porte sur la sécurité. Des tests pré-déploiement,
 
 Aucun régulateur, existant ou proposé, ne se prononcera sur la façon dont un agent traite le blasphème, le suicide assisté ou l'égalité femmes-hommes. Ces arbitrages restent écrits par un cercle sociologiquement étroit, et ce sont ces angles morts qui m'ennuient vraiment.
 
-## Le panel qu'on a oublié d'institutionnaliser
-
 On m'objectera qu'Anthropic a fait l'expérience, avec en 2023 une constitution rédigée avec un panel citoyen, mille personnes et trente-huit mille votes. C'était réel et salutaire.
 
 Mais ces mille personnes, qui étaient-elles ? Des Américains. Et élargir un cercle ne réglerait pas le problème. Surtout, l'expérience a eu lieu, elle a montré des divergences avec le texte interne, et la version 2026 a quand même été écrite en interne. La délibération a été testée, pas institutionnalisée.
@@ -41,8 +39,6 @@ Mais ces mille personnes, qui étaient-elles ? Des Américains. Et élargir un c
 Et le même problème se rejoue à une échelle qu'on regarde encore moins, celle de l'entreprise. Quand une organisation déploie un agent interne, chaque prompt système est une décision normative déguisée en choix technique. Écrire que l'agent ne critique pas tel ou tel produit est une décision de communication, et le faire rediriger vers les ressources humaines est une décision de gouvernance. Dans la plupart des déploiements, c'est l'équipe data ou la tech qui tranche, sans mandat, sans procédure, et des fois sans trace ni délibération.
 
 On craint beaucoup les ingérences externes. Celle-là est interne, invisible et quasi-quotidienne.
-
-## Trois questions
 
 Je maintiens donc mes trois questions.
 

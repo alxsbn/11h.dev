@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The constitution that governs nothing"
+title: "AI, who controls what?"
 date: 2026-08-17
 categories: [ai, governance, ethics]
 excerpt: 'Dario Amodei breaks his silence and concedes that AI concentrates power by nature, then offers nothing but safety testing. Not one line on who decides those models'' values.'
@@ -10,7 +10,7 @@ header_image_credit: "Filip Szalbot"
 header_image_credit_url: "https://unsplash.com/@fess0"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: the-constitution-that-governs-nothing
+ref: ai-who-controls-what
 lang: en
 ---
 
@@ -30,8 +30,6 @@ Except that his entire answer is about safety. Pre-deployment testing, revenue t
 
 No regulator, existing or proposed, will rule on how an agent handles blasphemy, assisted dying or equality between men and women. Those judgements stay written by a sociologically narrow circle, and those blind spots are what genuinely bother me.
 
-## The panel nobody institutionalised
-
 Someone will object that Anthropic ran the experiment, with a constitution drafted in 2023 alongside a citizen panel of a thousand people and thirty-eight thousand votes. It was real and commendable.
 
 But who were those thousand people? Americans. And widening a circle would not fix the problem. Above all, the experiment happened, it revealed divergences from the internal text, and the 2026 version was still written in-house. Deliberation was tested, not institutionalised.
@@ -41,8 +39,6 @@ But who were those thousand people? Americans. And widening a circle would not f
 The same problem plays out at a scale we watch even less, that of the company. When an organisation deploys an internal agent, every system prompt is a normative decision dressed up as a technical choice. Writing that the agent must not criticise a given product is a communications decision, and having it redirect to human resources is a governance decision. In most deployments the data or engineering team makes the call, without a mandate, without procedure, and sometimes without a trace or any deliberation.
 
 We worry a great deal about interference from outside. This one is internal, invisible and near-daily.
-
-## Three questions
 
 So I stand by my three questions.
 
