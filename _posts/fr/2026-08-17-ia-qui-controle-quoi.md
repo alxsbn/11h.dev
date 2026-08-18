@@ -20,7 +20,16 @@ Ce week-end, Dario Amodei est sorti de son silence sur X pour répondre à l'inv
 
 ## Ce qu'il concède
 
-D'abord il concède le diagnostic, puisque « l'IA est structurellement une technologie qui tend à concentrer le pouvoir ». En cause des lois d'échelle, plus que de simples régulations. Ensuite il admet la seule critique qu'il juge fondée, à savoir que « nous n'avons pas encore tenu nos grandes promesses de bénéfice pour le monde. C'est entièrement de notre faute. »
+D'abord il concède le diagnostic.
+
+{% include tweet.html
+   text="L'IA est structurellement une technologie qui tend à concentrer le pouvoir, pour des raisons qui n'ont rien à voir avec la régulation."
+   author="Dario Amodei"
+   handle="DarioAmodei"
+   date="16 août 2026"
+   url="https://x.com/DarioAmodei/status/2088758816376807762" %}
+
+En cause des lois d'échelle, plus que de simples régulations. Ensuite il admet la seule critique qu'il juge fondée, à savoir que « nous n'avons pas encore tenu nos grandes promesses de bénéfice pour le monde. C'est entièrement de notre faute. »
 
 Il finit sur la défiance du public, qu'une campagne marketing ne réparera pas de si tôt. « Dire que l'IA guérira le cancer est devenu un cliché. Ce qui marchera, c'est guérir effectivement le cancer. » Sic.
 

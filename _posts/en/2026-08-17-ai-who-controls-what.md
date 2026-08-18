@@ -20,7 +20,16 @@ This weekend, Dario Amodei broke his silence on X to answer the investor Gavin B
 
 ## What he concedes
 
-He starts by conceding the diagnosis, since "AI is structurally a technology that tends to concentrate power". The cause lies in the scaling laws rather than in any regulation. He then admits the one criticism he considers fair, namely that "we haven't yet delivered on our big promises to benefit the world. That is totally on us."
+He starts by conceding the diagnosis.
+
+{% include tweet.html
+   text="AI is structurally a technology that tends to concentrate power, for reasons that have nothing to do with regulation."
+   author="Dario Amodei"
+   handle="DarioAmodei"
+   date="16 August 2026"
+   url="https://x.com/DarioAmodei/status/2088758816376807762" %}
+
+The cause lies in the scaling laws rather than in any regulation. He then admits the one criticism he considers fair, namely that "we haven't yet delivered on our big promises to benefit the world. That is totally on us."
 
 He closes on public distrust, which no marketing campaign will repair any time soon. "Saying that AI will cure cancer is more a cliche than it is inspiring. What will work is actually curing cancer." Quite.
 
