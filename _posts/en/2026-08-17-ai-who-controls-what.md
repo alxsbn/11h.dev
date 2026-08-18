@@ -39,6 +39,8 @@ Except that his entire answer is about safety. Pre-deployment testing, revenue t
 
 No regulator, existing or proposed, will rule on how an agent handles blasphemy, assisted dying or equality between men and women. Those judgements stay written by a sociologically narrow circle, and those blind spots are what genuinely bother me.
 
+The troubling part is elsewhere. In the same thread he argues that a sound institution distributes power rather than concentrating it, adding that "at their best, institutions can vest power in ideas rather than people". He simply does not apply that conclusion to his own model's constitution.
+
 Someone will object that Anthropic ran the experiment, with a constitution drafted in 2023 alongside a citizen panel of a thousand people and thirty-eight thousand votes. It was real and commendable.
 
 But who were those thousand people? Americans. And widening a circle would not fix the problem. Above all, the experiment happened, it revealed divergences from the internal text, and the 2026 version was still written in-house. Deliberation was tested, not institutionalised.
