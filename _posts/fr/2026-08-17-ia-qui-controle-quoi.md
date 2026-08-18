@@ -39,6 +39,8 @@ Sauf que toute sa réponse porte sur la sécurité. Des tests pré-déploiement,
 
 Aucun régulateur, existant ou proposé, ne se prononcera sur la façon dont un agent traite le blasphème, le suicide assisté ou l'égalité femmes-hommes. Ces arbitrages restent écrits par un cercle sociologiquement étroit, et ce sont ces angles morts qui m'ennuient vraiment.
 
+Le plus troublant est ailleurs. Il défend dans le même fil l'idée qu'une bonne institution répartit le pouvoir au lieu de le concentrer, ajoutant même qu'« au mieux, les institutions logent le pouvoir dans les idées plutôt que dans les personnes ». Il n'applique simplement pas cette conclusion à la constitution de son propre modèle.
+
 On m'objectera qu'Anthropic a fait l'expérience, avec en 2023 une constitution rédigée avec un panel citoyen, mille personnes et trente-huit mille votes. C'était réel et salutaire.
 
 Mais ces mille personnes, qui étaient-elles ? Des Américains. Et élargir un cercle ne réglerait pas le problème. Surtout, l'expérience a eu lieu, elle a montré des divergences avec le texte interne, et la version 2026 a quand même été écrite en interne. La délibération a été testée, pas institutionnalisée.
