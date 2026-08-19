@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "L'intention était le vrai angle mort"
+title: "BI, l'angle mort de l'intention"
 date: 2026-08-19
 categories: [data, ai, work]
 excerpt: 'Pendant longtemps nous avons compté des vues de dashboards en croyant mesurer l''usage de la donnée. Les agents rendent enfin visible la question que les gens se posaient vraiment.'
@@ -10,7 +10,7 @@ header_image_credit: "Nathan DeFiesta"
 header_image_credit_url: "https://unsplash.com/@natedefiesta"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: l-intention-etait-le-vrai-angle-mort
+ref: bi-l-angle-mort-de-l-intention
 lang: fr
 ---
 

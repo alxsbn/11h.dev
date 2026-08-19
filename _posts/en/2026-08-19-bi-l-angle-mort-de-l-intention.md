@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Intention was the real blind spot"
+title: "BI's blind spot was intention"
 date: 2026-08-19
 categories: [data, ai, work]
 excerpt: 'For years we counted dashboard views and called it data usage. Agents finally make visible the question people were actually asking.'
@@ -10,7 +10,7 @@ header_image_credit: "Nathan DeFiesta"
 header_image_credit_url: "https://unsplash.com/@natedefiesta"
 header_image_source: "Unsplash"
 header_image_source_url: "https://unsplash.com"
-ref: l-intention-etait-le-vrai-angle-mort
+ref: bi-l-angle-mort-de-l-intention
 lang: en
 ---
 
