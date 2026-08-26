@@ -36,9 +36,9 @@ You can call the reaction disproportionate, and it was. It is mostly revealing, 
 
 ## What agents actually moved
 
-Automation delivered on its promise, but not where we expected. Most of our days used to go into writing code and keeping the stack running, and that block collapsed. The temptation is to conclude that we gained time, when in fact we moved it.
+What remains is what all this looks like on the ground, far from the trading screens. What I see is that agentic automation delivered on every one of its promises, though not where we expected, and the word automation deserves a question mark of its own, since what is at play has less to do with a machine running unattended than with work changing nature.
 
-In my own professional context, here is what that looks like in practice:
+Our days used to go into writing code and keeping the stack in operational condition, and it is broadly that block of hours which collapsed. One could therefore be tempted to conclude that we gained time, when in the end we moved it.
 
 </div>
 
@@ -52,13 +52,15 @@ In my own professional context, here is what that looks like in practice:
 
 <div class="flow" markdown="1">
 
-Specification work, the kind carried out with business stakeholders, rose sharply to the point of nearly doubling, and above all a category appeared that had not existed three years earlier. We now call it *context engineering*, and it consists of describing the domain, setting the rules, documenting the traps and deciding what should be automated as much as what should never be.
+In our case, specification work, the kind carried out with business stakeholders, rose sharply to the point of nearly doubling, and above all a category appeared that had not existed three years earlier. We now call it *context engineering*, and it consists of describing the domain, setting the rules, documenting the traps and deciding what should be automated as much as what should never be.
 
 That work is entirely new and irreducibly human, because no agent can decide on your behalf what your company needs to know. This is where the freed-up time went, and it is also what makes what follows interesting.
 
 ## The temptation
 
-When the market's thesis knocks on the door of a team that has just lived through that, it is particularly seductive.
+That said, when a thesis this strong knocks on the door of a team that has just lived through that, it is particularly seductive.
+
+The thesis is the one the market voted for in February, and it fits in a sentence. If an agent produces software on demand, then what vendors were selling becomes reproducible in-house, and licences turn into avoidable spend. That is the reasoning that erased a trillion dollars in a week, and it stays theoretical only until the day you hold the code-writing agent yourself.
 
 Since agents write the code, why keep paying a licence for an ingestion tool when you could build your own connectors, swap a recurring expense for tokens and cut the bill tenfold? We considered it seriously and went as far as a proof of concept.
 

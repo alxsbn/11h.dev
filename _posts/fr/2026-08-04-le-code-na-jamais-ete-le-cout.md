@@ -36,9 +36,9 @@ On peut trouver la réaction disproportionnée, et elle l'était. Elle est surto
 
 ## Ce que les agents ont vraiment déplacé
 
-L'automatisation a tenu ses promesses, mais pas là où on l'attendait. Avant, l'essentiel des journées partait dans l'écriture de code et le maintien de la stack en état de marche, et ce bloc s'est effondré. La tentation est alors de conclure qu'on a gagné du temps, alors qu'en réalité on l'a déplacé.
+Reste à savoir ce que tout cela donne sur le terrain, loin des écrans de cotation. Ce que j'en vois, c'est que l'automatisation agentique a tenu toutes ses promesses, mais pas là où on l'attendait, et le mot d'automatisation mérite d'ailleurs un point d'interrogation tant ce qui se joue tient moins de la machine qui tourne seule que du travail qui change de nature.
 
-Sur mon contexte professionnel, voilà ce que cela donne en pratique :
+Avant, nos journées se passaient essentiellement à écrire du code et à maintenir la stack en conditions opérationnelles, et c'est globalement ce bloc d'heures qui s'est effondré. On pourrait donc être tenté de conclure qu'on a gagné du temps, alors qu'au final on l'a déplacé.
 
 </div>
 
@@ -52,13 +52,15 @@ Sur mon contexte professionnel, voilà ce que cela donne en pratique :
 
 <div class="flow" markdown="1">
 
-Les tâches de spécification, celles qui se mènent avec les stakeholders métiers, ont drastiquement augmenté jusqu'à presque doubler, et surtout une catégorie est apparue qui n'existait pas trois ans plus tôt. On l'appelle désormais le *context engineering*, et elle consiste à décrire le domaine, poser les règles, documenter les pièges et arbitrer ce qui doit être automatisé comme ce qui ne doit surtout pas l'être.
+Dans notre cas, les tâches de spécification, celles qui se mènent avec les stakeholders métiers, ont drastiquement augmenté jusqu'à presque doubler, et surtout une catégorie est apparue qui n'existait pas trois ans plus tôt. On l'appelle désormais le *context engineering*, et elle consiste à décrire le domaine, poser les règles, documenter les pièges et arbitrer ce qui doit être automatisé comme ce qui ne doit surtout pas l'être.
 
 Ce travail est entièrement neuf et il est irréductiblement humain, car aucun agent ne peut décider à votre place ce que votre entreprise a besoin de savoir. C'est là que le temps libéré est allé, et c'est aussi ce qui rend la suite intéressante.
 
 ## La tentation
 
-Quand la thèse du marché frappe à la porte d'une équipe qui vient de vivre ça, elle est particulièrement séduisante.
+Ceci étant dit, quand une thèse aussi forte frappe à la porte d'une équipe qui vient de vivre ça, elle est particulièrement séduisante.
+
+Cette thèse, c'est celle que le marché a votée en février, et elle tient en une phrase. Si un agent produit le logiciel à la demande, alors ce que vendaient les éditeurs devient reproductible en interne, et les licences se transforment en dépense évitable. C'est le raisonnement qui a effacé mille milliards en une semaine, et il ne reste théorique que jusqu'au jour où l'on tient soi-même l'agent qui écrit le code.
 
 Puisque les agents écrivent le code, pourquoi continuer à payer une licence pour un outil d'ingestion, alors qu'on pourrait développer ses propres connecteurs, troquer une dépense récurrente contre des tokens et diviser la facture par dix ? Nous l'avons envisagé sérieusement et nous sommes allés jusqu'au proof of concept.
 
