@@ -15,7 +15,9 @@ lang: en
 <div class="act" markdown="1">
 <div class="flow" markdown="1">
 
-It took only a handful of Claude files published on a GitHub repository for the panic to start. Those Skills showed that an agent could reproduce, in a few hundred lines of configuration, what vendors charge for by seat and by year, and the idea that every piece of software was now rewritable on demand circulated for a few days. The result: roughly a trillion dollars of market value evaporated.
+**30 January 2026.** Anthropic publishes a handful of business plugins on [its GitHub repository](https://github.com/anthropics/skills), covering legal, sales, finance, marketing and data analysis. Those Skills show that an agent can reproduce, in a few hundred lines of configuration, what vendors charge for by seat and by year.
+
+Four days later, on 3 February, a Jefferies trader coins the word "[SaaSpocalypse](https://www.forbes.com/sites/michaelashley/2026/02/18/saaspocalypse-now-claudes-11-plugins-triggered-a-285b-wipeout/)" to describe a session where everyone sells at once. The result: $285 billion evaporated in a single day, and more than a trillion over the week.
 
 You can call the reaction disproportionate, and it was. It is mostly revealing, since an entire market had just settled an engineering question by reflex, without once looking inside the software in question.
 
@@ -23,10 +25,10 @@ You can call the reaction disproportionate, and it was. It is mostly revealing, 
 
 {% include talk/chart-line.html
    points="60,34 175,44 290,50 400,148"
-   labels="2023,2024,Jan 26,Feb 26"
+   labels="2023,2024,30 Jan,3 Feb"
    len="560"
    crash="true"
-   crashnote="≈ $1T wiped out"
+   crashnote="−$285B in one session"
    alt="SaaS vendor valuation index: broadly flat from 2023 to January 2026, then a sharp drop in February 2026."
    caption="The technology had not moved, only the belief about it had changed." %}
 

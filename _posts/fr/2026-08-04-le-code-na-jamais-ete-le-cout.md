@@ -15,7 +15,9 @@ lang: fr
 <div class="act" markdown="1">
 <div class="flow" markdown="1">
 
-Il aura suffi de quelques fichiers Claude publiés sur un repo GitHub pour que la panique démarre. Ces Skills montraient qu'un agent pouvait reproduire, en quelques centaines de lignes de configuration, ce que des éditeurs facturent au siège et à l'année, et l'idée que tout le logiciel du monde était désormais réécrivable à la demande a circulé pendant quelques jours. Résultat : l'équivalent de mille milliards de dollars de valorisation s'est évaporé.
+**30 janvier 2026.** Anthropic publie une poignée de plugins métier sur [son repo GitHub](https://github.com/anthropics/skills), pour le juridique, les ventes, la finance, le marketing et l'analyse de données. Ces Skills montrent qu'un agent peut reproduire, en quelques centaines de lignes de configuration, ce que des éditeurs facturent au siège et à l'année.
+
+Quatre jours plus tard, le 3 février, un trader de Jefferies invente le mot « [SaaSpocalypse](https://www.forbes.com/sites/michaelashley/2026/02/18/saaspocalypse-now-claudes-11-plugins-triggered-a-285b-wipeout/) » pour décrire une séance où tout le monde vend en même temps. Résultat : 285 milliards de dollars évaporés en un jour, et plus de mille milliards sur la semaine.
 
 On peut trouver la réaction disproportionnée, et elle l'était. Elle est surtout révélatrice, puisqu'un marché entier venait de trancher une question d'ingénierie par réflexe, sans avoir regardé ce qu'il y avait à l'intérieur des logiciels en question.
 
@@ -23,10 +25,10 @@ On peut trouver la réaction disproportionnée, et elle l'était. Elle est surto
 
 {% include talk/chart-line.html
    points="60,34 175,44 290,50 400,148"
-   labels="2023,2024,janv. 26,févr. 26"
+   labels="2023,2024,30 janv.,3 févr."
    len="560"
    crash="true"
-   crashnote="≈ 1 000 Md$ effacés"
+   crashnote="−285 Md$ en une séance"
    alt="Indice de valorisation des éditeurs SaaS : quasi stable de 2023 à janvier 2026, puis chute brutale en février 2026."
    caption="La technologie n'avait pas bougé, seule la croyance à son sujet avait changé." %}
 
