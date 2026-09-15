@@ -14,9 +14,9 @@ ref: an-ai-agent-absolves-no-one
 lang: fr
 ---
 
-Poussons l'expérience jusqu'au bout, sans la discuter.
+À quoi ressemblerait une organisation entièrement agentique ? Poussons l'expérience jusqu'au bout, sans chercher à la discuter.
 
-Dans une startup ordinaire, chacun encode sa manière de travailler dans des skills et des agents. Le juridique verse sa doctrine contractuelle, le marketing sa grammaire de campagne, la finance ses règles d'engagement, la data ses définitions métier. Tout ce savoir-faire devient invocable par n'importe qui, sans rendez-vous et sans file d'attente.
+Prenons le cas d'une startup ordinaire. Chacun y encode sa manière de travailler dans des skills, conçoit les agents de son propre métier et les rend disponibles au reste de l'entreprise. Le juridique verse sa doctrine contractuelle, le marketing sa grammaire de campagne, la finance ses règles d'engagement, la data ses définitions métier. Tout ce savoir-faire devient invocable par n'importe qui, sans rendez-vous et sans file d'attente.
 
 À ce stade, l'exécution a disparu. Il ne reste que des personnes avec leur expérience et leur bagout, qui poussent la société vers de la croissance rentable et des parts de marché. Ce n'est plus vraiment de la science-fiction, puisque [l'exécution n'est déjà plus la contrainte](/fr/2026/01/21/execution-nest-plus-la-contrainte/).
 

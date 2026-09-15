@@ -14,9 +14,9 @@ ref: an-ai-agent-absolves-no-one
 lang: en
 ---
 
-Let us take the thought experiment all the way, without arguing with it.
+What would a fully agentic organisation look like? Let us take the thought experiment all the way, without trying to argue with it.
 
-In an ordinary startup, everyone encodes their way of working into skills and agents. Legal pours in its contract doctrine, marketing its campaign grammar, finance its rules of engagement, data its business definitions. All that know-how becomes callable by anyone, with no meeting and no queue.
+Take an ordinary startup. Everyone there encodes their way of working into skills, designs the agents of their own trade and makes them available to the rest of the company. Legal pours in its contract doctrine, marketing its campaign grammar, finance its rules of engagement, data its business definitions. All that know-how becomes callable by anyone, with no meeting and no queue.
 
 At that point execution is gone. What remains is people with their experience and their nerve, pushing the company toward profitable growth and market share. This is no longer quite science fiction, given that [execution is already no longer the constraint](/en/2026/01/21/execution-is-no-longer-the-constraint/).
 
