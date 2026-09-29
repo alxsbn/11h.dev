@@ -36,7 +36,7 @@ In my own case, running data, a bad decision built on wrong figures remains my r
 
 ## A debt the agent calls in
 
-California now bars defendants, through [AB 316](https://www.mclellanlawgroup.com/california-ab-316-ai-liability-company-responsibility), from arguing that the AI caused the harm on its own. The law is narrow. It removes one line of defence without saying who among the designer, the deployer and whoever configured the agent must answer, and that is precisely the question a company faces.
+California now bars defendants, through [AB 316](https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB316), from arguing that the AI caused the harm on its own. The law is narrow. It removes one line of defence without saying who among the designer, the deployer and whoever configured the agent must answer, and that is precisely the question a company faces.
 
 Take backups, whose ownership appears in no job description, as is the case in plenty of companies. An agent restores a backup without referring to anyone, and the restore fails. Does the fault lie with whoever designed the agent, with whoever left the line out of the job description, or with the CTO who managed the person who should have answered for it?
 

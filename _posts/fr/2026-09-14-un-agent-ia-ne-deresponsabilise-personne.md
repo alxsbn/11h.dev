@@ -36,7 +36,7 @@ Dans mon cas, étant responsable de la data, une mauvaise décision fondée sur 
 
 ## Une dette que l'agent rend exigible
 
-La Californie interdit désormais, avec [la loi AB 316](https://www.mclellanlawgroup.com/california-ab-316-ai-liability-company-responsibility), de plaider que l'IA a causé un dommage toute seule. Le texte est étroit. Il écarte un moyen de défense sans dire qui, du concepteur, du déployeur ou de celui qui a configuré l'agent, doit répondre, et c'est justement la question qui se pose dans une entreprise.
+La Californie interdit désormais, avec [la loi AB 316](https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB316), de plaider que l'IA a causé un dommage toute seule. Le texte est étroit. Il écarte un moyen de défense sans dire qui, du concepteur, du déployeur ou de celui qui a configuré l'agent, doit répondre, et c'est justement la question qui se pose dans une entreprise.
 
 Prenons les sauvegardes, dont la responsabilité ne figure dans aucune fiche de poste, comme dans bien des entreprises. Un agent restaure une sauvegarde sans en référer à personne, et la restauration échoue. La faute revient-elle à qui a conçu l'agent, à qui a omis la ligne dans la fiche de poste, ou au directeur technique dont dépendait la personne qui aurait dû en répondre ?
 
