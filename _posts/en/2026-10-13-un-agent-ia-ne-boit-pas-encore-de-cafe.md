@@ -73,4 +73,4 @@ Yet in an oral culture, that rarely happens. A decision made in passing never le
 
 That's why a strong writing culture helps you scale with agents. Coincidence or not, working fully remote leaves little choice but to work this way, while the others make do.
 
-To close, here's a simple test. Take a strategic topic decided a few months ago, one where nothing was written down (not the decision, not how, not why). If you weren't there that day, could anyone explain it to you? Now imagine the same exercise six months from now, for a colleague (or an AI agent) who wasn't there either.
+To close, here's a small test. Think of a strategic decision made a few months ago, in a meeting you attended, then try to remember the why and the how behind it. Now fast forward six months. A new colleague (or an AI agent) has just joined and asks why things are done this way. If you, who were in the room, are already unsure, what could they possibly find?
