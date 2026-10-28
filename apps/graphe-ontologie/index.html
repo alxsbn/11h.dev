@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>
-<title>Graphe et ontologie</title>
+<title>Graphe × Ontologie</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: header + tiles, then one wide 3D stage, then two reading panels side by side. */
@@ -29,6 +29,13 @@
   --table: #9a9890; --ent: #9085e9; --thread: #eda100; --line: #f0efec;
   --plane: rgba(255,255,255,0.04);
 }
+.hero { margin-bottom: 20px; }
+.logo { display: block; height: 40px; width: auto; margin-bottom: 16px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo { filter: invert(1); } }
+:root[data-theme="dark"] .logo { filter: invert(1); }
+.hero h1 { font-size: 30px; margin: 0 0 12px; letter-spacing: -0.01em; }
+.pair { margin: 0; padding-left: 18px; max-width: 760px; color: var(--ink2); display: grid; gap: 8px; }
+.pair b { color: var(--ink); }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
 main { max-width: 1280px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
@@ -70,17 +77,14 @@ code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
 </style>
 
 <main>
-  <h1>Graphe et ontologie</h1>
-  <p class="sub">En bas, le graphe de la société tel que la donnée l'encode déjà : les tables gold, reliées aux identifiants métier qu'elles partagent (une styliste, une cliente, une commande) et aux tables qu'elles lisent. En haut, l'ontologie : les skills, rules et agents qui expliquent comment lire et parcourir ces liens. Un fil vertical relie un fichier de l'ontologie à une table ou un identifiant qu'il cite.</p>
-
-  <div class="tiles">
-    <div class="card tile"><div class="k">Tables gold exposées</div><div class="v" id="t-tables"></div><div class="d" id="t-tables-d">gold.core, agentic, cubes</div></div>
-    <div class="card tile"><div class="k">Identifiants métier</div><div class="v" id="t-ents"></div><div class="d">partagés par 2 tables ou plus</div></div>
-    <div class="card tile"><div class="k">Liens dans la donnée</div><div class="v" id="t-links"></div><div class="d" id="t-links-d"></div></div>
-    <div class="card tile"><div class="k">Fichiers d'ontologie</div><div class="v" id="t-onto"></div><div class="d" id="t-onto-d"></div></div>
-    <div class="card tile"><div class="k">Fils ontologie vers data</div><div class="v" id="t-cross"></div><div class="d">un fichier cite une table ou un identifiant</div></div>
-    <div class="card tile"><div class="k">Tables citées par l'ontologie</div><div class="v" id="t-cov"></div><div class="d" id="t-cov-d"></div></div>
-  </div>
+  <header class="hero">
+    <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAAAwCAMAAACyoMGoAAAAIVBMVEUBAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkHjVJAAAACnRSTlMAEyhAYoGsy97ug4GlxwAAAg5JREFUeNrtmVuSqzAMRC3Zeu5/wfeWQbhcQDxOPuKa4eQHFNTutEUelfTw8PDwO4DKfEt3/JFoACXIB8dT4htCaaPsQLRjNMcFbNGSaW83LqmRWaOcz6r3oJ/ZGlC9YZtoOMdoL77B9QzEr5HDA7k3aCtbqL5lNKt35JdGqWqJ+8ApewfXcqz0XqLqPYrDRNnv4bi8h+YTNbNmtG2RkIbmKNEcSsQeCJu3HYFjPKNsWI1OJCqIINHQLBmkKCsMEqXDEnCoNvvcv6y4uMTmDRNtkolbA1yVB4lGXOG5Lws0pdzW5S7ReaP5opwHifpLo3ptVKZm9HOj9COjEkr9lulyicryiY6NjhM1r4+vJTq86wP8T0bEL8zoTKKNxWe08cUZ1SfRvzqjuvSMziQKuZRCDY14iHihz3oo6gMmvj29a5SHdz2KD4hVJVb6ONHSyu1wkCiI/wgpcnhpRrUis4lCXEJk+1EezSj5JIZh9EBmEz2vymlw14PPUtLJ6GSiZwEXSINEyzs+P080AXcCOPxdTz6Dya7BumOmppJS3s60OjomNxWt1LLsZdgjUt9RShtimx7evbcblQ6O9EruHgjpBCTozibAqpqxaw/BS6PlVI0tWAe+NESLGmWEjmyLGj2znlHyF0BaB/R7NK2E+i2UViKb3yBpLcqNU4W0GFn9Aoa0HFBYepjy84/VJP8A4xtwxL4RKXMAAAAASUVORK5CYII=" alt="Jolimoi" width="168" height="48">
+    <h1>Graphe × Ontologie</h1>
+    <ul class="pair">
+      <li><b>Graphe :</b> votre modèle de données. Les tables qui se joignent entre elles et représentent votre business (ventes, prospects, clients, coûts…). C'est le QUOI.</li>
+      <li><b>Ontologie :</b> vos définitions, vos règles métier, vos skills, votre documentation, vos process, votre organigramme. Tout ce qui explique pourquoi les choses sont ce qu'elles sont, et comment utiliser vos tables. C'est le POURQUOI et le COMMENT.</li>
+    </ul>
+  </header>
 
   <div class="card stage">
     <canvas id="c" role="img" aria-label="Vue 3D en deux étages : l'ontologie au-dessus du graphe des tables gold"></canvas>
@@ -99,21 +103,6 @@ code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
     </div>
   </div>
 
-  <div class="cols">
-    <div class="card">
-      <h2>Les identifiants qui tiennent le graphe</h2>
-      <p class="note">Chaque identifiant est une entité de la société. Survolez une ligne pour la voir dans le graphe.</p>
-      <table><thead><tr><th>Entité</th><th class="n">Tables</th><th></th><th class="n">Fichiers qui la citent</th></tr></thead><tbody id="ents"></tbody></table>
-    </div>
-    <div class="card">
-      <h2>Tables qu'aucun fichier d'ontologie ne cite</h2>
-      <p class="note" id="uncited-note"></p>
-      <div class="chips" id="uncited"></div>
-      <h2 style="margin-top:18px">Tables sans aucun lien dans la donnée</h2>
-      <p class="note">Ni identifiant partagé ni lignage avec une autre table gold.</p>
-      <div class="chips" id="isolated"></div>
-    </div>
-  </div>
 </main>
 <div class="tip" id="tip" hidden></div>
 
@@ -359,34 +348,6 @@ addEventListener("resize", resize);
 resize();
 requestAnimationFrame(loop);
 
-/* ---------- Tiles and panels ---------- */
-const tables = dataNodes.filter(n => n.kind === "table"), ents = dataNodes.filter(n => n.kind === "ent");
-const cited = tables.filter(n => n.deg.cross > 0);
-$("t-tables").textContent = tables.length;
-$("t-ents").textContent = ents.length;
-$("t-links").textContent = fmt(D.keys.length + D.lineage.length);
-$("t-links-d").textContent = `${D.keys.length} clés partagées, ${D.lineage.length} liens de lignage`;
-$("t-onto").textContent = ontoNodes.length;
-$("t-onto-d").textContent = `${fmt(D.onto_edges.length)} citations entre eux`;
-$("t-cross").textContent = fmt(edges.filter(e => e.type === "cross").length);
-$("t-cov").textContent = `${cited.length} / ${tables.length}`;
-$("t-cov-d").textContent = `${Math.round(100 * cited.length / tables.length)} % des tables, ${ents.filter(n => n.deg.cross).length} identifiants sur ${ents.length}`;
-
-const maxC = d3.max(ents, n => n.count);
-$("ents").innerHTML = ents.sort((a, b) => b.count - a.count).map(n =>
-  `<tr class="row" data-id="${n.id}"><td>${n.name}</td><td class="n">${n.count}</td><td class="barcell"><div class="meter" style="width:${100 * n.count / maxC}%"></div></td><td class="n">${n.deg.cross}</td></tr>`).join("");
-const uncited = tables.filter(n => !n.deg.cross).sort((a, b) => a.name.localeCompare(b.name));
-$("uncited-note").textContent = `${uncited.length} tables sur ${tables.length}. Ce sont les trous de l'ontologie : la donnée existe, aucune skill n'explique encore comment la lire.`;
-if (ANON) $("t-tables-d").textContent = "la couche d'analyse";
-$("uncited").innerHTML = ANON ? "" : uncited.map(n => `<span class="chip" data-id="${n.id}">${n.name}</span>`).join("");
-const isolated = tables.filter(n => !n.deg.key && !n.deg.lin).sort((a, b) => a.name.localeCompare(b.name));
-if (ANON) $("isolated").previousElementSibling.textContent += ` ${isolated.length} tables.`;
-$("isolated").innerHTML = ANON ? "" : isolated.map(n => `<span class="chip" data-id="${n.id}">${n.name}</span>`).join("");
-document.querySelectorAll("[data-id]").forEach(el => {
-  el.addEventListener("mouseenter", () => { pinned = byId.get(el.dataset.id); });
-  el.addEventListener("mouseleave", () => { pinned = null; });
-  el.addEventListener("click", () => { pinned = byId.get(el.dataset.id); cv.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" }); });
-});
 </script>
 
 </body></html>
