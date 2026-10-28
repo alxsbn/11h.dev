@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>
+<title>Graphe et ontologie</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: header + tiles, then one wide 3D stage, then two reading panels side by side. */
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --border: rgba(11,11,11,0.10);
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a;
+  --table: #7d7b75; --ent: #6250d6; --thread: #c98500; --line: #0b0b0b;
+  --plane: rgba(11,11,11,0.035);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --border: rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+    --table: #9a9890; --ent: #9085e9; --thread: #eda100; --line: #f0efec;
+    --plane: rgba(255,255,255,0.04);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --border: rgba(255,255,255,0.10);
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+  --table: #9a9890; --ent: #9085e9; --thread: #eda100; --line: #f0efec;
+  --plane: rgba(255,255,255,0.04);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 1280px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font-size: 22px; margin: 0 0 6px; font-weight: 650; text-wrap: balance; }
+.sub { color: var(--ink2); margin: 0 0 20px; max-width: 760px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; min-width: 0; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.tile .k { color: var(--ink2); font-size: 12px; }
+.tile .v { font-size: 26px; font-weight: 650; margin-top: 2px; }
+.tile .d { color: var(--muted); font-size: 12px; }
+.stage { position: relative; padding: 0; overflow: hidden; }
+#c { display: block; width: 100%; touch-action: none; cursor: grab; }
+#c:active { cursor: grabbing; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--grid); font-size: 12px; color: var(--ink2); }
+.bar label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.bar input { accent-color: var(--s1); }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.ln { display: inline-block; width: 16px; height: 2px; border-radius: 1px; }
+.hint { color: var(--muted); margin-left: auto; }
+.cols { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px; margin-top: 16px; }
+@media (max-width: 820px) { .cols { grid-template-columns: 1fr; } .hint { margin-left: 0; } }
+h2 { font-size: 14px; margin: 0 0 4px; font-weight: 650; }
+.note { color: var(--muted); font-size: 12px; margin: 0 0 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--grid); }
+th { color: var(--muted); font-weight: 500; font-size: 12px; }
+td.n { text-align: right; font-variant-numeric: tabular-nums; width: 1%; white-space: nowrap; }
+tr.row { cursor: pointer; }
+tr.row:hover td { background: var(--plane); }
+.barcell { width: 34%; }
+.meter { height: 6px; border-radius: 3px; background: var(--ent); min-width: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); color: var(--ink2); cursor: pointer; }
+.chip:hover { border-color: var(--table); color: var(--ink); }
+.tip { position: fixed; pointer-events: none; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.14); z-index: 10; max-width: 300px; }
+.tip b { font-weight: 650; }
+.tip .m { color: var(--muted); }
+code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+</style>
+
+<main>
+  <h1>Graphe et ontologie</h1>
+  <p class="sub">En bas, le graphe de la société tel que la donnée l'encode déjà : les tables gold, reliées aux identifiants métier qu'elles partagent (une styliste, une cliente, une commande) et aux tables qu'elles lisent. En haut, l'ontologie : les skills, rules et agents qui expliquent comment lire et parcourir ces liens. Un fil vertical relie un fichier de l'ontologie à une table ou un identifiant qu'il cite.</p>
+
+  <div class="tiles">
+    <div class="card tile"><div class="k">Tables gold exposées</div><div class="v" id="t-tables"></div><div class="d" id="t-tables-d">gold.core, agentic, cubes</div></div>
+    <div class="card tile"><div class="k">Identifiants métier</div><div class="v" id="t-ents"></div><div class="d">partagés par 2 tables ou plus</div></div>
+    <div class="card tile"><div class="k">Liens dans la donnée</div><div class="v" id="t-links"></div><div class="d" id="t-links-d"></div></div>
+    <div class="card tile"><div class="k">Fichiers d'ontologie</div><div class="v" id="t-onto"></div><div class="d" id="t-onto-d"></div></div>
+    <div class="card tile"><div class="k">Fils ontologie vers data</div><div class="v" id="t-cross"></div><div class="d">un fichier cite une table ou un identifiant</div></div>
+    <div class="card tile"><div class="k">Tables citées par l'ontologie</div><div class="v" id="t-cov"></div><div class="d" id="t-cov-d"></div></div>
+  </div>
+
+  <div class="card stage">
+    <canvas id="c" role="img" aria-label="Vue 3D en deux étages : l'ontologie au-dessus du graphe des tables gold"></canvas>
+    <div class="bar">
+      <span><i class="sw" style="background:var(--s1)"></i> Skill</span>
+      <span><i class="sw" style="background:var(--s2)"></i> Rule</span>
+      <span><i class="sw" style="background:var(--s3)"></i> Agent</span>
+      <span><i class="sw" style="background:var(--table)"></i> Table gold</span>
+      <span><i class="sw" style="background:var(--ent)"></i> Identifiant métier</span>
+      <label><input type="checkbox" id="e-onto" checked><i class="ln" style="background:var(--line);opacity:.5"></i> Citations entre fichiers</label>
+      <label><input type="checkbox" id="e-key" checked><i class="ln" style="background:var(--ent)"></i> Clés partagées</label>
+      <label><input type="checkbox" id="e-lin" checked><i class="ln" style="background:var(--table)"></i> Lignage entre tables</label>
+      <label><input type="checkbox" id="e-cross" checked><i class="ln" style="background:var(--thread)"></i> Fils ontologie vers data</label>
+      <label><input type="checkbox" id="spin" checked> Rotation</label>
+      <span class="hint">Glisser pour tourner · molette pour zoomer · survol pour suivre les liens</span>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="card">
+      <h2>Les identifiants qui tiennent le graphe</h2>
+      <p class="note">Chaque identifiant est une entité de la société. Survolez une ligne pour la voir dans le graphe.</p>
+      <table><thead><tr><th>Entité</th><th class="n">Tables</th><th></th><th class="n">Fichiers qui la citent</th></tr></thead><tbody id="ents"></tbody></table>
+    </div>
+    <div class="card">
+      <h2>Tables qu'aucun fichier d'ontologie ne cite</h2>
+      <p class="note" id="uncited-note"></p>
+      <div class="chips" id="uncited"></div>
+      <h2 style="margin-top:18px">Tables sans aucun lien dans la donnée</h2>
+      <p class="note">Ni identifiant partagé ni lignage avec une autre table gold.</p>
+      <div class="chips" id="isolated"></div>
+    </div>
+  </div>
+</main>
+<div class="tip" id="tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const D = {"anon":true,"tables":{"t107":{"schema":"","domain":"","cols":5,"ents":[],"keys":[]},"t066":{"schema":"","domain":"","cols":43,"ents":[],"keys":[]},"t083":{"schema":"","domain":"","cols":18,"ents":[],"keys":[]},"t128":{"schema":"","domain":"","cols":64,"ents":[],"keys":[]},"t125":{"schema":"","domain":"","cols":14,"ents":[],"keys":[]},"t012":{"schema":"","domain":"","cols":7,"ents":[],"keys":[]},"t079":{"schema":"","domain":"","cols":6,"ents":[],"keys":[]},"t126":{"schema":"","domain":"","cols":11,"ents":[],"keys":[]},"t091":{"schema":"","domain":"","cols":11,"ents":[],"keys":[]},"t074":{"schema":"","domain":"","cols":33,"ents":[],"keys":[]},"t132":{"schema":"","domain":"","cols":16,"ents":[],"keys":[]},"t069":{"schema":"","domain":"","cols":29,"ents":["Styliste"],"keys":[]},"t051":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t089":{"schema":"","domain":"","cols":119,"ents":["Pays","Personne","Styliste"],"keys":[]},"t027":{"schema":"","domain":"","cols":28,"ents":["Pays","Prospect"],"keys":[]},"t064":{"schema":"","domain":"","cols":72,"ents":[],"keys":[]},"t127":{"schema":"","domain":"","cols":72,"ents":[],"keys":[]},"t063":{"schema":"","domain":"","cols":63,"ents":[],"keys":[]},"t017":{"schema":"","domain":"","cols":72,"ents":[],"keys":[]},"t036":{"schema":"","domain":"","cols":17,"ents":[],"keys":[]},"t011":{"schema":"","domain":"","cols":20,"ents":["Cliente"],"keys":[]},"t013":{"schema":"","domain":"","cols":5,"ents":["Cliente"],"keys":[]},"t007":{"schema":"","domain":"","cols":6,"ents":["Cliente"],"keys":[]},"t133":{"schema":"","domain":"","cols":25,"ents":["Styliste"],"keys":[]},"t137":{"schema":"","domain":"","cols":60,"ents":[],"keys":[]},"t113":{"schema":"","domain":"","cols":67,"ents":[],"keys":[]},"t080":{"schema":"","domain":"","cols":41,"ents":["Styliste"],"keys":[]},"t081":{"schema":"","domain":"","cols":15,"ents":["Styliste"],"keys":[]},"t050":{"schema":"","domain":"","cols":33,"ents":[],"keys":[]},"t111":{"schema":"","domain":"","cols":18,"ents":[],"keys":[]},"t122":{"schema":"","domain":"","cols":73,"ents":[],"keys":[]},"t055":{"schema":"","domain":"","cols":64,"ents":[],"keys":[]},"t097":{"schema":"","domain":"","cols":73,"ents":[],"keys":[]},"t000":{"schema":"","domain":"","cols":73,"ents":[],"keys":[]},"t071":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t102":{"schema":"","domain":"","cols":113,"ents":["Cliente","Pays","Personne","Styliste"],"keys":[]},"t134":{"schema":"","domain":"","cols":11,"ents":["Styliste"],"keys":[]},"t109":{"schema":"","domain":"","cols":9,"ents":["Styliste"],"keys":[]},"t025":{"schema":"","domain":"","cols":17,"ents":["Styliste"],"keys":[]},"t068":{"schema":"","domain":"","cols":13,"ents":["Styliste"],"keys":[]},"t129":{"schema":"","domain":"","cols":8,"ents":["Styliste"],"keys":[]},"t117":{"schema":"","domain":"","cols":15,"ents":[],"keys":[]},"t067":{"schema":"","domain":"","cols":10,"ents":[],"keys":[]},"t070":{"schema":"","domain":"","cols":32,"ents":["Styliste"],"keys":[]},"t032":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t061":{"schema":"","domain":"","cols":7,"ents":["Styliste"],"keys":[]},"t047":{"schema":"","domain":"","cols":4,"ents":[],"keys":[]},"t141":{"schema":"","domain":"","cols":21,"ents":[],"keys":[]},"t142":{"schema":"","domain":"","cols":5,"ents":["Styliste"],"keys":[]},"t085":{"schema":"","domain":"","cols":4,"ents":[],"keys":[]},"t076":{"schema":"","domain":"","cols":25,"ents":[],"keys":[]},"t088":{"schema":"","domain":"","cols":11,"ents":["Cliente"],"keys":[]},"t101":{"schema":"","domain":"","cols":15,"ents":[],"keys":[]},"t075":{"schema":"","domain":"","cols":12,"ents":["Styliste"],"keys":[]},"t033":{"schema":"","domain":"","cols":20,"ents":[],"keys":[]},"t028":{"schema":"","domain":"","cols":23,"ents":[],"keys":[]},"t116":{"schema":"","domain":"","cols":6,"ents":[],"keys":[]},"t005":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t104":{"schema":"","domain":"","cols":16,"ents":["Cliente","Commande","Ligne de commande","Produit","Styliste"],"keys":[]},"t118":{"schema":"","domain":"","cols":8,"ents":["Styliste"],"keys":[]},"t078":{"schema":"","domain":"","cols":14,"ents":["Styliste"],"keys":[]},"t040":{"schema":"","domain":"","cols":16,"ents":["Styliste"],"keys":[]},"t009":{"schema":"","domain":"","cols":15,"ents":["Styliste"],"keys":[]},"t108":{"schema":"","domain":"","cols":29,"ents":["Styliste"],"keys":[]},"t062":{"schema":"","domain":"","cols":16,"ents":["Styliste"],"keys":[]},"t094":{"schema":"","domain":"","cols":9,"ents":["Styliste"],"keys":[]},"t112":{"schema":"","domain":"","cols":12,"ents":["Styliste"],"keys":[]},"t015":{"schema":"","domain":"","cols":22,"ents":["Styliste"],"keys":[]},"t034":{"schema":"","domain":"","cols":23,"ents":["Styliste"],"keys":[]},"t054":{"schema":"","domain":"","cols":8,"ents":["Cliente","Commande","Déclinaison","Produit","Styliste"],"keys":[]},"t100":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t010":{"schema":"","domain":"","cols":54,"ents":["Adresse","Cliente","Commande","Panier","Pays","Styliste","Transporteur"],"keys":[]},"t090":{"schema":"","domain":"","cols":27,"ents":["Cliente","Commande","Styliste"],"keys":[]},"t041":{"schema":"","domain":"","cols":9,"ents":["Styliste"],"keys":[]},"t021":{"schema":"","domain":"","cols":7,"ents":["Styliste"],"keys":[]},"t115":{"schema":"","domain":"","cols":13,"ents":["Commande","Styliste"],"keys":[]},"t121":{"schema":"","domain":"","cols":16,"ents":["Cliente","Personne","Produit","Styliste"],"keys":[]},"t135":{"schema":"","domain":"","cols":19,"ents":["Cliente","Commande","Panier","Personne","Produit","Styliste"],"keys":[]},"t031":{"schema":"","domain":"","cols":24,"ents":[],"keys":[]},"t060":{"schema":"","domain":"","cols":115,"ents":["Adresse","Cliente","Commande","Déclinaison","Ligne de commande","Panier","Pays","Produit","Styliste","Transporteur"],"keys":[]},"t045":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t110":{"schema":"","domain":"","cols":82,"ents":["Niveau d'animation","Niveau de vente","Rémunération","Styliste"],"keys":[]},"t059":{"schema":"","domain":"","cols":3,"ents":["Styliste"],"keys":[]},"t103":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t106":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t014":{"schema":"","domain":"","cols":17,"ents":["Styliste"],"keys":[]},"t008":{"schema":"","domain":"","cols":14,"ents":["Challenge","Groupe client","Niveau d'animation","Niveau de vente","Styliste"],"keys":[]},"t039":{"schema":"","domain":"","cols":5,"ents":["Cliente"],"keys":[]},"t056":{"schema":"","domain":"","cols":14,"ents":["Bon de réduction","Commande","Styliste"],"keys":[]},"t087":{"schema":"","domain":"","cols":9,"ents":["Cliente","Styliste"],"keys":[]},"t098":{"schema":"","domain":"","cols":5,"ents":["Cliente","Styliste"],"keys":[]},"t084":{"schema":"","domain":"","cols":17,"ents":["Base de connaissance"],"keys":[]},"t058":{"schema":"","domain":"","cols":5,"ents":["Pays","Produit"],"keys":[]},"t023":{"schema":"","domain":"","cols":5,"ents":["Marque","Pays"],"keys":[]},"t030":{"schema":"","domain":"","cols":15,"ents":["Déclinaison","Produit"],"keys":[]},"t057":{"schema":"","domain":"","cols":27,"ents":["Déclinaison","Marque","Produit"],"keys":[]},"t001":{"schema":"","domain":"","cols":36,"ents":["Déclinaison","Marque","Produit"],"keys":[]},"t049":{"schema":"","domain":"","cols":17,"ents":["Marque"],"keys":[]},"t073":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t119":{"schema":"","domain":"","cols":10,"ents":["Déclinaison","Produit"],"keys":[]},"t053":{"schema":"","domain":"","cols":51,"ents":["Déclinaison","Marque","Produit"],"keys":[]},"t131":{"schema":"","domain":"","cols":7,"ents":[],"keys":[]},"t052":{"schema":"","domain":"","cols":36,"ents":["Styliste"],"keys":[]},"t019":{"schema":"","domain":"","cols":7,"ents":[],"keys":[]},"t003":{"schema":"","domain":"","cols":7,"ents":[],"keys":[]},"t099":{"schema":"","domain":"","cols":11,"ents":["Commande","Styliste"],"keys":[]},"t046":{"schema":"","domain":"","cols":11,"ents":["Onboarding"],"keys":[]},"t114":{"schema":"","domain":"","cols":13,"ents":["Onboarding","Styliste"],"keys":[]},"t037":{"schema":"","domain":"","cols":27,"ents":["Déclinaison","Produit"],"keys":[]},"t086":{"schema":"","domain":"","cols":6,"ents":[],"keys":[]},"t002":{"schema":"","domain":"","cols":18,"ents":["Adresse","Cliente","Commande","Déclinaison","Panier","Produit","Transporteur"],"keys":[]},"t095":{"schema":"","domain":"","cols":5,"ents":["Déclinaison","Produit"],"keys":[]},"t123":{"schema":"","domain":"","cols":4,"ents":["Déclinaison","Produit"],"keys":[]},"t072":{"schema":"","domain":"","cols":9,"ents":["Badge","Styliste"],"keys":[]},"t136":{"schema":"","domain":"","cols":31,"ents":["Badge","Formation"],"keys":[]},"t147":{"schema":"","domain":"","cols":19,"ents":["Badge","Formation","Styliste"],"keys":[]},"t048":{"schema":"","domain":"","cols":3,"ents":["Marque","Styliste"],"keys":[]},"t044":{"schema":"","domain":"","cols":10,"ents":["Niveau d'animation","Niveau de vente","Rémunération"],"keys":[]},"t038":{"schema":"","domain":"","cols":6,"ents":["Niveau d'animation","Styliste"],"keys":[]},"t145":{"schema":"","domain":"","cols":6,"ents":["Niveau de vente","Styliste"],"keys":[]},"t092":{"schema":"","domain":"","cols":5,"ents":["Styliste"],"keys":[]},"t139":{"schema":"","domain":"","cols":7,"ents":["Styliste"],"keys":[]},"t004":{"schema":"","domain":"","cols":8,"ents":["Base de connaissance","Styliste"],"keys":[]},"t035":{"schema":"","domain":"","cols":7,"ents":["Styliste"],"keys":[]},"t043":{"schema":"","domain":"","cols":8,"ents":["Styliste"],"keys":[]},"t029":{"schema":"","domain":"","cols":6,"ents":["Licence","Styliste"],"keys":[]},"t042":{"schema":"","domain":"","cols":7,"ents":["Styliste"],"keys":[]},"t006":{"schema":"","domain":"","cols":19,"ents":["Adresse","Cliente"],"keys":[]},"t120":{"schema":"","domain":"","cols":18,"ents":["Transporteur"],"keys":[]},"t096":{"schema":"","domain":"","cols":16,"ents":["Bon de réduction","Cliente"],"keys":[]},"t143":{"schema":"","domain":"","cols":3,"ents":[],"keys":[]},"t140":{"schema":"","domain":"","cols":4,"ents":["Produit"],"keys":[]},"t105":{"schema":"","domain":"","cols":9,"ents":["Challenge","Styliste"],"keys":[]},"t018":{"schema":"","domain":"","cols":8,"ents":["Challenge","Commande","Styliste"],"keys":[]},"t093":{"schema":"","domain":"","cols":12,"ents":["Challenge","Styliste"],"keys":[]},"t020":{"schema":"","domain":"","cols":5,"ents":["Cliente"],"keys":[]},"t082":{"schema":"","domain":"","cols":21,"ents":["Commande","Panier"],"keys":[]},"t124":{"schema":"","domain":"","cols":6,"ents":["Déclinaison","Produit"],"keys":[]},"t026":{"schema":"","domain":"","cols":5,"ents":["Produit"],"keys":[]},"t016":{"schema":"","domain":"","cols":11,"ents":["Déclinaison","Groupe client","Produit"],"keys":[]},"t065":{"schema":"","domain":"","cols":8,"ents":["Déclinaison","Produit"],"keys":[]},"t138":{"schema":"","domain":"","cols":5,"ents":["Styliste"],"keys":[]},"t077":{"schema":"","domain":"","cols":12,"ents":["Formation","Marque"],"keys":[]},"t146":{"schema":"","domain":"","cols":9,"ents":["Formation","Styliste"],"keys":[]},"t130":{"schema":"","domain":"","cols":3,"ents":["Styliste"],"keys":[]},"t022":{"schema":"","domain":"","cols":0,"ents":[],"keys":[]},"t024":{"schema":"","domain":"","cols":14,"ents":["Styliste"],"keys":[]},"t144":{"schema":"","domain":"","cols":3,"ents":["Cliente"],"keys":[]}},"entities":{"Styliste":64,"Pays":7,"Personne":4,"Cliente":20,"Commande":12,"Ligne de commande":2,"Produit":20,"Déclinaison":14,"Adresse":4,"Panier":5,"Transporteur":4,"Niveau d'animation":4,"Niveau de vente":4,"Rémunération":2,"Challenge":4,"Groupe client":2,"Bon de réduction":2,"Base de connaissance":2,"Marque":7,"Onboarding":2,"Badge":3,"Formation":4},"keys":[["t001","Déclinaison"],["t001","Marque"],["t001","Produit"],["t002","Adresse"],["t002","Cliente"],["t002","Commande"],["t002","Déclinaison"],["t002","Panier"],["t002","Produit"],["t002","Transporteur"],["t004","Base de connaissance"],["t004","Styliste"],["t006","Adresse"],["t006","Cliente"],["t007","Cliente"],["t008","Challenge"],["t008","Groupe client"],["t008","Niveau d'animation"],["t008","Niveau de vente"],["t008","Styliste"],["t009","Styliste"],["t010","Adresse"],["t010","Cliente"],["t010","Commande"],["t010","Panier"],["t010","Pays"],["t010","Styliste"],["t010","Transporteur"],["t011","Cliente"],["t013","Cliente"],["t014","Styliste"],["t015","Styliste"],["t016","Déclinaison"],["t016","Groupe client"],["t016","Produit"],["t018","Challenge"],["t018","Commande"],["t018","Styliste"],["t020","Cliente"],["t021","Styliste"],["t023","Marque"],["t023","Pays"],["t024","Styliste"],["t025","Styliste"],["t026","Produit"],["t027","Pays"],["t029","Styliste"],["t030","Déclinaison"],["t030","Produit"],["t034","Styliste"],["t035","Styliste"],["t037","Déclinaison"],["t037","Produit"],["t038","Niveau d'animation"],["t038","Styliste"],["t039","Cliente"],["t040","Styliste"],["t041","Styliste"],["t042","Styliste"],["t043","Styliste"],["t044","Niveau d'animation"],["t044","Niveau de vente"],["t044","Rémunération"],["t046","Onboarding"],["t048","Marque"],["t048","Styliste"],["t049","Marque"],["t052","Styliste"],["t053","Déclinaison"],["t053","Marque"],["t053","Produit"],["t054","Cliente"],["t054","Commande"],["t054","Déclinaison"],["t054","Produit"],["t054","Styliste"],["t056","Bon de réduction"],["t056","Commande"],["t056","Styliste"],["t057","Déclinaison"],["t057","Marque"],["t057","Produit"],["t058","Pays"],["t058","Produit"],["t059","Styliste"],["t060","Adresse"],["t060","Cliente"],["t060","Commande"],["t060","Déclinaison"],["t060","Ligne de commande"],["t060","Panier"],["t060","Pays"],["t060","Produit"],["t060","Styliste"],["t060","Transporteur"],["t061","Styliste"],["t062","Styliste"],["t065","Déclinaison"],["t065","Produit"],["t068","Styliste"],["t069","Styliste"],["t070","Styliste"],["t072","Badge"],["t072","Styliste"],["t075","Styliste"],["t077","Formation"],["t077","Marque"],["t078","Styliste"],["t080","Styliste"],["t081","Styliste"],["t082","Commande"],["t082","Panier"],["t084","Base de connaissance"],["t087","Cliente"],["t087","Styliste"],["t088","Cliente"],["t089","Pays"],["t089","Personne"],["t089","Styliste"],["t090","Cliente"],["t090","Commande"],["t090","Styliste"],["t092","Styliste"],["t093","Challenge"],["t093","Styliste"],["t094","Styliste"],["t095","Déclinaison"],["t095","Produit"],["t096","Bon de réduction"],["t096","Cliente"],["t098","Cliente"],["t098","Styliste"],["t099","Commande"],["t099","Styliste"],["t102","Cliente"],["t102","Pays"],["t102","Personne"],["t102","Styliste"],["t104","Cliente"],["t104","Commande"],["t104","Ligne de commande"],["t104","Produit"],["t104","Styliste"],["t105","Challenge"],["t105","Styliste"],["t108","Styliste"],["t109","Styliste"],["t110","Niveau d'animation"],["t110","Niveau de vente"],["t110","Rémunération"],["t110","Styliste"],["t112","Styliste"],["t114","Onboarding"],["t114","Styliste"],["t115","Commande"],["t115","Styliste"],["t118","Styliste"],["t119","Déclinaison"],["t119","Produit"],["t120","Transporteur"],["t121","Cliente"],["t121","Personne"],["t121","Produit"],["t121","Styliste"],["t123","Déclinaison"],["t123","Produit"],["t124","Déclinaison"],["t124","Produit"],["t129","Styliste"],["t130","Styliste"],["t133","Styliste"],["t134","Styliste"],["t135","Cliente"],["t135","Commande"],["t135","Panier"],["t135","Personne"],["t135","Produit"],["t135","Styliste"],["t136","Badge"],["t136","Formation"],["t138","Styliste"],["t139","Styliste"],["t140","Produit"],["t142","Styliste"],["t144","Cliente"],["t145","Niveau de vente"],["t145","Styliste"],["t146","Formation"],["t146","Styliste"],["t147","Badge"],["t147","Formation"],["t147","Styliste"]],"lineage":[["t000","t111"],["t001","t057"],["t002","t086"],["t005","t116"],["t010","t100"],["t014","t015"],["t014","t061"],["t014","t070"],["t014","t080"],["t014","t081"],["t014","t106"],["t014","t115"],["t014","t129"],["t017","t036"],["t018","t133"],["t024","t022"],["t025","t134"],["t027","t051"],["t027","t113"],["t028","t033"],["t037","t090"],["t049","t050"],["t053","t005"],["t053","t050"],["t053","t057"],["t053","t073"],["t053","t090"],["t053","t117"],["t053","t119"],["t054","t009"],["t054","t015"],["t054","t025"],["t054","t034"],["t054","t040"],["t054","t062"],["t054","t068"],["t054","t078"],["t054","t094"],["t054","t108"],["t054","t109"],["t054","t112"],["t055","t111"],["t057","t030"],["t060","t000"],["t060","t005"],["t060","t007"],["t060","t010"],["t060","t017"],["t060","t028"],["t060","t031"],["t060","t033"],["t060","t041"],["t060","t047"],["t060","t050"],["t060","t054"],["t060","t055"],["t060","t061"],["t060","t063"],["t060","t064"],["t060","t067"],["t060","t070"],["t060","t080"],["t060","t081"],["t060","t089"],["t060","t090"],["t060","t097"],["t060","t104"],["t060","t115"],["t060","t122"],["t060","t127"],["t060","t135"],["t061","t032"],["t062","t118"],["t063","t036"],["t064","t036"],["t065","t119"],["t068","t134"],["t073","t116"],["t078","t118"],["t080","t113"],["t080","t133"],["t089","t005"],["t089","t009"],["t089","t015"],["t089","t022"],["t089","t034"],["t089","t040"],["t089","t041"],["t089","t045"],["t089","t062"],["t089","t069"],["t089","t070"],["t089","t071"],["t089","t078"],["t089","t080"],["t089","t081"],["t089","t092"],["t089","t094"],["t089","t100"],["t089","t106"],["t089","t108"],["t089","t112"],["t089","t115"],["t089","t118"],["t089","t129"],["t089","t133"],["t090","t101"],["t090","t117"],["t094","t118"],["t097","t111"],["t100","t116"],["t102","t000"],["t102","t007"],["t102","t017"],["t102","t055"],["t102","t063"],["t102","t064"],["t102","t071"],["t102","t080"],["t102","t081"],["t102","t097"],["t102","t122"],["t102","t127"],["t106","t116"],["t107","t050"],["t109","t134"],["t110","t005"],["t110","t045"],["t110","t050"],["t110","t089"],["t110","t100"],["t111","t050"],["t113","t137"],["t115","t021"],["t119","t073"],["t119","t117"],["t121","t071"],["t121","t089"],["t121","t113"],["t122","t111"],["t124","t095"],["t127","t036"],["t129","t025"],["t129","t068"],["t129","t109"],["t130","t089"],["t135","t121"],["t138","t133"],["t139","t092"],["t141","t047"],["t141","t050"],["t141","t061"],["t141","t067"],["t141","t070"],["t141","t080"],["t141","t081"],["t141","t113"],["t141","t117"],["t141","t129"],["t143","t086"],["t146","t133"],["t147","t133"]],"onto":{"agent:a003":340,"agent:a004":75,"agent:a008":107,"agent:a007":72,"agent:a011":362,"agent:a005":179,"agent:a012":306,"agent:a002":152,"agent:a010":69,"agent:a009":100,"agent:a013":59,"agent:a006":97,"agent:a001":78,"rule:r016":86,"rule:r001":128,"rule:r007":58,"rule:r012":51,"rule:r009":84,"rule:r006":18,"rule:r002":46,"rule:r018":150,"rule:r003":87,"rule:r013":73,"rule:r005":29,"rule:r019":40,"rule:r017":22,"rule:r010":122,"rule:r011":59,"rule:r008":29,"rule:r021":62,"rule:r014":58,"rule:r020":77,"rule:r015":112,"rule:r004":102,"skill:s027":124,"skill:s048":334,"skill:s044":421,"skill:s052":260,"skill:s030":115,"skill:s069":391,"skill:s028":105,"skill:s005":499,"skill:s039":245,"skill:s018":816,"skill:s035":124,"skill:s015":591,"skill:s009":321,"skill:s036":245,"skill:s026":68,"skill:s062":425,"skill:s056":107,"skill:s008":350,"skill:s038":626,"skill:s059":234,"skill:s003":370,"skill:s019":270,"skill:s034":600,"skill:s007":2824,"skill:s013":140,"skill:s040":731,"skill:s017":429,"skill:s061":165,"skill:s053":1299,"skill:s045":406,"skill:s046":448,"skill:s057":330,"skill:s051":441,"skill:s025":337,"skill:s020":327,"skill:s012":217,"skill:s064":261,"skill:s043":1580,"skill:s032":420,"skill:s006":228,"skill:s037":101,"skill:s029":460,"skill:s042":159,"skill:s060":156,"skill:s068":551,"skill:s033":190,"skill:s065":208,"skill:s016":226,"skill:s047":459,"skill:s001":314,"skill:s058":202,"skill:s010":133,"skill:s054":99,"skill:s063":147,"skill:s023":233,"skill:s049":167,"skill:s004":168,"skill:s024":615,"skill:s067":153,"skill:s002":601,"skill:s066":301,"skill:s055":378,"skill:s011":521,"skill:s014":997,"skill:s021":422,"skill:s022":182,"skill:s041":183,"skill:s050":114,"skill:s031":159},"onto_edges":[["agent:a001","skill:s045"],["agent:a001","skill:s052"],["agent:a002","rule:r018"],["agent:a002","skill:s037"],["agent:a002","skill:s039"],["agent:a002","skill:s045"],["agent:a002","skill:s054"],["agent:a002","skill:s061"],["agent:a002","skill:s065"],["agent:a003","skill:s048"],["agent:a004","agent:a011"],["agent:a004","skill:s007"],["agent:a004","skill:s021"],["agent:a005","rule:r009"],["agent:a006","agent:a011"],["agent:a006","skill:s007"],["agent:a006","skill:s011"],["agent:a007","skill:s039"],["agent:a008","rule:r014"],["agent:a008","rule:r017"],["agent:a008","skill:s011"],["agent:a008","skill:s021"],["agent:a008","skill:s026"],["agent:a008","skill:s065"],["agent:a008","skill:s069"],["agent:a009","skill:s010"],["agent:a009","skill:s015"],["agent:a011","agent:a004"],["agent:a011","rule:r014"],["agent:a011","rule:r017"],["agent:a011","skill:s007"],["agent:a011","skill:s011"],["agent:a012","rule:r011"],["agent:a012","rule:r014"],["agent:a012","rule:r015"],["agent:a012","skill:s007"],["agent:a012","skill:s011"],["agent:a013","rule:r008"],["agent:a013","skill:s045"],["rule:r001","skill:s011"],["rule:r001","skill:s025"],["rule:r001","skill:s030"],["rule:r001","skill:s037"],["rule:r001","skill:s061"],["rule:r003","rule:r018"],["rule:r003","skill:s029"],["rule:r003","skill:s030"],["rule:r003","skill:s034"],["rule:r003","skill:s038"],["rule:r003","skill:s052"],["rule:r003","skill:s053"],["rule:r004","rule:r001"],["rule:r004","rule:r013"],["rule:r004","rule:r016"],["rule:r004","rule:r018"],["rule:r004","skill:s021"],["rule:r004","skill:s054"],["rule:r005","skill:s046"],["rule:r007","rule:r014"],["rule:r007","skill:s065"],["rule:r008","rule:r004"],["rule:r008","rule:r016"],["rule:r008","rule:r018"],["rule:r008","skill:s011"],["rule:r009","agent:a005"],["rule:r009","rule:r013"],["rule:r009","rule:r019"],["rule:r009","skill:s028"],["rule:r010","rule:r014"],["rule:r010","skill:s002"],["rule:r010","skill:s024"],["rule:r010","skill:s067"],["rule:r011","skill:s007"],["rule:r012","skill:s008"],["rule:r014","rule:r021"],["rule:r014","skill:s011"],["rule:r014","skill:s065"],["rule:r015","skill:s007"],["rule:r016","rule:r001"],["rule:r016","rule:r004"],["rule:r016","rule:r015"],["rule:r016","rule:r018"],["rule:r017","rule:r011"],["rule:r017","rule:r014"],["rule:r017","skill:s007"],["rule:r017","skill:s011"],["rule:r017","skill:s035"],["rule:r017","skill:s040"],["rule:r017","skill:s065"],["rule:r018","agent:a002"],["rule:r018","rule:r001"],["rule:r018","rule:r004"],["rule:r018","rule:r008"],["rule:r018","rule:r009"],["rule:r018","rule:r012"],["rule:r018","rule:r013"],["rule:r018","rule:r014"],["rule:r018","rule:r019"],["rule:r018","rule:r020"],["rule:r018","rule:r021"],["rule:r018","skill:s001"],["rule:r018","skill:s007"],["rule:r018","skill:s030"],["rule:r018","skill:s034"],["rule:r018","skill:s037"],["rule:r018","skill:s052"],["rule:r018","skill:s061"],["rule:r018","skill:s065"],["rule:r018","skill:s069"],["rule:r019","skill:s008"],["rule:r021","rule:r014"],["skill:s001","skill:s021"],["skill:s002","skill:s022"],["skill:s002","skill:s024"],["skill:s002","skill:s067"],["skill:s003","skill:s006"],["skill:s003","skill:s038"],["skill:s003","skill:s059"],["skill:s004","skill:s002"],["skill:s004","skill:s011"],["skill:s004","skill:s014"],["skill:s004","skill:s021"],["skill:s004","skill:s041"],["skill:s005","agent:a003"],["skill:s005","rule:r003"],["skill:s005","rule:r011"],["skill:s005","skill:s018"],["skill:s005","skill:s025"],["skill:s005","skill:s047"],["skill:s005","skill:s048"],["skill:s006","rule:r001"],["skill:s006","rule:r011"],["skill:s006","rule:r019"],["skill:s006","skill:s045"],["skill:s007","agent:a004"],["skill:s007","agent:a006"],["skill:s007","agent:a011"],["skill:s007","agent:a012"],["skill:s007","rule:r005"],["skill:s007","rule:r007"],["skill:s007","rule:r011"],["skill:s007","rule:r014"],["skill:s007","rule:r015"],["skill:s007","rule:r017"],["skill:s007","skill:s002"],["skill:s007","skill:s006"],["skill:s007","skill:s011"],["skill:s007","skill:s012"],["skill:s007","skill:s017"],["skill:s007","skill:s021"],["skill:s007","skill:s026"],["skill:s007","skill:s032"],["skill:s007","skill:s035"],["skill:s007","skill:s040"],["skill:s007","skill:s042"],["skill:s007","skill:s046"],["skill:s007","skill:s050"],["skill:s007","skill:s051"],["skill:s007","skill:s054"],["skill:s007","skill:s055"],["skill:s007","skill:s058"],["skill:s007","skill:s065"],["skill:s007","skill:s066"],["skill:s007","skill:s067"],["skill:s008","agent:a003"],["skill:s008","rule:r011"],["skill:s008","rule:r012"],["skill:s008","rule:r020"],["skill:s008","rule:r021"],["skill:s008","skill:s031"],["skill:s009","skill:s033"],["skill:s009","skill:s036"],["skill:s009","skill:s038"],["skill:s010","skill:s047"],["skill:s010","skill:s056"],["skill:s011","skill:s021"],["skill:s011","skill:s065"],["skill:s012","agent:a009"],["skill:s012","skill:s010"],["skill:s012","skill:s011"],["skill:s012","skill:s025"],["skill:s012","skill:s056"],["skill:s013","rule:r017"],["skill:s013","rule:r018"],["skill:s013","skill:s011"],["skill:s013","skill:s065"],["skill:s014","skill:s002"],["skill:s014","skill:s011"],["skill:s014","skill:s021"],["skill:s014","skill:s041"],["skill:s014","skill:s049"],["skill:s014","skill:s054"],["skill:s014","skill:s065"],["skill:s014","skill:s066"],["skill:s015","agent:a009"],["skill:s015","skill:s010"],["skill:s015","skill:s056"],["skill:s016","skill:s023"],["skill:s016","skill:s049"],["skill:s016","skill:s066"],["skill:s016","skill:s067"],["skill:s017","agent:a006"],["skill:s017","skill:s007"],["skill:s017","skill:s011"],["skill:s017","skill:s040"],["skill:s018","rule:r010"],["skill:s018","rule:r011"],["skill:s018","rule:r015"],["skill:s018","skill:s002"],["skill:s018","skill:s004"],["skill:s018","skill:s005"],["skill:s018","skill:s021"],["skill:s018","skill:s023"],["skill:s018","skill:s032"],["skill:s018","skill:s049"],["skill:s018","skill:s050"],["skill:s018","skill:s054"],["skill:s018","skill:s060"],["skill:s018","skill:s065"],["skill:s018","skill:s067"],["skill:s018","skill:s068"],["skill:s019","rule:r020"],["skill:s019","skill:s003"],["skill:s019","skill:s059"],["skill:s020","agent:a003"],["skill:s020","agent:a004"],["skill:s020","agent:a005"],["skill:s020","agent:a011"],["skill:s020","rule:r001"],["skill:s020","rule:r002"],["skill:s020","rule:r005"],["skill:s020","rule:r006"],["skill:s020","rule:r011"],["skill:s020","rule:r012"],["skill:s020","rule:r013"],["skill:s020","rule:r014"],["skill:s020","rule:r015"],["skill:s020","rule:r019"],["skill:s020","rule:r020"],["skill:s020","skill:s007"],["skill:s020","skill:s025"],["skill:s020","skill:s037"],["skill:s020","skill:s053"],["skill:s021","rule:r015"],["skill:s021","skill:s002"],["skill:s021","skill:s011"],["skill:s021","skill:s014"],["skill:s021","skill:s041"],["skill:s021","skill:s054"],["skill:s021","skill:s060"],["skill:s021","skill:s067"],["skill:s022","skill:s002"],["skill:s022","skill:s042"],["skill:s022","skill:s054"],["skill:s023","skill:s002"],["skill:s023","skill:s021"],["skill:s023","skill:s066"],["skill:s023","skill:s067"],["skill:s024","skill:s002"],["skill:s024","skill:s067"],["skill:s025","agent:a003"],["skill:s025","rule:r011"],["skill:s025","rule:r015"],["skill:s025","skill:s045"],["skill:s025","skill:s048"],["skill:s028","rule:r009"],["skill:s028","rule:r018"],["skill:s028","rule:r019"],["skill:s028","skill:s045"],["skill:s029","rule:r013"],["skill:s029","skill:s006"],["skill:s029","skill:s030"],["skill:s029","skill:s031"],["skill:s029","skill:s034"],["skill:s029","skill:s035"],["skill:s029","skill:s045"],["skill:s029","skill:s052"],["skill:s030","agent:a002"],["skill:s030","rule:r001"],["skill:s030","rule:r008"],["skill:s030","rule:r018"],["skill:s030","skill:s006"],["skill:s030","skill:s031"],["skill:s030","skill:s034"],["skill:s030","skill:s037"],["skill:s030","skill:s045"],["skill:s030","skill:s052"],["skill:s030","skill:s061"],["skill:s031","rule:r014"],["skill:s031","skill:s034"],["skill:s032","rule:r011"],["skill:s032","rule:r015"],["skill:s032","skill:s018"],["skill:s032","skill:s063"],["skill:s033","skill:s036"],["skill:s034","rule:r011"],["skill:s034","skill:s006"],["skill:s034","skill:s029"],["skill:s034","skill:s030"],["skill:s034","skill:s031"],["skill:s034","skill:s045"],["skill:s034","skill:s052"],["skill:s034","skill:s069"],["skill:s035","agent:a011"],["skill:s035","rule:r015"],["skill:s035","skill:s007"],["skill:s036","skill:s011"],["skill:s037","agent:a002"],["skill:s037","rule:r014"],["skill:s037","rule:r018"],["skill:s037","rule:r021"],["skill:s037","skill:s030"],["skill:s037","skill:s053"],["skill:s037","skill:s061"],["skill:s037","skill:s065"],["skill:s038","rule:r009"],["skill:s038","rule:r019"],["skill:s038","rule:r021"],["skill:s038","skill:s003"],["skill:s038","skill:s059"],["skill:s038","skill:s062"],["skill:s038","skill:s065"],["skill:s039","agent:a002"],["skill:s039","agent:a007"],["skill:s039","skill:s018"],["skill:s039","skill:s032"],["skill:s039","skill:s050"],["skill:s039","skill:s068"],["skill:s040","agent:a006"],["skill:s040","agent:a012"],["skill:s040","rule:r014"],["skill:s040","rule:r015"],["skill:s040","skill:s007"],["skill:s040","skill:s011"],["skill:s040","skill:s014"],["skill:s040","skill:s017"],["skill:s040","skill:s023"],["skill:s040","skill:s041"],["skill:s040","skill:s054"],["skill:s041","skill:s011"],["skill:s041","skill:s014"],["skill:s041","skill:s021"],["skill:s041","skill:s060"],["skill:s041","skill:s067"],["skill:s042","skill:s002"],["skill:s042","skill:s022"],["skill:s042","skill:s054"],["skill:s043","agent:a006"],["skill:s043","rule:r010"],["skill:s043","rule:r011"],["skill:s043","rule:r015"],["skill:s043","skill:s055"],["skill:s043","skill:s058"],["skill:s043","skill:s066"],["skill:s044","rule:r011"],["skill:s044","rule:r017"],["skill:s045","agent:a010"],["skill:s045","agent:a013"],["skill:s045","rule:r001"],["skill:s045","rule:r009"],["skill:s045","rule:r011"],["skill:s045","rule:r018"],["skill:s045","skill:s006"],["skill:s045","skill:s029"],["skill:s045","skill:s030"],["skill:s045","skill:s031"],["skill:s045","skill:s037"],["skill:s045","skill:s052"],["skill:s045","skill:s061"],["skill:s046","agent:a011"],["skill:s046","rule:r005"],["skill:s046","rule:r015"],["skill:s046","rule:r018"],["skill:s046","skill:s030"],["skill:s046","skill:s037"],["skill:s046","skill:s051"],["skill:s046","skill:s057"],["skill:s046","skill:s061"],["skill:s047","rule:r011"],["skill:s047","rule:r014"],["skill:s047","rule:r015"],["skill:s047","rule:r018"],["skill:s047","skill:s005"],["skill:s047","skill:s028"],["skill:s047","skill:s038"],["skill:s048","agent:a003"],["skill:s048","skill:s025"],["skill:s048","skill:s034"],["skill:s048","skill:s045"],["skill:s049","skill:s014"],["skill:s049","skill:s067"],["skill:s050","skill:s001"],["skill:s051","agent:a011"],["skill:s051","agent:a012"],["skill:s051","rule:r011"],["skill:s051","rule:r015"],["skill:s051","skill:s011"],["skill:s051","skill:s015"],["skill:s051","skill:s035"],["skill:s051","skill:s046"],["skill:s051","skill:s057"],["skill:s052","agent:a001"],["skill:s052","rule:r001"],["skill:s052","rule:r011"],["skill:s052","skill:s006"],["skill:s052","skill:s029"],["skill:s052","skill:s034"],["skill:s052","skill:s045"],["skill:s053","rule:r003"],["skill:s053","rule:r007"],["skill:s053","rule:r008"],["skill:s053","rule:r010"],["skill:s053","rule:r014"],["skill:s053","rule:r015"],["skill:s053","skill:s007"],["skill:s053","skill:s011"],["skill:s053","skill:s021"],["skill:s053","skill:s022"],["skill:s053","skill:s029"],["skill:s053","skill:s033"],["skill:s053","skill:s034"],["skill:s053","skill:s036"],["skill:s053","skill:s038"],["skill:s053","skill:s045"],["skill:s053","skill:s047"],["skill:s053","skill:s054"],["skill:s053","skill:s062"],["skill:s054","skill:s002"],["skill:s054","skill:s011"],["skill:s054","skill:s021"],["skill:s054","skill:s022"],["skill:s054","skill:s042"],["skill:s054","skill:s065"],["skill:s056","agent:a009"],["skill:s057","agent:a011"],["skill:s057","rule:r011"],["skill:s057","skill:s007"],["skill:s057","skill:s046"],["skill:s057","skill:s048"],["skill:s057","skill:s061"],["skill:s057","skill:s063"],["skill:s058","skill:s066"],["skill:s058","skill:s067"],["skill:s059","rule:r012"],["skill:s059","skill:s003"],["skill:s059","skill:s006"],["skill:s059","skill:s019"],["skill:s059","skill:s045"],["skill:s060","skill:s002"],["skill:s060","skill:s021"],["skill:s060","skill:s041"],["skill:s060","skill:s054"],["skill:s061","agent:a002"],["skill:s061","rule:r001"],["skill:s061","rule:r018"],["skill:s061","skill:s030"],["skill:s061","skill:s034"],["skill:s061","skill:s045"],["skill:s061","skill:s046"],["skill:s061","skill:s065"],["skill:s062","rule:r012"],["skill:s062","rule:r013"],["skill:s062","rule:r020"],["skill:s063","skill:s021"],["skill:s063","skill:s032"],["skill:s063","skill:s058"],["skill:s064","agent:a003"],["skill:s064","rule:r015"],["skill:s064","rule:r019"],["skill:s064","skill:s005"],["skill:s064","skill:s025"],["skill:s064","skill:s059"],["skill:s065","skill:s002"],["skill:s065","skill:s004"],["skill:s065","skill:s011"],["skill:s065","skill:s021"],["skill:s065","skill:s041"],["skill:s065","skill:s049"],["skill:s065","skill:s050"],["skill:s065","skill:s054"],["skill:s065","skill:s055"],["skill:s065","skill:s066"],["skill:s066","skill:s002"],["skill:s066","skill:s021"],["skill:s066","skill:s023"],["skill:s066","skill:s067"],["skill:s067","skill:s002"],["skill:s067","skill:s011"],["skill:s067","skill:s023"],["skill:s067","skill:s024"],["skill:s068","rule:r010"],["skill:s068","skill:s001"],["skill:s068","skill:s004"],["skill:s068","skill:s018"],["skill:s068","skill:s060"],["skill:s068","skill:s067"],["skill:s069","agent:a008"],["skill:s069","rule:r001"],["skill:s069","rule:r008"],["skill:s069","rule:r014"],["skill:s069","rule:r017"],["skill:s069","skill:s011"],["skill:s069","skill:s020"],["skill:s069","skill:s026"],["skill:s069","skill:s034"],["skill:s069","skill:s039"],["skill:s069","skill:s065"]],"cross":[["agent:a002","ent:Déclinaison"],["agent:a002","ent:Produit"],["agent:a002","table:t090"],["agent:a004","table:t141"],["agent:a005","ent:Cliente"],["agent:a011","ent:Marque"],["agent:a011","ent:Produit"],["agent:a011","table:t005"],["agent:a011","table:t022"],["agent:a011","table:t045"],["agent:a011","table:t049"],["agent:a011","table:t053"],["agent:a011","table:t060"],["agent:a011","table:t100"],["agent:a011","table:t106"],["agent:a011","table:t146"],["agent:a011","table:t147"],["agent:a012","table:t005"],["agent:a012","table:t100"],["rule:r001","table:t053"],["rule:r001","table:t060"],["rule:r001","table:t102"],["rule:r004","ent:Commande"],["rule:r007","table:t028"],["rule:r007","table:t033"],["rule:r007","table:t050"],["rule:r007","table:t073"],["rule:r007","table:t111"],["rule:r007","table:t113"],["rule:r007","table:t119"],["rule:r007","table:t122"],["rule:r008","table:t100"],["rule:r009","table:t145"],["rule:r010","ent:Niveau d'animation"],["rule:r010","ent:Niveau de vente"],["rule:r010","table:t045"],["rule:r010","table:t110"],["rule:r011","ent:Cliente"],["rule:r011","ent:Styliste"],["rule:r011","table:t089"],["rule:r011","table:t102"],["rule:r013","ent:Cliente"],["rule:r013","ent:Commande"],["rule:r013","table:t053"],["rule:r013","table:t060"],["rule:r013","table:t102"],["rule:r014","table:t033"],["rule:r014","table:t090"],["rule:r016","ent:Niveau de vente"],["rule:r020","table:t116"],["rule:r021","ent:Commande"],["skill:s001","ent:Base de connaissance"],["skill:s001","ent:Styliste"],["skill:s001","table:t004"],["skill:s001","table:t070"],["skill:s001","table:t089"],["skill:s001","table:t146"],["skill:s002","ent:Cliente"],["skill:s002","ent:Commande"],["skill:s002","ent:Niveau d'animation"],["skill:s002","ent:Niveau de vente"],["skill:s002","ent:Produit"],["skill:s002","ent:Rémunération"],["skill:s002","ent:Styliste"],["skill:s002","table:t038"],["skill:s002","table:t045"],["skill:s002","table:t060"],["skill:s002","table:t089"],["skill:s002","table:t107"],["skill:s002","table:t110"],["skill:s002","table:t139"],["skill:s002","table:t145"],["skill:s003","ent:Cliente"],["skill:s003","ent:Commande"],["skill:s003","ent:Styliste"],["skill:s004","ent:Styliste"],["skill:s004","table:t014"],["skill:s004","table:t024"],["skill:s004","table:t089"],["skill:s004","table:t106"],["skill:s007","ent:Styliste"],["skill:s007","table:t000"],["skill:s007","table:t005"],["skill:s007","table:t010"],["skill:s007","table:t014"],["skill:s007","table:t019"],["skill:s007","table:t024"],["skill:s007","table:t028"],["skill:s007","table:t029"],["skill:s007","table:t032"],["skill:s007","table:t035"],["skill:s007","table:t045"],["skill:s007","table:t050"],["skill:s007","table:t059"],["skill:s007","table:t060"],["skill:s007","table:t067"],["skill:s007","table:t070"],["skill:s007","table:t073"],["skill:s007","table:t085"],["skill:s007","table:t086"],["skill:s007","table:t089"],["skill:s007","table:t097"],["skill:s007","table:t100"],["skill:s007","table:t106"],["skill:s007","table:t107"],["skill:s007","table:t110"],["skill:s007","table:t111"],["skill:s007","table:t113"],["skill:s007","table:t115"],["skill:s007","table:t122"],["skill:s007","table:t128"],["skill:s007","table:t137"],["skill:s007","table:t141"],["skill:s007","table:t146"],["skill:s007","table:t147"],["skill:s008","table:t060"],["skill:s009","table:t024"],["skill:s009","table:t089"],["skill:s010","table:t050"],["skill:s011","ent:Cliente"],["skill:s011","ent:Commande"],["skill:s011","ent:Déclinaison"],["skill:s011","ent:Niveau d'animation"],["skill:s011","ent:Niveau de vente"],["skill:s011","ent:Produit"],["skill:s011","ent:Styliste"],["skill:s011","table:t005"],["skill:s011","table:t010"],["skill:s011","table:t014"],["skill:s011","table:t017"],["skill:s011","table:t019"],["skill:s011","table:t022"],["skill:s011","table:t024"],["skill:s011","table:t027"],["skill:s011","table:t032"],["skill:s011","table:t036"],["skill:s011","table:t045"],["skill:s011","table:t051"],["skill:s011","table:t060"],["skill:s011","table:t061"],["skill:s011","table:t071"],["skill:s011","table:t073"],["skill:s011","table:t089"],["skill:s011","table:t100"],["skill:s011","table:t106"],["skill:s011","table:t110"],["skill:s011","table:t116"],["skill:s011","table:t119"],["skill:s011","table:t121"],["skill:s012","ent:Styliste"],["skill:s012","table:t005"],["skill:s012","table:t073"],["skill:s012","table:t100"],["skill:s012","table:t106"],["skill:s013","table:t036"],["skill:s013","table:t060"],["skill:s014","ent:Badge"],["skill:s014","ent:Cliente"],["skill:s014","ent:Commande"],["skill:s014","ent:Formation"],["skill:s014","ent:Onboarding"],["skill:s014","ent:Personne"],["skill:s014","ent:Produit"],["skill:s014","ent:Styliste"],["skill:s014","table:t011"],["skill:s014","table:t013"],["skill:s014","table:t014"],["skill:s014","table:t024"],["skill:s014","table:t027"],["skill:s014","table:t029"],["skill:s014","table:t035"],["skill:s014","table:t038"],["skill:s014","table:t042"],["skill:s014","table:t043"],["skill:s014","table:t044"],["skill:s014","table:t046"],["skill:s014","table:t048"],["skill:s014","table:t052"],["skill:s014","table:t053"],["skill:s014","table:t059"],["skill:s014","table:t060"],["skill:s014","table:t069"],["skill:s014","table:t072"],["skill:s014","table:t077"],["skill:s014","table:t088"],["skill:s014","table:t089"],["skill:s014","table:t093"],["skill:s014","table:t102"],["skill:s014","table:t110"],["skill:s014","table:t114"],["skill:s014","table:t121"],["skill:s014","table:t130"],["skill:s014","table:t135"],["skill:s014","table:t136"],["skill:s014","table:t139"],["skill:s014","table:t142"],["skill:s014","table:t145"],["skill:s014","table:t146"],["skill:s014","table:t147"],["skill:s015","ent:Niveau d'animation"],["skill:s015","ent:Niveau de vente"],["skill:s016","ent:Cliente"],["skill:s016","ent:Personne"],["skill:s016","ent:Styliste"],["skill:s016","table:t027"],["skill:s016","table:t029"],["skill:s016","table:t035"],["skill:s016","table:t059"],["skill:s016","table:t060"],["skill:s016","table:t089"],["skill:s016","table:t102"],["skill:s016","table:t110"],["skill:s016","table:t121"],["skill:s018","ent:Cliente"],["skill:s018","ent:Commande"],["skill:s018","ent:Niveau d'animation"],["skill:s018","ent:Niveau de vente"],["skill:s018","ent:Styliste"],["skill:s018","ent:Transporteur"],["skill:s018","table:t029"],["skill:s018","table:t060"],["skill:s018","table:t083"],["skill:s018","table:t089"],["skill:s018","table:t102"],["skill:s018","table:t110"],["skill:s018","table:t120"],["skill:s018","table:t141"],["skill:s021","ent:Styliste"],["skill:s021","table:t005"],["skill:s021","table:t021"],["skill:s021","table:t022"],["skill:s021","table:t024"],["skill:s021","table:t029"],["skill:s021","table:t032"],["skill:s021","table:t038"],["skill:s021","table:t053"],["skill:s021","table:t060"],["skill:s021","table:t070"],["skill:s021","table:t081"],["skill:s021","table:t089"],["skill:s021","table:t100"],["skill:s021","table:t106"],["skill:s021","table:t110"],["skill:s021","table:t113"],["skill:s021","table:t115"],["skill:s021","table:t130"],["skill:s021","table:t139"],["skill:s021","table:t141"],["skill:s021","table:t145"],["skill:s022","table:t031"],["skill:s022","table:t060"],["skill:s023","ent:Niveau d'animation"],["skill:s023","ent:Niveau de vente"],["skill:s023","ent:Styliste"],["skill:s023","table:t035"],["skill:s023","table:t059"],["skill:s023","table:t110"],["skill:s024","table:t080"],["skill:s025","table:t141"],["skill:s027","ent:Styliste"],["skill:s027","table:t075"],["skill:s031","table:t010"],["skill:s032","table:t024"],["skill:s032","table:t141"],["skill:s034","table:t010"],["skill:s036","ent:Produit"],["skill:s036","ent:Styliste"],["skill:s036","table:t053"],["skill:s036","table:t071"],["skill:s036","table:t089"],["skill:s036","table:t100"],["skill:s038","ent:Commande"],["skill:s038","ent:Ligne de commande"],["skill:s038","ent:Styliste"],["skill:s038","table:t015"],["skill:s038","table:t019"],["skill:s038","table:t028"],["skill:s038","table:t033"],["skill:s038","table:t060"],["skill:s038","table:t089"],["skill:s038","table:t092"],["skill:s038","table:t096"],["skill:s038","table:t125"],["skill:s041","ent:Bon de réduction"],["skill:s041","ent:Commande"],["skill:s041","ent:Niveau de vente"],["skill:s041","ent:Styliste"],["skill:s041","table:t005"],["skill:s041","table:t010"],["skill:s041","table:t060"],["skill:s041","table:t096"],["skill:s041","table:t100"],["skill:s042","table:t031"],["skill:s042","table:t050"],["skill:s042","table:t060"],["skill:s042","table:t104"],["skill:s042","table:t111"],["skill:s042","table:t122"],["skill:s043","ent:Niveau d'animation"],["skill:s043","ent:Styliste"],["skill:s043","table:t009"],["skill:s043","table:t059"],["skill:s043","table:t089"],["skill:s043","table:t108"],["skill:s043","table:t118"],["skill:s045","ent:Cliente"],["skill:s049","ent:Niveau d'animation"],["skill:s049","ent:Niveau de vente"],["skill:s049","ent:Styliste"],["skill:s049","table:t027"],["skill:s049","table:t089"],["skill:s049","table:t110"],["skill:s050","ent:Styliste"],["skill:s050","table:t083"],["skill:s050","table:t089"],["skill:s050","table:t128"],["skill:s051","table:t100"],["skill:s053","ent:Niveau d'animation"],["skill:s053","ent:Niveau de vente"],["skill:s053","ent:Produit"],["skill:s053","ent:Styliste"],["skill:s053","table:t005"],["skill:s053","table:t010"],["skill:s053","table:t060"],["skill:s053","table:t070"],["skill:s053","table:t090"],["skill:s053","table:t100"],["skill:s053","table:t110"],["skill:s053","table:t113"],["skill:s054","ent:Commande"],["skill:s054","ent:Déclinaison"],["skill:s054","ent:Produit"],["skill:s054","table:t001"],["skill:s054","table:t005"],["skill:s054","table:t010"],["skill:s054","table:t016"],["skill:s054","table:t030"],["skill:s054","table:t037"],["skill:s054","table:t053"],["skill:s054","table:t057"],["skill:s054","table:t060"],["skill:s054","table:t090"],["skill:s054","table:t100"],["skill:s054","table:t117"],["skill:s054","table:t124"],["skill:s054","table:t143"],["skill:s055","table:t033"],["skill:s055","table:t036"],["skill:s055","table:t067"],["skill:s055","table:t137"],["skill:s055","table:t141"],["skill:s057","table:t053"],["skill:s058","ent:Niveau d'animation"],["skill:s058","ent:Styliste"],["skill:s058","table:t059"],["skill:s058","table:t089"],["skill:s058","table:t110"],["skill:s060","ent:Cliente"],["skill:s060","ent:Commande"],["skill:s060","ent:Styliste"],["skill:s060","table:t039"],["skill:s060","table:t056"],["skill:s060","table:t060"],["skill:s060","table:t102"],["skill:s061","table:t090"],["skill:s062","ent:Cliente"],["skill:s062","ent:Commande"],["skill:s062","ent:Ligne de commande"],["skill:s062","ent:Produit"],["skill:s062","ent:Styliste"],["skill:s064","table:t009"],["skill:s064","table:t078"],["skill:s064","table:t102"],["skill:s065","ent:Adresse"],["skill:s065","ent:Cliente"],["skill:s065","ent:Commande"],["skill:s065","ent:Déclinaison"],["skill:s065","ent:Ligne de commande"],["skill:s065","ent:Marque"],["skill:s065","ent:Pays"],["skill:s065","ent:Produit"],["skill:s065","ent:Styliste"],["skill:s065","ent:Transporteur"],["skill:s065","table:t000"],["skill:s065","table:t001"],["skill:s065","table:t003"],["skill:s065","table:t005"],["skill:s065","table:t006"],["skill:s065","table:t008"],["skill:s065","table:t010"],["skill:s065","table:t011"],["skill:s065","table:t012"],["skill:s065","table:t014"],["skill:s065","table:t016"],["skill:s065","table:t017"],["skill:s065","table:t018"],["skill:s065","table:t019"],["skill:s065","table:t020"],["skill:s065","table:t021"],["skill:s065","table:t024"],["skill:s065","table:t026"],["skill:s065","table:t027"],["skill:s065","table:t028"],["skill:s065","table:t029"],["skill:s065","table:t030"],["skill:s065","table:t031"],["skill:s065","table:t033"],["skill:s065","table:t036"],["skill:s065","table:t037"],["skill:s065","table:t038"],["skill:s065","table:t039"],["skill:s065","table:t042"],["skill:s065","table:t044"],["skill:s065","table:t046"],["skill:s065","table:t047"],["skill:s065","table:t049"],["skill:s065","table:t052"],["skill:s065","table:t053"],["skill:s065","table:t055"],["skill:s065","table:t056"],["skill:s065","table:t057"],["skill:s065","table:t059"],["skill:s065","table:t060"],["skill:s065","table:t061"],["skill:s065","table:t063"],["skill:s065","table:t064"],["skill:s065","table:t065"],["skill:s065","table:t066"],["skill:s065","table:t067"],["skill:s065","table:t070"],["skill:s065","table:t074"],["skill:s065","table:t075"],["skill:s065","table:t076"],["skill:s065","table:t079"],["skill:s065","table:t080"],["skill:s065","table:t081"],["skill:s065","table:t082"],["skill:s065","table:t083"],["skill:s065","table:t085"],["skill:s065","table:t086"],["skill:s065","table:t087"],["skill:s065","table:t088"],["skill:s065","table:t089"],["skill:s065","table:t090"],["skill:s065","table:t091"],["skill:s065","table:t093"],["skill:s065","table:t095"],["skill:s065","table:t097"],["skill:s065","table:t098"],["skill:s065","table:t099"],["skill:s065","table:t100"],["skill:s065","table:t101"],["skill:s065","table:t102"],["skill:s065","table:t105"],["skill:s065","table:t110"],["skill:s065","table:t111"],["skill:s065","table:t113"],["skill:s065","table:t114"],["skill:s065","table:t115"],["skill:s065","table:t116"],["skill:s065","table:t117"],["skill:s065","table:t119"],["skill:s065","table:t120"],["skill:s065","table:t121"],["skill:s065","table:t122"],["skill:s065","table:t123"],["skill:s065","table:t124"],["skill:s065","table:t125"],["skill:s065","table:t126"],["skill:s065","table:t127"],["skill:s065","table:t128"],["skill:s065","table:t130"],["skill:s065","table:t132"],["skill:s065","table:t135"],["skill:s065","table:t136"],["skill:s065","table:t137"],["skill:s065","table:t139"],["skill:s065","table:t140"],["skill:s065","table:t141"],["skill:s065","table:t142"],["skill:s065","table:t143"],["skill:s065","table:t144"],["skill:s065","table:t145"],["skill:s065","table:t146"],["skill:s065","table:t147"],["skill:s066","ent:Niveau d'animation"],["skill:s066","ent:Niveau de vente"],["skill:s066","ent:Styliste"],["skill:s066","table:t005"],["skill:s066","table:t029"],["skill:s066","table:t045"],["skill:s066","table:t059"],["skill:s066","table:t089"],["skill:s066","table:t100"],["skill:s066","table:t110"],["skill:s067","ent:Niveau d'animation"],["skill:s067","table:t045"],["skill:s067","table:t110"],["skill:s068","ent:Base de connaissance"],["skill:s068","table:t024"],["skill:s068","table:t083"],["skill:s068","table:t089"],["skill:s068","table:t142"]]};
+const ANON = !!D.anon;
+const KIND = { skill: "Skill", rule: "Rule", agent: "Agent", table: "Table gold", ent: "Identifiant métier" };
+const fmt = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+const $ = id => document.getElementById(id);
+
+/* ---------- Graph model ---------- */
+const nodes = [], byId = new Map();
+const add = n => { n.nb = new Set(); n.deg = { onto: 0, key: 0, lin: 0, cross: 0 }; nodes.push(n); byId.set(n.id, n); };
+for (const [t, v] of Object.entries(D.tables)) add({ id: "table:" + t, layer: 0, kind: "table", name: t, info: v });
+for (const [e, c] of Object.entries(D.entities)) add({ id: "ent:" + e, layer: 0, kind: "ent", name: e, count: c });
+for (const [id, lines] of Object.entries(D.onto)) add({ id, layer: 1, kind: id.split(":")[0], name: id.split(":").slice(1).join(":"), lines });
+const edges = [
+  ...D.keys.map(([t, e]) => ({ a: "table:" + t, b: "ent:" + e, type: "key" })),
+  ...D.lineage.map(([a, b]) => ({ a: "table:" + a, b: "table:" + b, type: "lin" })),
+  ...D.onto_edges.map(([a, b]) => ({ a, b, type: "onto" })),
+  ...D.cross.map(([a, b]) => ({ a, b, type: "cross" })),
+].filter(e => byId.has(e.a) && byId.has(e.b));
+edges.forEach(e => { e.A = byId.get(e.a); e.B = byId.get(e.b); e.A.deg[e.type]++; e.B.deg[e.type]++; });
+
+const radius = n => n.kind === "ent" ? 4 + Math.sqrt(n.count) * 1.3
+  : n.kind === "table" ? 2.2 + Math.sqrt(n.info.cols) / 1.8
+  : 2.4 + Math.sqrt(n.lines) / 5.5;
+
+/* ---------- Layout: data plane first, ontology anchored above what it cites ---------- */
+const dataNodes = nodes.filter(n => n.layer === 0), ontoNodes = nodes.filter(n => n.layer === 1);
+const dl = edges.filter(e => e.type === "key" || e.type === "lin").map(e => ({ source: e.a, target: e.b, type: e.type }));
+const simD = d3.forceSimulation(dataNodes)
+  .force("link", d3.forceLink(dl).id(d => d.id).distance(l => l.type === "key" ? 48 : 34).strength(l => l.type === "key" ? 0.45 : 0.12))
+  .force("charge", d3.forceManyBody().strength(d => d.kind === "ent" ? -700 : -60))
+  .force("collide", d3.forceCollide(d => radius(d) + 3))
+  .force("x", d3.forceX(0).strength(0.07)).force("y", d3.forceY(0).strength(0.07)).stop();
+for (let i = 0; i < 500; i++) simD.tick();
+
+ontoNodes.forEach(n => {
+  const t = edges.filter(e => e.type === "cross" && e.a === n.id).map(e => e.B);
+  n.ax = t.length ? d3.mean(t, d => d.x) : 0;
+  n.ay = t.length ? d3.mean(t, d => d.y) : 0;
+  n.x = n.ax + (Math.random() - .5) * 40; n.y = n.ay + (Math.random() - .5) * 40;
+});
+const ol = edges.filter(e => e.type === "onto").map(e => ({ source: e.a, target: e.b }));
+const simO = d3.forceSimulation(ontoNodes)
+  .force("link", d3.forceLink(ol).id(d => d.id).distance(40).strength(0.02))
+  .force("charge", d3.forceManyBody().strength(-110))
+  .force("collide", d3.forceCollide(d => radius(d) + 3))
+  .force("ax", d3.forceX(d => d.ax * 1.6).strength(0.05)).force("ay", d3.forceY(d => d.ay * 1.6).strength(0.05)).stop();
+for (let i = 0; i < 400; i++) simO.tick();
+
+for (const layer of [dataNodes, ontoNodes]) {
+  const ext = d3.quantile(layer.map(n => Math.hypot(n.x, n.y)).sort(d3.ascending), 0.92);
+  layer.forEach(n => {
+    n.x = n.x / ext * 330; n.y = n.y / ext * 330;
+    const r = Math.hypot(n.x, n.y);
+    if (r > 430) { n.x *= 430 / r; n.y *= 430 / r; }
+  });
+}
+
+/* ---------- Colors from tokens ---------- */
+let C = {};
+function readColors() {
+  const s = getComputedStyle(document.documentElement);
+  for (const k of ["s1", "s2", "s3", "table", "ent", "thread", "line", "ink", "ink2", "muted", "surface", "grid", "plane"]) C[k] = s.getPropertyValue("--" + k).trim();
+}
+readColors();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", readColors);
+new MutationObserver(readColors).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+const fill = n => ({ skill: C.s1, rule: C.s2, agent: C.s3, table: C.table, ent: C.ent })[n.kind];
+
+/* ---------- 3D projection ---------- */
+const cv = $("c"), ctx = cv.getContext("2d");
+let W = 0, H = 0, DPR = 1;
+let yaw = -0.6, pitch = 0.5, zoom = 1, hovered = null, pinned = null;
+const LAYER = 200, FOV = 1400, PLANE = 450;
+function resize() {
+  DPR = window.devicePixelRatio || 1;
+  W = cv.clientWidth; H = Math.round(Math.min(760, Math.max(420, W * 0.72)));
+  cv.style.height = H + "px"; cv.width = W * DPR; cv.height = H * DPR;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+function proj(X, Y, Z) {
+  const s = Math.min(W / 1000, H / 820) * zoom;
+  const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+  const x1 = X * cy - Z * sy, z1 = X * sy + Z * cy;
+  const y2 = Y * cp + z1 * sp, z2 = z1 * cp - Y * sp;
+  const f = FOV / (FOV + z2);
+  return { x: W / 2 + x1 * f * s, y: H / 2 - y2 * f * s, f: f * Math.max(s, 0.55), z: z2 };
+}
+const layerY = l => l ? LAYER : -LAYER;
+function place() { for (const n of nodes) { const p = proj(n.x, layerY(n.layer), n.y); n.sx = p.x; n.sy = p.y; n.f = p.f; n.z = p.z; } }
+
+/* ---------- Drawing ---------- */
+const show = { onto: true, key: true, lin: true, cross: true };
+const ALPHA = { onto: 0.16, key: 0.32, lin: 0.22, cross: 0.11 };
+const STROKE = { onto: () => C.line, key: () => C.ent, lin: () => C.table, cross: () => C.thread };
+
+function plane(l, label) {
+  const y = layerY(l), c = [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([a, b]) => proj(a * PLANE, y, b * PLANE));
+  ctx.beginPath(); c.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.closePath();
+  ctx.fillStyle = C.plane; ctx.fill();
+  ctx.strokeStyle = C.grid; ctx.lineWidth = 1; ctx.stroke();
+  const left = c.reduce((a, b) => b.x < a.x ? b : a);
+  ctx.font = "600 12px system-ui, sans-serif"; ctx.fillStyle = C.muted; ctx.textAlign = "left";
+  ctx.fillText(label, Math.max(8, left.x + 6), left.y - 8);
+}
+function drawEdges(types, focus) {
+  for (const t of types) {
+    if (!show[t]) continue;
+    ctx.strokeStyle = STROKE[t](); ctx.lineWidth = 1;
+    ctx.globalAlpha = focus ? 0.05 : ALPHA[t];
+    ctx.beginPath();
+    for (const e of edges) if (e.type === t) { ctx.moveTo(e.A.sx, e.A.sy); ctx.lineTo(e.B.sx, e.B.sy); }
+    ctx.stroke();
+    if (focus) {
+      ctx.globalAlpha = 0.85; ctx.lineWidth = 1.4; ctx.beginPath();
+      for (const e of edges) if (e.type === t && (e.A === focus || e.B === focus)) { ctx.moveTo(e.A.sx, e.A.sy); ctx.lineTo(e.B.sx, e.B.sy); }
+      ctx.stroke();
+    }
+  }
+  ctx.globalAlpha = 1;
+}
+function drawNodes(layer, focus, nb) {
+  const list = nodes.filter(n => n.layer === layer).sort((a, b) => b.z - a.z);
+  for (const n of list) {
+    const r = radius(n) * n.f;
+    ctx.globalAlpha = focus && !nb.has(n) ? 0.18 : 1;
+    ctx.beginPath(); ctx.arc(n.sx, n.sy, r, 0, Math.PI * 2);
+    ctx.fillStyle = fill(n); ctx.fill();
+    ctx.lineWidth = 1.2; ctx.strokeStyle = C.surface; ctx.stroke();
+    if (n === focus) { ctx.lineWidth = 2; ctx.strokeStyle = C.ink; ctx.beginPath(); ctx.arc(n.sx, n.sy, r + 3, 0, Math.PI * 2); ctx.stroke(); }
+  }
+  ctx.globalAlpha = 1;
+}
+const topOnto = new Set(ontoNodes.slice().sort((a, b) => b.deg.cross - a.deg.cross).slice(0, 7));
+const labelOrder = nodes.slice().sort((a, b) => (b.kind === "ent") - (a.kind === "ent") || (b.count || b.deg.cross) - (a.count || a.deg.cross));
+function drawLabels(focus, nb) {
+  ctx.textAlign = "left"; ctx.lineJoin = "round";
+  const boxes = [];
+  if (focus) boxes.length = 0;
+  for (const n of (focus ? [focus, ...labelOrder] : labelOrder)) {
+    const always = n.kind === "ent" || (!focus && topOnto.has(n));
+    if (!(always || (focus && nb.has(n)))) continue;
+    if (focus && !nb.has(n)) continue;
+    if (ANON && n.kind !== "ent") continue;
+    const big = n.kind === "ent";
+    ctx.font = (big ? "600 12px" : "11px") + " system-ui, sans-serif";
+    const x = n.sx + radius(n) * n.f + 4, y = n.sy + 4, w = ctx.measureText(n.name).width;
+    if (boxes.some(b => x < b.x + b.w && x + w > b.x && y - 11 < b.y && y > b.y - 11)) continue;
+    boxes.push({ x, y, w });
+    ctx.lineWidth = 3; ctx.strokeStyle = C.surface; ctx.strokeText(n.name, x, y);
+    ctx.fillStyle = big ? C.ink : C.ink2; ctx.fillText(n.name, x, y);
+  }
+}
+function neighbors(n) {
+  const s = new Set([n]);
+  for (const e of edges) if (show[e.type]) { if (e.A === n) s.add(e.B); if (e.B === n) s.add(e.A); }
+  return s;
+}
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  place();
+  const focus = pinned || hovered, nb = focus ? neighbors(focus) : null;
+  plane(0, "Graphe data : tables gold et identifiants");
+  drawEdges(["lin", "key"], focus);
+  drawNodes(0, focus, nb);
+  drawEdges(["cross"], focus);
+  plane(1, "Ontologie : skills, rules, agents");
+  drawEdges(["onto"], focus);
+  drawNodes(1, focus, nb);
+  drawLabels(focus, nb);
+}
+
+/* ---------- Interaction ---------- */
+const tip = $("tip");
+const citedBy = n => edges.filter(e => e.type === "cross" && e.B === n).map(e => e.A.name);
+const cites = (n, k) => edges.filter(e => e.type === "cross" && e.A === n && e.B.kind === k).length;
+function tipHtml(n) {
+  if (n.kind === "table") {
+    const by = citedBy(n);
+    if (ANON) return `<b>${KIND.table}</b><br><span class="m">${n.info.cols} colonnes documentées</span>` +
+      (n.info.ents.length ? `<br>Identifiants : ${n.info.ents.join(", ")}` : "<br>Aucun identifiant partagé") +
+      `<br>Lignage : ${n.deg.lin} table(s)<br>Citée par ${by.length} fichier(s)`;
+    return `<b>${n.name}</b><br><span class="m">${KIND.table} · ${n.info.schema} · ${n.info.cols} colonnes documentées</span>` +
+      (n.info.keys.length ? `<br>Clés : <code>${n.info.keys.join(", ")}</code>` : "<br>Aucun identifiant partagé") +
+      `<br>Lignage : ${n.deg.lin} table(s)<br>Citée par ${by.length} fichier(s)${by.length ? " : " + by.slice(0, 5).join(", ") + (by.length > 5 ? "…" : "") : ""}`;
+  }
+  if (n.kind === "ent") {
+    const by = citedBy(n);
+    return `<b>${n.name}</b><br><span class="m">${KIND.ent}</span><br>Porté par ${n.count} tables gold<br>Cité par ${by.length} fichier(s)`;
+  }
+  return `<b>${ANON ? KIND[n.kind] : n.name}</b><br><span class="m">${ANON ? "" : KIND[n.kind] + " · "}${fmt(n.lines)} lignes</span>` +
+    `<br>Cite ${cites(n, "table")} table(s) et ${cites(n, "ent")} identifiant(s)<br>Liens avec d'autres fichiers : ${n.deg.onto}`;
+}
+function pick(px, py) {
+  let best = null, bd = Infinity;
+  for (const n of nodes) {
+    const r = radius(n) * n.f + 4, d = Math.hypot(n.sx - px, n.sy - py);
+    if (d < r && (d < bd || (best && best.layer < n.layer && d < r))) { best = n; bd = d; }
+  }
+  return best;
+}
+let drag = null, lastMove = 0;
+cv.addEventListener("pointerdown", ev => { drag = { x: ev.clientX, y: ev.clientY, yaw, pitch, moved: false }; cv.setPointerCapture(ev.pointerId); });
+cv.addEventListener("pointermove", ev => {
+  const r = cv.getBoundingClientRect();
+  if (drag) {
+    const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
+    if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true;
+    yaw = drag.yaw + dx * 0.006;
+    pitch = Math.max(0.12, Math.min(1.35, drag.pitch + dy * 0.004));
+    lastMove = performance.now(); tip.hidden = true;
+    return;
+  }
+  hovered = pick(ev.clientX - r.left, ev.clientY - r.top);
+  if (hovered) { tip.innerHTML = tipHtml(hovered); tip.hidden = false; placeTip(ev); } else tip.hidden = true;
+});
+cv.addEventListener("pointerup", ev => {
+  if (drag && !drag.moved) { const r = cv.getBoundingClientRect(); const n = pick(ev.clientX - r.left, ev.clientY - r.top); pinned = n && n !== pinned ? n : null; }
+  drag = null;
+});
+cv.addEventListener("pointerleave", () => { hovered = null; tip.hidden = true; });
+cv.addEventListener("wheel", ev => { ev.preventDefault(); zoom = Math.max(0.6, Math.min(3, zoom * Math.exp(-ev.deltaY * 0.0012))); }, { passive: false });
+function placeTip(ev) {
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = ev.clientX + 14, y = ev.clientY + 14;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - 14;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - 14;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+for (const t of ["onto", "key", "lin", "cross"]) $("e-" + t).addEventListener("change", ev => show[t] = ev.target.checked);
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (reduced) $("spin").checked = false;
+function loop(now) {
+  if ($("spin").checked && !drag && now - lastMove > 2500 && !hovered) yaw += 0.0018;
+  draw();
+  requestAnimationFrame(loop);
+}
+addEventListener("resize", resize);
+resize();
+requestAnimationFrame(loop);
+
+/* ---------- Tiles and panels ---------- */
+const tables = dataNodes.filter(n => n.kind === "table"), ents = dataNodes.filter(n => n.kind === "ent");
+const cited = tables.filter(n => n.deg.cross > 0);
+$("t-tables").textContent = tables.length;
+$("t-ents").textContent = ents.length;
+$("t-links").textContent = fmt(D.keys.length + D.lineage.length);
+$("t-links-d").textContent = `${D.keys.length} clés partagées, ${D.lineage.length} liens de lignage`;
+$("t-onto").textContent = ontoNodes.length;
+$("t-onto-d").textContent = `${fmt(D.onto_edges.length)} citations entre eux`;
+$("t-cross").textContent = fmt(edges.filter(e => e.type === "cross").length);
+$("t-cov").textContent = `${cited.length} / ${tables.length}`;
+$("t-cov-d").textContent = `${Math.round(100 * cited.length / tables.length)} % des tables, ${ents.filter(n => n.deg.cross).length} identifiants sur ${ents.length}`;
+
+const maxC = d3.max(ents, n => n.count);
+$("ents").innerHTML = ents.sort((a, b) => b.count - a.count).map(n =>
+  `<tr class="row" data-id="${n.id}"><td>${n.name}</td><td class="n">${n.count}</td><td class="barcell"><div class="meter" style="width:${100 * n.count / maxC}%"></div></td><td class="n">${n.deg.cross}</td></tr>`).join("");
+const uncited = tables.filter(n => !n.deg.cross).sort((a, b) => a.name.localeCompare(b.name));
+$("uncited-note").textContent = `${uncited.length} tables sur ${tables.length}. Ce sont les trous de l'ontologie : la donnée existe, aucune skill n'explique encore comment la lire.`;
+if (ANON) $("t-tables-d").textContent = "la couche d'analyse";
+$("uncited").innerHTML = ANON ? "" : uncited.map(n => `<span class="chip" data-id="${n.id}">${n.name}</span>`).join("");
+const isolated = tables.filter(n => !n.deg.key && !n.deg.lin).sort((a, b) => a.name.localeCompare(b.name));
+if (ANON) $("isolated").previousElementSibling.textContent += ` ${isolated.length} tables.`;
+$("isolated").innerHTML = ANON ? "" : isolated.map(n => `<span class="chip" data-id="${n.id}">${n.name}</span>`).join("");
+document.querySelectorAll("[data-id]").forEach(el => {
+  el.addEventListener("mouseenter", () => { pinned = byId.get(el.dataset.id); });
+  el.addEventListener("mouseleave", () => { pinned = null; });
+  el.addEventListener("click", () => { pinned = byId.get(el.dataset.id); cv.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" }); });
+});
+</script>
+
+</body></html>
