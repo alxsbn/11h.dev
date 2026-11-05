@@ -1,5 +1,6 @@
 /* ============================================================
-   Cellular — moteur métaball WebGL (p5.js) piloté par BEATS.
+   Cellular — moteur métaball WebGL (p5.js) piloté par BEATS,
+   avec un repli canvas 2D du halo quand le navigateur n'a pas de WebGL.
    Dérivé du prototype cellular-deck : shader métaball (les cellules
    fusionnent organiquement, couleurs qui se fondent aux jonctions),
    persistance par `id` (même id = la cellule vit et se déplace en
@@ -171,23 +172,48 @@ void main(){
     const CFG = { background:[246,239,228], threshold:0.73, softness:0.55, glow:0.55, speed:1.0, wander:0.55 };
     this.CFG = CFG;
 
+    // Sans WebGL (GPU blocklisté, accélération matérielle coupée), p5 lève une exception
+    // dans setup et rien ne s'affiche : on bascule alors le halo sur un canvas 2D.
+    const useGL = Cellular.hasWebGL();
+
     this.p = new p5((sk) => {
-      let theShader;
+      let theShader = null;
+      let failed = false;
       sk.setup = () => {
         self.p = sk;                 // dispo dès le setup (avant le retour de new p5)
         sk.pixelDensity(1);
         const w = self.canvasHost.clientWidth || 900, h = self.canvasHost.clientHeight || 500;
-        const cv = sk.createCanvas(w, h, sk.WEBGL);
+        let cv;
+        try {
+          cv = sk.createCanvas(w, h, useGL ? sk.WEBGL : sk.P2D);
+          if (useGL) {
+            const { vert, frag } = self._shaders();
+            theShader = sk.createShader(vert, frag);
+          }
+        } catch (e) {
+          // contexte WebGL refusé malgré la sonde (contexte perdu, limite atteinte) : relance en 2D
+          if (!useGL) throw e;
+          failed = true;
+          Cellular._webgl = false;
+          setTimeout(() => { if (self.p === sk) self.enter(); }, 0);
+          return;
+        }
         cv.parent(self.canvasHost);
         sk.noStroke();
-        const { vert, frag } = self._shaders();
-        theShader = sk.createShader(vert, frag);
         self._applyBeat(0, true);
         self.beatIdx = 0;
       };
       sk.draw = () => {
+        if (failed) return;
         const t = sk.millis()/1000 * CFG.speed * (0.7 + self.tempo*0.35);
         self._updateCells(sk, t);
+        if (!theShader) {
+          self._drawHalo2D(sk);
+          self._drawDisks(sk);
+          self._syncLabels(sk);
+          self._drawFrieze();
+          return;
+        }
         const pos = new Array(self.MAX*3).fill(0);
         const cols = new Array(self.MAX*3).fill(0);
         let n = 0;
@@ -216,6 +242,41 @@ void main(){
         sk.resizeCanvas(w, h);
       };
     });
+  }
+
+  /* sondé une seule fois : chaque contexte de sonde compte dans la limite de contextes WebGL du navigateur */
+  static hasWebGL() {
+    if (Cellular._webgl !== undefined) return Cellular._webgl;
+    try {
+      const c = document.createElement("canvas");
+      const gl = c.getContext("webgl") || c.getContext("experimental-webgl");
+      Cellular._webgl = !!gl;
+      if (gl) gl.getExtension("WEBGL_lose_context")?.loseContext();
+    } catch (e) {
+      Cellular._webgl = false;
+    }
+    return Cellular._webgl;
+  }
+
+  /* repli 2D du halo métaball : un dégradé radial par cellule, superposé par alpha
+     (sans les ponts de matière du shader) */
+  _drawHalo2D(sk) {
+    const ctx = sk.drawingContext;
+    const [br, bg, bb] = this.CFG.background;
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = `rgb(${br},${bg},${bb})`;
+    ctx.fillRect(0, 0, sk.width, sk.height);
+    for (const c of this.cells) {
+      if (c.r < 1) continue;
+      const [r, g, b] = c.color.map(Math.round);
+      const R = c.r * 3.2;
+      const grad = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, R);
+      grad.addColorStop(0, `rgba(${r},${g},${b},${0.5 * this.CFG.glow})`);
+      grad.addColorStop(0.45, `rgba(${r},${g},${b},${0.18 * this.CFG.glow})`);
+      grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(c.x - R, c.y - R, R * 2, R * 2);
+    }
   }
 
   exit() {
