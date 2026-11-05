@@ -1,5 +1,6 @@
 /* ============================================================
-   Cellular — moteur métaball WebGL (p5.js) piloté par BEATS.
+   Cellular — moteur métaball WebGL (p5.js) piloté par BEATS,
+   avec un repli canvas 2D du halo quand le navigateur n'a pas de WebGL.
    Dérivé du prototype cellular-deck : shader métaball (les cellules
    fusionnent organiquement, couleurs qui se fondent aux jonctions),
    persistance par `id` (même id = la cellule vit et se déplace en
@@ -177,21 +178,33 @@ void main(){
 
     this.p = new p5((sk) => {
       let theShader = null;
+      let failed = false;
       sk.setup = () => {
         self.p = sk;                 // dispo dès le setup (avant le retour de new p5)
         sk.pixelDensity(1);
         const w = self.canvasHost.clientWidth || 900, h = self.canvasHost.clientHeight || 500;
-        const cv = sk.createCanvas(w, h, useGL ? sk.WEBGL : sk.P2D);
+        let cv;
+        try {
+          cv = sk.createCanvas(w, h, useGL ? sk.WEBGL : sk.P2D);
+          if (useGL) {
+            const { vert, frag } = self._shaders();
+            theShader = sk.createShader(vert, frag);
+          }
+        } catch (e) {
+          // contexte WebGL refusé malgré la sonde (contexte perdu, limite atteinte) : relance en 2D
+          if (!useGL) throw e;
+          failed = true;
+          Cellular._webgl = false;
+          setTimeout(() => { if (self.p === sk) self.enter(); }, 0);
+          return;
+        }
         cv.parent(self.canvasHost);
         sk.noStroke();
-        if (useGL) {
-          const { vert, frag } = self._shaders();
-          theShader = sk.createShader(vert, frag);
-        }
         self._applyBeat(0, true);
         self.beatIdx = 0;
       };
       sk.draw = () => {
+        if (failed) return;
         const t = sk.millis()/1000 * CFG.speed * (0.7 + self.tempo*0.35);
         self._updateCells(sk, t);
         if (!theShader) {
@@ -231,16 +244,22 @@ void main(){
     });
   }
 
+  /* sondé une seule fois : chaque contexte de sonde compte dans la limite de contextes WebGL du navigateur */
   static hasWebGL() {
+    if (Cellular._webgl !== undefined) return Cellular._webgl;
     try {
       const c = document.createElement("canvas");
-      return !!(c.getContext("webgl") || c.getContext("experimental-webgl"));
+      const gl = c.getContext("webgl") || c.getContext("experimental-webgl");
+      Cellular._webgl = !!gl;
+      if (gl) gl.getExtension("WEBGL_lose_context")?.loseContext();
     } catch (e) {
-      return false;
+      Cellular._webgl = false;
     }
+    return Cellular._webgl;
   }
 
-  /* repli 2D du halo métaball : un dégradé radial par cellule, en mélange additif doux */
+  /* repli 2D du halo métaball : un dégradé radial par cellule, superposé par alpha
+     (sans les ponts de matière du shader) */
   _drawHalo2D(sk) {
     const ctx = sk.drawingContext;
     const [br, bg, bb] = this.CFG.background;
