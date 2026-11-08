@@ -25,6 +25,7 @@
 
         <div class="trigger">
           <a class="page-link" href="{{ '/' | append: page_lang | append: '/' | relative_url }}">{{ t.home }}</a>
+          <a class="page-link" href="{{ '/' | append: page_lang | append: '/' | append: t.works_slug | append: '/' | relative_url }}">{{ t.works }}</a>
           <a class="page-link" href="{{ '/' | append: page_lang | append: '/about/' | relative_url }}">{{ t.about }}</a>
         </div>
       </nav>
@@ -32,7 +33,7 @@
 
     <!-- Right: Language Toggle + Dark Mode Toggle -->
     <div class="header-right">
-      {%- assign switch_url = nil -%}
+      {%- assign switch_url = page.alt_url -%}
       {%- if page.ref -%}
         {%- if page_lang == "en" -%}
           {%- assign other_lang = "fr" -%}

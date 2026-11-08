@@ -1,0 +1,57 @@
+---
+layout: default
+---
+{%- assign page_lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.translations[page_lang] -%}
+{%- assign date_format = t.date_format | default: "%B %-d, %Y" -%}
+
+<div class="home-container">
+  <header class="home-header">
+    <h1 class="home-title">{{ page.title }}</h1>
+  </header>
+
+  {%- if t.works_intro -%}
+  <div class="home-intro">
+    <p>{{ t.works_intro }}</p>
+  </div>
+  {%- endif -%}
+
+  {{ content }}
+
+  {%- comment -%}
+    A work is any page whose front matter sets `work: true` (talks under /talk/,
+    apps under /apps/). Fields mirror a post: title, date, excerpt (French),
+    excerpt_en (English), header_image, header_image_alt. `kind` is talk or
+    app, `event` is optional.
+  {%- endcomment -%}
+  {%- assign works = site.pages | where: "work", true | sort: "date" | reverse -%}
+  {%- if works.size > 0 -%}
+  <div class="posts-container">
+    <div class="posts-grid">
+      {%- for work in works -%}
+      {%- assign kind_key = "kind_" | append: work.kind -%}
+      {%- assign excerpt = work.excerpt -%}
+      {%- if page_lang == "en" and work.excerpt_en -%}{%- assign excerpt = work.excerpt_en -%}{%- endif -%}
+      <article class="post-card">
+        <a href="{{ work.url | relative_url }}" class="post-card__link">
+          {%- if work.header_image -%}
+          <div class="post-card__image">
+            <img src="{{ work.header_image | relative_url }}" alt="{{ work.header_image_alt | default: work.title }}" loading="lazy">
+          </div>
+          {%- endif -%}
+          <div class="post-card__content">
+            <h3 class="post-card__title">{{ work.title | escape }}</h3>
+            <time class="post-card__date" datetime="{{ work.date | date_to_xmlschema }}">
+              {{ work.date | date: date_format }}{% if t[kind_key] %} · {{ t[kind_key] }}{% endif %}{% if work.event %} · {{ work.event }}{% endif %}
+            </time>
+            {%- if excerpt -%}
+            <p class="post-card__excerpt">{{ excerpt | strip_html | truncate: 200 }}</p>
+            {%- endif -%}
+          </div>
+        </a>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+</div>
