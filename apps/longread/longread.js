@@ -45,7 +45,7 @@ window.Longread = (() => {
         const r = img.parentElement.getBoundingClientRect();
         if (r.bottom < 0 || r.top > h) continue;
         const p = Math.min(1, Math.max(0, (h - r.top) / (h + r.height)));
-        const z = img.dataset.zoom === 'hero' ? 1.05 + p * 0.25 : 1.9 - p * 0.45;
+        const z = img.dataset.zoom === 'hero' ? 1.05 + p * 0.25 : 1.2 - p * 0.2;
         img.style.setProperty('--z', z.toFixed(3));
       }
     }
