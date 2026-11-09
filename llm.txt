@@ -22,10 +22,10 @@ All article URLs follow the pattern: `/{lang}/{year}/{month}/{day}/{slug}/`
 Talks, long reads and interactive apps are listed on a separate page: https://11h.dev/fr/travaux/ (FR) and https://11h.dev/en/work/ (EN). Talks live under `/talk/{slug}/`, long reads under `/longread/{slug}/`, apps under `/apps/{slug}/`.
 
 Long reads (French, scrollytelling):
-- [Un livre, plusieurs rayons](/longread/multilabel-llm/) - Multi-label text classification with an LLM: few-shot prompting, token costs, metrics, production. With Martin Labenne.
-- [Deux ans pour ne plus y penser](/longread/mysql-s3-dms/) - MySQL to S3 with AWS DMS: seven production lessons, from partitioning to binlogs.
-- [Les pièges qu'on se tend](/longread/pieges-passage-echelle/) - Scaling data operations: five rules and the traps they avoid.
-- [Deux factures pour un cluster](/longread/databricks-couts/) - Databricks cost management: reading the bill, tagging, system tables, compute, Photon.
+- [Multi-label Classification Problems with Large Language Models](/longread/multilabel-llm/) - Multi-label text classification with an LLM: few-shot prompting, token costs, metrics, production. With Martin Labenne.
+- [MySQL vers S3 avec AWS DMS : ce qui marche vraiment en production](/longread/mysql-s3-dms/) - MySQL to S3 with AWS DMS: seven production lessons, from partitioning to binlogs.
+- [Les pièges cachés du passage à l'échelle des opérations data, et comment les surmonter](/longread/pieges-passage-echelle/) - Scaling data operations: five rules and the traps they avoid.
+- [Gestion des coûts Databricks](/longread/databricks-couts/) - Databricks cost management: reading the bill, tagging, system tables, compute, Photon.
 
 ## What This Blog Is About
 
