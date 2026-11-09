@@ -58,26 +58,26 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .home-container .post-card__link,
-  .home-container .post-card__link:visited,
-  .home-container a.post-card__link,
-  .home-container a.post-card__link:visited {
+  :root:not([data-theme="light"]) .home-container .post-card__link,
+  :root:not([data-theme="light"]) .home-container .post-card__link:visited,
+  :root:not([data-theme="light"]) .home-container a.post-card__link,
+  :root:not([data-theme="light"]) .home-container a.post-card__link:visited {
     color: #f0f0f0 !important;
   }
 
-  .home-container .post-card__title,
-  .home-container .post-card__link .post-card__title,
-  .home-container h2.post-card__title,
-  .home-container h3.post-card__title {
+  :root:not([data-theme="light"]) .home-container .post-card__title,
+  :root:not([data-theme="light"]) .home-container .post-card__link .post-card__title,
+  :root:not([data-theme="light"]) .home-container h2.post-card__title,
+  :root:not([data-theme="light"]) .home-container h3.post-card__title {
     color: #f0f0f0 !important;
   }
 
-  .home-container .post-card__excerpt,
-  .home-container .post-card__link .post-card__excerpt {
+  :root:not([data-theme="light"]) .home-container .post-card__excerpt,
+  :root:not([data-theme="light"]) .home-container .post-card__link .post-card__excerpt {
     color: #b8b8b8 !important;
   }
 
-  .home-container .post-card:hover .post-card__title {
+  :root:not([data-theme="light"]) .home-container .post-card:hover .post-card__title {
     color: #ffffff !important;
   }
 }
