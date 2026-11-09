@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un livre, plusieurs rayons</title>
+<meta name="description" content="Talk : classifier du texte en multi-label avec un LLM. Alexis Blandin et Martin Labenne, Jolimoi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF9F6;
+    --ink: #1F1B18;
+    --muted: #6E655D;
+    --line: #DDD6CC;
+    --accent: #A9472F;
+    --code-bg: #F1EDE6;
+    --mark: #F3DCC4;
+    --pol: #3E6A95;
+    --eco: #A86F1E;
+    --spo: #4C7A47;
+    --ent: #8A4F7D;
+    --serif: "Spectral", Georgia, serif;
+    --mono: "JetBrains Mono", "IBM Plex Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); overflow: hidden; }
+  body { font-family: var(--serif); -webkit-font-smoothing: antialiased; }
+
+  /* Scène 16:9 de 1600 × 900, mise à l'échelle de la fenêtre */
+  #stage {
+    position: absolute; left: 50%; top: 50%;
+    width: 1600px; height: 900px;
+    transform-origin: 0 0;
+  }
+  .slide {
+    position: absolute; inset: 0;
+    padding: 110px 140px;
+    display: none; overflow: hidden;
+    flex-direction: column; justify-content: center;
+  }
+  .slide.active { display: flex; }
+
+  h1, h2, h3, p { margin: 0; font-weight: 400; }
+  h1 { font-size: 104px; line-height: 1.02; letter-spacing: -0.01em; }
+  h2 { font-size: 64px; line-height: 1.1; margin-bottom: 48px; }
+  h3 { font-size: 40px; line-height: 1.2; }
+  p, li { font-size: 38px; line-height: 1.35; }
+  .muted { color: var(--muted); }
+  .small { font-size: 28px; }
+  .accent { color: var(--accent); }
+  em { font-style: italic; }
+  .kicker { font-size: 26px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+  ul.plain { list-style: none; margin: 0; padding: 0; }
+  ul.plain li { padding-left: 44px; position: relative; margin: 0 0 22px; }
+  ul.plain li::before { content: "–"; position: absolute; left: 0; color: var(--accent); }
+
+  /* Révélations au clic */
+  .step:not(.mark) { visibility: hidden; }
+  .step.on:not(.mark) { visibility: visible; }
+  .mark { transition: background-color .15s; border-radius: 4px; }
+  .mark.on { background: var(--mark); }
+
+  /* Titre : panneau image collé à gauche (46 %) */
+  .s-title { padding: 0; flex-direction: row; justify-content: flex-start; }
+  .s-title .panel { width: 46%; height: 100%; overflow: hidden; }
+  .s-title .panel img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; display: block; }
+  .s-title .text { width: 54%; padding: 0 110px 0 96px; display: flex; flex-direction: column; justify-content: center; }
+  .s-title h1 { font-size: 112px; }
+  .s-title .sub { font-size: 38px; margin-top: 40px; color: var(--muted); font-style: italic; }
+  .s-title .by { font-size: 30px; margin-top: 72px; }
+  .s-title .by span { color: var(--muted); }
+
+  /* Chapitres : même photo, un étage plus haut à chaque rayon */
+  .s-chapter { padding: 0; }
+  .s-chapter img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; transform: scale(var(--zoom, 1.7));
+    transform-origin: var(--focus, 50% 90%);
+  }
+  .s-chapter .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(250,249,246,.96) 0%, rgba(250,249,246,.9) 42%, rgba(250,249,246,.15) 75%); }
+  .s-chapter .label { position: relative; padding-left: 140px; }
+  .s-chapter .num { font-size: 32px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+  .s-chapter h1 { font-size: 110px; }
+
+  /* Question au public */
+  .quote { font-size: 64px; line-height: 1.2; font-style: italic; margin: 10px 0 56px; }
+  .answer { font-size: 44px; margin-top: 44px; }
+
+  /* Étiquettes */
+  .chips { display: flex; gap: 20px; flex-wrap: wrap; min-height: 76px; align-items: center; }
+  .chip {
+    font-family: var(--serif); font-size: 34px; padding: 8px 26px 10px;
+    border-radius: 999px; color: #fff; display: inline-block; line-height: 1.2;
+  }
+  .chip.pol { background: var(--pol); }
+  .chip.eco { background: var(--eco); }
+  .chip.spo { background: var(--spo); }
+  .chip.ent { background: var(--ent); }
+  .chip.none { background: transparent; color: var(--muted); border: 2px dashed var(--line); }
+  .chip.sm { font-size: 22px; padding: 4px 14px 6px; }
+
+  /* Deux colonnes */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; }
+  .cols h3 { margin-bottom: 22px; }
+  .rule { border-top: 2px solid var(--line); padding-top: 28px; }
+
+  /* Tableau */
+  table { border-collapse: collapse; font-size: 26px; width: 100%; }
+  th, td { padding: 13px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+  th { font-weight: 600; font-size: 22px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  td.bin { text-align: center; font-family: var(--mono); font-size: 24px; }
+  td.bin.one { color: var(--accent); font-weight: 600; }
+  th.bin { text-align: center; }
+  td.txt { font-style: italic; }
+
+  /* Chiffres */
+  .big { font-size: 150px; line-height: 1; letter-spacing: -0.02em; }
+  .bigline { display: flex; align-items: baseline; gap: 36px; margin-bottom: 28px; }
+  .bigline .big { min-width: 0; }
+  .bigline p { font-size: 44px; }
+
+  /* Pipeline */
+  .flow { display: flex; align-items: stretch; gap: 0; margin-bottom: 60px; }
+  .box { flex: 1; border: 2px solid var(--ink); padding: 28px 30px; border-radius: 6px; }
+  .box h3 { margin-bottom: 12px; }
+  .box p { font-size: 28px; color: var(--muted); line-height: 1.35; }
+  .arrow { width: 70px; display: flex; align-items: center; justify-content: center; font-size: 44px; color: var(--muted); }
+
+  /* Trois raisons */
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
+  .three h3 { color: var(--accent); margin-bottom: 18px; }
+  .three p { font-size: 32px; }
+
+  /* Barres de tokens (schéma, pas une mesure) */
+  .tok { display: grid; grid-template-columns: 330px 1fr; row-gap: 34px; column-gap: 30px; align-items: center; margin-bottom: 40px; }
+  .tok .name { font-size: 34px; }
+  .tok .name small { display: block; font-size: 24px; color: var(--muted); font-style: italic; }
+  .bars { display: flex; gap: 8px; height: 46px; }
+  .bar { height: 100%; border-radius: 3px; display: flex; align-items: center; padding: 0 14px; font-size: 20px; color: #fff; white-space: nowrap; }
+  .bar.in { background: #9C9187; }
+  .bar.out { background: var(--accent); }
+  .legend { display: flex; gap: 40px; font-size: 24px; color: var(--muted); margin-bottom: 30px; }
+  .legend i { display: inline-block; width: 22px; height: 22px; border-radius: 3px; vertical-align: -3px; margin-right: 10px; }
+
+  /* Code */
+  pre {
+    margin: 0; background: var(--code-bg); border-radius: 8px;
+    padding: 34px 40px; font-family: var(--mono); font-size: 25px; line-height: 1.5;
+    white-space: pre; overflow: hidden; color: var(--ink);
+  }
+  pre .line { display: block; padding: 0 8px; margin: 0 -8px; }
+  pre .c { color: #8A8076; font-style: italic; }
+  pre .s { color: #7B4A1F; }
+  pre .k { color: var(--accent); font-weight: 600; }
+  .codehead { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; }
+  .codehead h2 { margin: 0; font-size: 54px; }
+  .codehead span { font-size: 24px; color: var(--muted); font-style: italic; }
+  .caption { margin-top: 30px; font-size: 30px; }
+
+  /* Cascade */
+  .cascade { display: grid; grid-template-columns: 240px 70px 360px 70px 1fr; align-items: center; margin: 10px 0 56px; }
+  .cascade .box { padding: 22px 26px; }
+  .cascade .stack { display: flex; flex-direction: column; gap: 18px; }
+
+  /* Métriques */
+  .truth { display: grid; grid-template-columns: 200px 1fr; row-gap: 22px; align-items: center; margin-bottom: 50px; }
+  .truth .who { font-size: 30px; color: var(--muted); font-style: italic; }
+  .verdicts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; }
+  .verdict { border-top: 3px solid var(--ink); padding-top: 20px; }
+  .verdict .v { font-size: 84px; line-height: 1; margin: 6px 0 14px; }
+  .verdict h3 { font-size: 30px; font-weight: 600; }
+  .verdict p { font-size: 25px; color: var(--muted); line-height: 1.35; }
+
+  .avg { display: grid; grid-template-columns: 220px 1fr; row-gap: 18px; margin-top: 10px; }
+  .avg dt { font-family: var(--mono); font-size: 28px; color: var(--accent); }
+  .avg dd { margin: 0; font-size: 30px; }
+
+  /* Fin */
+  .s-end h1 { font-size: 96px; margin-bottom: 50px; }
+  .s-end a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 6px; }
+  .credits { position: absolute; bottom: 60px; left: 140px; right: 140px; font-size: 20px; color: var(--muted); }
+  .credits a { color: var(--muted); }
+
+  /* Chrome */
+  #progress { position: fixed; left: 0; bottom: 0; height: 4px; background: var(--accent); transition: width .2s; z-index: 5; }
+  #count { position: fixed; right: 18px; bottom: 12px; font: 14px var(--mono); color: var(--muted); z-index: 5; }
+  #hint { position: fixed; right: 90px; bottom: 12px; font: 15px var(--serif); color: var(--muted); font-style: italic; transition: opacity .4s; z-index: 5; }
+  #notes {
+    position: fixed; left: 0; right: 0; bottom: 0; max-height: 36vh; overflow: auto;
+    background: rgba(31,27,24,.94); color: #F4EFE8; font: 17px/1.5 var(--serif);
+    padding: 18px 26px 26px; display: none; z-index: 10;
+  }
+  #notes.show { display: block; }
+  #notes b { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #C9A98F; display: block; margin-bottom: 6px; }
+  aside.notes { display: none; }
+</style>
+</head>
+<body>
+<main id="stage">
+
+<!-- 1. Titre -->
+<section class="slide s-title">
+  <div class="panel"><img src="assets/bibliotheque.jpg" alt="Atrium blanc d'une bibliothèque sur plusieurs étages, rayonnages et escaliers"></div>
+  <div class="text">
+    <div class="kicker">Jolimoi Tech</div>
+    <h1>Un livre,<br>plusieurs rayons</h1>
+    <p class="sub">Classifier du texte en multi-label<br>avec un LLM</p>
+    <p class="by">Alexis Blandin <span>&amp;</span> Martin Labenne</p>
+  </div>
+  <aside class="notes">Le talk reprend l'article écrit avec Martin, Data Scientist de l'équipe. Une seule image pour tout le talk : une bibliothèque, où un livre peut appartenir à plusieurs rayons, ou à aucun.</aside>
+</section>
+
+<!-- 2. Question : deux rayons -->
+<section class="slide">
+  <div class="kicker">Une question pour la salle</div>
+  <h2>Dans quel rayon range-t-on cette phrase&nbsp;?</h2>
+  <p class="quote" style="font-size:58px">«&nbsp;Election debate highlights key economic policies.&nbsp;»</p>
+  <div class="chips step"><span class="chip pol">politique</span><span class="chip eco">économie</span></div>
+  <p class="answer step">Les deux. Personne n'a tort.</p>
+  <aside class="notes">Laisser la salle répondre. Certains diront politique, d'autres économie. La bonne réponse est les deux : c'est tout le sujet.</aside>
+</section>
+
+<!-- 3. Question : aucun rayon -->
+<section class="slide">
+  <div class="kicker">Et celle-ci</div>
+  <h2>Sports, politique, économie ou divertissement&nbsp;?</h2>
+  <p class="quote">«&nbsp;AI will take on the world.&nbsp;»</p>
+  <div class="chips step"><span class="chip none">aucun rayon</span></div>
+  <p class="answer step">Le vide aussi est une réponse.<br><span class="muted">Le classifieur doit savoir la donner.</span></p>
+  <aside class="notes">Le cas oublié : rien ne s'applique. Un modèle qui force toujours une étiquette se trompe ici.</aside>
+</section>
+
+<!-- 4. Multi-classe vs multi-label -->
+<section class="slide">
+  <h2>Deux problèmes qui se ressemblent</h2>
+  <div class="cols">
+    <div class="rule">
+      <h3>Multi-classe</h3>
+      <p class="muted">Un texte va dans <em>exactement un</em> rayon. Les classes s'excluent.</p>
+    </div>
+    <div class="rule">
+      <h3 class="accent">Multi-label</h3>
+      <p>Un texte va dans <em>zéro, un ou plusieurs</em> rayons. Le nombre d'étiquettes varie d'un texte à l'autre.</p>
+    </div>
+  </div>
+  <p class="step" style="margin-top:70px">Les étiquettes se tiennent entre elles&nbsp;: la présence de l'une change la probabilité de l'autre.</p>
+  <aside class="notes">Élection et économie vont souvent ensemble. Le modèle doit apprendre ces dépendances, pas seulement chaque étiquette isolément.</aside>
+</section>
+
+<!-- 5. Représentation -->
+<section class="slide">
+  <h2 style="margin-bottom:34px">Deux écritures du même fait</h2>
+  <table>
+    <thead><tr><th>Texte</th><th>Liste</th><th class="bin">Pol.</th><th class="bin">Éco.</th><th class="bin">Sport</th><th class="bin">Divert.</th></tr></thead>
+    <tbody>
+      <tr><td class="txt">Government passes new healthcare reform.</td><td><span class="chip sm pol">politique</span></td><td class="bin one">1</td><td class="bin">0</td><td class="bin">0</td><td class="bin">0</td></tr>
+      <tr><td class="txt">Stock market hits new highs amid economic boom.</td><td><span class="chip sm eco">économie</span></td><td class="bin">0</td><td class="bin one">1</td><td class="bin">0</td><td class="bin">0</td></tr>
+      <tr><td class="txt">Celebrity singer releases new music video.</td><td><span class="chip sm ent">divertissement</span></td><td class="bin">0</td><td class="bin">0</td><td class="bin">0</td><td class="bin one">1</td></tr>
+      <tr><td class="txt">Local sports team wins championship game.</td><td><span class="chip sm spo">sport</span></td><td class="bin">0</td><td class="bin">0</td><td class="bin one">1</td><td class="bin">0</td></tr>
+      <tr><td class="txt">Election debate highlights key economic policies.</td><td><span class="chip sm pol">politique</span> <span class="chip sm eco">économie</span></td><td class="bin one">1</td><td class="bin one">1</td><td class="bin">0</td><td class="bin">0</td></tr>
+      <tr><td class="txt">AI will take on the world.</td><td><span class="muted">[ ]</span></td><td class="bin">0</td><td class="bin">0</td><td class="bin">0</td><td class="bin">0</td></tr>
+    </tbody>
+  </table>
+  <p class="caption muted">Une liste par texte, ou une colonne binaire par étiquette.</p>
+  <aside class="notes">La colonne binaire est la forme qu'attendent les métriques de scikit-learn. On y reviendra à la fin.</aside>
+</section>
+
+<!-- 6. Explosion combinatoire -->
+<section class="slide">
+  <h2>Pourquoi c'est difficile</h2>
+  <div class="bigline"><span class="big">16</span><p>combinaisons possibles avec 4 étiquettes</p></div>
+  <div class="bigline step"><span class="big accent">1&nbsp;048&nbsp;576</span><p>avec 20</p></div>
+  <p class="step" style="margin-top:30px">La matrice se vide. Beaucoup de combinaisons n'ont presque aucun exemple, et un modèle entraîné en réclame beaucoup.</p>
+  <p class="step" style="margin-top:22px"><em>Et si on n'a pas ces données, ni le temps de les produire&nbsp;?</em></p>
+  <aside class="notes">2 puissance n. Chaque étiquette ajoutée double le nombre de combinaisons. C'est la question qui ouvre le talk.</aside>
+</section>
+
+<!-- 7. Chapitre 1 -->
+<section class="slide s-chapter" style="--focus: 30% 95%;">
+  <img src="assets/bibliotheque.jpg" alt="">
+  <div class="veil"></div>
+  <div class="label"><div class="num">Rayon 1</div><h1>L'ancien chemin</h1></div>
+</section>
+
+<!-- 8. Pipeline NLP -->
+<section class="slide">
+  <h2>Un projet NLP classique</h2>
+  <div class="flow">
+    <div class="box"><h3>Prétraitement</h3><p>Minuscules, ponctuation, chiffres, racinisation ou lemmatisation</p></div>
+    <div class="arrow">→</div>
+    <div class="box"><h3>Features</h3><p>Sac de mots, n-grammes</p></div>
+    <div class="arrow">→</div>
+    <div class="box"><h3>Modèle</h3><p>Sélection, réglage des hyperparamètres, validation</p></div>
+  </div>
+  <div class="cols step">
+    <div><h3 class="accent">Le déséquilibre</h3><p class="small">Certaines étiquettes reviennent partout, d'autres presque jamais. Plus l'écart est grand, plus l'entraînement souffre.</p></div>
+    <div><h3 class="accent">La corrélation</h3><p class="small">Le modèle doit apprendre les liens entre étiquettes, en plus des étiquettes elles-mêmes.</p></div>
+  </div>
+  <aside class="notes">Rien d'impossible ici, mais du temps et des ressources avant la première prédiction utile.</aside>
+</section>
+
+<!-- 9. Chapitre 2 -->
+<section class="slide s-chapter" style="--focus: 40% 72%;">
+  <img src="assets/bibliotheque.jpg" alt="">
+  <div class="veil"></div>
+  <div class="label"><div class="num">Rayon 2</div><h1>Le raccourci</h1></div>
+</section>
+
+<!-- 10. Pourquoi un LLM -->
+<section class="slide">
+  <h2>Pourquoi un LLM</h2>
+  <div class="three">
+    <div><h3>Simple</h3><p>Une API, dans n'importe quel langage. Pas de prétraitement du texte, pas de modèle à entraîner.</p></div>
+    <div class="step"><h3>Moins cher</h3><p>Héberger un modèle demande un GPU. Pour des textes courts, payer l'inférence au token coûte moins.</p></div>
+    <div class="step"><h3>Ajustable</h3><p>Un ou deux exemples dans le prompt suffisent à relever la qualité des prédictions.</p></div>
+  </div>
+  <aside class="notes">Un token, c'est un morceau de mot. Le modèle de facturation au token change le calcul pour les petites tâches.</aside>
+</section>
+
+<!-- 11. Déterminisme -->
+<section class="slide">
+  <p class="quote" style="margin-bottom:40px">«&nbsp;Un LLM ne répond jamais deux fois pareil.&nbsp;»</p>
+  <p class="step">C'est vrai en général. Sur une tâche de classification simple, la réponse varie rarement.</p>
+  <div class="step" style="margin-top:50px">
+    <pre style="font-size:34px"><span class="c"># on fixe le hasard autant que l'API le permet</span>
+temperature=<span class="k">0</span>,
+seed=<span class="k">424242</span>,</pre>
+  </div>
+  <aside class="notes">Le paramètre seed d'OpenAI rend les résultats presque déterministes. Presque : assez pour classer.</aside>
+</section>
+
+<!-- 12. Jeu de test -->
+<section class="slide">
+  <h2>Pas de jeu d'entraînement.<br><span class="accent">Un jeu de test, toujours.</span></h2>
+  <ul class="plain">
+    <li class="step">Il reflète la complexité réelle du cas d'usage, dans un format constant.</li>
+    <li class="step">Il couvre les combinaisons d'étiquettes, y compris l'absence d'étiquette.</li>
+    <li class="step">Il suit la distribution du réel quand on la connaît.</li>
+    <li class="step">Quelques centaines d'exemples au minimum, davantage à chaque étiquette ajoutée.</li>
+    <li class="step">On le renouvelle avec des données fraîches.</li>
+  </ul>
+  <aside class="notes">Le LLM dispense d'entraîner. Il ne dispense pas de mesurer.</aside>
+</section>
+
+<!-- 13. Chapitre 3 -->
+<section class="slide s-chapter" style="--focus: 55% 48%;">
+  <img src="assets/bibliotheque.jpg" alt="">
+  <div class="veil"></div>
+  <div class="label"><div class="num">Rayon 3</div><h1>Le prix d'une pensée</h1></div>
+</section>
+
+<!-- 14. Asymétrie des tokens -->
+<section class="slide">
+  <div class="kicker">La règle qui décide de tout</div>
+  <h1 style="font-size:130px">4 mots en entrée<br><span class="accent">= 1 mot en sortie</span></h1>
+  <p class="step" style="margin-top:56px">Les fournisseurs facturent environ un quart du coût à l'entrée et trois quarts à la sortie. Chaque token généré coûte aussi du temps.</p>
+  <aside class="notes">Ordre de grandeur des grilles tarifaires en 2024. Le ratio exact varie selon le fournisseur, l'asymétrie reste.</aside>
+</section>
+
+<!-- 15. Techniques de prompt -->
+<section class="slide">
+  <h2 style="margin-bottom:30px">Trois façons de demander</h2>
+  <div class="legend"><span><i style="background:#9C9187"></i>tokens en entrée</span><span><i style="background:var(--accent)"></i>tokens en sortie</span><span><em>schéma, pas une mesure</em></span></div>
+  <div class="tok">
+    <div class="name">Chain of thought<small>«&nbsp;réfléchis étape par étape&nbsp;»</small></div>
+    <div class="bars"><div class="bar in" style="width:14%"></div><div class="bar out" style="width:44%">raisonnement détaillé</div></div>
+    <div class="name step">Tree of thoughts<small>trois experts débattent</small></div>
+    <div class="bars step"><div class="bar in" style="width:20%"></div><div class="bar out" style="width:76%">débat entre experts</div></div>
+    <div class="name step">Few-shot<small>quelques exemples, réponse courte</small></div>
+    <div class="bars step"><div class="bar in" style="width:46%">consigne + exemples</div><div class="bar out" style="width:6%"></div></div>
+  </div>
+  <p class="step">Pour classer, on paie les exemples en entrée et on réduit la sortie à une liste.</p>
+  <aside class="notes">Chain of thought et tree of thoughts font mieux sur les problèmes durs, au prix de beaucoup de sortie. Si le budget et la latence ne comptent pas, ils restent une option. Pour une liste d'étiquettes, le few-shot gagne.</aside>
+</section>
+
+<!-- 16. Chapitre 4 -->
+<section class="slide s-chapter" style="--focus: 50% 25%;">
+  <img src="assets/bibliotheque.jpg" alt="">
+  <div class="veil"></div>
+  <div class="label"><div class="num">Rayon 4</div><h1>Le classifieur</h1></div>
+</section>
+
+<!-- 17. Few-shot prompt -->
+<section class="slide">
+  <div class="codehead"><h2>Le prompt few-shot</h2><span>API OpenAI, extrait</span></div>
+<pre style="font-size:21px"><span class="line">messages = [</span><span class="line">  {<span class="s">"role"</span>: <span class="s">"system"</span>, <span class="s">"content"</span>: <span class="s">"You are a multi-label classifier. Return the tags "</span></span><span class="line">   <span class="s">"as a list separated by commas. If no tags apply, return nothing. "</span></span><span class="line">   <span class="s">"Available tags: sports, politics, economy, entertainment."</span>},</span><span class="line step mark"><span class="c">  # exemple 1 : deux étiquettes</span></span><span class="line step mark">  {<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"Text: 'Election debate highlights key economic policies.'"</span>},</span><span class="line step mark">  {<span class="s">"role"</span>: <span class="s">"assistant"</span>, <span class="s">"content"</span>: <span class="s">"Tags:politics,economy"</span>},</span><span class="line step mark"><span class="c">  # exemple 2 : aucune étiquette</span></span><span class="line step mark">  {<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"Text: 'AI will take on the world.'"</span>},</span><span class="line step mark">  {<span class="s">"role"</span>: <span class="s">"assistant"</span>, <span class="s">"content"</span>: <span class="s">"Tags:"</span>},</span><span class="line step mark"><span class="c">  # le texte à classer</span></span><span class="line step mark">  {<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="k">f</span><span class="s">"Text: '{content_txt}'"</span>},</span><span class="line">]</span></pre>
+  <p class="caption muted">Deux exemples suffisent à fixer le format de la réponse, et le cas vide.</p>
+  <aside class="notes">Choisir les exemples est la partie difficile : ils apprennent au modèle la structure de la tâche et le format de sortie. Le deuxième exemple montre qu'une réponse vide est permise.</aside>
+</section>
+
+<!-- 18. Parser -->
+<section class="slide">
+  <div class="codehead"><h2>Ne jamais croire la sortie sur parole</h2><span>extrait condensé</span></div>
+<pre><span class="line">ALLOWED = [<span class="s">"sports"</span>, <span class="s">"politics"</span>, <span class="s">"economy"</span>, <span class="s">"entertainment"</span>]</span><span class="line"> </span><span class="line"><span class="k">def</span> parse_labels(completion) -&gt; list[str]:</span><span class="line">    text = completion.choices[<span class="k">0</span>].message.content</span><span class="line">    text = text.replace(<span class="s">"Tags:"</span>, <span class="s">""</span>).strip()</span><span class="line">    <span class="k">if not</span> text:</span><span class="line">        <span class="k">return</span> []</span><span class="line">    labels = [label.strip() <span class="k">for</span> label <span class="k">in</span> text.split(<span class="s">","</span>)]</span><span class="line step mark">    <span class="k">return</span> sorted(set(labels) &amp; set(ALLOWED))   <span class="c"># le garde-fou</span></span></pre>
+  <p class="caption step">Le modèle peut inventer un rayon. L'intersection avec la liste autorisée l'efface.</p>
+  <aside class="notes">On retire le préfixe, on découpe, on nettoie, puis on ne garde que les étiquettes connues. La sortie devient une liste triée, comparable au jeu de test.</aside>
+</section>
+
+<!-- 19. Cascade -->
+<section class="slide">
+  <h2>Plus de rayons, moins de précision</h2>
+  <p style="margin-bottom:50px">Avec beaucoup d'étiquettes, le modèle hésite et la précision baisse.</p>
+  <div class="cascade step">
+    <div class="box"><h3>Texte</h3></div>
+    <div class="arrow">→</div>
+    <div class="box"><h3>Grandes catégories</h3><p>1<sup>er</sup> appel</p></div>
+    <div class="arrow">→</div>
+    <div class="stack">
+      <div class="box"><h3>Spécialiste A</h3><p>étiquettes fines</p></div>
+      <div class="box"><h3>Spécialiste B</h3><p>étiquettes fines</p></div>
+    </div>
+  </div>
+  <p class="step">Un premier appel choisit l'étage, un second choisit le rayon.</p>
+  <aside class="notes">La cascade marche quand les étiquettes s'organisent en hiérarchie. Sinon, tester des techniques plus coûteuses, moins sensibles au nombre d'étiquettes.</aside>
+</section>
+
+<!-- 20. Rate limiting -->
+<section class="slide">
+  <div class="codehead"><h2>Rester sous la limite de l'API</h2><span>paquet ratelimit</span></div>
+<pre><span class="line"><span class="k">from</span> ratelimit <span class="k">import</span> limits, sleep_and_retry</span><span class="line"> </span><span class="line step mark">@sleep_and_retry                <span class="c"># au-delà de la limite : attendre, puis réessayer</span></span><span class="line step mark">@limits(calls=<span class="k">50</span>, period=<span class="k">60</span>)    <span class="c"># 50 appels par minute</span></span><span class="line"><span class="k">def</span> get_chat_completion(messages):</span><span class="line">    <span class="k">return</span> client.chat.completions.create(</span><span class="line">        model=MODEL_NAME, messages=messages,</span><span class="line">        temperature=<span class="k">0</span>, seed=<span class="k">424242</span>,</span><span class="line">    )</span></pre>
+  <p class="caption muted">Les appels en trop attendent la fenêtre suivante au lieu d'échouer.</p>
+  <aside class="notes">Classer un historique de plusieurs milliers de textes déclenche vite la limite du fournisseur. Deux décorateurs suffisent.</aside>
+</section>
+
+<!-- 21. Chapitre 5 -->
+<section class="slide s-chapter" style="--focus: 75% 8%;">
+  <img src="assets/bibliotheque.jpg" alt="">
+  <div class="veil"></div>
+  <div class="label"><div class="num">Rayon 5</div><h1>En production</h1></div>
+</section>
+
+<!-- 22. Observer -->
+<section class="slide">
+  <h2>Garder une trace de chaque appel</h2>
+  <ul class="plain">
+    <li><strong>Tracer</strong> l'entrée, la sortie, les tokens et la durée. LangSmith ou Phoenix les affichent.</li>
+    <li class="step"><strong>Évaluer</strong> en continu sur des données fraîches, par une revue humaine ou par un second LLM qui juge le premier.</li>
+    <li class="step"><strong>Versionner</strong> chaque prompt avec son rapport de classification, pour comparer les versions sur les mêmes métriques.</li>
+  </ul>
+  <aside class="notes">LLM as a judge : un modèle relit les sorties du classifieur. Les traces servent aussi à suivre le coût et la latence : une séquence plus longue génère plus lentement.</aside>
+</section>
+
+<!-- 23. Métriques : un exemple -->
+<section class="slide">
+  <h2 style="margin-bottom:36px">Une prédiction, quatre verdicts</h2>
+  <div class="truth">
+    <div class="who">Attendu</div><div class="chips"><span class="chip pol">politique</span><span class="chip eco">économie</span></div>
+    <div class="who">Prédit</div><div class="chips"><span class="chip pol">politique</span></div>
+  </div>
+  <div class="verdicts">
+    <div class="verdict step"><h3>Exact match</h3><div class="v accent">0</div><p>Tout ou rien. La métrique la plus stricte.</p></div>
+    <div class="verdict step"><h3>Hamming loss</h3><div class="v">0,25</div><p>Une étiquette fausse sur quatre. Plus bas, mieux c'est.</p></div>
+    <div class="verdict step"><h3>Jaccard</h3><div class="v">0,5</div><p>Une étiquette commune sur deux au total.</p></div>
+    <div class="verdict step"><h3>Précision · Rappel</h3><div class="v">1 · 0,5</div><p>Rien de faux, mais un oubli.</p></div>
+  </div>
+  <aside class="notes">Même prédiction, quatre chiffres. Le choix de la métrique décide de ce qu'on appelle une erreur.</aside>
+</section>
+
+<!-- 24. Choisir sa métrique -->
+<section class="slide">
+  <h2>Choisir l'erreur qu'on redoute</h2>
+  <div class="cols" style="gap:70px">
+    <div>
+      <p class="small" style="margin-bottom:18px"><strong>Précision</strong> pour éviter les faux positifs.</p>
+      <p class="small" style="margin-bottom:18px"><strong>Rappel</strong> pour éviter les oublis.</p>
+      <p class="small"><strong>F1</strong> quand les deux comptent autant.</p>
+    </div>
+    <dl class="avg step">
+      <dt>micro</dt><dd>compte global, toutes étiquettes confondues</dd>
+      <dt>macro</dt><dd>chaque étiquette pèse pareil, rares comprises</dd>
+      <dt>weighted</dt><dd>pondéré par la fréquence de chaque étiquette</dd>
+      <dt>samples</dt><dd>calculé texte par texte, puis moyenné</dd>
+    </dl>
+  </div>
+  <div class="step" style="margin-top:46px">
+<pre style="font-size:23px;padding:26px 34px"><span class="line">mlb = MultiLabelBinarizer().fit([ALLOWED])</span><span class="line">y_true, y_pred = mlb.transform(labels_true), mlb.transform(labels_pred)</span><span class="line">classification_report(y_true, y_pred, target_names=mlb.classes_)</span></pre>
+  </div>
+  <aside class="notes">Le rapport de scikit-learn donne précision, rappel, F1 et support par étiquette et pour chaque moyenne. On y ajoute exact match, Hamming loss et Jaccard.</aside>
+</section>
+
+<!-- 25. Conclusion -->
+<section class="slide">
+  <h1 style="font-size:96px;line-height:1.1">Un LLM ne supprime pas<br>le dataset.</h1>
+  <h1 class="step accent" style="font-size:96px;line-height:1.1;margin-top:30px">Il le déplace<br>de l'entraînement vers le test.</h1>
+  <aside class="notes">Le gain est réel : quelques exemples, une API, des jours au lieu de mois. Mais la rigueur reste la même, elle porte sur la mesure : jeu de test, traces, métriques, versions de prompt.</aside>
+</section>
+
+<!-- 26. Merci -->
+<section class="slide s-end">
+  <h1>Merci</h1>
+  <p>Alexis Blandin &amp; Martin Labenne, Jolimoi</p>
+  <p class="small muted" style="margin-top:30px">L'article d'origine&nbsp;: <a href="https://tech.jolimoi.com/multi-label-classification-problems-with-large-langage-models/" target="_blank" rel="noopener">tech.jolimoi.com</a></p>
+  <div class="credits">Photo&nbsp;: Niklas Ohlrogge, <a href="https://unsplash.com/@ohlrogge" target="_blank" rel="noopener">Unsplash</a>. Sources&nbsp;: documentation scikit-learn (métriques multi-label), documentation de l'API OpenAI (chat completions, seed), promptingguide.ai.</div>
+</section>
+
+</main>
+
+<div id="progress"></div>
+<div id="count"></div>
+<div id="hint">→ ou clic pour avancer · N pour les notes · F pour le plein écran</div>
+<div id="notes"></div>
+
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const slides = [...document.querySelectorAll('.slide')];
+  const progress = document.getElementById('progress');
+  const count = document.getElementById('count');
+  const hint = document.getElementById('hint');
+  const notesBox = document.getElementById('notes');
+  let i = 0, s = 0;
+  const ALL = /[?&]all\b/.test(location.search);
+
+  const steps = k => slides[k].querySelectorAll('.step');
+
+  function fit() {
+    const k = Math.min(innerWidth / 1600, innerHeight / 900);
+    stage.style.transform = `scale(${k}) translate(-50%, -50%)`;
+  }
+
+  function render() {
+    slides.forEach((el, k) => el.classList.toggle('active', k === i));
+    steps(i).forEach((el, k) => el.classList.toggle('on', k < s));
+    progress.style.width = `${(i / (slides.length - 1)) * 100}%`;
+    count.textContent = `${i + 1} / ${slides.length}`;
+    if (i > 0) hint.style.opacity = 0;
+    const n = slides[i].querySelector('aside.notes');
+    notesBox.innerHTML = `<b>Notes, slide ${i + 1}</b>` + (n ? n.innerHTML : '<i>Pas de note.</i>');
+    history.replaceState(null, '', `#${i + 1}`);
+  }
+
+  function next() {
+    if (s < steps(i).length) s++;
+    else if (i < slides.length - 1) { i++; s = 0; }
+    render();
+  }
+  function prev() {
+    if (s > 0) s--;
+    else if (i > 0) { i--; s = steps(i).length; }
+    render();
+  }
+  function go(k) { i = Math.max(0, Math.min(slides.length - 1, k)); s = 0; render(); }
+
+  addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') go(0);
+    else if (e.key === 'End') go(slides.length - 1);
+    else if (e.key === 'n' || e.key === 'N') notesBox.classList.toggle('show');
+    else if (e.key === 'f' || e.key === 'F') {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen?.();
+    }
+  });
+
+  addEventListener('click', e => {
+    if (e.target.closest('a, #notes')) return;
+    if (e.clientX < innerWidth * 0.2) prev(); else next();
+  });
+
+  let lock = 0;
+  addEventListener('wheel', e => {
+    const now = Date.now();
+    if (now - lock < 500 || Math.abs(e.deltaY) < 8) return;
+    lock = now;
+    e.deltaY > 0 ? next() : prev();
+  }, { passive: true });
+
+  let tx = null;
+  addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', e => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 40) dx < 0 ? next() : prev();
+  }, { passive: true });
+
+  addEventListener('resize', fit);
+  const h = parseInt(location.hash.slice(1), 10);
+  if (h >= 1 && h <= slides.length) i = h - 1;
+  if (ALL) s = steps(i).length;
+  fit(); render(); window.focus();
+})();
+</script>
+</body>
+</html>
