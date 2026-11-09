@@ -1,0 +1,48 @@
+---
+layout: none
+permalink: /talk/multilabel-llm/
+sitemap: false
+work: true
+kind: talk
+title: "Un livre, plusieurs rayons"
+date: 2024-08-06
+event: "Jolimoi Tech"
+excerpt: "Classifier du texte en multi-label avec un LLM, sans jeu d'entraînement : few-shot, coût des tokens, métriques et production. Avec Martin Labenne, d'après notre article sur le blog tech de Jolimoi."
+excerpt_en: "Multi-label text classification with an LLM, without a training set: few-shot prompting, token costs, metrics and production. With Martin Labenne, based on our article on the Jolimoi tech blog."
+header_image: /assets/images/travaux/multilabel-llm.jpg
+header_image_alt: "Ouverture du grand format Un livre, plusieurs rayons"
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Un livre, plusieurs rayons</title>
+  <meta name="description" content="Grand format : classifier du texte en multi-label avec un LLM. Alexis Blandin et Martin Labenne, Jolimoi.">
+  <meta property="og:title" content="Un livre, plusieurs rayons">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://11h.dev/talk/multilabel-llm/">
+  <meta property="og:image" content="https://11h.dev/assets/images/travaux/multilabel-llm.jpg">
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #FAF9F6; overflow: hidden; }
+    /* Le grand format vit dans son propre document (chemins relatifs assets/ intacts),
+       affiché ici en plein écran via une iframe sans bordure. */
+    iframe#deck {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      border: 0;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="deck"
+          src="/apps/multilabel-llm/"
+          title="Un livre, plusieurs rayons"
+          allow="fullscreen"
+          allowfullscreen></iframe>
+  <script>document.getElementById('deck').addEventListener('load', e => e.target.contentWindow.focus());</script>
+</body>
+</html>
