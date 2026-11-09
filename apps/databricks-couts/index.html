@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deux factures pour un cluster</title>
+<meta name="description" content="Maîtriser les coûts Databricks : lire la facture, tagger, interroger les tables système, choisir le compute, faire le calcul de Photon. Retour d'expérience Jolimoi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/apps/longread/longread.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* Facture */
+  .inv-sec { border-top: 2px solid var(--ink); padding-top: 10px; margin-top: 22px; transition: opacity .45s; }
+  .inv-sec h4 { margin: 0 0 8px; font-size: 18px; font-weight: 600; display: flex; justify-content: space-between; }
+  .inv-sec h4 span { font-weight: 400; color: var(--muted); font-size: 15px; font-style: italic; }
+  .inv-line { display: flex; justify-content: space-between; font-size: 18px; padding: 6px 8px; margin: 0 -8px; border-radius: 4px; transition: background-color .4s; }
+  .inv-line i { font-style: normal; color: var(--muted); font-family: var(--mono); font-size: 14px; }
+  .inv-line.hl { background: var(--mark); }
+  .dim { opacity: .3; }
+
+  /* Cluster */
+  .nodes { display: flex; gap: 14px; flex-wrap: wrap; margin: 22px 0 26px; min-height: 120px; }
+  .node { width: 150px; border: 2px solid var(--ink); border-radius: 8px; padding: 12px 14px; background: var(--bg); font-size: 15px; line-height: 1.35; opacity: 0; transform: scale(.85); transition: opacity .5s, transform .5s; }
+  .node.on { opacity: 1; transform: none; }
+  .node b { display: block; font-size: 17px; margin-bottom: 4px; }
+  .node.drv { border-color: var(--c1); }
+  .node.drv b { color: var(--c1); }
+  .meter { display: flex; align-items: baseline; gap: 14px; }
+  .meter .big { font-size: clamp(56px, 7vw, 96px); line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .meter span { font-size: 22px; }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .badge { font: 13px var(--mono); padding: 3px 9px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); }
+
+  /* Tags */
+  .res { background: var(--bg); border: 2px solid var(--ink); border-radius: 8px; padding: 18px 20px; }
+  .res .id { font: 15px var(--mono); color: var(--muted); }
+  .res .name { font-size: 24px; margin: 4px 0 14px; min-height: 1.4em; transition: opacity .4s; }
+  .tags { display: flex; flex-direction: column; gap: 8px; }
+  .tag { display: flex; gap: 12px; font: 15px var(--mono); padding: 6px 10px; border-radius: 4px; background: var(--paper); opacity: 0; transform: translateX(-10px); transition: opacity .45s, transform .45s; }
+  .tag.on { opacity: 1; transform: none; }
+  .tag b { color: var(--accent); font-weight: 600; min-width: 170px; }
+  .split { display: flex; gap: 10px; margin-top: 18px; opacity: 0; transition: opacity .5s; }
+  .split.on { opacity: 1; }
+  .split div { flex: 1; border-radius: 6px; padding: 10px 12px; color: #fff; font-size: 15px; line-height: 1.3; }
+
+  /* Nom d'instance */
+  .iname { font: clamp(36px, 5.4vw, 80px)/1.1 var(--mono); letter-spacing: .02em; text-align: center; margin: 20px 0 30px; }
+  .iname span { transition: color .4s, background-color .4s; border-radius: 6px; padding: 0 2px; }
+  .iname span.hl { color: #fff; background: var(--accent); }
+  .ilegend { text-align: center; font-size: 26px; min-height: 2.6em; }
+  .ilegend small { display: block; font-size: 17px; color: var(--muted); font-style: italic; }
+
+  /* Savings Plans */
+  .sp-row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line); transition: opacity .45s; }
+  .sp-row .lbl { font-size: 18px; }
+  .sp-row .val { font-size: clamp(34px, 4vw, 54px); font-variant-numeric: tabular-nums; }
+  .sp-row.save .val { color: var(--accent); }
+
+  /* Photon */
+  .ph { display: grid; grid-template-columns: 130px 1fr 120px; gap: 14px; align-items: center; margin: 16px 0; }
+  .ph .n { font-size: 19px; }
+  .ph .track { height: 38px; background: var(--bg); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  .ph .fill { height: 100%; width: 0; transition: width 1s cubic-bezier(.2,.7,.2,1); }
+  .ph .v { font: 18px var(--mono); text-align: right; }
+  .calc { background: var(--paper); border-radius: 10px; padding: 28px 30px; }
+  .calc input[type=range] { width: 100%; accent-color: var(--accent); margin: 14px 0 6px; }
+  .calc .out { font-size: 30px; margin-top: 10px; }
+  .calc .out b { color: var(--accent); font-weight: 400; }
+
+  table.fam { min-width: 640px; }
+  table.fam td:first-child { font-weight: 600; white-space: nowrap; }
+  table.fam td:nth-child(2) { font-family: var(--mono); font-size: 14px; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<header id="bar" aria-hidden="true">
+  <span class="t">Deux factures pour un cluster</span>
+  <span class="c" id="barChapter"></span>
+  <span class="p" id="barProgress"></span>
+</header>
+
+<section class="hero" id="hero" data-chapter="">
+  <img src="assets/billets.jpg" alt="Mains tenant une liasse de billets de cent dollars en éventail" data-zoom="hero">
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="kicker">Jolimoi Tech · Grand format</div>
+    <h1>Deux factures<br>pour un cluster</h1>
+    <p class="lede">Databricks se paie deux fois : le cloud qui fait tourner les machines, et les DBU, la licence comptée à la seconde. Lire, tagger, mesurer, puis choisir le compute : le retour d'expérience d'une startup au budget serré.</p>
+    <p class="by">Par Alexis Blandin <span>· 9 min de lecture</span></p>
+  </div>
+  <div class="scroll-cue">Faites défiler</div>
+</section>
+
+<div class="gap s"></div>
+
+<div class="prose" data-chapter="Contexte">
+  <p class="note reveal">Ce texte accompagnait une conférence donnée lors d'un meetup Databricks, où nous étions invités à partager notre retour d'expérience sur la gestion de nos coûts. Il a d'abord paru sur le blog tech de Jolimoi en juin 2024.</p>
+  <p class="first reveal">Il ne sera pas question d'optimisation de code. Les coûts dépendent aussi de la performance, de la modélisation au stockage, mais ce sujet mérite ses propres articles. Celui-ci couvre la gestion et la maîtrise des coûts Databricks, un sujet après l'autre.</p>
+  <p class="reveal">Chaque entreprise a sa propre vision de ses dépenses cloud, et Databricks ne fait pas exception. Voici la nôtre, chez Jolimoi :</p>
+  <ul>
+    <li class="reveal">un budget limité, projets de R&amp;D compris ;</li>
+    <li class="reveal">en startup, aucune ressource gaspillée sans justification : le budget suit un pourcentage fixe du chiffre d'affaires, réajusté chaque mois sur le mois passé, donc sans marge de manœuvre ;</li>
+    <li class="reveal">Databricks sert surtout à l'ETL et au warehousing (<code>pip install dbt-databricks</code>) ;</li>
+    <li class="reveal">nous sommes sur AWS ;</li>
+    <li class="reveal">nous ne gérons pas des pétaoctets.</li>
+  </ul>
+</div>
+
+<!-- ============ POSTE 1 ============ -->
+<section class="chapter" style="--focus: 35% 60%;" data-chapter="Poste 1 · Lire la facture">
+  <img src="assets/billets.jpg" alt="" data-zoom="chapter">
+  <div class="veil"></div>
+  <div class="label">
+    <div class="num reveal">Poste 1</div>
+    <h2 class="reveal d1">Lire la facture</h2>
+    <p class="sub reveal d2">Avant d'optimiser, savoir ce qu'on paie.</p>
+  </div>
+</section>
+
+<div class="prose" data-chapter="Poste 1 · Lire la facture">
+  <p class="reveal">Cela semble évident : commencer par comprendre de quoi se compose la dépense. La tarification de Databricks paraît plus complexe que celle d'autres solutions, parce qu'elle arrive en deux parties.</p>
+</div>
+
+<section class="scrolly" data-graphic="invoice" data-chapter="Poste 1 · Lire la facture">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="plabel">Ce que coûte un cluster</div>
+    <div class="inv-sec" id="invCloud">
+      <h4>Facture cloud <span>AWS</span></h4>
+      <div class="inv-line" data-l="cloud">Transfert de données <i>cloud</i></div>
+      <div class="inv-line" data-l="cloud">Compute (instances EC2) <i>cloud</i></div>
+      <div class="inv-line" data-l="cloud">Stockage <i>cloud</i></div>
+    </div>
+    <div class="inv-sec" id="invDbu">
+      <h4>Facture Databricks <span>licence</span></h4>
+      <div class="inv-line" data-l="dbu">Consommation en DBU <i>à la seconde</i></div>
+    </div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="1"><div class="box">Un cluster Databricks produit deux factures.</div></div>
+    <div class="step" data-step="2"><div class="box"><strong>Les coûts cloud</strong>, AWS dans notre cas : surtout le transfert de données, le compute et le stockage.</div></div>
+    <div class="step" data-step="3"><div class="box"><strong>La consommation Databricks</strong>, une sorte de licence comptée en DBU (DataBricks Units). Elle suit surtout le compute qu'on met en face : plus le cluster est gros, plus on paie. Elle se facture au temps consommé, à la seconde.</div></div>
+  </div>
+</section>
+
+<section class="scrolly" data-graphic="cluster" data-chapter="Poste 1 · Lire la facture">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="plabel">Un cluster, ses nœuds, ses DBU</div>
+    <div class="nodes">
+      <div class="node drv on"><b>Driver</b>30,5 Go<br>4 cœurs</div>
+      <div class="node" data-n="1"><b>Worker 1</b>30,5 Go<br>4 cœurs</div>
+      <div class="node" data-n="2"><b>Worker 2</b>30,5 Go<br>4 cœurs</div>
+    </div>
+    <div class="meter"><span class="big" id="dbuMeter">4</span><span>DBU/h</span></div>
+    <div class="badges"><span class="badge">i3.xlarge</span><span class="badge">Photon</span><span class="badge">Unity Catalog</span><span class="badge">Runtime 13.3</span></div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="1"><div class="box">Un driver et un worker, des i3.xlarge avec Photon : le cluster consomme 4 DBU par heure.</div></div>
+    <div class="step" data-step="2"><div class="box">Ajoutons un worker identique : 6 DBU par heure. La corrélation est nette entre le nombre d'instances et les DBU consommées. Ici, une instance vaut 2 DBU/h.</div></div>
+  </div>
+</section>
+
+<div class="prose" data-chapter="Poste 1 · Lire la facture">
+  <p class="reveal">Pour aller plus loin, quelques ressources fiables :</p>
+  <ul>
+    <li class="reveal"><a href="https://www.databricks.com/product/pricing" target="_blank" rel="noopener">les prix publics</a> ;</li>
+    <li class="reveal"><a href="https://www.databricks.com/product/pricing/product-pricing/instance-types" target="_blank" rel="noopener">le calculateur de prix</a> ;</li>
+    <li class="reveal"><a href="https://docs.databricks.com/en/lakehouse-architecture/cost-optimization/best-practices.html" target="_blank" rel="noopener">la documentation Databricks sur l'optimisation des coûts</a> ;</li>
+    <li class="reveal"><a href="https://www.databricks.com/blog/best-practices-cost-management-databricks" target="_blank" rel="noopener">les bonnes pratiques de gestion des coûts</a> ;</li>
+    <li class="reveal"><a href="https://docs.databricks.com/en/admin/account-settings/usage.html" target="_blank" rel="noopener">les paramètres du compte et l'utilisation</a>.</li>
+  </ul>
+</div>
+
+<!-- ============ POSTE 2 ============ -->
+<section class="chapter" style="--focus: 60% 30%;" data-chapter="Poste 2 · Suivre la dépense">
+  <img src="assets/billets.jpg" alt="" data-zoom="chapter">
+  <div class="veil"></div>
+  <div class="label">
+    <div class="num reveal">Poste 2</div>
+    <h2 class="reveal d1">Suivre la dépense</h2>
+    <p class="sub reveal d2">Tagger tout, puis interroger les tables système.</p>
+  </div>
+</section>
+
+<div class="prose" data-chapter="Poste 2 · Suivre la dépense">
+  <p class="reveal">Une fois la répartition de la facture comprise, il faut la surveiller. Le premier outil est la console du compte, qui filtre les données d'utilisation par SKU, par workspace et par tag.</p>
+</div>
+
+<figure class="wide reveal">
+  <img src="/assets/images/databricks-cost/dbks3.png" alt="Console du compte Databricks : graphique d'utilisation filtrable" loading="lazy">
+  <figcaption>La console du compte : une première lecture, utile si les tags sont bien posés.</figcaption>
+</figure>
+
+<div class="prose" data-chapter="Poste 2 · Suivre la dépense">
+  <p class="reveal">Elle ne remplace pas une analyse fine des coûts, mais elle suffit pour commencer, à une condition : des tags bien configurés. Le tagging reste une pratique classique du FinOps, et toujours pertinente. Databricks pose certains tags par défaut, et chacun peut définir sa propre convention.</p>
+</div>
+
+<section class="scrolly" data-graphic="tags" data-chapter="Poste 2 · Suivre la dépense">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="plabel">Une ressource, avant et après les tags</div>
+    <div style="height:14px"></div>
+    <div class="res">
+      <div class="id">cluster_id&nbsp;: 0617-084512-x7k2p9qa</div>
+      <div class="name" id="resName">???</div>
+      <div class="tags">
+        <div class="tag" data-g="2"><b>jm:application</b>dbt-nightly</div>
+        <div class="tag" data-g="2"><b>jm:domain</b>data</div>
+        <div class="tag" data-g="2"><b>jm:role</b>ETL</div>
+        <div class="tag" data-g="3"><b>jm:environment</b>production</div>
+        <div class="tag" data-g="3"><b>jm:owner</b>équipe data</div>
+        <div class="tag" data-g="4"><b>jm:managedBy</b>terraform</div>
+        <div class="tag" data-g="4"><b>jm:taggingVersion</b>2</div>
+      </div>
+    </div>
+    <div class="split" id="split">
+      <div style="background:var(--c1)">Data<br><small>show-back</small></div>
+      <div style="background:var(--c2)">Marketing<br><small>charge-back</small></div>
+      <div style="background:var(--c3)">Produit<br><small>charge-back</small></div>
+    </div>
+    <div class="pfoot">Identifiant et valeurs d'exemple.</div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="1"><div class="box">Sans tag, une ressource se résume à un identifiant. Personne ne sait à quoi elle sert ni qui la paie.</div></div>
+    <div class="step" data-step="2"><div class="box">Chez Jolimoi, tous les assets cloud portent les mêmes tags, Databricks compris (sauf les endpoints, qui refusaient les deux-points). <strong>jm:application</strong> est le plus basique : feature, projet, peu importe le nom, c'est l'identifiant clé de l'usage. <strong>jm:domain</strong> désigne une division, une équipe ou un domaine métier (marketing, data). <strong>jm:role</strong> précise la fonction : front, back, sécurité, ETL, data science.</div></div>
+    <div class="step" data-step="3"><div class="box"><strong>jm:environment</strong> : production, intégration, staging, sandbox. <strong>jm:owner</strong> : la partie prenante clé, propriétaire du projet, analyste ou contact technique, bref la personne responsable de l'asset côté facturation.</div></div>
+    <div class="step" data-step="4"><div class="box"><strong>jm:managedBy</strong> dit comment l'asset a été construit : Terraform, CloudFormation, ou rien du tout, c'est-à-dire à la main. Et <strong>jm:taggingVersion</strong>, parce que les conventions de tagging ont elles aussi des versions.</div></div>
+    <div class="step" data-step="5"><div class="box">Ces tags donnent des informations plus lisibles qu'un ID de cluster. Ils permettent surtout le show-back et le charge-back vers d'autres entités métier, utiles quand le budget IT est réparti dans l'entreprise.</div></div>
+  </div>
+</section>
+
+<div class="prose" data-chapter="Poste 2 · Suivre la dépense">
+  <p class="reveal">Les données d'utilisation sont disponibles par plusieurs canaux : l'API, la <a href="https://docs.databricks.com/en/admin/account-settings/billable-usage-delivery.html" target="_blank" rel="noopener">livraison sur S3</a> et les tables système, ces deux dernières encore en preview au moment de l'écriture, en juin 2024.</p>
+  <p class="reveal">Pour exploiter ces données finement, il faut passer par les tables système : <code>system.billing.usage</code> pour l'utilisation, <code>system.billing.list_prices</code> pour le prix de chaque SKU Databricks à un moment donné.</p>
+</div>
+
+<figure class="wide reveal">
+  <img src="/assets/images/databricks-cost/dbks5.png" alt="Schéma de la table system.billing.usage dans le Catalog Explorer" loading="lazy" style="max-width:520px;margin:0 auto">
+  <figcaption>Le schéma de <code>system.billing.usage</code>.</figcaption>
+</figure>
+
+<div class="prose" data-chapter="Poste 2 · Suivre la dépense">
+  <p class="reveal">Databricks fournit une <a href="https://docs.databricks.com/en/admin/system-tables/billing.html#sample-queries" target="_blank" rel="noopener">liste d'exemples de requêtes et de templates</a>. On peut aussi écrire la sienne.</p>
+</div>
+
+<section class="scrolly" data-graphic="sql" data-chapter="Poste 2 · Suivre la dépense">
+  <div class="sticky"><div class="graphic">
+<pre id="sqlCode"><span class="ln" data-g="sel"><span class="k">SELECT</span></span><span class="ln" data-g="sel">  billing_origin_product</span><span class="ln" data-g="sel">  , usage_date</span><span class="ln" data-g="sel">  , usage.sku_name</span><span class="ln" data-g="price">  , <span class="k">SUM</span>(usage_quantity) <span class="k">AS</span> dbu_count</span><span class="ln" data-g="price">  , <span class="k">CAST</span>(pricing[<span class="s">"default"</span>] <span class="k">AS FLOAT</span>) <span class="k">AS</span> pricing</span><span class="ln" data-g="price">  , (dbu_count * <span class="k">CAST</span>(pricing[<span class="s">"default"</span>] <span class="k">AS FLOAT</span>)) <span class="k">AS</span> total_price</span><span class="ln" data-g="tag">  , custom_tags[<span class="s">"jm:application"</span>] <span class="k">AS</span> application</span><span class="ln" data-g="sel"><span class="k">FROM</span> system.billing.usage</span><span class="ln" data-g="join"><span class="k">INNER JOIN</span> system.billing.list_prices <span class="k">ON</span> usage.cloud = list_prices.cloud</span><span class="ln" data-g="join">  <span class="k">AND</span> usage.sku_name = list_prices.sku_name</span><span class="ln" data-g="join">  <span class="k">AND</span> usage.usage_start_time &gt;= list_prices.price_start_time</span><span class="ln" data-g="join">  <span class="k">AND</span> (</span><span class="ln" data-g="join">    usage.usage_end_time &lt;= list_prices.price_end_time</span><span class="ln" data-g="join">    <span class="k">OR</span> list_prices.price_end_time <span class="k">IS NULL</span></span><span class="ln" data-g="join">  )</span><span class="ln" data-g="grp"><span class="k">GROUP BY</span></span><span class="ln" data-g="grp">  billing_origin_product, usage_date, usage.sku_name</span><span class="ln" data-g="grp">  , pricing[<span class="s">"default"</span>], custom_tags[<span class="s">"jm:application"</span>]</span><span class="ln" data-g="grp"><span class="k">ORDER BY</span> usage_date <span class="k">DESC</span>, dbu_count <span class="k">DESC</span>;</span></pre>
+  </div></div>
+  <div class="steps">
+    <div class="step" data-step="sel"><div class="box">La requête part de <code>system.billing.usage</code> : le produit à l'origine de la consommation, le jour, le SKU.</div></div>
+    <div class="step" data-step="join"><div class="box">La jointure avec <code>list_prices</code> retrouve le prix en vigueur au moment de la consommation : même cloud, même SKU, et une fenêtre de validité qui contient la période d'usage, ou qui court toujours.</div></div>
+    <div class="step" data-step="price"><div class="box">On additionne les DBU consommées et on les multiplie par le prix par défaut pour obtenir un coût.</div></div>
+    <div class="step" data-step="tag"><div class="box">Le tag <strong>jm:application</strong> devient une colonne : le coût se lit par application, et plus par identifiant de cluster.</div></div>
+    <div class="step" data-step="grp"><div class="box">On regroupe par jour, produit, SKU et application, du plus récent au plus coûteux.</div></div>
+  </div>
+</section>
+
+<div class="prose" data-chapter="Poste 2 · Suivre la dépense">
+  <p class="reveal">Autre option : le tableau de bord d'observabilité des coûts publié sur <a href="https://github.com/databricks/tmm/tree/main/System-Tables-Demo/Serverless-Jobs-Notebooks-PuPr" target="_blank" rel="noopener">GitHub</a>. Il ne fonctionne pas très bien, et on se demande pourquoi il n'est pas dans la galerie d'exemples.</p>
+</div>
+
+<figure class="wide reveal">
+  <img src="/assets/images/databricks-cost/dbks6.png" alt="Tableau de bord d'observabilité des coûts Databricks" loading="lazy">
+  <figcaption>Le tableau de bord d'observabilité des coûts.</figcaption>
+</figure>
+
+<!-- ============ POSTE 3 ============ -->
+<section class="chapter" style="--focus: 70% 75%;" data-chapter="Poste 3 · Choisir le compute">
+  <img src="assets/billets.jpg" alt="" data-zoom="chapter">
+  <div class="veil"></div>
+  <div class="label">
+    <div class="num reveal">Poste 3</div>
+    <h2 class="reveal d1">Choisir le compute</h2>
+    <p class="sub reveal d2">Familles d'instances, runtimes, engagements cloud.</p>
+  </div>
+</section>
+
+<div class="prose" data-chapter="Poste 3 · Choisir le compute">
+  <p class="reveal">Chaque option dépend des cas d'usage, donc quelques recommandations générales seulement. La première : évaluer les types et familles d'instances. L'interface Databricks offre un large choix : optimisées pour le stockage ou la mémoire, usage général, avec GPU, avec ou sans <a href="https://docs.databricks.com/en/optimizations/disk-cache.html" target="_blank" rel="noopener">Delta cache accelerated</a>.</p>
+</div>
+
+<figure class="wide reveal">
+  <div class="tablewrap">
+  <table class="fam">
+    <thead><tr><th>Famille</th><th>Exemples</th><th>Cas d'usage</th><th>Profil</th></tr></thead>
+    <tbody>
+      <tr><td>Usage général (M)</td><td>m5.large<br>m5.xlarge</td><td>Compute, mémoire et réseau équilibrés. Convient à une grande variété d'applications.</td><td>CPU et mémoire modérés</td></tr>
+      <tr><td>Calcul (C)</td><td>c5.large<br>c5.xlarge</td><td>Applications limitées par le calcul : traitements batch, inférence de machine learning, transformations de données.</td><td>CPU élevé, peu de mémoire</td></tr>
+      <tr><td>Mémoire (R)</td><td>r5.large<br>r5.xlarge</td><td>Applications gourmandes en mémoire : gros caches en mémoire, analytique big data en temps réel, bases de données haute performance.</td><td>Beaucoup de mémoire, CPU modéré</td></tr>
+      <tr><td>Stockage (I)</td><td>i3.large<br>i3.xlarge</td><td>Tâches d'entrées-sorties : lectures et écritures rapides et séquentielles sur de gros volumes, NoSQL, warehousing, traitement de données à grande échelle.</td><td>IOPS élevées, gros stockage local</td></tr>
+      <tr><td>Accélérée (P, G)</td><td>p3.2xlarge<br>g4dn.xlarge</td><td>Applications qui exigent des GPU : deep learning, IA, traitement vidéo, calcul haute performance.</td><td>GPU pour le calcul parallèle, forte bande passante mémoire</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <figcaption>Les familles d'instances AWS, résumées.</figcaption>
+</figure>
+
+<div class="prose" data-chapter="Poste 3 · Choisir le compute">
+  <p class="reveal">Pour retrouver les instances EC2 correspondantes, la console AWS reste un bon point de départ.</p>
+</div>
+
+<figure class="wide reveal">
+  <img src="/assets/images/databricks-cost/dbks7.png" alt="Console AWS EC2 : comparaison des types d'instances" loading="lazy">
+  <figcaption>Comparer les instances dans la console EC2.</figcaption>
+</figure>
+
+<div class="prose" data-chapter="Poste 3 · Choisir le compute">
+  <p class="reveal">Reste à lire leurs noms. Chaque lettre a un sens, détaillé dans <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html" target="_blank" rel="noopener">la documentation AWS</a>.</p>
+</div>
+
+<section class="scrolly" data-graphic="iname" data-chapter="Poste 3 · Choisir le compute">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="plabel">Lire un nom d'instance</div>
+    <div class="iname"><span data-p="fam">c</span><span data-p="gen">7</span><span data-p="proc">g</span><span data-p="cap">n</span>.<span data-p="size">xlarge</span></div>
+    <div class="ilegend" id="iLegend"></div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="fam"><div class="box">La première lettre donne la <strong>famille</strong> : c pour les instances optimisées pour le calcul.</div></div>
+    <div class="step" data-step="gen"><div class="box">Le chiffre donne la <strong>génération</strong> de l'instance.</div></div>
+    <div class="step" data-step="proc"><div class="box">Vient ensuite la <strong>famille de processeur</strong> : g pour Graviton, le processeur ARM d'AWS. Attention : les instances Graviton ne prennent pas en charge certaines fonctionnalités Databricks.</div></div>
+    <div class="step" data-step="cap"><div class="box">Une lettre optionnelle signale une <strong>capacité additionnelle</strong> : n pour un réseau renforcé.</div></div>
+    <div class="step" data-step="size"><div class="box">Après le point, la <strong>taille</strong> de l'instance.</div></div>
+  </div>
+</section>
+
+<div class="prose" data-chapter="Poste 3 · Choisir le compute">
+  <p class="reveal">Au-delà de ces généralités, le meilleur conseil : surveiller sa charge de travail et observer comment réagissent la mémoire et le CPU du cluster. Même chose pour le dimensionnement du nœud driver.</p>
+  <p class="reveal">Le Delta cache ne mérite pas qu'on s'y attarde sur les runtimes récents : à partir du Databricks Runtime 14.2, la commande <code>CACHE SELECT</code> est ignorée. Choisir le dernier runtime apporte d'ailleurs presque toujours de bonnes nouvelles côté performances. Vérifiez seulement que votre code tourne dessus.</p>
+  <p class="reveal">Sans rapport direct avec Databricks, les fournisseurs cloud offrent aussi leurs leviers de réduction. Chez AWS : les Savings Plans, plus flexibles et mieux remisés, et les Reserved Instances, qui ne sont pas la meilleure option. Le principe : vous engagez votre consommation sur une famille d'instances, AWS vous accorde une remise, plus forte si vous payez une partie ou la totalité d'avance. AWS calcule même des recommandations à partir de votre consommation passée.</p>
+</div>
+
+<section class="scrolly" data-graphic="sp" data-chapter="Poste 3 · Choisir le compute">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="plabel">Recommandation Savings Plans, par mois</div>
+    <div style="height:10px"></div>
+    <div class="sp-row" data-r="1"><span class="lbl">Dépense actuelle, à la demande</span><span class="val" data-to="1638.37">1&nbsp;638,37&nbsp;$</span></div>
+    <div class="sp-row" data-r="2"><span class="lbl">Dépense après engagement</span><span class="val" data-to="1264.17">1&nbsp;264,17&nbsp;$</span></div>
+    <div class="sp-row save" data-r="3"><span class="lbl">Économie</span><span class="val" data-to="374.20">374,20&nbsp;$</span></div>
+    <div class="pfoot">Estimation AWS de mai 2024 : Compute Savings Plan sur un an, payé intégralement d'avance, calculé sur les 30 derniers jours.</div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="1"><div class="box">Sur notre compte, la recommandation part d'une dépense mensuelle de 1&nbsp;638&nbsp;dollars à la demande.</div></div>
+    <div class="step" data-step="2"><div class="box">En s'engageant, la même consommation coûte 1&nbsp;264&nbsp;dollars par mois.</div></div>
+    <div class="step" data-step="3"><div class="box">374&nbsp;dollars d'économie chaque mois, soit 23&nbsp;% de la dépense concernée, sans toucher à une ligne de code. C'est un bon point de départ.</div></div>
+  </div>
+</section>
+
+<figure class="wide reveal">
+  <img src="/assets/images/databricks-cost/dbks9.png" alt="Console AWS : recommandations Savings Plans" loading="lazy">
+  <figcaption>L'écran de recommandations d'AWS.</figcaption>
+</figure>
+
+<!-- ============ POSTE 4 ============ -->
+<section class="chapter" style="--focus: 50% 20%;" data-chapter="Poste 4 · Photon ou pas Photon">
+  <img src="assets/billets.jpg" alt="" data-zoom="chapter">
+  <div class="veil"></div>
+  <div class="label">
+    <div class="num reveal">Poste 4</div>
+    <h2 class="reveal d1">Photon ou pas Photon&nbsp;?</h2>
+    <p class="sub reveal d2">Avez-vous vraiment fait le calcul&nbsp;?</p>
+  </div>
+</section>
+
+<div class="prose" data-chapter="Poste 4 · Photon ou pas Photon">
+  <p class="reveal">Dernier point, et pas le moindre. <a href="https://docs.databricks.com/en/compute/photon.html" target="_blank" rel="noopener">Selon Databricks</a>, Photon est une solution rentable&nbsp;:</p>
+  <p class="note reveal">«&nbsp;Photon est un moteur de requêtes vectorisé haute performance, natif Databricks, qui exécute vos workloads SQL et vos appels d'API DataFrame plus vite, afin de réduire le coût total par workload.&nbsp;»</p>
+  <p class="reveal">Photon semble aller de soi quand le but est d'aller vite, par exemple sur un job cluster qui doit livrer ses résultats avant de s'éteindre. Mais le calcul mérite d'être fait.</p>
+</div>
+
+<section class="scrolly" data-graphic="photon" data-chapter="Poste 4 · Photon ou pas Photon">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="plabel">Même driver r5d.xlarge, runtime 14.3</div>
+    <div style="height:16px"></div>
+    <div class="ph"><span class="n">Sans Photon</span><div class="track"><div class="fill" id="phOff" style="background:var(--in)"></div></div><span class="v">0,9 DBU/h</span></div>
+    <div class="ph"><span class="n">Avec Photon</span><div class="track"><div class="fill" id="phOn" style="background:var(--accent)"></div></div><span class="v">1,8 DBU/h</span></div>
+    <div class="pfoot" id="phNote">&nbsp;</div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="1"><div class="box">Prenons le même nœud, un r5d.xlarge de 32&nbsp;Go et 4&nbsp;cœurs. Sans Photon, il consomme 0,9&nbsp;DBU par heure.</div></div>
+    <div class="step" data-step="2"><div class="box">Activez Photon : 1,8&nbsp;DBU par heure. Par défaut, Photon signifie payer le double. C'est aussi simple que ça.</div></div>
+    <div class="step" data-step="3"><div class="box">La seule question qui compte : Photon divise-t-il aussi votre temps par deux&nbsp;?</div></div>
+  </div>
+</section>
+
+<div class="wide" style="max-width:728px">
+  <div class="calc reveal">
+    <div class="plabel">Faites le calcul</div>
+    <label for="speed" style="display:block;margin-top:12px;font-size:18px">Photon rend le job <b id="speedOut">1,5</b> fois plus rapide</label>
+    <input type="range" id="speed" min="1" max="4" step="0.1" value="1.5">
+    <div class="out">Facture DBU du job&nbsp;: <b id="costOut">×1,33</b></div>
+    <div class="pfoot">DBU seulement : un job plus court réduit aussi la facture cloud de l'instance, qui ne double pas avec Photon.</div>
+  </div>
+</div>
+
+<p class="pull reveal" data-chapter="Pas encore une conclusion">Ce n'est pas<span class="accent">(encore) une conclusion.</span></p>
+
+<div class="prose" data-chapter="Pas encore une conclusion">
+  <p class="reveal">Restent à couvrir la configuration des jobs et des clusters, l'auto-terminaison, les pools de clusters, les fleet et spot instances, et les SQL warehouses. Le principe, lui, ne change pas : deux factures, que l'on ne réduit qu'après avoir appris à les lire.</p>
+</div>
+
+<footer class="end" data-chapter="Pas encore une conclusion">
+  <div class="prose">
+    <p>Paru d'abord sur le blog tech de Jolimoi le 17 juin 2024, à l'occasion d'un meetup Databricks.</p>
+    <p>Photo : Michael Longmire, <a href="https://unsplash.com/@f7photo" target="_blank" rel="noopener">Unsplash</a>. Captures : console Databricks et console AWS.</p>
+    <p style="margin-top:1.6em"><a href="/fr/travaux/" target="_top">← Tous les travaux</a></p>
+  </div>
+</footer>
+
+<script src="/apps/longread/longread.js"></script>
+<script>
+(() => {
+  const { $, $$, countTo, fr } = Longread;
+  const money = v => v.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/ /g, ' ') + ' $';
+
+  Longread.init({
+    invoice(step) {
+      const s = +step;
+      $('#invCloud').classList.toggle('dim', s === 3);
+      $('#invDbu').classList.toggle('dim', s === 2);
+      $$('.inv-line').forEach(l => l.classList.toggle('hl', (s === 2 && l.dataset.l === 'cloud') || (s === 3 && l.dataset.l === 'dbu')));
+    },
+    cluster(step) {
+      const s = +step;
+      $$('.node[data-n]').forEach(n => n.classList.toggle('on', +n.dataset.n <= s));
+      countTo($('#dbuMeter'), 2 + 2 * s, { fmt: v => fr(Math.round(v)) });
+    },
+    tags(step) {
+      const s = +step;
+      $$('.tag').forEach(t => t.classList.toggle('on', s >= +t.dataset.g));
+      $('#resName').textContent = s >= 2 ? 'dbt-nightly · data · production' : '???';
+      $('#split').classList.toggle('on', s >= 5);
+    },
+    sql(step) {
+      const pre = $('#sqlCode');
+      pre.classList.add('focus');
+      $$('.ln', pre).forEach(l => l.classList.toggle('hl', l.dataset.g === step));
+    },
+    iname(step) {
+      const legend = {
+        fam: ['Famille', 'c : optimisée pour le calcul'],
+        gen: ['Génération', '7 : septième génération'],
+        proc: ['Famille de processeur', 'g : Graviton'],
+        cap: ['Capacité additionnelle', 'n : réseau renforcé'],
+        size: ['Taille', 'xlarge'],
+      }[step];
+      $$('.iname span').forEach(sp => sp.classList.toggle('hl', sp.dataset.p === step));
+      $('#iLegend').innerHTML = `${legend[0]}<small>${legend[1]}</small>`;
+    },
+    sp(step) {
+      const s = +step;
+      $$('.sp-row').forEach(r => {
+        const on = +r.dataset.r <= s, v = $('.val', r);
+        r.style.opacity = on ? 1 : 0.2;
+        if (on && !r._done) { r._done = true; countTo(v, +v.dataset.to, { from: 0, fmt: money }); }
+      });
+    },
+    photon(step) {
+      const s = +step;
+      $('#phOff').style.width = '45%';
+      $('#phOn').style.width = s >= 2 ? '90%' : '0';
+      $('#phNote').textContent = s >= 3 ? 'Il faut un job deux fois plus rapide pour que la facture DBU ne bouge pas.' : ' ';
+    },
+  });
+
+  const speed = $('#speed');
+  const upd = () => {
+    const v = +speed.value, ratio = 2 / v;
+    $('#speedOut').textContent = v.toFixed(1).replace('.', ',');
+    const pct = Math.round((ratio - 1) * 100);
+    $('#costOut').textContent = `×${ratio.toFixed(2).replace('.', ',')} (${pct > 0 ? '+' : ''}${pct} %)`;
+  };
+  speed.addEventListener('input', upd); upd();
+})();
+</script>
+</body>
+</html>

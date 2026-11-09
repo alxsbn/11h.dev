@@ -1,6 +1,6 @@
 fr:
   # Navigation
-  home: "Accueil"
+  home: "Notes"
   works: "Travaux"
   works_slug: "travaux"
   about: "À propos"
@@ -8,6 +8,7 @@ fr:
   works_intro: "Talks et applications, en marge des billets."
   kind_talk: "Talk"
   kind_app: "App"
+  kind_longread: "Grand format"
   # Post
   read_more: "Lire la suite"
   min_read: "min de lecture"
@@ -34,7 +35,7 @@ fr:
 
 en:
   # Navigation
-  home: "Home"
+  home: "Notes"
   works: "Work"
   works_slug: "work"
   about: "About"
@@ -42,6 +43,7 @@ en:
   works_intro: "Talks and apps, alongside the posts."
   kind_talk: "Talk"
   kind_app: "App"
+  kind_longread: "Long read"
   # Post
   read_more: "Read more"
   min_read: "min read"

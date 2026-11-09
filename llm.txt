@@ -19,7 +19,13 @@ This blog is **fully bilingual** (English + French). Every article exists in bot
 
 All article URLs follow the pattern: `/{lang}/{year}/{month}/{day}/{slug}/`
 
-Talks and interactive apps are listed on a separate page: https://11h.dev/fr/travaux/ (FR) and https://11h.dev/en/work/ (EN). Talks live under `/talk/{slug}/`, apps under `/apps/{slug}/`.
+Talks, long reads and interactive apps are listed on a separate page: https://11h.dev/fr/travaux/ (FR) and https://11h.dev/en/work/ (EN). Talks live under `/talk/{slug}/`, long reads under `/longread/{slug}/`, apps under `/apps/{slug}/`.
+
+Long reads (French, scrollytelling):
+- [Un livre, plusieurs rayons](/longread/multilabel-llm/) - Multi-label text classification with an LLM: few-shot prompting, token costs, metrics, production. With Martin Labenne.
+- [Deux ans pour ne plus y penser](/longread/mysql-s3-dms/) - MySQL to S3 with AWS DMS: seven production lessons, from partitioning to binlogs.
+- [Les pièges qu'on se tend](/longread/pieges-passage-echelle/) - Scaling data operations: five rules and the traps they avoid.
+- [Deux factures pour un cluster](/longread/databricks-couts/) - Databricks cost management: reading the bill, tagging, system tables, compute, Photon.
 
 ## What This Blog Is About
 
@@ -68,8 +74,6 @@ The technical posts inform the philosophical ones. The philosophy shapes how I b
 
 **Technical Deep Dives:**
 - [Inverting the Data Testing Pyramid: Optimizing for Time to Insight](/en/2025/12/20/inverting-the-data-testing-pyramid-optimizing-for-time-to-insight/) - The core issue wasn't test coverage. It was what we were optimizing for.
-- [MySQL to S3 with AWS DMS: What actually works in production](/en/2025/12/15/mysql-to-s3-with-aws-dms-what-actually-works-in-pr/) - I don't like sharing experience reports on specific software. These articles age poorly. But on A...
-- [Databricks Cost Management](/en/2024/06/17/databricks-cost-management/) - Best practices for handling and managing Databricks costs - from understanding the cost structure...
 
 **Earlier Work (2014-2016):**
 Digital transformation reflections when those words still meant something - LinkedIn acquisition analysis, uberization critique, digital hygiene.
@@ -102,8 +106,6 @@ Digital transformation reflections when those words still meant something - Link
 
 **Approfondissements techniques :**
 - [Inverser la pyramide des tests data : optimiser le temps d'accès à l'insight](/fr/2025/12/20/inverser-la-pyramide-des-tests-data-optimiser-le-temps-dacces-a-linsight/) - Le vrai problème n'était pas la couverture de tests. C'était ce qu'on cherchait à optimiser.
-- [MySQL vers S3 avec AWS DMS : ce qui marche vraiment en production](/fr/2025/12/15/mysql-vers-s3-avec-aws-dms-ce-qui-marche-vraiment-en-prod/) - Je n'aime pas partager des retours d'expérience sur des logiciels spécifiques. Ces articles vieil...
-- [Gestion des coûts Databricks](/fr/2024/06/17/gestion-des-couts-databricks/) - Bonnes pratiques pour maîtriser et gérer les coûts Databricks — de la compréhension de la structu...
 
 **Travaux anterieurs (2014-2016) :**
 Reflexions sur la transformation digitale quand ces mots voulaient encore dire quelque chose - analyse du rachat de LinkedIn, critique de l'uberisation, hygiene numerique.

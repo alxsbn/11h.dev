@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deux ans pour ne plus y penser</title>
+<meta name="description" content="MySQL vers S3 avec AWS DMS : sept leçons de production, de la partition au binlog, pour ingérer des centaines de To sans presque aucune maintenance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/apps/longread/longread.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  .pipe { display: flex; flex-direction: column; gap: 0; }
+  .pnode {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    border: 2px solid var(--line); border-radius: 8px; padding: 12px 18px; background: var(--bg);
+    transition: border-color .4s, background-color .4s, color .4s, opacity .4s;
+  }
+  .pnode b { font-size: 20px; font-weight: 400; }
+  .pnode small { font: 13px var(--mono); color: var(--muted); text-align: right; }
+  .pnode.hl { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .pnode.hl small { color: #CFC6BC; }
+  .pnode.off { opacity: .35; }
+  .parr { text-align: center; color: var(--muted); font-size: 18px; line-height: 1.6; }
+  .lesson { display: flex; align-items: baseline; gap: 14px; min-height: 64px; margin-bottom: 18px; }
+  .lesson .n { font-size: 56px; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .lesson .t { font-size: 22px; line-height: 1.2; }
+  .lesson .of { font: 14px var(--mono); color: var(--muted); }
+
+  table.meta td, table.meta th { font-family: var(--mono); font-size: 14px; }
+  table.meta tr.same td:nth-child(3) { color: var(--accent); }
+
+  .sizing { background: var(--paper); border-radius: 10px; padding: 28px 30px; }
+  .sizing svg { width: 100%; height: auto; display: block; }
+  @media (max-width: 900px) {
+    .pnode { padding: 6px 12px; }
+    .pnode b { font-size: 17px; }
+    .pnode small { display: none; }
+    .parr { font-size: 12px; line-height: 1.2; }
+    .lesson { min-height: 0; margin-bottom: 10px; }
+    .lesson .n { font-size: 38px; }
+    .lesson .t { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header id="bar" aria-hidden="true">
+  <span class="t">Deux ans pour ne plus y penser</span>
+  <span class="c" id="barChapter"></span>
+  <span class="p" id="barProgress"></span>
+</header>
+
+<section class="hero" id="hero" data-chapter="">
+  <img src="assets/serveurs.jpg" alt="Baies de serveurs dans la pénombre, câbles et voyants verts" data-zoom="hero">
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="kicker">Retour d'expérience · Grand format</div>
+    <h1>Deux ans pour<br>ne plus y penser</h1>
+    <p class="lede">MySQL vers S3 avec AWS DMS : ce qui marche vraiment en production. Sept leçons, apprises à nos dépens, pour ingérer des centaines de To sans presque aucune maintenance.</p>
+    <p class="by">Par Alexis Blandin <span>· 5 min de lecture</span></p>
+  </div>
+  <div class="scroll-cue">Faites défiler</div>
+</section>
+
+<div class="gap s"></div>
+
+<div class="prose" data-chapter="Le circuit">
+  <p class="first reveal">Je n'aime pas partager des retours d'expérience sur des logiciels précis : ces articles vieillissent mal. Mais sur AWS DMS vers S3, nous avons assez souffert chez <a href="https://www.jolimoi.com" target="_blank" rel="noopener">Jolimoi</a> pour que garder ça pour nous soit criminel.</p>
+  <p class="note reveal">Avertissement : ce qui suit ne vaut que dans notre contexte. Le circuit est décrit ci-dessous.</p>
+</div>
+
+<section class="scrolly" data-graphic="pipe" data-chapter="Le circuit">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="lesson" id="lesson"><span class="n" id="lN"></span><span class="t" id="lT">Le circuit</span></div>
+    <div class="pipe">
+      <div class="pnode" data-k="src"><b>Aurora MySQL</b><small>AWS RDS · binlogs</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="dms"><b>AWS DMS</b><small>full load, puis CDC</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="s3"><b>S3</b><small>Parquet · YYYYMMDD</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="al"><b>Autoloader</b><small>micro-batch · 30 min</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="delta"><b>Delta Lake</b><small>Auto Optimize · Z-Ordering</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="dbt"><b>dbt</b><small>modélisation</small></div>
+    </div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="c-src"><div class="box">La source : une base <strong>Aurora MySQL</strong> sur AWS RDS.</div></div>
+    <div class="step" data-step="c-dms"><div class="box"><strong>AWS DMS</strong> lit les changements de la base et les pousse vers S3.</div></div>
+    <div class="step" data-step="c-s3"><div class="box">Sur <strong>S3</strong>, des fichiers Parquet. Pour nous, ce n'est qu'un tampon d'ingestion : on ne requête jamais directement dessus.</div></div>
+    <div class="step" data-step="c-al"><div class="box"><strong>Databricks Autoloader</strong> ingère ces fichiers en micro-batch toutes les 30 minutes…</div></div>
+    <div class="step" data-step="c-delta"><div class="box">…vers <strong>Delta Lake</strong>, que <strong>dbt</strong> modélise ensuite. Tout ce qui suit s'inscrit dans ce circuit.</div></div>
+  </div>
+</section>
+
+<!-- ============ SEPT LEÇONS ============ -->
+<section class="chapter" style="--focus: 50% 50%;" data-chapter="Sept leçons">
+  <img src="assets/serveurs.jpg" alt="" data-zoom="chapter">
+  <div class="veil"></div>
+  <div class="label">
+    <div class="num reveal">Sept leçons</div>
+    <h2 class="reveal d1">Ce qui marche<br>en production</h2>
+    <p class="sub reveal d2">De la source jusqu'aux fichiers, chaque leçon a son endroit dans le circuit.</p>
+  </div>
+</section>
+
+<section class="scrolly" data-graphic="pipe" data-chapter="Sept leçons">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="lesson"><span class="n lN"></span><span class="t lT"></span></div>
+    <div class="pipe">
+      <div class="pnode" data-k="src"><b>Aurora MySQL</b><small>AWS RDS · binlogs</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="dms"><b>AWS DMS</b><small>full load, puis CDC</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="s3"><b>S3</b><small>Parquet · YYYYMMDD</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="al"><b>Autoloader</b><small>micro-batch · 30 min</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="delta"><b>Delta Lake</b><small>Auto Optimize · Z-Ordering</small></div>
+      <div class="parr">↓</div>
+      <div class="pnode" data-k="dbt"><b>dbt</b><small>modélisation</small></div>
+    </div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="1"><div class="box"><strong>Partitionnement : restez simple.</strong> Style Hive, une partition <code>YYYYMMDD</code>, point. Pas de complexité inutile. Ça marche pour nous parce qu'on ne fait pas de query pruning directement sur S3 : tout est ingéré par Autoloader vers Delta Lake. Le vrai bénéfice : les backfills et les migrations deviennent triviaux. Adaptez à votre volume et à vos patterns d'accès, mais commencez simple.</div></div>
+    <div class="step" data-step="2"><div class="box"><strong>Découpez les tâches DMS stratégiquement.</strong> Pas une tâche par source : un découpage par type de table, selon le volume, le taux de churn et la criticité. Vous gagnez des full reloads indépendants et un réglage fin. Attention : nous ne le faisons que sur des tables isolées. Si la table A référence la table B et qu'elles vivent dans deux tâches, vous risquez des incohérences temporelles. Les schema drifts, eux, se règlent côté Autoloader, par inférence automatique du schéma.</div></div>
+    <div class="step" data-step="3"><div class="box"><strong>Évaluations de pré-migration : passez votre tour.</strong> Quand la cible est S3, c'est à mon avis du temps perdu. DMS pousse du Parquet non structuré : il n'y a pas de schéma relationnel à valider. Nous faisons seulement des vérifications de base, des comptages de lignes et quelques checksums. Pousser vers S3 coûte si peu qu'on peut itérer vite, sans se noyer dans des validations qui n'ont pas de sens ici.</div></div>
+    <div class="step" data-step="4"><div class="box"><strong>DMS Serverless : nous avons fait marche arrière.</strong> Testé plusieurs fois, sur des périodes de trois à six mois : plus cher, moins performant, un scaling imprévisible. Retour en arrière à chaque fois. AWS améliore le produit en continu, mais aujourd'hui, côté tarifs, les instances classiques restent plus prévisibles et plus économiques.</div></div>
+    <div class="step" data-step="5"><div class="box"><strong>Les métadonnées de transaction sont non négociables.</strong> Ajoutez un identifiant de transaction (<code>AR_H_CHANGE_SEQ</code> pour MySQL), l'<code>Op</code> (INSERT, UPDATE, DELETE) et le <code>TIMESTAMP</code>. DMS peut tronquer la précision à la milliseconde. Sans ces colonnes, impossible d'ordonner de façon fiable des opérations concurrentes. Ça ressemble à un détail, jusqu'au jour où ça casse vos garanties de cohérence.</div></div>
+    <div class="step" data-step="6"><div class="box"><strong>Rétention des binlogs et dimensionnement.</strong> Côté source, augmentez la rétention des binlogs : sept jours minimum pour nous. Nous avons perdu des événements une fois, à cause d'un binlog expiré trop vite, et nous ne lésinons plus depuis. Côté DMS, lancez une grosse instance pour le full load, faites l'import, puis réduisez avant de passer en CDC continu. Ça nous a fait économiser des milliers d'euros. Mais ne sous-dimensionnez jamais le stockage de l'instance.</div></div>
+    <div class="step" data-step="7"><div class="box"><strong>Les petits fichiers, le vrai ennemi.</strong> Même en Parquet. Nous visons 100 à 200&nbsp;Mo par fichier et réglons le commit et le flush de DMS en conséquence. La compaction se fait automatiquement côté Databricks, après l'ingestion dans Delta Lake, avec Auto Optimize et le Z-Ordering. Le coût de chargement depuis S3 est négligeable, et on ne charge normalement qu'une fois.</div></div>
+  </div>
+</section>
+
+<div class="prose" data-chapter="Sept leçons">
+  <p class="reveal">Deux leçons méritent un dessin. La cinquième d'abord : quand deux opérations tombent dans la même milliseconde, seul l'identifiant de transaction dit laquelle est arrivée en premier.</p>
+</div>
+
+<figure class="wide reveal" style="max-width:760px">
+  <div class="tablewrap">
+  <table class="meta">
+    <thead><tr><th>AR_H_CHANGE_SEQ</th><th>Op</th><th>TIMESTAMP</th><th>status</th></tr></thead>
+    <tbody>
+      <tr><td>…0000000000418230</td><td>I</td><td>2025-12-15 09:14:03.217</td><td>created</td></tr>
+      <tr class="same"><td>…0000000000418231</td><td>U</td><td>2025-12-15 09:14:03.482</td><td>paid</td></tr>
+      <tr class="same"><td>…0000000000418232</td><td>U</td><td>2025-12-15 09:14:03.482</td><td>cancelled</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <figcaption>Exemple fictif. Deux mises à jour partagent le même horodatage tronqué : sans la séquence, «&nbsp;paid&nbsp;» et «&nbsp;cancelled&nbsp;» s'ordonnent au hasard.</figcaption>
+</figure>
+
+<div class="prose" data-chapter="Sept leçons">
+  <p class="reveal">La sixième ensuite : l'instance DMS n'a pas besoin de la même taille toute sa vie.</p>
+</div>
+
+<figure class="wide reveal" style="max-width:760px">
+  <div class="sizing">
+    <svg viewBox="0 0 640 220" role="img" aria-label="Schéma : une grande instance pendant le full load, puis une petite instance pour le CDC continu">
+      <line x1="40" y1="180" x2="620" y2="180" stroke="#1F1B18" stroke-width="1.5"/>
+      <rect x="50" y="40" width="170" height="140" fill="#A9472F" rx="3"/>
+      <rect x="230" y="140" width="380" height="40" fill="#9C9187" rx="3"/>
+      <text x="135" y="112" text-anchor="middle" fill="#fff" font-family="Spectral, serif" font-size="18">Full load</text>
+      <text x="135" y="134" text-anchor="middle" fill="#fff" font-family="Spectral, serif" font-size="14" font-style="italic">grosse instance</text>
+      <text x="420" y="166" text-anchor="middle" fill="#fff" font-family="Spectral, serif" font-size="16">CDC continu, petite instance</text>
+      <text x="40" y="206" fill="#6E655D" font-family="Spectral, serif" font-size="14">temps →</text>
+      <text x="40" y="26" fill="#6E655D" font-family="Spectral, serif" font-size="14">taille de l'instance</text>
+    </svg>
+  </div>
+  <figcaption>Schéma, pas une mesure. Le stockage de l'instance, lui, ne se réduit pas.</figcaption>
+</figure>
+
+<p class="pull reveal" data-chapter="Ce qui reste">Pas une solution «&nbsp;configurer et oublier&nbsp;».<span class="accent">Deux ans pour en arriver là.</span></p>
+
+<div class="prose" data-chapter="Ce qui reste">
+  <p class="reveal">AWS DMS vers S3 demande du soin. La différence se joue sur la granularité des tâches, limitée aux tables isolées, sur des métadonnées de transaction complètes, sur un dimensionnement intelligent et sur une vraie obsession des détails opérationnels.</p>
+  <p class="reveal">L'architecture en aval compte autant que DMS. Nous ne requêtons jamais directement sur S3 : tout passe par Autoloader vers Delta Lake, puis par dbt. Le Parquet sur S3 n'est qu'un tampon d'ingestion.</p>
+  <p class="reveal">Les erreurs DMS sont captées et remontent dans Slack par un agent maison. Le seul bug vraiment vicieux rencontré : un <code>ALTER TYPE</code> sur un ENUM MySQL, qui a mélangé les valeurs. Détecté vite, corrigé, puis full load à nouveau.</p>
+  <p class="reveal">Aujourd'hui, nous ingérons des centaines de To avec presque zéro maintenance. Il a fallu deux ans pour en arriver là. Adaptez à votre contexte, ne copiez pas aveuglément.</p>
+</div>
+
+<footer class="end" data-chapter="Ce qui reste">
+  <div class="prose">
+    <p>Paru d'abord le 15 décembre 2025.</p>
+    <p>Photo : Taylor Vick, <a href="https://unsplash.com/@tvick" target="_blank" rel="noopener">Unsplash</a>.</p>
+    <p style="margin-top:1.6em"><a href="/fr/travaux/" target="_top">← Tous les travaux</a></p>
+  </div>
+</footer>
+
+<script src="/apps/longread/longread.js"></script>
+<script>
+(() => {
+  const { $, $$ } = Longread;
+  const LESSONS = {
+    1: ['Partitionnement : restez simple', ['s3']],
+    2: ['Découper les tâches DMS', ['dms', 'al']],
+    3: ['Pré-migration : passez votre tour', ['dms', 's3']],
+    4: ['DMS Serverless : marche arrière', ['dms']],
+    5: ['Métadonnées de transaction', ['dms']],
+    6: ['Binlogs et dimensionnement', ['src', 'dms']],
+    7: ['Les petits fichiers', ['s3', 'delta']],
+  };
+  const CIRCUIT = { 'c-src': ['src'], 'c-dms': ['dms'], 'c-s3': ['s3'], 'c-al': ['al'], 'c-delta': ['delta', 'dbt'] };
+
+  Longread.init({
+    pipe(step, sc) {
+      let keys, n = '', t = '';
+      if (CIRCUIT[step]) { keys = CIRCUIT[step]; t = 'Le circuit'; }
+      else { [t, keys] = LESSONS[step]; n = step; }
+      $$('.pnode', sc).forEach(p => {
+        p.classList.toggle('hl', keys.includes(p.dataset.k));
+        p.classList.toggle('off', !keys.includes(p.dataset.k));
+      });
+      const nEl = $('.lN', sc) || $('#lN', sc), tEl = $('.lT', sc) || $('#lT', sc);
+      nEl.textContent = n; tEl.innerHTML = n ? `${t} <span class="of">/7</span>` : t;
+    },
+  });
+})();
+</script>
+</body>
+</html>
