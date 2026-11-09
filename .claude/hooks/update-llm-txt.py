@@ -45,6 +45,56 @@ def parse_front_matter(content: str) -> dict:
     return front_matter
 
 
+WORK_KINDS = {'talk': 'Talk', 'longread': 'Long read (French, scrollytelling)', 'app': 'App'}
+SKIP_DIRS = {'_site', '.git', '.claude', 'node_modules', 'vendor', '.jekyll-cache'}
+
+
+def load_works() -> list:
+    """Load the Travaux / Work pages: any page whose front matter sets `work: true`."""
+    works = []
+    for path in PROJECT_ROOT.rglob('*'):
+        if path.suffix not in ('.html', '.md') or not path.is_file():
+            continue
+        if SKIP_DIRS.intersection(path.relative_to(PROJECT_ROOT).parts):
+            continue
+        try:
+            content = path.read_text(encoding='utf-8')
+        except (UnicodeDecodeError, OSError):
+            continue
+        if not content.startswith('---'):
+            continue
+        fm = parse_front_matter(content)
+        if fm.get('work') != 'true':
+            continue
+        url = fm.get('permalink')
+        if not url:
+            # Jekyll derives the URL from the path when no permalink is set
+            rel = path.relative_to(PROJECT_ROOT).as_posix()
+            url = '/' + (rel[:-len('index.html')] if rel.endswith('index.html') else rel)
+        works.append({
+            'title': fm.get('title', path.stem).replace('\\"', '"'),
+            'url': url,
+            'date': fm.get('date', ''),
+            'kind': WORK_KINDS.get(fm.get('kind', ''), fm.get('kind', '')),
+            'excerpt': fm.get('excerpt_en') or fm.get('excerpt', ''),
+        })
+    return sorted(works, key=lambda w: w['date'], reverse=True)
+
+
+def generate_works_section(works: list) -> str:
+    """Describe the Travaux / Work page and list its entries."""
+    out = ("Talks, long reads and interactive apps are listed on a separate page: "
+           "https://11h.dev/fr/travaux/ (FR) and https://11h.dev/en/work/ (EN). "
+           "Talks live under `/talk/{slug}/`, long reads under `/longread/{slug}/`, "
+           "apps under `/apps/{slug}/`.\n\n")
+    if works:
+        out += "Work (talks, long reads, apps):\n"
+        for w in works:
+            out += f"- [{w['title']}]({w['url']}) - {w['kind']}. {w['excerpt']}\n"
+        out += "\n"
+    return out
+
+
 def get_permalink(filename: str, lang: str) -> str:
     """Generate permalink from filename with language prefix."""
     match = re.match(r'^(\d{4})-(\d{2})-(\d{2})-(.+)\.md$', filename)
@@ -255,7 +305,7 @@ This blog is **fully bilingual** (English + French). Every article exists in bot
 
 All article URLs follow the pattern: `/{lang}/{year}/{month}/{day}/{slug}/`
 
-## What This Blog Is About
+{WORKS}## What This Blog Is About
 
 Two parallel tracks:
 
@@ -277,6 +327,7 @@ The technical posts inform the philosophical ones. The philosophy shapes how I b
 ## Articles (English)
 
 '''
+    content = content.replace('{WORKS}', generate_works_section(load_works()))
 
     content += generate_section(en_categories, 'en')
 
