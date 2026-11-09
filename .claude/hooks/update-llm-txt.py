@@ -72,7 +72,7 @@ def load_works() -> list:
             rel = path.relative_to(PROJECT_ROOT).as_posix()
             url = '/' + (rel[:-len('index.html')] if rel.endswith('index.html') else rel)
         works.append({
-            'title': fm.get('title', path.stem).replace('\\"', '"'),
+            'title': (fm.get('title_en') or fm.get('title', path.stem)).replace('\\"', '"'),
             'url': url,
             'date': fm.get('date', ''),
             'kind': WORK_KINDS.get(fm.get('kind', ''), fm.get('kind', '')),
