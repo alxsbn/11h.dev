@@ -6,10 +6,6 @@ layout: default
 {%- assign date_format = t.date_format | default: "%B %-d, %Y" -%}
 
 <div class="home-container">
-  <header class="home-header">
-    <h1 class="home-title">{{ page.title }}</h1>
-  </header>
-
   {%- if t.works_intro -%}
   <div class="home-intro">
     <p>{{ t.works_intro }}</p>

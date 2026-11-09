@@ -5,7 +5,7 @@ fr:
   works_slug: "travaux"
   about: "À propos"
   # Works
-  works_intro: "Talks et applications, en marge des billets."
+  works_intro: "Talks, grands formats et applications, en marge des notes."
   kind_talk: "Talk"
   kind_app: "App"
   kind_longread: "Grand format"
@@ -20,7 +20,7 @@ fr:
   copy_link: "Copier le lien"
   copied: "Copié !"
   # Homepage
-  description: "Notes et réflexions sur la tech, la data et ce qui m'anime"
+  description: "Notes personnelles sur la tech, la data et ce qui m'anime."
   rss: "RSS"
   # About
   about_title: "À propos"
@@ -40,7 +40,7 @@ en:
   works_slug: "work"
   about: "About"
   # Works
-  works_intro: "Talks and apps, alongside the posts."
+  works_intro: "Talks, long reads and apps, alongside the notes."
   kind_talk: "Talk"
   kind_app: "App"
   kind_longread: "Long read"
@@ -55,7 +55,7 @@ en:
   copy_link: "Copy link"
   copied: "Copied!"
   # Homepage
-  description: "Personal blog about passions and ideas"
+  description: "Personal notes on tech, data and what drives me."
   rss: "RSS"
   # About
   about_title: "About Me"
