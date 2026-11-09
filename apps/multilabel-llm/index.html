@@ -367,8 +367,8 @@
 </div>
 
 <!-- ======================= RAYON 1 ======================= -->
-<section class="chapter" style="--focus: 30% 95%;" data-chapter="Rayon 1 · L'ancien chemin">
-  <img src="assets/bibliotheque.jpg" alt="" data-zoom="chapter">
+<section class="chapter" style="--focus: 50% 50%;" data-chapter="Rayon 1 · L'ancien chemin">
+  <img src="assets/r1-fichier.jpg" alt="Tiroirs en bois d'un ancien fichier de bibliothèque" data-zoom="chapter">
   <div class="veil"></div>
   <div class="label">
     <div class="num reveal">Rayon 1</div>
@@ -399,8 +399,8 @@
 </div>
 
 <!-- ======================= RAYON 2 ======================= -->
-<section class="chapter" style="--focus: 40% 72%;" data-chapter="Rayon 2 · Le raccourci">
-  <img src="assets/bibliotheque.jpg" alt="" data-zoom="chapter">
+<section class="chapter" style="--focus: 50% 50%;" data-chapter="Rayon 2 · Le raccourci">
+  <img src="assets/r2-echelle.jpg" alt="Échelle appuyée contre de hauts rayonnages, entre deux colonnes" data-zoom="chapter">
   <div class="veil"></div>
   <div class="label">
     <div class="num reveal">Rayon 2</div>
@@ -441,8 +441,8 @@ seed=<span class="k">424242</span>,</pre>
 </div>
 
 <!-- ======================= RAYON 3 ======================= -->
-<section class="chapter" style="--focus: 55% 48%;" data-chapter="Rayon 3 · Le prix d'une pensée">
-  <img src="assets/bibliotheque.jpg" alt="" data-zoom="chapter">
+<section class="chapter" style="--focus: 50% 50%;" data-chapter="Rayon 3 · Le prix d'une pensée">
+  <img src="assets/r3-lecteurs.jpg" alt="Gravure de lecteurs absorbés sous des lampes de bibliothèque" data-zoom="chapter">
   <div class="veil"></div>
   <div class="label">
     <div class="num reveal">Rayon 3</div>
@@ -483,8 +483,8 @@ seed=<span class="k">424242</span>,</pre>
 </section>
 
 <!-- ======================= RAYON 4 ======================= -->
-<section class="chapter" style="--focus: 50% 25%;" data-chapter="Rayon 4 · Le classifieur">
-  <img src="assets/bibliotheque.jpg" alt="" data-zoom="chapter">
+<section class="chapter" style="--focus: 50% 50%;" data-chapter="Rayon 4 · Le classifieur">
+  <img src="assets/r4-rayonnages.jpg" alt="Allée de rayonnages aux livres bien rangés" data-zoom="chapter">
   <div class="veil"></div>
   <div class="label">
     <div class="num reveal">Rayon 4</div>
@@ -548,8 +548,8 @@ seed=<span class="k">424242</span>,</pre>
 </figure>
 
 <!-- ======================= RAYON 5 ======================= -->
-<section class="chapter" style="--focus: 75% 8%;" data-chapter="Rayon 5 · En production">
-  <img src="assets/bibliotheque.jpg" alt="" data-zoom="chapter">
+<section class="chapter" style="--focus: 50% 50%;" data-chapter="Rayon 5 · En production">
+  <img src="assets/r5-salle.jpg" alt="Grande salle de lecture pleine de lecteurs, vue d'en haut" data-zoom="chapter">
   <div class="veil"></div>
   <div class="label">
     <div class="num reveal">Rayon 5</div>
@@ -616,7 +616,7 @@ seed=<span class="k">424242</span>,</pre>
 <footer class="end" data-chapter="Conclusion">
   <div class="prose">
     <p>Adapté de «&nbsp;Multi-label Classification Problems with Large Language Models&nbsp;», publié sur le blog tech de Jolimoi le 6 août 2024, par Martin Labenne et Alexis Blandin.</p>
-    <p>Photo : Niklas Ohlrogge, <a href="https://unsplash.com/@ohlrogge" target="_blank" rel="noopener">Unsplash</a>.</p>
+    <p>Photos sur Unsplash : <a href="https://unsplash.com/@ohlrogge" target="_blank" rel="noopener">Niklas Ohlrogge</a> (ouverture), <a href="https://unsplash.com/@jankolar" target="_blank" rel="noopener">Jan Antonin Kolar</a>, <a href="https://unsplash.com/@nimbus_vulpis" target="_blank" rel="noopener">Rafael Garcin</a>, <a href="https://unsplash.com/@nypl" target="_blank" rel="noopener">The New York Public Library</a>, <a href="https://unsplash.com/@zetong" target="_blank" rel="noopener">Zetong Li</a>, <a href="https://unsplash.com/@unclpenguin" target="_blank" rel="noopener">Jimmy Whitson</a>.</p>
     <p>Sources : <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics" target="_blank" rel="noopener">scikit-learn, métriques de classification</a> · <a href="https://platform.openai.com/docs/api-reference/chat/create#chat-create-seed" target="_blank" rel="noopener">API OpenAI, paramètre seed</a> · <a href="https://www.promptingguide.ai/techniques" target="_blank" rel="noopener">promptingguide.ai</a> · <a href="https://en.wikipedia.org/wiki/Multi-label_classification" target="_blank" rel="noopener">Wikipédia, multi-label classification</a>.</p>
     <p style="margin-top:1.6em"><a href="/fr/travaux/" target="_top">← Tous les travaux</a></p>
   </div>
@@ -653,7 +653,7 @@ seed=<span class="k">424242</span>,</pre>
       const r = img.parentElement.getBoundingClientRect();
       if (r.bottom < 0 || r.top > h) continue;
       const p = Math.min(1, Math.max(0, (h - r.top) / (h + r.height)));
-      const z = img.dataset.zoom === 'hero' ? 1.05 + p * 0.25 : 1.9 - p * 0.45;
+      const z = img.dataset.zoom === 'hero' ? 1.05 + p * 0.25 : 1.2 - p * 0.2;
       img.style.setProperty('--z', z.toFixed(3));
     }
   }
