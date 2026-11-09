@@ -1,0 +1,39 @@
+---
+layout: none
+permalink: /longread/mysql-s3-dms/
+sitemap: false
+work: true
+kind: longread
+title: "Deux ans pour ne plus y penser"
+date: 2025-12-15
+excerpt: "MySQL vers S3 avec AWS DMS : sept leçons de production, de la partition au binlog, pour ingérer des centaines de To sans presque aucune maintenance."
+excerpt_en: "MySQL to S3 with AWS DMS: seven production lessons, from partitioning to binlogs, to ingest hundreds of TB with almost no maintenance."
+header_image: /assets/images/travaux/mysql-s3-dms.jpg
+header_image_alt: "Ouverture du grand format Deux ans pour ne plus y penser"
+redirect_from:
+  - /fr/2025/12/15/mysql-vers-s3-avec-aws-dms-ce-qui-marche-vraiment-en-prod/
+  - /en/2025/12/15/mysql-to-s3-with-aws-dms-what-actually-works-in-pr/
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Deux ans pour ne plus y penser</title>
+  <meta name="description" content="Grand format : MySQL vers S3 avec AWS DMS, ce qui marche en production.">
+  <meta property="og:title" content="Deux ans pour ne plus y penser">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://11h.dev/longread/mysql-s3-dms/">
+  <meta property="og:image" content="https://11h.dev/assets/images/travaux/mysql-s3-dms.jpg">
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #FAF9F6; overflow: hidden; }
+    /* Le grand format vit dans son propre document (apps/mysql-s3-dms/),
+       affiché ici en plein écran via une iframe sans bordure. */
+    iframe#deck { position: fixed; inset: 0; width: 100vw; height: 100vh; border: 0; display: block; }
+  </style>
+</head>
+<body>
+  <iframe id="deck" src="/apps/mysql-s3-dms/" title="Deux ans pour ne plus y penser" allow="fullscreen" allowfullscreen></iframe>
+  <script>document.getElementById('deck').addEventListener('load', e => e.target.contentWindow.focus());</script>
+</body>
+</html>

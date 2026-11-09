@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les pièges qu'on se tend</title>
+<meta name="description" content="Passer à l'échelle des opérations data : cinq règles et les pièges qu'elles évitent, tirées d'échanges avec des Head of Data, CTO, CEO et CPO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/apps/longread/longread.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  .stack { display: flex; flex-direction: column-reverse; gap: 10px; min-height: 470px; justify-content: flex-start; }
+  .blk {
+    border: 2px solid var(--line); border-radius: 8px; padding: 12px 18px; background: var(--bg);
+    opacity: 0; transform: translateY(-24px); transition: opacity .5s, transform .5s, border-color .4s, background-color .4s;
+  }
+  .blk.on { opacity: 1; transform: none; border-color: var(--ink); }
+  .blk.cur { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .blk h4 { margin: 0; font-size: 20px; font-weight: 400; display: flex; gap: 12px; align-items: baseline; }
+  .blk h4 i { font-style: normal; font: 14px var(--mono); opacity: .6; }
+  .blk .trap { font-size: 15px; font-style: italic; color: var(--accent); max-height: 0; overflow: hidden; transition: max-height .4s, margin .4s; }
+  .blk.cur .trap { color: #F0B9A8; }
+  .blk.trapon .trap { max-height: 3em; margin-top: 4px; }
+  .ground { border-top: 3px solid var(--ink); padding-top: 8px; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+  .who { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 18px; margin: .4em 0 1.4em; }
+  .who a { text-decoration-color: var(--line); }
+</style>
+</head>
+<body>
+
+<header id="bar" aria-hidden="true">
+  <span class="t">Les pièges qu'on se tend</span>
+  <span class="c" id="barChapter"></span>
+  <span class="p" id="barProgress"></span>
+</header>
+
+<section class="hero" id="hero" data-chapter="">
+  <img src="assets/bureau.jpg" alt="Deux personnes annotent un document entre des ordinateurs portables" data-zoom="hero">
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="kicker">Grand format · Organisation data</div>
+    <h1>Les pièges<br>qu'on se tend</h1>
+    <p class="lede">Passer à l'échelle des opérations data n'est pas simple, mais la plupart des obstacles sont prévisibles et évitables. Les plus grands défis sont souvent auto-infligés.</p>
+    <p class="by">Par Alexis Blandin <span>· 4 min de lecture</span></p>
+  </div>
+  <div class="scroll-cue">Faites défiler</div>
+</section>
+
+<div class="gap s"></div>
+
+<div class="prose" data-chapter="Introduction">
+  <p class="first reveal">J'ai échangé avec des Head of Data, des CTO, des CEO et des CPO, en poste ou passés par ces entreprises&nbsp;:</p>
+  <div class="who reveal">
+    <a href="https://www.labellevie.com/" target="_blank" rel="noopener">La Belle Vie</a>
+    <a href="https://pro.bsport.io/" target="_blank" rel="noopener">BSport</a>
+    <a href="https://www.qare.fr/" target="_blank" rel="noopener">Qare</a>
+    <a href="https://sundayapp.com/fr/" target="_blank" rel="noopener">Sunday</a>
+    <a href="https://www.leboncoin.fr/" target="_blank" rel="noopener">LeBonCoin</a>
+  </div>
+  <p class="reveal">Une chose ressort de ces conversations : les plus grands défis sont souvent ceux qu'on se crée. De la gouvernance approximative aux stacks techniques qui ne suivent pas la croissance, cinq règles reviennent, chacune avec le piège qu'elle évite. Elles se posent dans l'ordre, comme des fondations.</p>
+</div>
+
+<section class="scrolly" data-graphic="stack" data-chapter="Cinq fondations">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="plabel">Les fondations, posées une à une</div>
+    <div style="height:18px"></div>
+    <div class="stack">
+      <div class="blk" data-b="1"><h4><i>1</i>Centraliser, puis spécialiser</h4><div class="trap">Piège : des silos trop tôt</div></div>
+      <div class="blk" data-b="2"><h4><i>2</i>Une stack qui passe à l'échelle</h4><div class="trap">Piège : le legacy rigide</div></div>
+      <div class="blk" data-b="3"><h4><i>3</i>La gouvernance, tout de suite</h4><div class="trap">Piège : la gouvernance improvisée</div></div>
+      <div class="blk" data-b="4"><h4><i>4</i>Servir les objectifs métier</h4><div class="trap">Piège : l'usine à demandes ad hoc</div></div>
+      <div class="blk" data-b="5"><h4><i>5</i>Une équipe équilibrée</h4><div class="trap">Piège : plus de têtes, plus de résultats</div></div>
+    </div>
+    <div class="ground">Opérations data</div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="1a"><div class="box"><strong>1. Centralisez d'abord, spécialisez ensuite.</strong> Ne vous compliquez pas la vie. Au départ, il faut une petite équipe centralisée, capable d'imposer la gouvernance et de standardiser les processus. Résistez à l'envie de recruter des spécialistes. Posez d'abord les bases : des pipelines propres, un reporting solide, une propriété clairement définie. Quand viendra le moment de grandir, spécialisez l'équipe autour des besoins métier clés.</div></div>
+    <div class="step" data-step="1b"><div class="box"><div class="pair" style="margin:0"><div class="trap"><b>Piège</b>Créer des silos trop tôt en dispersant les spécialistes dans les équipes.</div><div><b>Conseil</b>Commencez avec des généralistes et des outils flexibles comme dbt ou Looker. Ne spécialisez que lorsque la charge opérationnelle l'exige.</div></div></div></div>
+    <div class="step" data-step="2a"><div class="box"><strong>2. Choisissez une stack qui passe à l'échelle.</strong> Vos outils ne doivent jamais vous freiner. Si vous utilisez encore des solutions obsolètes, vous êtes déjà en retard. La stack data moderne est cloud-native, modulaire et conçue pour la croissance : Snowflake, BigQuery ou Databricks. Arrêtez de bricoler des systèmes entre eux et investissez dans des technologies qui vous épargneront des maux de tête à long terme.</div></div>
+    <div class="step" data-step="2b"><div class="box"><div class="pair" style="margin:0"><div class="trap"><b>Piège</b>Vous enfermer dans des systèmes rigides et legacy.</div><div><b>Conseil</b>Projetez-vous là où sera l'entreprise dans trois ans. Choisissez des outils capables de gérer dix fois votre volume de données actuel.</div></div></div></div>
+    <div class="step" data-step="3a"><div class="box"><strong>3. La gouvernance n'est pas négociable.</strong> Il est tentant de la remettre à plus tard. Ne le faites pas : le jour où vous en mesurerez le besoin, il sera trop tard. Une gouvernance solide garantit la confiance, la sécurité et la conformité. Commencez petit : des définitions de données standardisées, des contrôles d'accès, des pistes d'audit. Construisez à partir de là.</div></div>
+    <div class="step" data-step="3b"><div class="box"><div class="pair" style="margin:0"><div class="trap"><b>Piège</b>Improviser la gouvernance le jour où la régulation arrive.</div><div><b>Conseil</b>Mettez en place dès le premier jour des outils automatisés, comme Monte Carlo ou CastorDoc, pour surveiller la qualité des données et la conformité.</div></div></div></div>
+    <div class="step" data-step="4a"><div class="box"><strong>4. La data doit servir les objectifs métier.</strong> Si vos données ne guident pas les décisions, à quoi servent-elles&nbsp;? Oubliez les dashboards que personne ne lit et les soi-disant KPI qui n'entraînent aucune action. Vos données doivent résoudre des problèmes métier critiques. Reliez chaque initiative data à un résultat clair et mesurable.</div></div>
+    <div class="step" data-step="4b"><div class="box"><div class="pair" style="margin:0"><div class="trap"><b>Piège</b>Devenir une usine à demandes ad hoc.</div><div><b>Conseil</b>Dites non aux demandes à faible valeur. Construisez plutôt des solutions qui répondent aux questions récurrentes.</div></div></div></div>
+    <div class="step" data-step="5a"><div class="box"><strong>5. Équilibrez votre équipe.</strong> Trop de juniors, et la progression ralentit nettement. Trop de seniors, et le budget explose. Les juniors ont besoin de mentorat, les seniors doivent rester concentrés sur les tâches à fort impact. Gardez une équipe lean, mais efficace.</div></div>
+    <div class="step" data-step="5b"><div class="box"><div class="pair" style="margin:0"><div class="trap"><b>Piège</b>Penser que plus de têtes donne plus de résultats.</div><div><b>Conseil</b>Associez chaque junior à un mentor senior pour accélérer son apprentissage et son autonomie.</div></div></div></div>
+  </div>
+</section>
+
+<p class="pull reveal" data-chapter="Pas d'excuses">Passer à l'échelle n'est pas une question de chance.<span class="accent">C'est une question de préparation.</span></p>
+
+<div class="prose" data-chapter="Pas d'excuses">
+  <p class="reveal">Les plus grosses erreurs arrivent quand les équipes foncent sans fondations solides. Centralisez d'abord, investissez dans une tech qui passe à l'échelle, imposez la gouvernance et concentrez-vous sur l'impact métier. Sans cela, vos opérations data ne sont pas prêtes à grandir.</p>
+</div>
+
+<footer class="end" data-chapter="Pas d'excuses">
+  <div class="prose">
+    <p>Paru d'abord le 28 janvier 2025.</p>
+    <p>Photo : Helloquence, <a href="https://unsplash.com/@helloquence" target="_blank" rel="noopener">Unsplash</a>.</p>
+    <p style="margin-top:1.6em"><a href="/fr/travaux/" target="_top">← Tous les travaux</a></p>
+  </div>
+</footer>
+
+<script src="/apps/longread/longread.js"></script>
+<script>
+(() => {
+  const { $$ } = Longread;
+  Longread.init({
+    stack(step) {
+      const n = parseInt(step, 10), trap = step.endsWith('b');
+      $$('.blk').forEach(b => {
+        const k = +b.dataset.b;
+        b.classList.toggle('on', k <= n);
+        b.classList.toggle('cur', k === n);
+        b.classList.toggle('trapon', k < n || (k === n && trap));
+      });
+    },
+  });
+})();
+</script>
+</body>
+</html>
