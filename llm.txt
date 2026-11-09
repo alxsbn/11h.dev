@@ -19,6 +19,8 @@ This blog is **fully bilingual** (English + French). Every article exists in bot
 
 All article URLs follow the pattern: `/{lang}/{year}/{month}/{day}/{slug}/`
 
+Talks and interactive apps are listed on a separate page: https://11h.dev/fr/travaux/ (FR) and https://11h.dev/en/work/ (EN). Talks live under `/talk/{slug}/`, apps under `/apps/{slug}/`.
+
 ## What This Blog Is About
 
 Two parallel tracks:
