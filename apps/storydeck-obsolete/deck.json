@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "title": "AI will make your organization obsolete. If you have one",
+    "source": "Google Slides « AI will make your organization obsolete. If you have one » (version du 2026-11-02)",
+    "generated": "2026-11-10",
+    "lang": "fr"
+  },
+  "scenes": [
+    {
+      "type": "title",
+      "title": "AI will make your organization obsolete. If you have one"
+    },
+    {
+      "type": "atelier",
+      "image": "assets/img/verrocchio-bapteme.jpg",
+      "alt": "Le Baptême du Christ",
+      "portrait": "assets/img/verrocchio-portrait.jpg",
+      "name": "Andrea del Verrocchio",
+      "dates": "v. 1435 – 1488"
+    },
+    {
+      "type": "atelier",
+      "image": "assets/img/stradanus-color-olivi.jpg",
+      "alt": "Stradanus, Color Olivi (Nova Reperta)"
+    },
+    {
+      "type": "atelier",
+      "image": "assets/img/leonard-anges.jpg",
+      "alt": "Le Baptême du Christ, détail des anges",
+      "portrait": "assets/img/leonard-portrait.jpg",
+      "name": "Léonard de Vinci",
+      "dates": "1452 – 1519"
+    },
+    {
+      "type": "duo",
+      "images": ["assets/img/logo-jolimoi.jpg", "assets/img/logo-urban-sketchers.jpg"]
+    },
+    {
+      "type": "cellular",
+      "beats": [
+        {
+          "tempo": 0.8,
+          "together": true,
+          "add": [
+            { "id": "head", "kind": "human", "label": "Head of Data", "x": 0.5,  "y": 0.36, "r": 0.09 },
+            { "id": "a1",   "kind": "human", "label": "Analyst 1",    "x": 0.32, "y": 0.58, "r": 0.055 },
+            { "id": "a2",   "kind": "human", "label": "Analyst 2",    "x": 0.44, "y": 0.64, "r": 0.055 },
+            { "id": "a3",   "kind": "human", "label": "Analyst 3",    "x": 0.56, "y": 0.64, "r": 0.055 },
+            { "id": "a4",   "kind": "human", "label": "Analyst 4",    "x": 0.68, "y": 0.58, "r": 0.055 }
+          ]
+        },
+        {
+          "tempo": 1.4,
+          "add": [
+            { "id": "ia", "kind": "agent", "label": "IA", "x": 0.8, "y": 0.34, "r": 0.06 }
+          ]
+        },
+        {
+          "tempo": 2.2,
+          "absorb": [
+            { "id": "a1", "into": "ia" },
+            { "id": "a2", "into": "ia" },
+            { "id": "a3", "into": "ia" },
+            { "id": "a4", "into": "ia" }
+          ],
+          "size": [{ "id": "ia", "r": 0.11 }]
+        }
+      ]
+    }
+  ]
+}
