@@ -19,6 +19,17 @@ Welcome to my personal blog where I write about passions and projects I'm workin
 - Urban Sketcher, active locally in Orléans 🇫🇷 and within the global community
 - Curious about where organization, philosophy, and technology intersect
 
+{% comment %}
+  Career section: remove this comment block once the lines are filled in.
+  One line per role: title, company, years, one achievement (link to /work/ when it lives there).
+
+## Career {#career}
+
+[Download my resume (PDF)](/assets/cv/alexis-blandin-cv-en.pdf)
+
+- **Role**, Company (YYYY to YYYY). One achievement.
+{% endcomment %}
+
 ## Contact
 
 Feel free to reach out or follow me:
