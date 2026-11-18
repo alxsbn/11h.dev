@@ -22,8 +22,9 @@ All article URLs follow the pattern: `/{lang}/{year}/{month}/{day}/{slug}/`
 Talks, long reads and interactive apps are listed on a separate page: https://11h.dev/fr/travaux/ (FR) and https://11h.dev/en/work/ (EN). Talks live under `/talk/{slug}/`, long reads under `/work/{slug}/`, apps under `/apps/{slug}/`.
 
 Work (talks, long reads, apps):
-- [Data job title family tree](/apps/arbre-metiers-data/) - App (French and English; `?lang=en` forces English). An interactive family tree of 83 data job titles, from the 1950s keypunch operator to the AI engineer, with the history and sources of each title. Inspired by Ian Miell's family tree of software job titles.
+- [Data job title family tree](/apps/arbre-metiers-data/) - App. 83 data job titles, from the 1950s keypunch operator to the AI engineer: an interactive family tree with the history and sources of each title.
 - [Graphe × Ontologie](/apps/graphe-ontologie/) - App. A two-level 3D view: the ontology (skills, rules, agents) set above the graph of gold tables. The what below, the why and the how above.
+- [The story of a data team that outlived its own job](/talk/agentic-analytics/video/) - Video. The follow-up to Once upon a time, Agentic Analytics, on video: 28 minutes on a data team that outlived its own job.
 - [Once upon a time, Agentic Analytics](/talk/agentic-analytics/) - Talk. The story of a data team and of the job that outlives it: a lean bet, automation, then agents, until the Data Analyst role itself gets rethought.
 - [Build, buy… or AI ?](/talk/fivetran-databricks/) - Talk. Rebuild everything in-house, thanks to AI and because of it? We play along, with a few exceptions. What we buy is no longer what we think we buy.
 - [MySQL to S3 with AWS DMS: What actually works in production](/work/mysql-vers-s3-avec-aws-dms-ce-qui-marche-vraiment-en-prod/) - Long read (French, scrollytelling). MySQL to S3 with AWS DMS: seven production lessons, from partitioning to binlogs, to ingest hundreds of TB with almost no maintenance.
