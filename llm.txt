@@ -24,6 +24,7 @@ Talks, long reads and interactive apps are listed on a separate page: https://11
 Work (talks, long reads, apps):
 - [The Bottleneck Always Ends Up With the Human](/work/le-goulot-finit-toujours-chez-l-humain/) - Long read (French, scrollytelling). In three years, the Jolimoi Data Team grew its pull requests per person sixteenfold. The bottleneck moved four times and always came back to the same place, human time.
 - [Data job title family tree](/apps/arbre-metiers-data/) - App. 83 data job titles, from the 1950s keypunch operator to the AI engineer: an interactive family tree with the history and sources of each title.
+- [AI Will Make Your Organization Obsolete. If You Have One.](/work/l-ia-rendra-votre-organisation-obsolete/) - Long read (French, scrollytelling). The same agentic strategy in two organizations, two opposite outcomes. Agents do not just automate tasks, they dissolve positions, and only what someone answers for remains.
 - [Graphe × Ontologie](/apps/graphe-ontologie/) - App. A two-level 3D view: the ontology (skills, rules, agents) set above the graph of gold tables. The what below, the why and the how above.
 - [The story of a data team that outlived its own job](/talk/agentic-analytics/video/) - Video. The follow-up to Once upon a time, Agentic Analytics, on video: 28 minutes on a data team that outlived its own job.
 - [Once upon a time, Agentic Analytics](/talk/agentic-analytics/) - Talk. The story of a data team and of the job that outlives it: a lean bet, automation, then agents, until the Data Analyst role itself gets rethought.
