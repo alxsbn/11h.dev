@@ -14,8 +14,10 @@
   .hero img { object-position: 50% 18%; }
 
   /* Figures en duo */
-  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: end; }
-  .duo img { border-radius: 6px; }
+  .duo { display: flex; justify-content: center; gap: 18px; }
+  .duo img { height: 380px; width: auto; max-width: 48%; object-fit: cover; border-radius: 6px; }
+  .stack img.overlay { inset: auto -14% -10% auto; width: 58%; height: auto; transform: rotate(-5deg); z-index: 2; box-shadow: 0 10px 30px rgba(31,27,24,.22); }
+  .prose ul.reveal li { margin-bottom: .3em; }
   .quad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
   .quad img { border-radius: 4px; box-shadow: 0 4px 18px rgba(31,27,24,.10); }
   figure.narrow { max-width: 420px; }
@@ -78,6 +80,8 @@
     .quad { grid-template-columns: 1fr 1fr; }
     .stack { max-width: 300px; }
     .pillar { min-height: 96px; }
+    .duo img { height: 210px; }
+    .stack img.overlay { inset: auto -6% -8% auto; width: 52%; }
     .chapter .veil { background: linear-gradient(90deg, rgba(250,249,246,.96) 0%, rgba(250,249,246,.86) 70%, rgba(250,249,246,.5) 100%); }
   }
 </style>
@@ -106,7 +110,7 @@
 
 <!-- ============ OUVERTURE ============ -->
 <div class="prose" data-chapter="Ouverture">
-  <p class="note reveal">Ce texte reprend la conférence « AI will make your organization obsolete. If you have one. », donnée le 16 novembre 2026 à la Forward Data Conference.</p>
+  <p class="note reveal">Ce texte reprend la conférence « AI will make your organization obsolete. If you have one. », donnée le 16 novembre 2026 à la Forward Data Conference. Les fiches de poste qui l'illustrent sont des exemples reconstitués, sans prétention à l'exhaustivité.</p>
 </div>
 
 <figure class="wide narrow reveal" data-chapter="Ouverture" style="max-width:560px">
@@ -152,7 +156,7 @@
 
 <div class="prose" data-chapter="Jolimoi · L'adoption">
   <p class="reveal">L'histoire de Jolimoi tient d'une rangée de dominos. C'est celle d'une entreprise frappée par une contraction économique sévère, et beaucoup y reconnaîtront une part de leur propre parcours.</p>
-  <p class="reveal">Le premier domino tombe avant même l'arrivée des agents, et c'est l'adoption. À son apogée, Jolimoi comptait une centaine de salariés, et l'équipe data sept personnes aux expertises nettement découpées. La contraction est venue par étapes, comme dans tant d'entreprises. À partir de l'été 2025, les départs n'ont plus été remplacés, et l'équipe est passée de sept à deux personnes, ce qu'elle est restée.</p>
+  <p class="reveal">Le premier domino tombe avant même l'arrivée des agents, et c'est l'adoption. À son apogée, Jolimoi comptait une centaine de salariés, et l'équipe data sept personnes aux expertises nettement découpées. Chez nous, le data analyst est un profil full stack, qui fait à la fois du data engineering, de l'analytics engineering, un peu de data science, de la BI et, bien sûr, de l'analyse. La contraction est venue par étapes, comme dans tant d'entreprises. À partir de l'été 2025, les départs n'ont plus été remplacés, et l'équipe est passée de sept à deux personnes, ce qu'elle est restée.</p>
   <p class="reveal">L'IA a été accueillie à bras ouverts. Les LLM d'abord, puis les premiers agents capables d'exécuter des commandes et de mener leurs propres recherches, ont absorbé les tâches de ceux qui partaient, jusqu'à ce que deux personnes fassent le travail de sept. Le résultat a dépassé nos attentes, et il faut le dire sans détour, l'IA peut remplacer des personnes. À ce stade pourtant, nous la mettions à notre seul service, un peu égoïstement, pour tenir la charge qui nous incombait.</p>
 </div>
 
@@ -256,7 +260,8 @@
       <img src="assets/fiche-2.png" data-f="2" alt="La même fiche, la plupart des tâches surlignées comme prises en charge par les agents" loading="lazy">
       <img src="assets/fiche-3.png" data-f="3" alt="La fiche compressée, où il ne reste presque plus rien" loading="lazy">
       <img src="assets/fiche-ai-da.png" data-f="4" alt="Fiche rouge de l'AI Data Analyst, la doublure agentique" loading="lazy">
-      <img src="assets/fiche-cfo.png" data-f="5" alt="Fiche du Chief Financial Officer, augmentée par l'agent" loading="lazy">
+      <img src="assets/fiche-cfo.png" data-f="5" alt="Fiche du Chief Financial Officer" loading="lazy">
+      <img src="assets/fiche-ai-da.png" data-f="5" class="overlay" alt="La fiche de l'AI Data Analyst posée sur celle du CFO" loading="lazy">
     </div>
   </div></div>
   <div class="steps">
@@ -264,19 +269,19 @@
     <div class="step" data-step="2"><div class="box">Après l'accélération, voici ce que les agents avaient pris en charge. Je trace ces rayures moi-même, mais elles se sont faites peu à peu, sans que personne ne les décide.</div></div>
     <div class="step" data-step="3"><div class="box">Après la distribution, produire les analyses est rayé, et même les valider. Assurer la cohérence des KPI ou orienter les décisions stratégiques se partage désormais avec les métiers. Il ne reste au bout du compte qu'une ligne, garantir la fiabilité de la data platform, et nous nous sommes demandé si c'était encore le rôle d'un analyste.</div></div>
     <div class="step" data-step="4"><div class="box">À côté est née sa doublure agentique, l'AI Data Analyst, infatigable et toujours efficace, qui prend du poids à mesure que la fiche humaine maigrit.</div></div>
-    <div class="step" data-step="5"><div class="box">Cette doublure s'installe ensuite chez les autres, chez le CFO par exemple, sans viser personne. Lui voit sa fiche grandir, tandis que la nôtre ne cesse de rétrécir.</div></div>
+    <div class="step" data-step="5"><div class="box">Cette doublure s'installe ensuite chez les autres, chez le CFO par exemple. Lui voit sa fiche grandir, augmentée de l'agent, tandis que la nôtre ne cesse de rétrécir.</div></div>
   </div>
 </section>
 
 <div class="prose" data-chapter="Jolimoi · La distribution">
   <p class="reveal">L'effet est cumulatif. Il gagne le CRM et le customer success, du stagiaire au head of CRM, jusqu'à cette personne qui n'appelle plus l'équipe data parce qu'elle est devenue analyste elle-même. Nous étions toujours là, dans les mêmes bureaux, mais on venait moins nous voir, et notre importance rétrécissait avec la fiche. Le métier dérivait.</p>
-  <p class="reveal">Vint alors la crise de conscience, et elle a eu un prix, des épisodes de fatigue professionnelle et des congés pris dans l'urgence, à la limite de l'arrêt maladie. L'équipe commençait à douter de sa propre utilité, et une phrase entendue à ce moment-là dit mieux que tout ce qui se jouait.</p>
+  <p class="reveal">Vint alors la crise de conscience, et elle a eu un prix, des épisodes de fatigue professionnelle. L'équipe commençait à douter de sa propre utilité, et une phrase entendue à ce moment-là dit mieux que tout ce qui se jouait.</p>
 </div>
 
 <p class="pull reveal" data-chapter="Jolimoi · La distribution">« Mon métier, c'est de faire de l'analyse, <span class="accent">pas de passer mon temps à gérer des agents. »</span></p>
 
 <div class="prose" data-chapter="Jolimoi · La distribution">
-  <p class="reveal">Ce qu'elle décrivait porte aujourd'hui un nom, le context engineering, mais nous ne parlions pas encore de contexte. Cette phrase a été le déclic de l'étape suivante.</p>
+  <p class="reveal">Nous assistions en réalité à la dérive de notre métier de full stack data analyst. Cette phrase a été le déclic de l'étape suivante.</p>
 </div>
 
 <!-- ============ 4 · COLONISATION ============ -->
@@ -292,7 +297,7 @@
 
 <div class="prose" data-chapter="Jolimoi · La colonisation">
   <p class="reveal">Le quatrième domino n'a pas vraiment été décidé. Ceux qui avaient vu ce que donnait un métier augmenté ont voulu la même chose pour le leur, pour déléguer, pour en faire davantage, et surtout pour ne pas devenir à leur tour le goulot de l'entreprise. La même logique a gagné tous les métiers. Les gestes de chacun ont été encodés, agentifiés puis distribués à tous, et la dépossession, devenue générale, a au moins rétabli une forme d'égalité des armes.</p>
-  <p class="reveal">Donner son savoir revient aussi à céder le pouvoir qui l'accompagnait, et chaque métier dispose désormais de sa doublure. L'analyste récupère des gestes du CFO, et le CFO l'agent de l'analyste. Qui en sort le plus fort&nbsp;? Est-ce l'analyste qui tient le harness et le contexte, et qui acquiert les compétences du CFO, ou le CFO qui acquiert celles de l'analyste sans avoir la main sur le contexte&nbsp;? Face à un C-level, l'expérience mise à part, on se bat désormais presque à armes égales, et ceux qui s'abritaient derrière un titre se retrouvent contestés, parfois jusque dans la hiérarchie. Cela nous est arrivé.</p>
+  <p class="reveal">Donner son savoir revient aussi à céder le pouvoir qui l'accompagnait, et chaque métier dispose désormais de sa doublure. L'analyste récupère des gestes du CFO, et le CFO l'agent de l'analyste. Qui en sort le plus fort&nbsp;? Est-ce l'analyste qui tient le harness et le contexte, et qui acquiert les compétences du CFO, ou le CFO qui acquiert celles de l'analyste sans avoir la main sur le contexte&nbsp;? Face à un C-level, l'expérience mise à part, on se bat désormais presque à armes égales, et ceux qui s'abritaient derrière un titre se retrouvent contestés, parfois jusque dans la hiérarchie.</p>
 </div>
 
 <figure class="wide reveal">
@@ -307,8 +312,18 @@
 
 <div class="prose" data-chapter="Jolimoi · La colonisation">
   <p class="reveal">On croit assister à un transfert de compétences, et c'en est un en volume, puisque les fiches des agents comptent désormais plus de tâches que celles des humains. Il dissimule pourtant une perte, une déqualification que l'on nomme <em>skill rot</em>, et un glissement plus profond, de l'individu vers le système, qui emporte avec lui la confiance et la rétention de l'information. C'est un sujet à part entière.</p>
-  <p class="reveal">Lorsque le savoir réside dans le système, une question devient brûlante, et je l'illustre toujours par la même histoire. On nous demande une analyse, sur la base d'une intention parfaitement claire. Un agent la réalise en retenant le mauvais dénominateur, le chiffre d'affaires global au lieu du chiffre d'affaires commissionnable, et l'erreur se répète de calcul en calcul jusqu'au board, où une mauvaise décision stratégique est prise sur cette base.</p>
-  <p class="reveal">Qui est coupable&nbsp;? Faut-il accuser le modèle choisi, le prompt, le harness, l'analyste qui avait encodé son geste, celui qui a posé la question ou celui qui a configuré l'agent&nbsp;? L'agent ne peut pas l'être, car un agent ne signe rien et ne répond de rien. Tout se joue sur cette question de la responsabilité, et j'y reviendrai.</p>
+  <p class="reveal">Lorsque le savoir réside dans le système, une question se pose, celle de savoir qui est responsable de quoi. Une petite histoire qui nous est arrivée l'illustre. Nous réalisons une analyse critique, importante pour le business et lourde d'impacts potentiels. Lors d'une division, l'agent retient le mauvais dénominateur, et l'erreur se propage à l'intégralité de l'analyse. L'information remonte jusqu'au board, et la décision est prise.</p>
+  <p class="reveal">Qui est coupable&nbsp;? Qui faut-il accuser&nbsp;:</p>
+  <ul class="reveal">
+    <li>le modèle choisi&nbsp;?</li>
+    <li>le prompt&nbsp;?</li>
+    <li>le harness&nbsp;?</li>
+    <li>le lab qui a entraîné le modèle&nbsp;?</li>
+    <li>l'annotateur du dataset du modèle frontière&nbsp;?</li>
+    <li>l'analyste qui avait encodé son geste&nbsp;?</li>
+    <li>celui qui a posé la question, ou celui qui a configuré l'agent&nbsp;?</li>
+  </ul>
+  <p class="reveal">L'agent ne peut pas l'être, car un agent ne signe rien et ne répond de rien. Tout se joue sur cette question de la responsabilité, et j'y reviendrai.</p>
 </div>
 
 <!-- ============ 5 · URBAN SKETCHERS ============ -->
@@ -323,8 +338,8 @@
 </section>
 
 <div class="prose" data-chapter="Urban Sketchers">
-  <p class="reveal">La seconde histoire est beaucoup plus courte, et c'est tout son intérêt. <a href="https://urbansketchers.org" target="_blank" rel="noopener">Urban Sketchers</a> est une association à but non lucratif animée par une centaine de bénévoles, présente dans quelque 500 villes sur tous les continents, et qui fédère une communauté mondiale de dessinateurs. Tout le monde y travaille en asynchrone, et nous y avons déployé la même stratégie qu'à Jolimoi, sur la même période.</p>
-  <p class="reveal">Une telle organisation repose sur un manifeste qui tient lieu de mission, et qui n'a pas varié depuis la fondation. Chacun s'y consacre entièrement, là où, dans une entreprise classique, les équipes se tirent volontiers la bourre, et même une entreprise à mission ne joue pas à cette échelle.</p>
+  <p class="reveal">La seconde histoire est beaucoup plus courte, et c'est tout son intérêt. <a href="https://urbansketchers.org" target="_blank" rel="noopener">Urban Sketchers</a> est une association à but non lucratif animée par une centaine de bénévoles, présente dans quelque 500 villes sur tous les continents, et qui fédère une communauté mondiale de dessinateurs. Tout le monde y travaille en asynchrone, et nous y avons déployé une stratégie agentique sur la même période.</p>
+  <p class="reveal">Une telle organisation repose sur un manifeste qui tient lieu de mission, et qui n'a pas varié depuis la fondation. Chacun s'y consacre entièrement, là où, dans une entreprise classique, les équipes se tirent volontiers la bourre.</p>
 </div>
 
 <figure class="wide narrow reveal">
@@ -334,8 +349,8 @@
 
 <div class="prose" data-chapter="Urban Sketchers">
   <p class="reveal">Les rituels y sont rares, sans sprint ni backlog. Il existe bien des titres, mais rien à défendre, ni territoire, ni budget, ni ego, car la mission dépasse chacun.</p>
-  <p class="reveal">Surtout, le bénévolat est un don de temps. En entreprise, le temps qu'on gagne retourne au travail, parce qu'un salarié vend son temps et qu'on attend de lui qu'il occupe celui qui se libère. Un bénévole cherche au contraire à en donner le moins possible au fonctionnement, pour le réserver à la mission ou à sa famille. Au lieu de compresser le temps, les agents l'ont donc libéré. L'onboarding des nouveaux chapters reposait sur une seule personne, devenue goulot malgré elle, et son automatisation a rendu ce temps à la mission.</p>
-  <p class="reveal">Vous serez peut-être déçus, car chez Urban Sketchers, il ne s'est rien passé. Les agents ont été accueillis à bras ouverts, sans la moindre friction, et rien de structurel n'a bougé. Chacun y faisait déjà un peu de tout, comme dans la bottega de Verrocchio, et il n'y avait rien à dissoudre.</p>
+  <p class="reveal">Surtout, le bénévolat est un don de temps. En entreprise, le temps qu'on gagne retourne au travail, parce qu'un salarié vend son temps et qu'on attend de lui qu'il occupe celui qui se libère. Un bénévole cherche au contraire à en donner le moins possible au fonctionnement, pour le réserver à la mission, à ses loisirs ou à sa famille. Au lieu de compresser le temps, les agents l'ont donc libéré.</p>
+  <p class="reveal">C'est peut-être un peu décevant, mais chez Urban Sketchers, il ne s'est rien passé. Les agents ont été accueillis à bras ouverts, sans la moindre friction, et rien de structurel n'a bougé. Chacun y faisait déjà un peu de tout, comme dans la bottega de Verrocchio, et il n'y avait rien à dissoudre.</p>
   <p class="reveal">Que retenir de ces deux histoires&nbsp;?</p>
 </div>
 
@@ -352,13 +367,13 @@
   </div></div></div>
   <div class="steps">
     <div class="step" data-step="1"><div class="box">Chez Jolimoi, le travail est entré dans le système, et les rituels avec lui.</div></div>
-    <div class="step" data-step="2"><div class="box">Le savoir a suivi, ces tâches cognitives routinières qu'on peut encoder, jusqu'à la table à privilégier pour analyser tel domaine.</div></div>
+    <div class="step" data-step="2"><div class="box">Le savoir a suivi, avec toutes ces tâches cognitives routinières qu'on peut encoder.</div></div>
     <div class="step" data-step="3"><div class="box">Il est resté les responsabilités, car des agents capables de raisonner prennent aussi des décisions, et il faut savoir qui répond de quoi. Chez Urban Sketchers, il n'y avait guère que la mission et ces responsabilités, et les agents n'ont rien trouvé à emporter.</div></div>
   </div>
 </section>
 
 <div class="prose" data-chapter="Urban Sketchers">
-  <p class="reveal">Nous sommes en train d'infliger aux cols blancs ce que nous avons fait subir aux cols bleus, et c'est peut-être dans cette histoire plus ancienne qu'il faut chercher la suite.</p>
+  <p class="reveal">De là, une constatation s'impose&nbsp;: nous sommes en train d'infliger aux cols blancs ce que nous avons fait subir aux cols bleus, et c'est peut-être dans cette histoire plus ancienne qu'il faut chercher la suite de la nôtre.</p>
 </div>
 
 <!-- ============ 6 · DIVISION DU TRAVAIL ============ -->
@@ -401,8 +416,13 @@
 </figure>
 
 <div class="prose" data-chapter="La division du travail">
-  <p class="reveal">Les machines ont ensuite pris le faire, à l'usine comme au bureau, où les cols blancs côtoient depuis longtemps machines à états et procédures algorithmiques. Ce qui résistait était le penser, que les machines ne savaient pas accomplir, et toute la question des cols blancs tient là. Une machine peut-elle penser à notre place&nbsp;? On l'a déjà tenté, dans les années 80.</p>
+  <p class="reveal">Les machines ont ensuite pris le faire, à l'usine comme au bureau, où les cols blancs côtoient depuis longtemps machines à états et procédures algorithmiques. Ce qui résistait était le penser, que les machines ne savaient pas accomplir, et toute la question des cols blancs tient là. Une machine peut-elle penser à notre place&nbsp;? On l'a déjà tenté dans les années 80, et on appelait cela des <a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_expert" target="_blank" rel="noopener">systèmes experts</a>.</p>
 </div>
+
+<figure class="wide narrow reveal">
+  <img src="assets/f-lisp.jpg" alt="Une Lisp Machine CADR exposée au MIT Museum" loading="lazy">
+  <figcaption>Une Lisp Machine CADR, au MIT Museum.</figcaption>
+</figure>
 
 <section class="scrolly" data-graphic="experts" data-chapter="La division du travail">
   <div class="sticky"><div class="graphic"><div class="panel">
@@ -417,20 +437,15 @@
     <div class="era" id="xpEra">Systèmes experts, années 80</div>
   </div></div></div>
   <div class="steps">
-    <div class="step" data-step="1"><div class="box">Sur des <a href="https://fr.wikipedia.org/wiki/Machine_Lisp" target="_blank" rel="noopener">Lisp Machines</a> comme celle du MIT tournaient des <a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_expert" target="_blank" rel="noopener">systèmes experts</a>. Ces lourds dispositifs des années 80 et 90 reposaient sur des règles en « si… alors » que des experts encodaient à la main, et ils excellaient sur l'explicite.</div></div>
+    <div class="step" data-step="1"><div class="box">Ces systèmes experts tournaient sur des <a href="https://fr.wikipedia.org/wiki/Machine_Lisp" target="_blank" rel="noopener">Lisp Machines</a> comme celle du MIT. Ces lourds dispositifs des années 80 et 90 reposaient sur des règles en « si… alors » que des experts encodaient à la main, et ils excellaient sur l'explicite.</div></div>
     <div class="step" data-step="2"><div class="box">L'implicite leur échappait, faute de data pour raisonner. Il fallait les nourrir sans fin, car chaque cas du réel que personne n'avait prévu exigeait une règle de plus.</div></div>
     <div class="step" data-step="3"><div class="box">Les modèles d'aujourd'hui disposent de la data qui leur manquait, et l'implicite s'est ouvert.</div></div>
-    <div class="step" data-step="4"><div class="box">En ouvrant l'implicite, nous avons pourtant inventé l'hallucination. Le système expert, quand il ne savait pas, le savait, et il s'arrêtait. Le modèle ne s'arrête jamais.</div></div>
+    <div class="step" data-step="4"><div class="box">En ouvrant l'implicite, nous avons pourtant inventé l'hallucination. Le système expert, quand il ne savait pas, le savait, et il s'arrêtait. L'agent, lui, peut ne pas s'arrêter au bon moment.</div></div>
   </div>
 </section>
 
-<figure class="wide narrow reveal">
-  <img src="assets/f-lisp.jpg" alt="Une Lisp Machine CADR exposée au MIT Museum" loading="lazy">
-  <figcaption>Une Lisp Machine CADR, au MIT Museum.</figcaption>
-</figure>
-
 <div class="prose" data-chapter="La division du travail">
-  <p class="reveal">Le corpus des modèles restera incomplet, même enrichi de toute notre propre data, car aucune machine ne capture l'intégralité du réel. Nous consacrons des heures au context engineering pour conjurer l'hallucination, et elle surviendra malgré tout. Il faudra toujours un humain dans la boucle pour nourrir le modèle, et quelqu'un pour répondre de ce qu'il produit.</p>
+  <p class="reveal">Le corpus des modèles restera toujours incomplet, même enrichi de notre propre data, car les données ne sont qu'un proxy du réel, et aucune machine n'a, à ce jour, la capacité d'en saisir l'intégralité. C'est d'ailleurs pour cela que <a href="/fr/2026/06/09/pourquoi-le-travail-reel-resiste-toujours-aux-modeles/" target="_top">le travail réel résiste toujours aux modèles</a>. Nous consacrons des heures au context engineering pour conjurer l'hallucination, et elle surviendra malgré tout. Il faudra toujours un humain dans la boucle pour nourrir le modèle, et quelqu'un pour répondre de ce qu'il produit.</p>
 </div>
 
 <!-- ============ 7 · L'ATELIER ============ -->
@@ -468,7 +483,7 @@
 </section>
 
 <div class="prose" data-chapter="Retour à l'atelier">
-  <p class="reveal">Le troisième point recèle un risque, celui de rejouer Taylor en déclassant les gens, en leur faisant encoder leur façon de faire pour leur annoncer ensuite qu'ils n'auront plus qu'à exécuter pendant que d'autres réfléchiront pour eux. Je ne crois pas que cela fonctionne. Imposé au fouet, l'encodage produit un contexte faux, et un contexte faux fait halluciner la machine. Les <a href="https://fr.wikipedia.org/wiki/Luddisme" target="_blank" rel="noopener">luddites</a> brisaient déjà les métiers à tisser, et rien n'empêche que cette guérilla se rejoue à l'intérieur de nos entreprises. Le seul context engineering qui tiendra sera collectif, porté par ceux qui pratiquent et qui recueillent le réel du terrain.</p>
+  <p class="reveal">Le troisième point recèle un risque, celui de rejouer Taylor en déclassant les gens, en leur faisant encoder leur façon de faire pour leur annoncer ensuite qu'ils n'auront plus qu'à exécuter pendant que d'autres réfléchiront pour eux. Je ne crois pas que cela fonctionne. Imposé au fouet, l'encodage produit un contexte faux, et un contexte faux fait halluciner la machine. Ceux à qui l'on demande de fournir la matière de leur propre obsolescence en font vite <a href="/fr/2026/06/15/vos-donnees-sont-un-theatre/" target="_top">un théâtre</a>. Les <a href="https://fr.wikipedia.org/wiki/Luddisme" target="_blank" rel="noopener">luddites</a> brisaient déjà les métiers à tisser, et rien n'empêche que cette guérilla se rejoue à l'intérieur de nos entreprises. Le seul context engineering qui tiendra sera collectif, porté par ceux qui pratiquent et qui recueillent le réel du terrain.</p>
   <p class="reveal">Le dernier point oblige à regarder ce qu'est un poste. Il soude deux choses, un titre qui dit ce que l'on fait et une signature qui dit de quoi l'on répond. Les agents décollent les deux, en prenant le faire et en laissant la signature à quelqu'un, ou à personne. Une position est un titre sans signature, un poste qui porte un nom, un périmètre et parfois une équipe, sans répondre d'aucun résultat. Elle fonctionnait comme une muraille autour d'une rareté, le temps, et les agents rendent le temps abondant. Si vous dirigez quelque chose sans répondre de rien, c'est exactement ce qu'ils dissolvent.</p>
   <p class="reveal">Ce point soulève une difficulté que je ne veux pas éluder, celle des juniors. Je reste partisan d'en recruter, à condition de leur confier des responsabilités, comme Verrocchio en a confié à Léonard sur ce tableau. Nous le faisons très peu, parce que la responsabilité demeure attachée au titre.</p>
 </div>
@@ -482,15 +497,15 @@
   </div></div>
   <div class="steps">
     <div class="step" data-step="1"><div class="box">Revenons une dernière fois à la fiche de l'analyste, là où nous l'avions laissée.</div></div>
-    <div class="step" data-step="2"><div class="box">Ce qui s'y ajoute en vert consiste à superviser les agents, répondre des chiffres, évaluer ce qu'ils produisent et maintenir le harness. Ce sont toutes des signatures.</div></div>
+    <div class="step" data-step="2"><div class="box">Nous avons désormais de nouvelles responsabilités, principalement liées aux agents, qu'il s'agisse de les superviser, de répondre des chiffres, d'évaluer ce qu'ils produisent ou de maintenir le harness. Ce sont toutes des signatures.</div></div>
   </div>
 </section>
 
 <div class="prose" data-chapter="Retour à l'atelier">
-  <p class="reveal">Augmentée de la finance, du juridique et du reste, une telle fiche ne tient plus sous son titre. Faut-il parler de staff, de builder, de solver&nbsp;? Certaines entreprises désignent déjà tous leurs membres comme <em>Members of Technical Staff</em>. Je pencherais pour un mot plus ancien, artisan, celui d'un métier de plus de cinq cents ans.</p>
+  <p class="reveal">De plus, augmentée de la finance, du juridique et du reste, une telle fiche ne tient plus sous son titre. Faut-il parler de staff, de builder, de solver&nbsp;? Certaines entreprises désignent déjà tous leurs membres comme <em>Members of Technical Staff</em>. Je pencherais pour un mot plus ancien, celui d'artisan.</p>
 </div>
 
-<p class="pull reveal" data-chapter="Retour à l'atelier">L'IA ne rend pas une organisation obsolète. <span class="accent">Elle rend obsolète ce qu'elle défendait, ses positions.</span></p>
+<p class="pull reveal" data-chapter="Retour à l'atelier">L'IA rendra votre organisation obsolète. <span class="accent">Plus encore, elle rend obsolète ce qu'elle défendait, ses positions.</span></p>
 
 <div class="prose" data-chapter="Retour à l'atelier">
   <p class="reveal">Voilà l'atelier à recomposer, avec des profils holistiques, une machine qui coordonne, un contexte tenu collectivement et une responsabilité partagée. Un test permet d'en mesurer la distance. Lundi, prenez une fiche de poste, la vôtre ou celle d'un membre de votre équipe, et demandez-vous pour chaque ligne : si un agent s'en charge demain, qui signe derrière&nbsp;? S'il n'y a personne, c'était une position.</p>
@@ -500,7 +515,7 @@
 <div class="gap"></div>
 
 <div class="prose" data-chapter="Épilogue">
-  <p class="reveal">Il faut revenir, pour finir, à l'atelier de Verrocchio. L'histoire racontée au début est une légende, écrite des décennies plus tard par un biographe soucieux de fabriquer le mythe de l'artiste face à l'artisan. Verrocchio n'a pas posé son pinceau. Il s'est davantage tourné vers la sculpture, mais il a gardé jusqu'au bout son coup d'œil et son droit de validation, regardant chaque œuvre, y posant une dernière touche et décidant quand elle était achevée. Il répondait de ce qui sortait de son atelier, parce que c'était sa responsabilité.</p>
+  <p class="reveal">Pour finir, j'aimerais revenir à l'atelier de Verrocchio. L'histoire racontée au début est une légende, écrite des décennies plus tard par un biographe soucieux de fabriquer le mythe de l'artiste face à l'artisan. Verrocchio n'a pas posé son pinceau. Il s'est davantage tourné vers la sculpture, mais il a gardé jusqu'au bout son coup d'œil et son droit de validation, regardant chaque œuvre, y posant une dernière touche et décidant quand elle était achevée. Il répondait de ce qui sortait de son atelier, parce que c'était sa responsabilité.</p>
 </div>
 
 <figure class="wide reveal">
@@ -512,7 +527,7 @@
 </figure>
 
 <div class="prose" data-chapter="Épilogue">
-  <p class="reveal">Léonard, dans cette histoire, c'est votre agent, un génie qui apportait dans l'atelier une technique venue d'ailleurs, la peinture à l'huile, et qui la perfectionnera jusqu'à sa mort. On devine déjà dans l'ange ce qu'on appellera le <em>sfumato</em>. Il n'a pourtant rien signé. Le tableau est sorti de l'atelier sous le nom de son maître, et Léonard n'était qu'une main du collectif qui a permis cette œuvre.</p>
+  <p class="reveal">Léonard, dans cette histoire, c'est votre agent. Ce génie apportait dans l'atelier une technique venue des Flandres, la peinture à l'huile, dont il tirera le <em>sfumato</em> qu'il perfectionnera jusqu'à sa mort, et dont l'ange porte déjà la promesse. Il n'a pourtant rien signé. Le tableau est sorti de l'atelier sous le nom de son maître, et Léonard n'était qu'une main du collectif qui a permis cette œuvre.</p>
   <p class="reveal">L'IA rendra votre organisation obsolète, si vous en avez une, c'est-à-dire si elle tient debout grâce à ses positions. L'atelier survivra, tant que quelqu'un répond de ce qui en sort.</p>
 </div>
 
