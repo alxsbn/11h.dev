@@ -45,7 +45,7 @@ def parse_front_matter(content: str) -> dict:
     return front_matter
 
 
-WORK_KINDS = {'talk': 'Talk', 'longread': 'Long read (French, scrollytelling)', 'app': 'App'}
+WORK_KINDS = {'talk': 'Talk', 'longread': 'Long read (French, scrollytelling)', 'app': 'App', 'video': 'Video'}
 SKIP_DIRS = {'_site', '.git', '.claude', 'node_modules', 'vendor', '.jekyll-cache'}
 
 

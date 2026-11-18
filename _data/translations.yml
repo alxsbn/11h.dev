@@ -9,6 +9,7 @@ fr:
   kind_talk: "Talk"
   kind_app: "App"
   kind_longread: "Grand format"
+  kind_video: "Vidéo"
   # Post
   read_more: "Lire la suite"
   min_read: "min de lecture"
@@ -44,6 +45,7 @@ en:
   kind_talk: "Talk"
   kind_app: "App"
   kind_longread: "Long read"
+  kind_video: "Video"
   # Post
   read_more: "Read more"
   min_read: "min read"
