@@ -19,21 +19,33 @@ layout: default
     long reads under /work/, apps under /apps/). Fields mirror a post:
     title (French), title_en (English), date, excerpt (French), excerpt_en
     (English), header_image, header_image_alt. `kind` is talk, longread or
-    app, `event` is optional. The grid shows the header image only: the
-    title lives in the link's aria-label and tooltip, so header_image is
-    required.
+    app, `event` is optional.
   {%- endcomment -%}
   {%- assign works = site.pages | where: "work", true | sort: "date" | reverse -%}
   {%- if works.size > 0 -%}
   <div class="posts-container">
-    <div class="posts-grid posts-grid--tiles">
+    <div class="posts-grid">
       {%- for work in works -%}
+      {%- assign kind_key = "kind_" | append: work.kind -%}
+      {%- assign excerpt = work.excerpt -%}
+      {%- if page_lang == "en" and work.excerpt_en -%}{%- assign excerpt = work.excerpt_en -%}{%- endif -%}
       {%- assign work_title = work.title -%}
       {%- if page_lang == "en" and work.title_en -%}{%- assign work_title = work.title_en -%}{%- endif -%}
-      <article class="post-card post-card--tile">
-        <a href="{{ work.url | relative_url }}" class="post-card__link" aria-label="{{ work_title | escape }}" title="{{ work_title | escape }}">
+      <article class="post-card">
+        <a href="{{ work.url | relative_url }}" class="post-card__link">
+          {%- if work.header_image -%}
           <div class="post-card__image">
-            <img src="{{ work.header_image | relative_url }}" alt="{{ work.header_image_alt | default: work_title | escape }}" loading="lazy">
+            <img src="{{ work.header_image | relative_url }}" alt="{{ work.header_image_alt | default: work_title }}" loading="lazy">
+          </div>
+          {%- endif -%}
+          <div class="post-card__content">
+            <h3 class="post-card__title">{{ work_title | escape }}</h3>
+            <time class="post-card__date" datetime="{{ work.date | date_to_xmlschema }}">
+              {{ work.date | date: date_format }}{% if t[kind_key] %} · {{ t[kind_key] }}{% endif %}{% if work.event %} · {{ work.event }}{% endif %}
+            </time>
+            {%- if excerpt -%}
+            <p class="post-card__excerpt">{{ excerpt | strip_html | truncate: 200 }}</p>
+            {%- endif -%}
           </div>
         </a>
       </article>
