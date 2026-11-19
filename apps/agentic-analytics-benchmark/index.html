@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Les questions dangereuses ont l'air simples</title>
-<meta name="description" content="Deux questions d'analyse posées à chaque modèle Claude, à chaque niveau d'effort. La simple ne départage personne, la floue départage tout le monde. Le bon modèle se choisit après avoir trié la question.">
+<title>Agentic Analytics benchmark : que coûte une bonne réponse</title>
+<meta name="description" content="Haiku, Sonnet, Opus et Fable, à chaque niveau d'effort, face à une question d'analyse simple puis à une question floue. Qui trouve la bonne réponse, en combien de requêtes et pour quel prix.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -74,7 +74,7 @@
 <body>
 
 <header id="bar" aria-hidden="true">
-  <span class="t">Les questions dangereuses ont l'air simples</span>
+  <span class="t">Agentic Analytics benchmark : que coûte une bonne réponse</span>
   <span class="c" id="barChapter"></span>
   <span class="p" id="barProgress"></span>
 </header>
@@ -85,9 +85,9 @@
   </div></div>
   <div class="veil" style="background:linear-gradient(0deg, rgba(243,239,232,1) 0%, rgba(243,239,232,.95) 40%, rgba(243,239,232,0) 70%)"></div>
   <div class="inner">
-    <div class="kicker">Grand format · Benchmark agentique</div>
-    <h1 style="font-size:clamp(44px, 6.4vw, 96px)">Les questions dangereuses ont l'air simples</h1>
-    <p class="lede">J'ai posé deux questions d'analyse à tous les modèles Claude, à chaque niveau d'effort. La première était simple, la seconde en avait seulement l'air, et c'est elle qui a départagé les modèles.</p>
+    <div class="kicker">Grand format · Benchmark</div>
+    <h1 style="font-size:clamp(40px, 5.6vw, 84px)">Agentic Analytics benchmark : que coûte une bonne réponse</h1>
+    <p class="lede">Haiku, Sonnet, Opus et Fable, à chaque niveau d'effort, branchés sur notre lakehouse. La première question était simple, la seconde en avait seulement l'air, et c'est elle qui a départagé les modèles.</p>
     <p class="by">Par Alexis Blandin <span>· 19 novembre 2026 · 7 min de lecture</span></p>
   </div>
   <div class="scroll-cue">Faites défiler</div>
@@ -100,11 +100,7 @@
   <p class="reveal">Entre les deux journées, les modèles n'ont pas changé, la question si. Elle avait pourtant l'air aussi banale que la première, et c'est ce qui m'intéresse dans ce benchmark, bien plus que le classement des modèles.</p>
 </div>
 
-<p class="pull reveal" data-chapter="Trier avant de soigner">On ne choisit pas qui soigne<span class="accent">avant d'avoir trié le patient.</span></p>
-
-<div class="prose" data-chapter="Trier avant de soigner">
-  <p class="reveal">Les urgentistes ont un mot pour ça. Sous la Révolution puis l'Empire, le chirurgien militaire Dominique-Jean Larrey a pris l'habitude de soigner les blessés selon la gravité de leurs plaies, et non selon leur grade. Le triage était né, et avec lui une règle qui structure encore nos services d'urgence. Avant de choisir qui soigne, on évalue ce qu'il faut soigner.</p>
-  <p class="reveal">Le piège classique du triage est le patient qui marche, parle et plaisante, et dont la blessure ne se voit pas encore. Une question d'analyse peut lui ressembler, et la seconde question de ce benchmark en a fait la démonstration.</p>
+<div class="prose" data-chapter="Le protocole">
   <p class="reveal">Le protocole est resté identique d'un jour à l'autre. Chaque run utilise le même harness, branché sur le MCP de notre lakehouse Databricks et sur ses Metric Views, la couche sémantique où vivent nos indicateurs. J'ai croisé chaque modèle (Haiku 5.5, Sonnet 5.5, Opus 5.5 et Fable 5.1) avec chaque niveau d'effort, de low à max. Le coût de chaque run est calculé au prix public de l'API Claude.</p>
   <p class="reveal">Le second jour, j'ai ajouté un run ultracode par modèle, une orchestration où quatre explorateurs suivent chacun un angle avant qu'un vérificateur contrôle et qu'une synthèse conclue. La notation se fait alors contre une analyse de référence menée par un Data Analyst, recalculée et vérifiée pour le test.</p>
 </div>
@@ -160,16 +156,16 @@
   </div>
 </section>
 
-<p class="pull reveal" data-chapter="Le tri d'abord">La question avait l'air facile,<span class="accent">et c'est son flou qui la rendait complexe.</span></p>
+<p class="pull reveal" data-chapter="Quel modèle pour quelle question">La question avait l'air facile,<span class="accent">et c'est son flou qui la rendait complexe.</span></p>
 
-<div class="prose" data-chapter="Le tri d'abord">
+<div class="prose" data-chapter="Quel modèle pour quelle question">
   <p class="reveal">Le premier jour, mon conseil tenait en une ligne. Orchestrez avec Opus et exécutez avec Haiku ou Sonnet, car n'importe lequel de ces modèles fera le travail sur une data platform à l'état de l'art. Le second jour ne le contredit pas, il le précise.</p>
   <p class="reveal">Le vrai sujet est d'évaluer la complexité d'une question avant de choisir le modèle qui l'exécute. Une question cadrée, par exemple par une couche sémantique, se contente de Haiku ou de Sonnet. Dans le doute, Opus en high fait l'affaire. L'écart se compte en centimes, alors qu'une réponse juste pour de mauvaises raisons coûte bien plus cher.</p>
   <p class="reveal">Quant à ultracode, il vaut son prix sur les questions où explorer beaucoup de pistes à la fois change vraiment la réponse.</p>
-  <p class="reveal">Larrey triait des plaies qu'il pouvait voir. Une question floue cache la sienne derrière une formulation anodine, et c'est pour ça que trier la question est déjà un geste d'analyse. Il reste à savoir qui le fait. Si c'est Opus qui orchestre, le modèle le plus cher de la grille devient l'infirmier d'accueil, et c'est peut-être le meilleur usage qu'on puisse en faire.</p>
+  <p class="reveal">Une question floue cache sa difficulté derrière une formulation anodine, et c'est pour ça que trier la question est déjà un geste d'analyse. Si c'est Opus qui orchestre, le modèle le plus cher de la grille fait ce tri et confie l'exécution aux autres, et c'est peut-être le meilleur usage qu'on puisse en faire.</p>
 </div>
 
-<footer class="end" data-chapter="Le tri d'abord">
+<footer class="end" data-chapter="Quel modèle pour quelle question">
   <div class="prose">
     <p>Publié le 19 novembre 2026. Une première version, en deux posts, est parue sur LinkedIn. Un prochain benchmark portera sur des analyses très longues et très complexes.</p>
     <p>Coût au prix public de l'API Claude, par run ou par ultracode entier. Les questions sont simplifiées pour la lecture.</p>
