@@ -509,39 +509,6 @@ a.post-card__link .post-card__excerpt {
     font-size: 0.9375rem;
   }
 }
-/* ===== Works grid: image-only tiles ===== */
-.posts-grid.posts-grid--tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.25rem;
-}
-
-.post-card.post-card--tile {
-  padding: 0;
-  border-bottom: none;
-}
-
-.post-card--tile .post-card__link {
-  display: block;
-}
-
-.post-card--tile .post-card__image {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2;
-}
-
-.post-card--tile .post-card__link:focus-visible {
-  outline: 2px solid var(--color-text);
-  outline-offset: 3px;
-  border-radius: 6px;
-}
-
-@media screen and (max-width: 600px) {
-  .posts-grid.posts-grid--tiles {
-    grid-template-columns: 1fr;
-  }
-}
 </style>
 
 <!-- Header Image Styles -->
