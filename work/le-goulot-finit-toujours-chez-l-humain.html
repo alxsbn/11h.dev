@@ -1,0 +1,37 @@
+---
+layout: none
+permalink: /work/le-goulot-finit-toujours-chez-l-humain/
+sitemap: false
+work: true
+kind: longread
+title: "Le goulot finit toujours chez l'humain"
+title_en: "The Bottleneck Always Ends Up With the Human"
+date: 2026-11-19
+excerpt: "En trois ans, la Data Team de Jolimoi a multiplié par seize son volume de PR par personne. Le goulot d'étranglement a changé quatre fois de place et revient toujours au même endroit, le temps humain."
+excerpt_en: "In three years, the Jolimoi Data Team grew its pull requests per person sixteenfold. The bottleneck moved four times and always came back to the same place, human time."
+header_image: /assets/images/travaux/goulot-humain.jpg
+header_image_alt: "Ouverture du grand format Le goulot finit toujours chez l'humain"
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Le goulot finit toujours chez l'humain</title>
+  <meta name="description" content="Grand format : le goulot d'étranglement d'une data team augmentée par les agents, en quatre temps.">
+  <meta property="og:title" content="Le goulot finit toujours chez l'humain">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://11h.dev/work/le-goulot-finit-toujours-chez-l-humain/">
+  <meta property="og:image" content="https://11h.dev/assets/images/travaux/goulot-humain.jpg">
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #FAF9F6; overflow: hidden; }
+    /* Le grand format vit dans son propre document (apps/goulot-humain/),
+       affiché ici en plein écran via une iframe sans bordure. */
+    iframe#deck { position: fixed; inset: 0; width: 100vw; height: 100vh; border: 0; display: block; }
+  </style>
+</head>
+<body>
+  <iframe id="deck" src="/apps/goulot-humain/" title="Le goulot finit toujours chez l'humain" allow="fullscreen" allowfullscreen></iframe>
+  <script>document.getElementById('deck').addEventListener('load', e => e.target.contentWindow.focus());</script>
+</body>
+</html>
