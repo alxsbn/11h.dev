@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les questions dangereuses ont l'air simples</title>
+<meta name="description" content="Deux questions d'analyse posées à chaque modèle Claude, à chaque niveau d'effort. La simple ne départage personne, la floue départage tout le monde. Le bon modèle se choisit après avoir trié la question.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/apps/longread/longread.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* Ouverture : une rangée de questions, une seule porte une fausse piste. */
+  .hero { background: var(--paper); }
+  .rack { position: absolute; inset: 9vh 0 auto 0; display: flex; justify-content: center; pointer-events: none; }
+  .rack .row { display: flex; gap: 14px; }
+  .rack .q {
+    width: 46px; height: 46px; border-radius: 8px; display: grid; place-items: center;
+    font: 600 22px var(--mono); color: var(--muted); background: var(--bg); border: 2px solid var(--line);
+  }
+  .rack .q.bad { color: #fff; background: var(--accent); border-color: var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    .rack .q.bad { animation: pulse 2.6s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 9px rgba(169,71,47,.12); } }
+  }
+
+  /* Grille modèle × effort */
+  .gtitle { font: 600 13px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .gq { font-size: 16px; font-style: italic; color: var(--muted); line-height: 1.45; margin: 8px 0 18px; min-height: 2.9em; }
+  .grid { display: grid; grid-template-columns: 74px repeat(6, minmax(0, 1fr)); gap: 6px; }
+  .grid .h { font: 12px var(--mono); color: var(--muted); text-align: center; align-self: end; padding-bottom: 2px; }
+  .grid .h.u { color: var(--ink); font-weight: 600; }
+  .grid .m { font-size: 17px; font-weight: 600; align-self: center; line-height: 1.1; }
+  .grid .m small { display: block; font: 11px var(--mono); color: var(--muted); font-weight: 400; }
+  .c {
+    border-radius: 6px; padding: 8px 4px 7px; text-align: center; line-height: 1.25; background: var(--bg);
+    transition: opacity .4s, background-color .4s, box-shadow .4s, transform .4s;
+  }
+  .c .s { display: block; font: 600 18px var(--mono); }
+  .c .t, .c .r { display: block; font-size: 12px; color: var(--muted); }
+  .c .p { display: block; font: 600 13px var(--mono); }
+  .c.v5 { background: #DCE9D6; } .c.v5 .s { color: #2F6B2A; }
+  .c.v4 { background: #E9EEDD; } .c.v4 .s { color: #5C7A2E; }
+  .c.v3 { background: #F5E7CC; } .c.v3 .s { color: #9A6512; }
+  .c.v1 { background: #F4D9D2; } .c.v1 .s { color: var(--accent); }
+  .c.ok { background: #DCE9D6; } .c.ok .s { color: #2F6B2A; }
+  .c.ko { background: #F4D9D2; } .c.ko .s { color: var(--accent); }
+  .c.u { box-shadow: inset 0 0 0 2px var(--line); }
+  .c.na { background: transparent; }
+  .grid.focus .c:not(.hl) { opacity: .22; }
+  .grid.focus .c.hl { box-shadow: 0 0 0 2px var(--ink); }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .step .box p + p { margin-top: .8em; }
+  .step .box h3 { font: 600 14px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 .6em; }
+  .step .box q { font-style: italic; }
+  @media (max-width: 900px) {
+    .rack .q { width: 32px; height: 32px; font-size: 16px; }
+    .rack .row { gap: 8px; }
+    .grid { grid-template-columns: 50px repeat(6, minmax(0, 1fr)); gap: 3px; }
+    .grid .m { font-size: 12px; }
+    .grid .m small { display: none; }
+    .grid .h { font-size: 9px; }
+    .c { padding: 5px 1px; }
+    .c .s { font-size: 13px; }
+    .c .t, .c .r { display: none; }
+    .c .p { font-size: 9px; white-space: nowrap; letter-spacing: -.03em; }
+    .gq { font-size: 13px; margin: 4px 0 10px; }
+    .legend { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header id="bar" aria-hidden="true">
+  <span class="t">Les questions dangereuses ont l'air simples</span>
+  <span class="c" id="barChapter"></span>
+  <span class="p" id="barProgress"></span>
+</header>
+
+<section class="hero" id="hero" data-chapter="">
+  <div class="rack" aria-hidden="true"><div class="row">
+    <span class="q">?</span><span class="q">?</span><span class="q">?</span><span class="q bad">?</span><span class="q">?</span><span class="q">?</span><span class="q">?</span>
+  </div></div>
+  <div class="veil" style="background:linear-gradient(0deg, rgba(243,239,232,1) 0%, rgba(243,239,232,.95) 40%, rgba(243,239,232,0) 70%)"></div>
+  <div class="inner">
+    <div class="kicker">Grand format · Benchmark agentique</div>
+    <h1 style="font-size:clamp(44px, 6.4vw, 96px)">Les questions dangereuses ont l'air simples</h1>
+    <p class="lede">J'ai posé deux questions d'analyse à tous les modèles Claude, à chaque niveau d'effort. La première était simple, la seconde en avait seulement l'air, et c'est elle qui a départagé les modèles.</p>
+    <p class="by">Par Alexis Blandin <span>· 19 novembre 2026 · 7 min de lecture</span></p>
+  </div>
+  <div class="scroll-cue">Faites défiler</div>
+</section>
+
+<div class="gap s"></div>
+
+<div class="prose" data-chapter="Quarante-quatre runs">
+  <p class="first reveal">J'ai posé une question d'analyse à vingt configurations de Claude, et dix-neuf ont rendu une réponse juste au chiffre près. Le lendemain, j'en ai posé une plus floue à vingt-quatre configurations, et seules huit sont allées au bout du raisonnement.</p>
+  <p class="reveal">Entre les deux journées, les modèles n'ont pas changé, la question si. Elle avait pourtant l'air aussi banale que la première, et c'est ce qui m'intéresse dans ce benchmark, bien plus que le classement des modèles.</p>
+</div>
+
+<p class="pull reveal" data-chapter="Trier avant de soigner">On ne choisit pas qui soigne<span class="accent">avant d'avoir trié le patient.</span></p>
+
+<div class="prose" data-chapter="Trier avant de soigner">
+  <p class="reveal">Les urgentistes ont un mot pour ça. Sous la Révolution puis l'Empire, le chirurgien militaire Dominique-Jean Larrey a pris l'habitude de soigner les blessés selon la gravité de leurs plaies, et non selon leur grade. Le triage était né, et avec lui une règle qui structure encore nos services d'urgence. Avant de choisir qui soigne, on évalue ce qu'il faut soigner.</p>
+  <p class="reveal">Le piège classique du triage est le patient qui marche, parle et plaisante, et dont la blessure ne se voit pas encore. Une question d'analyse peut lui ressembler, et la seconde question de ce benchmark en a fait la démonstration.</p>
+  <p class="reveal">Le protocole est resté identique d'un jour à l'autre. Chaque run utilise le même harness, branché sur le MCP de notre lakehouse Databricks et sur ses Metric Views, la couche sémantique où vivent nos indicateurs. J'ai croisé chaque modèle (Haiku 5.5, Sonnet 5.5, Opus 5.5 et Fable 5.1) avec chaque niveau d'effort, de low à max. Le coût de chaque run est calculé au prix public de l'API Claude.</p>
+  <p class="reveal">Le second jour, j'ai ajouté un run ultracode par modèle, une orchestration où quatre explorateurs suivent chacun un angle avant qu'un vérificateur contrôle et qu'une synthèse conclue. La notation se fait alors contre une analyse de référence menée par un Data Analyst, recalculée et vérifiée pour le test.</p>
+</div>
+
+<section class="scrolly" data-graphic="grid" data-chapter="Les résultats">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="gtitle" id="gtitle">Question simple</div>
+    <p class="gq" id="gq"></p>
+    <div class="grid" id="grid"></div>
+    <div class="legend" id="legend"></div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="s1"><div class="box">
+      <h3>Jour 1, la question simple</h3>
+      <p><q>Le churn de septembre 2026 est-il anormal par rapport aux douze mois précédents, en nombre de départs et en CA client perdu ?</q> La question demande quelques requêtes, un peu de réflexion et du SQL généré.</p>
+      <p>Les vingt runs rendent le bon verdict, et seul Haiku en effort low se trompe sur un chiffre, de 10 %.</p>
+    </div></div>
+    <div class="step" data-step="s2"><div class="box">
+      <p>Avec un lakehouse et un harness bien conçus, il n'y a presque rien à chercher. Chaque run se contente de deux ou trois requêtes SQL, environ 2,4 en moyenne pour Sonnet et Opus et 3,3 pour Fable et Haiku.</p>
+      <p>Fable lance plus d'outils et vérifie davantage, comme il le fait en génération de code. Opus fait le travail le plus propre, avec deux requêtes et le bon filtre à chaque fois.</p>
+    </div></div>
+    <div class="step" data-step="s3"><div class="box">
+      <p>Monter l'effort n'allonge ni le temps ni le coût de façon régulière. Sur Haiku, plus d'effort l'a même fait sortir de la couche sémantique pour tout recalculer à la main.</p>
+      <p>Un petit modèle avec plus d'effort peut valoir un gros modèle avec moins d'effort, pour bien moins cher. Haiku en max coûte 0,07 $ et Sonnet en medium 0,42 $, soit six fois plus. La facture vient surtout du contexte que lit l'agent, environ 100 000 tokens, et très peu de sa réponse, environ 3 000.</p>
+    </div></div>
+    <div class="step" data-step="c1"><div class="box">
+      <h3>Jour 2, la question floue</h3>
+      <p>La seconde question ressemble à celles qu'on reçoit tous les jours, sans période, sans définition et avec une cause déjà trouvée. <q>Notre changement de mix produit nous pénalise-t-il, parce que la nouvelle gamme se vendrait mal ?</q></p>
+      <p>Or la cause est fausse deux fois. La nouvelle gamme est celle qui se vend le mieux, et le changement de mix date d'avant ce qu'on cherche à expliquer.</p>
+    </div></div>
+    <div class="step" data-step="c2"><div class="box">
+      <p>Pour obtenir 5/5, un run doit confirmer la bascule, la dater, démonter le « se vendrait mal », trouver le vrai moteur des ventes et signaler une limite honnête.</p>
+      <p>Les vingt-quatre runs rejettent la fausse piste, mais seuls huit trouvent toute l'explication.</p>
+    </div></div>
+    <div class="step" data-step="c3"><div class="box">
+      <p>Cette fois, l'effort compte. La note moyenne passe de 2,5/5 en medium à 4,25/5 en high, et aucun run sous dix requêtes n'obtient 5/5, alors que la veille deux ou trois suffisaient.</p>
+    </div></div>
+    <div class="step" data-step="c4"><div class="box">
+      <p>En low, même Opus se prend les pieds dans le tapis. Il conclut après deux requêtes seulement, avant d'avoir regardé assez loin, et s'arrête à 3/5.</p>
+    </div></div>
+    <div class="step" data-step="c5"><div class="box">
+      <p>Haiku ne dépasse jamais 4/5. En effort bas, il donne le bon verdict pour de mauvaises raisons, et Sonnet en medium tombe dans le même travers.</p>
+      <p>C'est plus dangereux qu'une erreur visible, car rien dans la réponse ne signale que le raisonnement a lâché en route.</p>
+    </div></div>
+    <div class="step" data-step="c6"><div class="box">
+      <p>Ultracode partait avec de l'aide, puisque ses quatre angles couvrent presque toute la grille de notation. Il ne fait pourtant pas mieux qu'un run seul, et sur Opus il fait même moins bien pour huit fois le prix.</p>
+      <p>Sur Fable, ultracode obtient 5/5 avec 86 requêtes en 16 min 29. Fable en max, seul, met le même temps pour 24 requêtes. Le parallélisme abat 3,6 fois plus de travail dans le même temps, mais pour 6,5 fois le prix.</p>
+    </div></div>
+    <div class="step" data-step="c7"><div class="box">
+      <p>Le moins cher des 5/5 reste Opus en high, à 0,81 $.</p>
+      <p>Sur une question qui demande du recul, comme remonter loin dans un historique, le gros modèle va plus vite et plus loin pour le même prix. En moyenne, Opus boucle en 6 min 09 pour 1,16 $, quand Sonnet met 7 min 03 pour 1,30 $.</p>
+    </div></div>
+  </div>
+</section>
+
+<p class="pull reveal" data-chapter="Le tri d'abord">La question avait l'air facile,<span class="accent">et c'est son flou qui la rendait complexe.</span></p>
+
+<div class="prose" data-chapter="Le tri d'abord">
+  <p class="reveal">Le premier jour, mon conseil tenait en une ligne. Orchestrez avec Opus et exécutez avec Haiku ou Sonnet, car n'importe lequel de ces modèles fera le travail sur une data platform à l'état de l'art. Le second jour ne le contredit pas, il le précise.</p>
+  <p class="reveal">Le vrai sujet est d'évaluer la complexité d'une question avant de choisir le modèle qui l'exécute. Une question cadrée, par exemple par une couche sémantique, se contente de Haiku ou de Sonnet. Dans le doute, Opus en high fait l'affaire. L'écart se compte en centimes, alors qu'une réponse juste pour de mauvaises raisons coûte bien plus cher.</p>
+  <p class="reveal">Quant à ultracode, il vaut son prix sur les questions où explorer beaucoup de pistes à la fois change vraiment la réponse.</p>
+  <p class="reveal">Larrey triait des plaies qu'il pouvait voir. Une question floue cache la sienne derrière une formulation anodine, et c'est pour ça que trier la question est déjà un geste d'analyse. Il reste à savoir qui le fait. Si c'est Opus qui orchestre, le modèle le plus cher de la grille devient l'infirmier d'accueil, et c'est peut-être le meilleur usage qu'on puisse en faire.</p>
+</div>
+
+<footer class="end" data-chapter="Le tri d'abord">
+  <div class="prose">
+    <p>Publié le 19 novembre 2026. Une première version, en deux posts, est parue sur LinkedIn. Un prochain benchmark portera sur des analyses très longues et très complexes.</p>
+    <p>Coût au prix public de l'API Claude, par run ou par ultracode entier. Les questions sont simplifiées pour la lecture.</p>
+    <p style="margin-top:1.6em"><a href="/fr/travaux/" target="_top">← Tous les travaux</a></p>
+  </div>
+</footer>
+
+<script src="/apps/longread/longread.js"></script>
+<script>
+(() => {
+  const { $, $$ } = Longread;
+  const MODELS = [['Haiku', '5.5'], ['Sonnet', '5.5'], ['Opus', '5.5'], ['Fable', '5.1']];
+  const EFF = ['low', 'medium', 'high', 'xhigh', 'max'];
+  // Question simple : [juste ?, secondes, coût $]
+  const S = [
+    [[0, 46, .06], [1, 54, .06], [1, 59, .07], [1, 60, .09], [1, 58, .07]],
+    [[1, 46, .46], [1, 58, .42], [1, 40, .34], [1, 55, .37], [1, 44, .47]],
+    [[1, 81, .69], [1, 99, .85], [1, 87, .79], [1, 83, .64], [1, 77, .65]],
+    [[1, 83, 1.42], [1, 98, 1.97], [1, 100, 1.58], [1, 132, 1.68], [1, 121, 1.81]],
+  ];
+  // Question complexe : [note /5, durée, coût $, requêtes SQL], la 6e colonne est ultracode.
+  const C = [
+    [[1, '60 s', .09, 6], [1, '64 s', .08, 5], [3, '2 min 15', .09, 7], [4, '4 min 12', .13, 9], [4, '13 min 19', .73, 18], [3, '5 min 03', .63, 37]],
+    [[4, '80 s', .50, 7], [1, '58 s', .44, 5], [4, '2 min 20', .60, 12], [4, '7 min 40', 1.53, 18], [5, '22 min 58', 3.43, 39], [4, '2 min 49', 2.65, 29]],
+    [[3, '53 s', .63, 2], [4, '96 s', .52, 5], [5, '3 min 38', .81, 10], [5, '6 min 20', 1.21, 17], [5, '18 min 18', 2.63, 21], [4, '9 min 05', 6.73, 38]],
+    [[4, '2 min 58', 2.31, 10], [4, '3 min 47', 1.52, 14], [5, '5 min 52', 2.05, 18], [5, '13 min 11', 3.49, 23], [5, '16 min 09', 3.30, 24], [5, '16 min 29', 21.4, 86]],
+  ];
+  const usd = v => v.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' $';
+  const Q = {
+    s: '« Le churn de septembre 2026 est-il anormal par rapport aux douze mois précédents, en nombre de départs et en CA client perdu ? »',
+    c: '« Notre changement de mix produit nous pénalise-t-il, parce que la nouvelle gamme se vendrait mal ? »',
+  };
+  const LEG = {
+    s: '<span><i style="background:#DCE9D6"></i>bon verdict, chiffres à 0,1 % près</span><span><i style="background:#F4D9D2"></i>bon verdict, un chiffre faux de 10 %</span>',
+    c: '<span><i style="background:#DCE9D6"></i>5/5</span><span><i style="background:#E9EEDD"></i>un point manqué</span><span><i style="background:#F5E7CC"></i>deux points manqués</span><span><i style="background:#F4D9D2"></i>bon verdict, raisonnement manqué</span>',
+  };
+  // Cellules mises en avant à chaque étape : [ligne, colonne]
+  const all = (f) => { const o = []; for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) if (f(r, c)) o.push([r, c]); return o; };
+  const STEPS = {
+    s1: { q: 's', hl: [[0, 0]] },
+    s2: { q: 's', hl: all((r, c) => r === 2 && c < 5) },
+    s3: { q: 's', hl: [[0, 4], [1, 1]] },
+    c1: { q: 'c', hl: null },
+    c2: { q: 'c', hl: all((r, c) => C[r][c][0] === 5) },
+    c3: { q: 'c', hl: all((r, c) => c === 1 || c === 2) },
+    c4: { q: 'c', hl: [[2, 0]] },
+    c5: { q: 'c', hl: all((r, c) => r === 0 || C[r][c][0] === 1) },
+    c6: { q: 'c', hl: all((r, c) => c === 5 || (r === 3 && c === 4) || (r === 2 && c === 2)) },
+    c7: { q: 'c', hl: [[2, 2]] },
+  };
+
+  let mode = null;
+  function build(q) {
+    const g = $('#grid'); mode = q;
+    let h = '<span></span>' + EFF.map(e => `<span class="h">${e}</span>`).join('') + `<span class="h u">${q === 'c' ? 'ultracode' : ''}</span>`;
+    MODELS.forEach(([m, v], r) => {
+      h += `<span class="m">${m}<small>${v}</small></span>`;
+      for (let c = 0; c < 6; c++) {
+        if (q === 's') {
+          if (c === 5) { h += '<span class="c na"></span>'; continue; }
+          const [ok, s, p] = S[r][c];
+          h += `<span class="c ${ok ? 'ok' : 'ko'}" data-r="${r}" data-c="${c}"><span class="s">${ok ? '✓' : '✗'}</span><span class="t">${s} s</span><span class="p">${usd(p)}</span></span>`;
+        } else {
+          const [n, t, p, k] = C[r][c];
+          h += `<span class="c v${n}${c === 5 ? ' u' : ''}" data-r="${r}" data-c="${c}"><span class="s">${n}/5</span><span class="t">${t}</span><span class="p">${usd(p)}</span><span class="r">${k} req.</span></span>`;
+        }
+      }
+    });
+    g.innerHTML = h;
+    $('#gtitle').textContent = q === 's' ? 'Jour 1 · question simple' : 'Jour 2 · question floue';
+    $('#gq').textContent = Q[q];
+    $('#legend').innerHTML = LEG[q];
+  }
+
+  Longread.init({
+    grid(step) {
+      const s = STEPS[step];
+      if (mode !== s.q) build(s.q);
+      const g = $('#grid');
+      g.classList.toggle('focus', !!s.hl);
+      $$('.c[data-r]', g).forEach(el => {
+        const hit = s.hl && s.hl.some(([r, c]) => r === +el.dataset.r && c === +el.dataset.c);
+        el.classList.toggle('hl', !!hit);
+      });
+    },
+  });
+})();
+</script>
+</body>
+</html>
