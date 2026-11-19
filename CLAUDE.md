@@ -36,7 +36,8 @@ _layouts/
   post.html    # Post layout (header image, share buttons, author bio)
 _includes/
   head.html          # Minima head override
-  custom-head.html   # Favicon, OG tags, hreflang, Google Fonts
+  custom-head.html   # OG tags, hreflang, Google Fonts
+  favicon.html       # Favicon links; include it in every layout: none page (work/, talk/)
   header.html        # Nav, language toggle, dark mode toggle
   google-analytics.html
   youtube.html
@@ -46,8 +47,9 @@ assets/
   main.scss
   images/            # Post images
   alexis-photos/     # Author photos
-  favicon.svg
-  11h-logo.png
+  favicon-32.png     # Square favicon (root favicon.ico holds 16/32/48)
+  apple-touch-icon.png
+  11h-logo.png       # Header logo (not square, do not use as favicon)
 en/
   index.html         # EN homepage
   about.md           # EN about page

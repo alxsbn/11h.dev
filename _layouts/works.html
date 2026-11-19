@@ -35,7 +35,7 @@ layout: default
         <a href="{{ work.url | relative_url }}" class="post-card__link">
           {%- if work.header_image -%}
           <div class="post-card__image">
-            <img src="{{ work.header_image | relative_url }}" alt="{{ work.header_image_alt | default: work_title }}" loading="lazy">
+            <img src="{{ work.header_image | relative_url }}?v={{ site.time | date: '%s' }}" alt="{{ work.header_image_alt | default: work_title }}" loading="lazy">
           </div>
           {%- endif -%}
           <div class="post-card__content">

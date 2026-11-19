@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le goulot sera toujours humain</title>
+<meta name="description" content="En trois ans, la Data Team de Jolimoi a multiplié par seize son volume de PR par personne. Le goulot d'étranglement a changé quatre fois de place et revient toujours au même endroit, le temps humain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/apps/longread/longread.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* Ouverture typographique : une colonne de marcheurs, Herbie traîne derrière. */
+  .hero { background: var(--paper); }
+  .trail { position: absolute; inset: 7vh 0 auto 0; height: 30%; display: flex; align-items: flex-start; justify-content: center; pointer-events: none; }
+  .trail svg { width: min(760px, 82vw); max-height: 100%; height: auto; overflow: visible; }
+  .trail .path { fill: none; stroke: var(--line); stroke-width: 3; stroke-dasharray: 2 10; stroke-linecap: round; }
+  .trail .w { fill: var(--ink); }
+  .trail .herbie { fill: var(--accent); }
+  .trail .herbie-l { font: 13px var(--mono); fill: var(--accent); letter-spacing: .14em; }
+  @media (prefers-reduced-motion: no-preference) {
+    .trail .w { animation: walk 3.2s ease-in-out infinite; }
+    .trail .w:nth-child(odd) { animation-delay: -1.6s; }
+    @keyframes walk { 50% { transform: translateY(-3px); } }
+  }
+
+  /* Le pipeline des quatre temps */
+  .pipe { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 14px; margin-top: 26px; }
+  .cell {
+    position: relative; border: 2px solid transparent; border-radius: 8px; background: var(--bg);
+    padding: 22px 10px 14px; text-align: center; min-height: 96px;
+    transition: background-color .45s, color .45s, border-color .45s, opacity .45s;
+  }
+  .cell h4 { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.2; }
+  .cell .who { display: block; margin-top: 4px; font-size: 14px; line-height: 1.3; color: var(--muted); transition: color .45s; }
+  .cell.agent { border-color: var(--accent); }
+  .cell.goulot { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .cell.goulot .who { color: #F6DDD3; }
+  .badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%) scale(.6); opacity: 0;
+    background: var(--ink); color: var(--bg); border-radius: 999px; padding: 3px 11px;
+    font: 600 11px var(--mono); letter-spacing: .14em; transition: opacity .35s, transform .35s;
+  }
+  .cell.goulot .badge { opacity: 1; transform: translateX(-50%) scale(1); }
+  .tag {
+    position: absolute; top: -11px; left: 12px; background: var(--bg); border: 1px solid var(--line);
+    border-radius: 999px; padding: 1px 9px; font: 600 10px var(--mono); letter-spacing: .14em; color: var(--muted);
+  }
+  .cell.blank { background: transparent; border: 0; min-height: 0; padding: 0; }
+  .harness { opacity: 0; transform: translateY(-10px); transition: opacity .5s, transform .5s; pointer-events: none; }
+  .split .harness { opacity: 1; transform: none; }
+  .lane { display: none; }
+  .split .lane { display: inline-block; }
+  .arrow { grid-column: 1 / -1; height: 0; }
+  .metric { display: flex; align-items: baseline; gap: 14px; margin-top: 30px; padding-top: 14px; border-top: 2px solid var(--ink); }
+  .metric .n { font: 600 44px/1 var(--mono); color: var(--accent); min-width: 2.4em; }
+  .metric .l { font-size: 16px; color: var(--muted); font-style: italic; }
+  .stage { font: 600 13px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .stage b { color: var(--ink); font-family: var(--serif); font-size: 22px; letter-spacing: 0; text-transform: none; margin-left: 10px; font-weight: 400; }
+  .step .box p + p { margin-top: .8em; }
+  .step .box h3 { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 .6em; font-family: var(--mono); font-weight: 600; }
+  @media (max-width: 900px) {
+    .pipe { gap: 10px 6px; margin-top: 16px; }
+    .cell { padding: 18px 4px 10px; min-height: 74px; }
+    .cell h4 { font-size: 14px; }
+    .cell .who { font-size: 11px; }
+    .badge { font-size: 9px; padding: 2px 7px; }
+    .tag { font-size: 8px; left: 4px; }
+    .metric .n { font-size: 32px; }
+    .metric .l { font-size: 13px; }
+    .stage b { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<header id="bar" aria-hidden="true">
+  <span class="t">Le goulot sera toujours humain</span>
+  <span class="c" id="barChapter"></span>
+  <span class="p" id="barProgress"></span>
+</header>
+
+<section class="hero" id="hero" data-chapter="">
+  <div class="trail" aria-hidden="true">
+    <svg viewBox="0 0 1000 220">
+      <path class="path" d="M20 170 C 200 60, 360 200, 520 120 S 820 40, 980 90"/>
+      <g>
+        <circle class="w" cx="960" cy="84" r="9"/>
+        <circle class="w" cx="925" cy="77" r="9"/>
+        <circle class="w" cx="890" cy="72" r="9"/>
+        <circle class="w" cx="852" cy="70" r="9"/>
+        <circle class="w" cx="815" cy="72" r="9"/>
+        <circle class="w" cx="776" cy="78" r="9"/>
+        <circle class="w" cx="738" cy="86" r="9"/>
+      </g>
+      <circle class="herbie" cx="372" cy="160" r="11"/>
+      <text class="herbie-l" x="372" y="196" text-anchor="middle">HERBIE</text>
+    </svg>
+  </div>
+  <div class="veil" style="background:linear-gradient(0deg, rgba(243,239,232,1) 0%, rgba(243,239,232,.95) 40%, rgba(243,239,232,0) 70%)"></div>
+  <div class="inner">
+    <div class="kicker">Grand format · Data Team Jolimoi</div>
+    <h1 style="font-size:clamp(44px, 6.4vw, 96px)">Le goulot sera toujours humain</h1>
+    <p class="lede">En trois ans, nous avons multiplié par seize le volume de pull requests par personne. Le goulot d'étranglement a changé quatre fois de place, et il est chaque fois revenu chez nous.</p>
+    <p class="by">Par Alexis Blandin <span>· 30 octobre 2026 · 5 min de lecture</span></p>
+  </div>
+  <div class="scroll-cue">Faites défiler</div>
+</section>
+
+<div class="gap s"></div>
+
+<div class="prose" data-chapter="Seize fois plus">
+  <p class="first reveal">Entre octobre 2023 et octobre 2026, la Data Team de Jolimoi a ouvert cinq fois plus de pull requests avec trois fois moins de monde. Rapporté à chaque personne, le volume a été multiplié par seize en trois ans, dont un facteur sept sur la seule dernière année.</p>
+  <p class="reveal">Ces chiffres feraient une belle slide de conférence, et c'est pour ça qu'ils m'intéressent assez peu. En les regardant de près, j'ai vu autre chose. Chaque fois que les agents ont absorbé une étape de notre travail, le goulot d'étranglement s'est déplacé. Puis il est revenu se loger au même endroit, chez nous, comme le marcheur qu'on retrouve toujours en queue de colonne.</p>
+</div>
+
+<p class="pull reveal" data-chapter="Herbie marche en tête">La troupe n'avance jamais plus vite<span class="accent">que le plus lent des marcheurs.</span></p>
+
+<div class="prose" data-chapter="Herbie marche en tête">
+  <p class="reveal">Ce phénomène porte un nom depuis 1984. Eliyahu Goldratt l'a raconté dans <em>Le But</em>, un roman industriel où un directeur d'usine, Alex Rogo, accompagne la randonnée scoute de son fils. La colonne s'étire, les plus rapides filent devant et les écarts se creusent. Rogo finit par comprendre que la troupe n'avance jamais plus vite que Herbie, le garçon le plus lent, quel que soit l'entrain des autres.</p>
+  <p class="reveal">Accélérer un maillon qui n'est pas Herbie ne change rien à l'arrivée, et soulager Herbie fait apparaître le Herbie suivant. Goldratt en a tiré la théorie des contraintes, que nous avons revécue en quatre temps sans l'avoir relue.</p>
+</div>
+
+<section class="scrolly" data-graphic="pipe" data-chapter="Quatre temps">
+  <div class="sticky"><div class="graphic"><div class="panel">
+    <div class="stage" id="stage">Temps 1<b id="stageName">Le legacy</b></div>
+    <div class="pipe" id="pipe">
+      <div class="cell" data-k="spec"><span class="badge">GOULOT</span><h4>Spécifier</h4><span class="who"></span></div>
+      <div class="cell" data-k="code"><span class="badge">GOULOT</span><h4>Coder</h4><span class="who"></span></div>
+      <div class="cell" data-k="review"><span class="badge">GOULOT</span><span class="tag lane">MÉTIER</span><h4>Review</h4><span class="who"></span></div>
+      <div class="cell" data-k="merge"><span class="badge">GOULOT</span><h4>Merge</h4><span class="who"></span></div>
+      <div class="cell blank harness"></div>
+      <div class="cell blank harness"></div>
+      <div class="cell harness agent" data-k="hreview"><span class="tag">HARNESS</span><h4>Review</h4><span class="who">agents</span></div>
+      <div class="cell harness agent" data-k="hmerge"><h4>Merge</h4><span class="who">agents</span></div>
+    </div>
+    <div class="metric"><span class="n" id="lines">15</span><span class="l" id="metricLabel">lignes dans une PR médiane</span></div>
+  </div></div></div>
+  <div class="steps">
+    <div class="step" data-step="1"><div class="box">
+      <h3>Temps 1, le legacy</h3>
+      <p>Avant les agents, notre Herbie s'appelait l'agenda. Une bonne partie du travail consistait à planifier, puis à protéger des créneaux pour produire. La contrainte se trouvait en amont, au moment de spécifier, parce que chaque heure de concentration se négociait contre une réunion.</p>
+      <p>Une PR médiane faisait alors une quinzaine de lignes, ce qui donne la taille des bouchées qu'on arrivait à avaler entre deux rendez-vous.</p>
+    </div></div>
+    <div class="step" data-step="2"><div class="box">
+      <h3>Temps 2, la machine à sous</h3>
+      <p>Les premières sessions de coding agentique ont libéré l'agenda, et le goulot a glissé d'un cran. Nous produisions plus, mais de manière artisanale, avec un humain au volant de chaque session. Or une session pilotée par un humain finit toujours par dériver.</p>
+      <p>On complexifie le sujet, on ajoute « juste une chose de plus », parce que la machine répond tout de suite et que relancer ne coûte rien. C'est le ressort de la machine à sous, où chaque tirage promet que le prochain sera le bon. La PR finissait loin de l'intention de départ.</p>
+    </div></div>
+    <div class="step" data-step="2b"><div class="box">
+      <p>La taille médiane d'une PR est passée de 15 à 100 lignes. Ces PR étaient trop profondes pour être relues sereinement par un humain. La contrainte s'était installée dans le code, ou plutôt chez celui qui tenait le volant.</p>
+      <p>Nous étions limités par notre temps et par notre niveau de concentration, alors qu'un agent fait ce qu'on lui demande, à la lettre et sans se fatiguer. Herbie, c'était nous, avec un sac de plus en plus lourd.</p>
+    </div></div>
+    <div class="step" data-step="3"><div class="box">
+      <h3>Temps 3, la dark factory</h3>
+      <p>Sauf que notre but n'a jamais été de produire plus, mais de mieux exécuter. Nous avons donc laissé les agents tourner en boîte noire sur des tâches cadrées, dans ce que l'industrie appelle une <a href="/fr/2026/03/05/la-dark-mine/" target="_top">dark factory</a>, une usine qui tourne lumières éteintes. La taille médiane d'une PR est retombée à 40 lignes.</p>
+      <p>Une PR attendait environ une heure en médiane avant d'être mergée. L'essentiel de cette heure appartenait aux agents, qui se relisaient les uns les autres jusqu'à rendre chaque PR mergeable.</p>
+    </div></div>
+    <div class="step" data-step="3b"><div class="box">
+      <p>Chaque PR devenait plus simple à relire, mais leur nombre a créé un problème neuf. Il y avait trop à relire et trop à merger. Le goulot avait atterri au bout de la chaîne, sur le bouton de merge, et ce bouton restait dans une main humaine.</p>
+    </div></div>
+    <div class="step" data-step="3c"><div class="box">
+      <p>Avec le temps, une nouvelle base de code est née à l'intérieur de notre monorepo. Environ 60 % des PR portaient sur notre harness, l'outillage qui encadre et guide les agents. La moitié d'entre elles naissaient de boucles de rétro gérées par les agents eux-mêmes.</p>
+      <p>Les agents savent très bien remplir un backlog et spécifier un besoin à partir d'une simple intention. Octobre n'est pas fini, et nous allons dépasser pour la première fois les mille issues créées dans Linear en un mois.</p>
+    </div></div>
+    <div class="step" data-step="4"><div class="box">
+      <h3>Temps 4, l'auto-apprentissage</h3>
+      <p>Ces issues ne sortent pas de nulle part. Elles viennent d'idées glanées pendant les sessions et de boucles de feedback construites sur les logs d'intention de nos équipes métier. Ces logs gardent la trace de ce que chacun cherchait en posant sa question. Le harness s'est mis à évoluer sans nous, comme une colonne qui avance sans attendre son chef.</p>
+    </div></div>
+    <div class="step" data-step="4b"><div class="box">
+      <p>Il était temps de le laisser s'autogérer. Les agents mergent désormais seuls les PR du harness, et nous gardons la main par un processus d'escalade qui nous remonte ce qui mérite un regard humain.</p>
+      <p>La chaîne s'est alors dédoublée, et côté harness, les agents spécifient, codent, relisent et mergent seuls. Côté métier, un humain relit avec eux et garde le dernier mot sur le merge, et c'est là que le goulot s'est réinstallé.</p>
+    </div></div>
+  </div>
+</section>
+
+<p class="pull reveal" data-chapter="Le sac de Herbie">Une seule chose n'a pas bougé en trois ans.<span class="accent">Le temps humain.</span></p>
+
+<div class="prose" data-chapter="Le sac de Herbie">
+  <p class="reveal">Le temps humain est aussi contraint qu'en 2023, avec le même nombre d'heures dans une journée et la même concentration qui s'effiloche en fin d'après-midi. Nous avons multiplié par seize ce qu'une personne fait passer dans la chaîne sans gagner une seule heure d'attention.</p>
+  <p class="reveal">Goldratt ne cherchait pas à rendre Herbie plus rapide, car c'était impossible. Rogo le place en tête de colonne pour que personne ne le distance, puis il répartit le contenu de son sac entre les autres scouts. Sans l'avoir planifié, c'est ce que nous avons fait. Les agents portent désormais tout ce qui ne demande pas de décision, et l'escalade place l'humain là où sa lenteur compte, sur les choix qui engagent le métier.</p>
+  <p class="reveal">Reste une question que Goldratt n'avait pas à se poser, car ses scouts ne traçaient pas eux-mêmes le sentier. Nos agents remplissent le backlog plus vite que nous ne pouvons le lire, et chaque issue qu'ils créent ajoute un kilomètre à la marche de Herbie. Le jour où son sac sera vide, il faudra encore décider qui fixe la longueur du chemin.</p>
+</div>
+
+<footer class="end" data-chapter="Le sac de Herbie">
+  <div class="prose">
+    <p>Publié le 30 octobre 2026. Une première version est parue sur LinkedIn.</p>
+    <p>Eliyahu M. Goldratt et Jeff Cox, <em>Le But</em>, 1984.</p>
+    <p style="margin-top:1.6em"><a href="/fr/travaux/" target="_top">← Tous les travaux</a></p>
+  </div>
+</footer>
+
+<script src="/apps/longread/longread.js"></script>
+<script>
+(() => {
+  const { $, $$ } = Longread;
+  // Chaque temps : qui tient chaque étape, où est le goulot, quelles étapes sont confiées aux agents.
+  const T = {
+    1: { name: 'Le legacy', who: { spec: 'humain', code: 'humain', review: 'humain', merge: 'humain' },
+         goulot: 'spec', agent: [], lines: 15, label: 'lignes dans une PR médiane' },
+    2: { name: 'La « slot machine »', who: { spec: 'humain', code: 'session qui dérive', review: 'humain + agent', merge: 'humain' },
+         goulot: 'code', agent: ['review'], lines: 100, label: 'lignes dans une PR médiane' },
+    3: { name: 'La dark factory', who: { spec: 'humain', code: 'agents', review: 'agent + humain', merge: 'humain' },
+         goulot: 'merge', agent: ['code', 'review'], lines: 40, label: 'lignes dans une PR médiane' },
+    4: { name: "L'auto-apprentissage", who: { spec: 'agent + humain', code: 'agents', review: 'agent + humain', merge: 'humain' },
+         goulot: 'merge', agent: ['spec'], lines: 1000, label: 'issues Linear en octobre, un record en vue' },
+  };
+  Longread.init({
+    pipe(step, sc) {
+      const s = T[parseInt(step, 10)];
+      $('#stage').firstChild.textContent = `Temps ${parseInt(step, 10)}`;
+      $('#stageName').textContent = s.name;
+      $$('.cell[data-k]', sc).forEach(c => {
+        const k = c.dataset.k;
+        if (!(k in s.who)) return;
+        c.querySelector('.who').textContent = s.who[k];
+        c.classList.toggle('goulot', s.goulot === k);
+        c.classList.toggle('agent', s.agent.includes(k));
+      });
+      $('#pipe').classList.toggle('split', step.startsWith('4'));
+      $('#metricLabel').textContent = s.label;
+      $('#lines').textContent = Longread.fr(s.lines) + (s.lines >= 1000 ? '+' : '');
+    },
+  });
+})();
+</script>
+</body>
+</html>
