@@ -13,20 +13,20 @@ Salut, moi c'est **Alexis** 👋
 
 Bienvenue sur mon blog personnel où j'écris sur mes passions et les projets qui m'occupent.
 
-## Ce que je fais
+Je suis curieux de l'intersection entre organisation, philosophie et technologie.
 
-- Je navigue dans le paysage IT depuis plus de vingt ans
-- Urban Sketcher, actif localement à Orléans 🇫🇷 et au sein de la communauté mondiale
-- Curieux de l'intersection entre organisation, philosophie et technologie
+Je navigue dans le paysage IT depuis plus de vingt ans. J'ai commencé par le logiciel d'entreprise, puis la digital workplace, le cloud et le DevOps. Depuis 2016, je travaille sur la data, et aujourd'hui sur l'IA. Quelques projets sont sur [GitHub](https://github.com/alxsbn).
+
+{% include career-gantt.html %}
+
+Dessinateur sur le vif à mes heures perdues : mes carnets sont visibles sur [Instagram](https://www.instagram.com/alexisblandin). Je suis par ailleurs Data Manager pour l'ONG Urban Sketchers et co-administrateur du chapitre orléanais 🇫🇷.
 
 ## Contact
 
-N'hésitez pas à me contacter ou à me suivre :
+N'hésitez pas à me contacter :
 
-- GitHub : [@alxsbn](https://github.com/alxsbn)
 - Email : [alexis.blandin@gmail.com](mailto:alexis.blandin@gmail.com)
 - LinkedIn : [@alexisblandin](https://www.linkedin.com/in/alexisblandin)
-- Instagram : [@alxsblandin](https://www.instagram.com/alexisblandin)
 
 ---
 

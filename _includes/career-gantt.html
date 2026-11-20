@@ -1,0 +1,44 @@
+{%- comment -%}
+  Mini Gantt of the career tracks, shown on the About pages.
+  Scale: 2003 to 2027 (24 years). For a track from year A to year B included:
+  left = (A - 2003) / 24 * 100, width = (B + 1 - A) / 24 * 100.
+  Colors come from the site theme tokens, so it follows light and dark mode.
+{%- endcomment -%}
+{%- assign ai = "IA" -%}
+{%- if page.lang == "en" -%}{%- assign ai = "AI" -%}{%- endif -%}
+<style>
+  .career-gantt { margin: 1.75rem 0 0.5rem; font-family: var(--font-sans); font-size: 0.8125rem; }
+  .career-gantt__row { display: grid; grid-template-columns: 9.5rem 1fr; align-items: center; gap: 0.75rem; padding: 0.3rem 0; }
+  .career-gantt__label { color: var(--color-text); white-space: nowrap; }
+  .career-gantt__track { position: relative; height: 6px; border-radius: 3px; background: var(--color-border); }
+  .career-gantt__bar { position: absolute; top: 0; bottom: 0; border-radius: 3px; background: var(--color-text-secondary); }
+  .career-gantt__bar--now { background: var(--color-accent); }
+  .career-gantt__axis { position: relative; height: 1.1rem; margin-top: 0.35rem; color: var(--color-text-secondary); font-size: 0.6875rem; font-variant-numeric: tabular-nums; }
+  .career-gantt__axis span { position: absolute; transform: translateX(-50%); }
+  @media (max-width: 520px) {
+    .career-gantt__row { grid-template-columns: 1fr; gap: 0.3rem; padding: 0.4rem 0; }
+    .career-gantt__axis-row { grid-template-columns: 1fr; }
+  }
+</style>
+<div class="career-gantt" role="img" aria-label="Enterprise software 2003-2010, Digital workplace 2007-2017, Cloud & DevOps 2011-2023, Data & {{ ai }} 2016-{{ site.time | date: '%Y' }}">
+  <div class="career-gantt__row">
+    <span class="career-gantt__label">Enterprise software</span>
+    <div class="career-gantt__track"><div class="career-gantt__bar" style="left:0%;width:33.33%"></div></div>
+  </div>
+  <div class="career-gantt__row">
+    <span class="career-gantt__label">Digital workplace</span>
+    <div class="career-gantt__track"><div class="career-gantt__bar" style="left:16.67%;width:45.83%"></div></div>
+  </div>
+  <div class="career-gantt__row">
+    <span class="career-gantt__label">Cloud &amp; DevOps</span>
+    <div class="career-gantt__track"><div class="career-gantt__bar" style="left:33.33%;width:54.17%"></div></div>
+  </div>
+  <div class="career-gantt__row">
+    <span class="career-gantt__label">Data &amp; {{ ai }}</span>
+    <div class="career-gantt__track"><div class="career-gantt__bar career-gantt__bar--now" style="left:54.17%;width:45.83%"></div></div>
+  </div>
+  <div class="career-gantt__row career-gantt__axis-row">
+    <span></span>
+    <div class="career-gantt__axis"><span style="left:8.33%">2005</span><span style="left:29.17%">2010</span><span style="left:50%">2015</span><span style="left:70.83%">2020</span><span style="left:91.67%">2025</span></div>
+  </div>
+</div>
