@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sketcher ID : une seule communauté, billet ou pas</title>
+<meta name="description" content="Ce projet de création d'un badge d'identification ouvert à chaque urban sketcher fait suite à la volonté de régler une frustration terrain remontée durant le symposium annuel Urban Sketchers de 2025. Neuf mois plus tard, plus de 5 000 personnes l'ont adopté.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/apps/longread/longread.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  .hero img { object-position: 50% 0; }
+  .hero .veil { background: linear-gradient(0deg, rgba(250,249,246,1) 0%, rgba(250,249,246,.96) 40%, rgba(250,249,246,.5) 55%, rgba(250,249,246,0) 70%); }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 0 0 1.6em; }
+  .facts div { border-top: 2px solid var(--ink); padding-top: 10px; }
+  .facts b { display: block; font-size: 40px; line-height: 1.1; font-weight: 400; color: var(--accent); }
+  .facts span { font-size: 15px; color: var(--muted); }
+  @media (max-width: 900px) {
+    .facts b { font-size: 30px; }
+  }
+  .wide img { border: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<header id="bar" aria-hidden="true">
+  <span class="t">Sketcher ID : une seule communauté, billet ou pas</span>
+  <span class="c" id="barChapter"></span>
+  <span class="p" id="barProgress"></span>
+</header>
+
+<section class="hero" id="hero" data-chapter="">
+  <img src="assets/ouverture.jpg" alt="Exemple de carte Sketcher ID : «&nbsp;I am an Urban Sketcher&nbsp;», un prénom, une ville, un drapeau et un QR code" data-zoom="hero">
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="kicker">Application · Urban Sketchers</div>
+    <h1 style="font-size:clamp(40px, 6vw, 86px)">Sketcher ID : une seule communauté, billet ou pas</h1>
+    <p class="lede">Ce projet de création d'un badge d'identification ouvert à chaque urban sketcher fait suite à la volonté de régler une frustration terrain remontée durant le symposium annuel <a href="https://urbansketchers.org/" target="_blank" rel="noopener">Urban Sketchers</a> de 2025. Neuf mois plus tard, plus de 5&nbsp;000 personnes l'ont adopté.</p>
+    <p class="by">Par Alexis Blandin <span>· 3 min de lecture · <a href="https://id.urbansketchers.org/" target="_blank" rel="noopener">id.urbansketchers.org</a></span></p>
+  </div>
+  <div class="scroll-cue">Faites défiler</div>
+</section>
+
+<div class="gap s"></div>
+
+<div class="prose" data-chapter="Le problème">
+  <p class="first reveal">Comme chaque année, en 2025, Urban Sketchers organisait son symposium annuel à Poznań, en Pologne. Cet événement est un moment important de la vie de l'association, où l'on se regroupe, avec des participants et instructeurs venant des quatre continents, en un endroit précis du monde, pour faire vivre notre passion commune pour le dessin sur le vif.</p>
+  <p class="reveal">Néanmoins, un tel événement nécessite une logistique coûteuse et donc l'ouverture d'une billetterie limitée. Il n'est pas donné à toute une partie des participants de pouvoir avoir une place&nbsp;: soit parce que les billets étaient tous vendus, soit parce qu'ils ne pouvaient tout simplement pas se le permettre.</p>
+  <p class="reveal">D'autres voulaient simplement dessiner avec les autres, sans suivre de cours. Eh bien, jamais à court de ressources, une communauté Facebook de sketchers aura eu l'idée de se créer un badge à eux, pour pouvoir se reconnaître. Un badge orange bricolé «&nbsp;Independent Sketchers&nbsp;», faisant écho aux badges officiels des quelques privilégiés faisant partie de l'événement officiel.</p>
+  <p class="reveal">Pourtant, la pratique du dessin sur le vif est quelque chose de simple et d'universel, devant être à la portée de tous.</p>
+  <p class="reveal">De là a germé l'idée d'adapter cette idée pour le prochain symposium 2026, se tenant à Toulouse. Une application simple est née de cette ambition&nbsp;: un formulaire d'enregistrement, un badge unique et téléchargeable affichant un QR code vers les informations de l'événement.</p>
+  <p class="reveal">Le premier prototype aura été rapidement mis en ligne. L'ensemble aura été designé via Lovable, puis la version de production, deux semaines plus tard, déployée sur le domaine id.urbansketchers.org hébergé sous Cloudflare Pages.</p>
+</div>
+
+<div class="prose" data-chapter="Aujourd'hui">
+  <div class="facts reveal">
+    <div><b>5&nbsp;133</b><span>sketchers inscrits</span></div>
+    <div><b>93</b><span>pays</span></div>
+    <div><b>15</b><span>langues</span></div>
+  </div>
+</div>
+
+<figure class="wide reveal">
+  <img src="assets/site.jpg" alt="Page d'accueil de id.urbansketchers.org : « Your Sketcher ID », un bouton « Get Your Free ID » et un exemple de carte orange">
+  <figcaption>La page d'accueil de <a href="https://id.urbansketchers.org/" target="_blank" rel="noopener">id.urbansketchers.org</a>, au 24 novembre 2026.</figcaption>
+</figure>
+
+<div class="prose" data-chapter="Aujourd'hui">
+  <p class="reveal">En juin, le badge du symposium est devenu Sketcher ID, une carte ouverte à tous les urban sketchers, qu'ils aillent ou non à un symposium.</p>
+  <p class="reveal">L'application a évolué et désormais chacun peut y ajouter un lien vers son réseau social, que le QR code ouvre, et la modifier quand il le souhaite. Le design a changé et de nouveaux templates sont en préparation.</p>
+  <p class="reveal">Au 24 novembre 2026, le Brésil compte 709 inscrits, la Corée 614, l'Espagne 475 et la France 392.</p>
+</div>
+
+<figure class="wide reveal">
+  <img src="assets/carte.jpg" alt="Compteur de Sketcher ID : 5 133 sketchers de 93 pays, avec le détail par pays, du Brésil (709) à la Tunisie (1)">
+  <figcaption>Les inscrits par pays sur id.urbansketchers.org, au 24 novembre 2026.</figcaption>
+</figure>
+
+<div class="prose" data-chapter="Aujourd'hui">
+  <p class="reveal">Neuf mois après ce message d'un dimanche de février, ce ne sont pas moins de 5&nbsp;133 sketchers dans 93 pays qui auront créé leur carte.</p>
+</div>
+
+<footer class="end" data-chapter="">
+  <div class="prose">
+    <p>Paru le 24 novembre 2026. Captures d'écran de <a href="https://id.urbansketchers.org/" target="_blank" rel="noopener">id.urbansketchers.org</a>.</p>
+    <p style="margin-top:1.6em"><a href="/fr/travaux/" target="_top">← Tous les travaux</a></p>
+  </div>
+</footer>
+
+<script src="/apps/longread/longread.js"></script>
+<script>Longread.init({});</script>
+</body>
+</html>
