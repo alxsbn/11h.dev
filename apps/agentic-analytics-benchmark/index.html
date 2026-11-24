@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/apps/longread/longread.css">
+<script src="/assets/app-theme.js"></script>
 <script>document.documentElement.classList.add('js');</script>
 <style>
   /* Ouverture : une rangée de questions, une seule porte une fausse piste. */
@@ -19,7 +20,7 @@
     width: 46px; height: 46px; border-radius: 8px; display: grid; place-items: center;
     font: 600 22px var(--mono); color: var(--muted); background: var(--bg); border: 2px solid var(--line);
   }
-  .rack .q.bad { color: #fff; background: var(--accent); border-color: var(--accent); }
+  .rack .q.bad { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
   @media (prefers-reduced-motion: no-preference) {
     .rack .q.bad { animation: pulse 2.6s ease-in-out infinite; }
     @keyframes pulse { 50% { box-shadow: 0 0 0 9px rgba(169,71,47,.12); } }
@@ -40,12 +41,15 @@
   .c .s { display: block; font: 600 18px var(--mono); }
   .c .t, .c .r { display: block; font-size: 12px; color: var(--muted); }
   .c .p { display: block; font: 600 13px var(--mono); }
-  .c.v5 { background: #DCE9D6; } .c.v5 .s { color: #2F6B2A; }
-  .c.v4 { background: #E9EEDD; } .c.v4 .s { color: #5C7A2E; }
-  .c.v3 { background: #F5E7CC; } .c.v3 .s { color: #9A6512; }
-  .c.v1 { background: #F4D9D2; } .c.v1 .s { color: var(--accent); }
-  .c.ok { background: #DCE9D6; } .c.ok .s { color: #2F6B2A; }
-  .c.ko { background: #F4D9D2; } .c.ko .s { color: var(--accent); }
+    :root { --ok-bg: #DCE9D6; --ok-ink: #2F6B2A; --v4-bg: #E9EEDD; --v4-ink: #5C7A2E; --v3-bg: #F5E7CC; --v3-ink: #9A6512; --ko-bg: #F4D9D2; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ok-bg: #233629; --ok-ink: #8FC489; --v4-bg: #2C3423; --v4-ink: #B6C77F; --v3-bg: #3B3121; --v3-ink: #E0B160; --ko-bg: #44271F; } }
+  :root[data-theme="dark"] { --ok-bg: #233629; --ok-ink: #8FC489; --v4-bg: #2C3423; --v4-ink: #B6C77F; --v3-bg: #3B3121; --v3-ink: #E0B160; --ko-bg: #44271F; }
+  .c.v5 { background: var(--ok-bg); } .c.v5 .s { color: var(--ok-ink); }
+  .c.v4 { background: var(--v4-bg); } .c.v4 .s { color: var(--v4-ink); }
+  .c.v3 { background: var(--v3-bg); } .c.v3 .s { color: var(--v3-ink); }
+  .c.v1 { background: var(--ko-bg); } .c.v1 .s { color: var(--accent); }
+  .c.ok { background: var(--ok-bg); } .c.ok .s { color: var(--ok-ink); }
+  .c.ko { background: var(--ko-bg); } .c.ko .s { color: var(--accent); }
   .c.u { box-shadow: inset 0 0 0 2px var(--line); }
   .c.na { background: transparent; }
   .grid.focus .c:not(.hl) { opacity: .22; }
@@ -83,7 +87,7 @@
   <div class="rack" aria-hidden="true"><div class="row">
     <span class="q">?</span><span class="q">?</span><span class="q">?</span><span class="q bad">?</span><span class="q">?</span><span class="q">?</span><span class="q">?</span>
   </div></div>
-  <div class="veil" style="background:linear-gradient(0deg, rgba(243,239,232,1) 0%, rgba(243,239,232,.95) 40%, rgba(243,239,232,0) 70%)"></div>
+  <div class="veil" style="background:linear-gradient(0deg, rgba(var(--paper-rgb),1) 0%, rgba(var(--paper-rgb),.95) 40%, rgba(var(--paper-rgb),0) 70%)"></div>
   <div class="inner">
     <div class="kicker">Grand format · Benchmark</div>
     <h1 style="font-size:clamp(40px, 5.6vw, 84px)">Agentic Analytics benchmark : que coûte une bonne réponse ?</h1>
@@ -199,8 +203,8 @@
     c: '« Notre changement de mix produit nous pénalise-t-il, parce que la nouvelle gamme se vendrait mal ? »',
   };
   const LEG = {
-    s: '<span><i style="background:#DCE9D6"></i>bon verdict, chiffres à 0,1 % près</span><span><i style="background:#F4D9D2"></i>bon verdict, un chiffre faux de 10 %</span>',
-    c: '<span><i style="background:#DCE9D6"></i>5/5</span><span><i style="background:#E9EEDD"></i>un point manqué</span><span><i style="background:#F5E7CC"></i>deux points manqués</span><span><i style="background:#F4D9D2"></i>bon verdict, raisonnement manqué</span>',
+    s: '<span><i style="background:var(--ok-bg)"></i>bon verdict, chiffres à 0,1 % près</span><span><i style="background:var(--ko-bg)"></i>bon verdict, un chiffre faux de 10 %</span>',
+    c: '<span><i style="background:var(--ok-bg)"></i>5/5</span><span><i style="background:var(--v4-bg)"></i>un point manqué</span><span><i style="background:var(--v3-bg)"></i>deux points manqués</span><span><i style="background:var(--ko-bg)"></i>bon verdict, raisonnement manqué</span>',
   };
   // Cellules mises en avant à chaque étape : [ligne, colonne]
   const all = (f) => { const o = []; for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) if (f(r, c)) o.push([r, c]); return o; };

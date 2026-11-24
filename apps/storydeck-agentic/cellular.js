@@ -48,6 +48,13 @@ const CP = {
 // forme par nature : tech/agent = carré arrondi, people = rond, event = losange
 const SHAPE = { tech: "square", human: "circle", event: "diamond", agent: "square", hot: "diamond" };
 
+/* Couleur du thème courant (clair/sombre), lue dans une variable CSS « r, g, b »
+   de la page. Relue à chaque image : la bascule de thème s'applique en direct. */
+function cellThemeRGB(name, fallback) {
+  const p = getComputedStyle(document.documentElement).getPropertyValue(name).split(",").map(Number);
+  return p.length === 3 && p.every((n) => Number.isFinite(n)) ? p : fallback;
+}
+
 export class Cellular {
   /* « un clic = une apparition » — éclate chaque beat source en sous-beats atomiques :
        1) si `chapter` → un sous-beat qui n'affiche QUE le carton de chapitre (voile + titre),
@@ -205,6 +212,7 @@ void main(){
       };
       sk.draw = () => {
         if (failed) return;
+        CFG.background = cellThemeRGB("--bg-rgb", [246, 239, 228]);
         const t = sk.millis()/1000 * CFG.speed * (0.7 + self.tempo*0.35);
         self._updateCells(sk, t);
         if (!theShader) {
@@ -482,14 +490,17 @@ void main(){
     ctx.strokeStyle = grad; ctx.lineWidth = 3.4; ctx.lineJoin="round"; ctx.stroke();
     // GRILLE ANNÉES ISO : un label par année pleine, espacé RÉGULIÈREMENT sur tout l'axe
     // (2020, 2021, … 2026 à intervalles identiques). Toujours affiché (repère fixe).
+    const inkSoft = cellThemeRGB("--ink-soft-rgb", [107, 93, 79]).join(",");
+    const fgDot = cellThemeRGB("--fg-rgb", [28, 28, 28]).join(",");
+    const bgDot = cellThemeRGB("--bg-rgb", [246, 239, 228]).join(",");
     ctx.textAlign = "center";
     ctx.font = "600 12px 'Playfair Display',Georgia,serif";
     for (let yr = 2020; yr <= 2026; yr++) {
       const yx = yearToX(yr);
-      ctx.fillStyle = "rgba(107,93,79,.6)";
+      ctx.fillStyle = `rgba(${inkSoft},.6)`;
       ctx.fillText(String(yr), yx, h-5);
       // fin tick vertical léger sous la ligne
-      ctx.strokeStyle = "rgba(107,93,79,.18)"; ctx.lineWidth = 1;
+      ctx.strokeStyle = `rgba(${inkSoft},.18)`; ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(yx, mid+10); ctx.lineTo(yx, h-16); ctx.stroke();
     }
     // stations (jalons datés) : positionnées à leur VRAIE date sur l'axe ISO.
@@ -503,10 +514,10 @@ void main(){
         const gold = st.mark === "gold";
         ctx.beginPath(); ctx.arc(sx, mid, 7, 0, Math.PI*2);
         if (gold) { ctx.fillStyle = "#e0a020"; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = "#a86e10"; ctx.stroke(); }
-        else { ctx.fillStyle = "#1c1c1c"; ctx.fill(); }
+        else { ctx.fillStyle = `rgb(${fgDot})`; ctx.fill(); }
       } else {
         ctx.beginPath(); ctx.arc(sx, mid, 5, 0, Math.PI*2);
-        ctx.fillStyle = "#f6efe4"; ctx.fill();
+        ctx.fillStyle = `rgb(${bgDot})`; ctx.fill();
         ctx.lineWidth = 2.2; ctx.strokeStyle = "#5b9dd9"; ctx.stroke();
       }
     });

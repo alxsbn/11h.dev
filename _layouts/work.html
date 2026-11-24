@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{%- comment -%}
+  Enveloppe commune des travaux (long reads, apps, talks). Affiche le header du site
+  (logo, menu, langue, RSS, bouton de thème) puis l'app de `page.app` dans une iframe
+  qui occupe le reste de l'écran. L'app charge /assets/app-theme.js : le bouton de thème
+  du header la bascule en direct via l'événement storage.
+
+  Front matter : app (chemin de l'app, obligatoire), plus les champs de travail
+  (work, kind, title, title_en, date, excerpt, excerpt_en, header_image…).
+  alt_url vaut par défaut la page Travaux de l'autre langue.
+{%- endcomment -%}
+{%- assign page_lang = page.lang | default: site.default_lang -%}
+<html lang="{{ page_lang }}">
+{%- include head.html -%}
+<body class="work-frame">
+  <style>
+    html, body.work-frame { height: 100%; }
+    body.work-frame {
+      margin: 0; overflow: hidden;
+      display: flex; flex-direction: column;
+      height: 100vh; height: 100dvh; min-height: 0;
+    }
+    body.work-frame .site-header { flex: none; position: relative; z-index: 10; border-bottom: 1px solid var(--color-border) !important; }
+    #work-app { flex: 1 1 auto; min-height: 0; width: 100%; border: 0; display: block; background: var(--color-bg); }
+  </style>
+  {%- include header.html -%}
+  <iframe id="work-app" src="{{ page.app | relative_url }}" title="{{ page.title | escape }}"
+          allow="fullscreen; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+          allowfullscreen></iframe>
+  <script>
+    // Les decks se pilotent au clavier : l'app reçoit le focus à son chargement, et le
+    // récupère après un clic sur le bouton de thème du header.
+    var app = document.getElementById('work-app');
+    function focusApp() { try { app.contentWindow.focus(); } catch (err) {} }
+    app.addEventListener('load', focusApp);
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('#theme-toggle')) setTimeout(focusApp, 0);
+    });
+  </script>
+</body>
+</html>

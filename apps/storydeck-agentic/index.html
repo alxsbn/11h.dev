@@ -24,9 +24,38 @@
     --ink-soft: #6b5d4f;    /* encre secondaire */
     --card: #fbf6ee;        /* cartes/panneaux (un ton au-dessus du fond) */
     --line: #e2d5c2;        /* filets/bordures douces */
+    --bg-rgb: 246, 239, 228;      /* --bg en composantes, pour les voiles rgba() */
+    --card-rgb: 251, 246, 238;    /* --card en composantes */
+    --ink-soft-rgb: 107, 93, 79;  /* --ink-soft en composantes (canvas) */
+    --fg-rgb: 28, 28, 28;         /* pastilles noires de la frise (canvas) */
+    --brand: #2a2320;             /* logo */
+    --marker: #3a4150;            /* jalons des graphiques duaux */
+    --flow: #c8b9a4;              /* flèches entre tuiles */
+    color-scheme: light;
     --scene-pad: clamp(1.5rem, 5vw, 6rem);
     --font-tale: 'Tangerine', 'Playfair Display', cursive;
     --font-chapter: 'Playfair Display', Georgia, serif;
+  }
+  /* Thème sombre : suit le bouton du header de 11h.dev (data-theme), sinon la
+     préférence système. Fond aligné sur le site (#1a1a1a). Les objets « papier »
+     (page Wikipédia, polaroïds, citations) restent blancs, comme posés sur une table. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1a1a1a; --bg2: #24211e; --fg: #ede8e1; --muted: #9ba7a9;
+      --accent: #45a8b6; --accent-deep: #6cc3cf; --ink-soft: #b8a999;
+      --card: #24221f; --line: #3a3531;
+      --bg-rgb: 26, 26, 26; --card-rgb: 36, 34, 31; --ink-soft-rgb: 184, 169, 153; --fg-rgb: 237, 232, 225;
+      --brand: #ede8e1; --marker: #a9b3c2; --flow: #5a5249;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+      --bg: #1a1a1a; --bg2: #24211e; --fg: #ede8e1; --muted: #9ba7a9;
+      --accent: #45a8b6; --accent-deep: #6cc3cf; --ink-soft: #b8a999;
+      --card: #24221f; --line: #3a3531;
+      --bg-rgb: 26, 26, 26; --card-rgb: 36, 34, 31; --ink-soft-rgb: 184, 169, 153; --fg-rgb: 237, 232, 225;
+      --brand: #ede8e1; --marker: #a9b3c2; --flow: #5a5249;
+      color-scheme: dark;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scrollbar-width: none; }
@@ -41,9 +70,9 @@
   .scene.is-active .scene__media { opacity: 1; }
   /* voile CLAIR pour lisibilité du texte encre par-dessus une image plein écran */
   .scene__overlay { position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(180deg, rgba(246,239,228,.55), rgba(246,239,228,.9)); }
+    background: linear-gradient(180deg, rgba(var(--bg-rgb),.55), rgba(var(--bg-rgb),.9)); }
   .scene__overlay--strong { background:
-    linear-gradient(90deg, rgba(246,239,228,.92), rgba(246,239,228,.6) 60%, rgba(246,239,228,.82)); }
+    linear-gradient(90deg, rgba(var(--bg-rgb),.92), rgba(var(--bg-rgb),.6) 60%, rgba(var(--bg-rgb),.82)); }
   .scene__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
     z-index: 0; opacity: 0; transition: opacity .8s ease; }
   .scene.is-active .scene__video { opacity: 1; }
@@ -125,7 +154,7 @@
   .scene--title-center .scene__content { max-width: 90vw; margin: 0 auto; }
   /* voile plus léger et localisé à droite (on garde l'enseigne bien visible à gauche) */
   .scene--title .scene__overlay { background:
-    linear-gradient(270deg, rgba(246,239,228,.62), rgba(246,239,228,.12) 45%, rgba(246,239,228,0) 70%); }
+    linear-gradient(270deg, rgba(var(--bg-rgb),.62), rgba(var(--bg-rgb),.12) 45%, rgba(var(--bg-rgb),0) 70%); }
   .scene--title h1 { font-family: var(--font-tale); font-weight: 700;
     font-size: clamp(3.6rem, 11vw, 9rem); line-height: .82; letter-spacing: 0;
     color: var(--fg); text-shadow: 0 2px 20px rgba(232,97,140,.15);
@@ -233,7 +262,7 @@
     gap: clamp(.6rem, 1.4vw, 1.6rem); width: 100%; max-width: 1200px; margin: 0 auto; flex-wrap: nowrap; }
   .stk__col { display: flex; flex-direction: column; gap: clamp(1.2rem, 2.4vh, 2.4rem);
     align-items: center; justify-content: flex-start; flex: 0 1 auto; }
-  .stk__flow { color: #c8b9a4; font-size: clamp(1.5rem, 3vw, 2.6rem); align-self: center; }
+  .stk__flow { color: var(--flow); font-size: clamp(1.5rem, 3vw, 2.6rem); align-self: center; }
   /* largeur de tuile FIXE → un logo plus étroit/large ne fait pas bouger la colonne */
   .stk__tile { position: relative; width: clamp(120px, 15vw, 190px); box-sizing: border-box;
     display: flex; flex-direction: column; align-items: center; gap: .6em;
@@ -554,7 +583,7 @@
     linear-gradient(180deg, rgba(11,13,18,.82), rgba(11,13,18,.9)); }
   .tri { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(.7rem, 1.6vw, 1.4rem); margin-top: .6rem; }
   .tri__col { padding: clamp(1.2rem, 2.2vw, 2rem); border-radius: 16px;
-    border: 1px solid var(--line); background: rgba(251,246,238,.85);
+    border: 1px solid var(--line); background: rgba(var(--card-rgb),.85);
     opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
   .tri__col.on { opacity: 1; transform: none; }
   .tri__title { font-size: clamp(1.3rem, 2.6vw, 2rem); font-weight: 800; color: var(--fg); margin-bottom: .7em; }
@@ -692,7 +721,7 @@
   .hub__center-sub { font-size: clamp(.8rem, 1.6vw, 1rem); color: var(--muted); margin-top: .3em; padding: 0 1em; }
   .hub__mod { position: absolute; left: var(--mx); top: var(--my); transform: translate(-50%,-50%) scale(.7);
     display: flex; align-items: center; gap: .5em; padding: .6em 1em; border-radius: 999px;
-    background: rgba(251,246,238,.96); border: 1px solid var(--line); white-space: nowrap;
+    background: rgba(var(--card-rgb),.96); border: 1px solid var(--line); white-space: nowrap;
     font-size: clamp(.85rem, 1.7vw, 1.1rem); font-weight: 600; color: var(--fg);
     box-shadow: 0 8px 24px rgba(80,60,40,.13); opacity: 0;
     transition: opacity .5s ease, transform .5s cubic-bezier(.34,1.4,.5,1); z-index: 2; }
@@ -770,7 +799,7 @@
   /* nom de la techno, en petit SOUS le carré (identifie le logo) */
   .cl__name { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap;
     font-size: 12px; font-weight: 700; color: var(--fg);
-    text-shadow: 0 1px 2px rgba(246,239,228,.95), 0 0 3px rgba(246,239,228,.8); }
+    text-shadow: 0 1px 2px rgba(var(--bg-rgb),.95), 0 0 3px rgba(var(--bg-rgb),.8); }
   /* la FORME de la bulle elle-même (carré/rond/losange, dessinée en canvas) porte la nature
      → plus de glyphe séparé au-dessus du label. */
   /* logo tech posé DIRECTEMENT dans le carré coloré de la bulle (pas de pastille → pas de carré-dans-carré) */
@@ -780,7 +809,7 @@
      Fond crème dégradé pour détacher le texte de la soupe, quoi qu'il arrive derrière. */
   .cellular__caption { position: absolute; left: 0; right: 0; bottom: clamp(84px, 14vh, 140px);
     z-index: 3; padding: 1.4rem 5vw 1rem;
-    background: linear-gradient(0deg, rgba(246,239,228,.96) 60%, rgba(246,239,228,0));
+    background: linear-gradient(0deg, rgba(var(--bg-rgb),.96) 60%, rgba(var(--bg-rgb),0));
     font-family: var(--font-chapter); font-style: italic;
     font-size: clamp(1.3rem, 3vw, 2.4rem); font-weight: 500; color: var(--fg); line-height: 1.2;
     transition: opacity .45s ease, transform .45s ease; }
@@ -788,13 +817,13 @@
   /* date courante du beat, en gros en bas à DROITE (taille ISO des sous-titres) */
   .cellular__date { position: absolute; right: 4vw; bottom: clamp(90px, 15vh, 150px); z-index: 4;
     font-family: var(--font-chapter); font-style: italic; font-weight: 700;
-    font-size: clamp(1.3rem, 3vw, 2.4rem); color: var(--fg); text-shadow: 0 1px 3px rgba(246,239,228,.9); }
+    font-size: clamp(1.3rem, 3vw, 2.4rem); color: var(--fg); text-shadow: 0 1px 3px rgba(var(--bg-rgb),.9); }
   .cellular__caption .hl { color: var(--fg); font-weight: 800; font-style: normal; }
   .cellular__caption .hl--accent { color: var(--accent-deep); font-weight: 800; font-style: normal; }
   .cellular__caption .hl--hot { color: var(--hot-deep); font-weight: 800; font-style: normal; }
   /* voile de chapitre clair + titre Playfair en fondu (façon « once upon a time ») */
   .cellular__veil { position: absolute; inset: 0; z-index: 4; pointer-events: none;
-    background: rgba(246,239,228,.88); opacity: 0; transition: opacity .8s ease; }
+    background: rgba(var(--bg-rgb),.88); opacity: 0; transition: opacity .8s ease; }
   .cellular__veil.on { opacity: 1; }
   .cellular__chapter { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center;
     justify-content: center; pointer-events: none; }
@@ -810,6 +839,7 @@
 
   #progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 50; transition: width .2s ease; }
   #brand { position: fixed; top: clamp(18px, 3vh, 32px); left: clamp(18px, 3vw, 40px); z-index: 60; line-height: 0; }
+  #brand { color: var(--brand); }
   #brand svg { height: clamp(22px, 3.2vh, 34px); width: auto; display: block; }
   #hint { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 13px; z-index: 50; opacity: .8; }
   #dots { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 50; }
@@ -820,7 +850,7 @@
 <body>
   <div id="progress"></div>
   <a id="brand" href="#" aria-label="Jolimoi">
-    <svg viewBox="0 0 424.72 111.64" fill="#2a2320" xmlns="http://www.w3.org/2000/svg"><path d="M125.38,0h-9.96c-12.48,0-22.7,10.21-22.7,22.7V55.89c0,12.48,10.21,22.7,22.7,22.7h9.96c12.48,0,22.7-10.21,22.7-22.7V22.7c0-12.48-10.21-22.7-22.7-22.7m-5.02,65.23h0c-2.87,0-5.19-2.32-5.19-5.19V18.25c0-2.87,2.33-5.19,5.19-5.19s5.19,2.33,5.19,5.19V60.04c0,2.87-2.33,5.19-5.19,5.19"/><path d="M304.61,.1h-9.96c-4.19,0-8.13,1.16-11.51,3.16-3.38-2-7.31-3.16-11.51-3.16h-9.96c-12.48,0-22.7,10.21-22.7,22.7v54.33h22.49V18.29c0-2.87,2.33-5.19,5.19-5.19s5.19,2.33,5.19,5.19v58.88h22.59V18.43c0-2.87,2.33-5.19,5.19-5.19s5.19,2.32,5.19,5.19v58.73h22.47V22.8c0-12.48-10.21-22.7-22.7-22.7"/><rect x="206.5" y="2.16" width="22.44" height="75.05"/><rect x="402.25" y="2.25" width="22.44" height="74.98"/><polygon points="179.16 63.76 179.11 2 156.68 2.02 156.74 77.11 156.94 77.11 156.94 77.17 198.3 77.24 198.34 63.79 179.16 63.76"/><path d="M369.67,.03h-9.96c-12.48,0-22.7,10.21-22.7,22.7V55.93c0,12.48,10.21,22.7,22.7,22.7h9.96c12.49,0,22.7-10.21,22.7-22.7V22.73C392.37,10.25,382.16,.03,369.67,.03m-5.02,65.23h0c-2.87,0-5.19-2.32-5.19-5.19V18.28c0-2.87,2.33-5.19,5.19-5.19s5.19,2.33,5.19,5.19V60.07c0,2.87-2.33,5.19-5.19,5.19"/><path d="M112.24,56.35h-30.12l-.07-53.85-54.85-.08V34.73h22.14V14.65l10.37,.02,.05,41.68-37.15,.12c-12.44,0-22.62,10.18-22.62,22.62v9.92c0,12.44,10.18,22.62,22.62,22.62H59.68c12.44,0,22.62-10.18,22.62-22.62,0,0,0-10.27-.01-10.45h35.95l-6-22.21Zm-54.09,32.83H18.49c-2.86,0-5.17-2.32-5.17-5.17s2.32-5.18,5.17-5.18H58.15c2.86,0,5.17,2.32,5.17,5.18s-2.32,5.17-5.17,5.17"/></svg>
+    <svg viewBox="0 0 424.72 111.64" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M125.38,0h-9.96c-12.48,0-22.7,10.21-22.7,22.7V55.89c0,12.48,10.21,22.7,22.7,22.7h9.96c12.48,0,22.7-10.21,22.7-22.7V22.7c0-12.48-10.21-22.7-22.7-22.7m-5.02,65.23h0c-2.87,0-5.19-2.32-5.19-5.19V18.25c0-2.87,2.33-5.19,5.19-5.19s5.19,2.33,5.19,5.19V60.04c0,2.87-2.33,5.19-5.19,5.19"/><path d="M304.61,.1h-9.96c-4.19,0-8.13,1.16-11.51,3.16-3.38-2-7.31-3.16-11.51-3.16h-9.96c-12.48,0-22.7,10.21-22.7,22.7v54.33h22.49V18.29c0-2.87,2.33-5.19,5.19-5.19s5.19,2.33,5.19,5.19v58.88h22.59V18.43c0-2.87,2.33-5.19,5.19-5.19s5.19,2.32,5.19,5.19v58.73h22.47V22.8c0-12.48-10.21-22.7-22.7-22.7"/><rect x="206.5" y="2.16" width="22.44" height="75.05"/><rect x="402.25" y="2.25" width="22.44" height="74.98"/><polygon points="179.16 63.76 179.11 2 156.68 2.02 156.74 77.11 156.94 77.11 156.94 77.17 198.3 77.24 198.34 63.79 179.16 63.76"/><path d="M369.67,.03h-9.96c-12.48,0-22.7,10.21-22.7,22.7V55.93c0,12.48,10.21,22.7,22.7,22.7h9.96c12.49,0,22.7-10.21,22.7-22.7V22.73C392.37,10.25,382.16,.03,369.67,.03m-5.02,65.23h0c-2.87,0-5.19-2.32-5.19-5.19V18.28c0-2.87,2.33-5.19,5.19-5.19s5.19,2.33,5.19,5.19V60.07c0,2.87-2.33,5.19-5.19,5.19"/><path d="M112.24,56.35h-30.12l-.07-53.85-54.85-.08V34.73h22.14V14.65l10.37,.02,.05,41.68-37.15,.12c-12.44,0-22.62,10.18-22.62,22.62v9.92c0,12.44,10.18,22.62,22.62,22.62H59.68c12.44,0,22.62-10.18,22.62-22.62,0,0,0-10.27-.01-10.45h35.95l-6-22.21Zm-54.09,32.83H18.49c-2.86,0-5.17-2.32-5.17-5.17s2.32-5.18,5.17-5.18H58.15c2.86,0,5.17,2.32,5.17,5.18s-2.32,5.17-5.17,5.17"/></svg>
   </a>
   <nav id="dots" aria-label="Aller à la scène"></nav>
   <main id="deck"></main>

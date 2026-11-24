@@ -9,10 +9,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/apps/longread/longread.css">
+<script src="/assets/app-theme.js"></script>
 <script>document.documentElement.classList.add('js');</script>
 <style>
   .hero img { object-position: 50% 0; }
-  .hero .veil { background: linear-gradient(0deg, rgba(250,249,246,1) 0%, rgba(250,249,246,.96) 40%, rgba(250,249,246,.5) 55%, rgba(250,249,246,0) 70%); }
+  .hero .veil { background: linear-gradient(0deg, rgba(var(--bg-rgb),1) 0%, rgba(var(--bg-rgb),.96) 40%, rgba(var(--bg-rgb),.5) 55%, rgba(var(--bg-rgb),0) 70%); }
   .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 0 0 1.6em; }
   .facts div { border-top: 2px solid var(--ink); padding-top: 10px; }
   .facts b { display: block; font-size: 40px; line-height: 1.1; font-weight: 400; color: var(--accent); }

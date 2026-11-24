@@ -84,12 +84,16 @@ for scene in deck.get("scenes", []):
 
 deck_js = json.dumps(deck, ensure_ascii=False)
 
+# Thème clair/sombre partagé de 11h.dev, inliné pour rester autoportant (file://).
+theme_js = (root / "../../assets/app-theme.js").read_text()
+
 out = f'''<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>StoryDeck — Agentic Analytics</title>
+<script>{theme_js}</script>
 <style>{css}</style>
 </head>
 <body>

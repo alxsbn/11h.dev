@@ -1,5 +1,6 @@
 ---
-layout: none
+layout: work
+app: /apps/databricks-couts/
 permalink: /work/gestion-des-couts-databricks/
 sitemap: false
 work: true
@@ -18,27 +19,3 @@ redirect_from:
   - /fr/2024/06/17/gestion-des-couts-databricks/
   - /en/2024/06/17/databricks-cost-management/
 ---
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  {% include favicon.html %}
-  <title>Gestion des coûts Databricks</title>
-  <meta name="description" content="Grand format : maîtriser les coûts Databricks, retour d'expérience Jolimoi.">
-  <meta property="og:title" content="Gestion des coûts Databricks">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://11h.dev/work/gestion-des-couts-databricks/">
-  <meta property="og:image" content="https://11h.dev/assets/images/travaux/databricks-couts.jpg">
-  <style>
-    html, body { margin: 0; padding: 0; height: 100%; background: #FAF9F6; overflow: hidden; }
-    /* Le grand format vit dans son propre document (apps/databricks-couts/),
-       affiché ici en plein écran via une iframe sans bordure. */
-    iframe#deck { position: fixed; inset: 0; width: 100vw; height: 100vh; border: 0; display: block; }
-  </style>
-</head>
-<body>
-  <iframe id="deck" src="/apps/databricks-couts/" title="Gestion des coûts Databricks" allow="fullscreen" allowfullscreen></iframe>
-  <script>document.getElementById('deck').addEventListener('load', e => e.target.contentWindow.focus());</script>
-</body>
-</html>

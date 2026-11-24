@@ -1,23 +1,17 @@
 ---
 layout: none
-work: true
-kind: app
 title: "Graphe × Ontologie"
-date: 2026-10-28
-excerpt: "Une vue 3D en deux étages : l'ontologie (skills, règles, agents) posée au-dessus du graphe des tables gold. En bas le quoi, en haut le pourquoi et le comment."
-excerpt_en: "A two-level 3D view: the ontology (skills, rules, agents) set above the graph of gold tables. The what below, the why and the how above."
-header_image: /assets/images/travaux/graphe-ontologie.jpg
-header_image_alt: "Vue 3D du graphe des tables et de l'ontologie"
 ---
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/assets/app-theme.js"></script></head><body>
 <title>Graphe × Ontologie</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: header + tiles, then one wide 3D stage, then two reading panels side by side. */
 :root {
-  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e; --muted: #898781;
-  --grid: #e1e0d9; --border: rgba(11,11,11,0.10);
+  --page: #faf9f6; --surface: #ffffff; --ink: #1f1b18; --ink2: #6e655d; --muted: #898781;
+  --grid: #ddd6cc; --border: rgba(11,11,11,0.10);
   --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a;
   --table: #7d7b75; --ent: #6250d6; --thread: #c98500; --line: #0b0b0b;
   --plane: rgba(11,11,11,0.035);
@@ -25,8 +19,8 @@ header_image_alt: "Vue 3D du graphe des tables et de l'ontologie"
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
-    --grid: #2c2c2a; --border: rgba(255,255,255,0.10);
+    --page: #1a1a1a; --surface: #222120; --ink: #ede8e1; --ink2: #c4bcb2; --muted: #898781;
+    --grid: #3a3531; --border: rgba(255,255,255,0.10);
     --s1: #3987e5; --s2: #d95926; --s3: #199e70;
     --table: #9a9890; --ent: #9085e9; --thread: #eda100; --line: #f0efec;
     --plane: rgba(255,255,255,0.04);
@@ -34,8 +28,8 @@ header_image_alt: "Vue 3D du graphe des tables et de l'ontologie"
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
-  --grid: #2c2c2a; --border: rgba(255,255,255,0.10);
+  --page: #1a1a1a; --surface: #222120; --ink: #ede8e1; --ink2: #c4bcb2; --muted: #898781;
+  --grid: #3a3531; --border: rgba(255,255,255,0.10);
   --s1: #3987e5; --s2: #d95926; --s3: #199e70;
   --table: #9a9890; --ent: #9085e9; --thread: #eda100; --line: #f0efec;
   --plane: rgba(255,255,255,0.04);
