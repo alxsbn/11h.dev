@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>~15K prompts plus tard : les petits secrets d'une insight factory</title>
+<meta name="description" content="Entre février et octobre, chez Jolimoi, nous avons capturé ~15 000 questions data posées à Claude. Sous le capot, ce qu'on demande, ce qui frustre, et pourquoi la difficulté n'est jamais le SQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/apps/longread/longread.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* Ouverture sans image */
+  .hero { background: var(--paper); height: auto; min-height: 0; padding: 16vh 0 9vh; }
+  .hero .inner { position: static; padding-bottom: 0; }
+
+  /* Tableau de bord : une carte par insight */
+  .dash { max-width: 1120px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+  .sec { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; margin: 9vh 0 4px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  .sec:first-child { margin-top: 7vh; }
+  .sec h2 { font-size: clamp(26px, 2.6vw, 34px); }
+  .sec span { font: 600 12px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .w6 { grid-column: span 6; } .w4 { grid-column: span 4; } .w3 { grid-column: span 3; } .w2 { grid-column: span 2; }
+  .lab { font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .num { font: 600 clamp(38px, 4.4vw, 58px) var(--mono); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .num.ka { color: var(--accent); }
+  .num small { font-size: .42em; letter-spacing: 0; color: var(--muted); margin-left: 6px; font-weight: 400; font-family: var(--serif); }
+  .say { font-size: 19px; line-height: 1.4; }
+  .cap { font-size: 13px; color: var(--muted); font-style: italic; margin-top: auto; padding-top: 6px; }
+  .ex { font-size: 15px; line-height: 1.45; font-style: italic; color: var(--ink); border-left: 2px solid var(--line); padding-left: 10px; }
+  .kpis { display: flex; flex-wrap: wrap; gap: 10px 36px; }
+  .kpis div { display: grid; gap: 4px; }
+  .kpis b { font: 600 clamp(26px, 2.6vw, 36px) var(--mono); font-variant-numeric: tabular-nums; line-height: 1; }
+  .kpis span { font-size: 14px; color: var(--muted); }
+  .kpis i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; }
+
+  /* Graphique miroir : questions au-dessus, requêtes en dessous */
+  .mirror { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+  .mirror .col { display: grid; grid-template-rows: 170px auto 170px; text-align: center; }
+  .mirror .up { display: flex; flex-direction: column; justify-content: flex-end; }
+  .mirror .dn { display: flex; flex-direction: column; justify-content: flex-start; }
+  .mirror .seg { width: 100%; }
+  .mirror .s-html { background: var(--accent); }
+  .mirror .s-rest { background: var(--c1); border-radius: 4px 4px 0 0; }
+  .mirror .s-sql { background: var(--c2); opacity: .75; border-radius: 0 0 4px 4px; }
+  .mirror .v { font: 600 11px var(--mono); padding: 3px 0; white-space: nowrap; }
+  .mirror .x { font: 12px var(--mono); color: var(--muted); padding: 6px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+
+  /* Barres horizontales */
+  .hbars { display: grid; gap: 14px; }
+  .hb { display: grid; grid-template-columns: minmax(0, 13em) 1fr 3.6em; gap: 14px; align-items: center; font-size: 16px; line-height: 1.3; }
+  .hb .tr { height: 14px; background: var(--paper); border-radius: 3px; overflow: hidden; }
+  .hb .fl { height: 100%; width: var(--w); background: var(--c1); border-radius: 3px; }
+  .hb .fl.ka { background: var(--accent); }
+  .hb .pc { font: 600 14px var(--mono); text-align: right; }
+
+  /* Ce qu'on demande : trois grandes barres et leurs exemples */
+  .kinds { display: grid; gap: 18px; }
+  .kind { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 28px; align-items: center; }
+  .kind .bar { display: grid; grid-template-columns: 1fr 4.2em; gap: 12px; align-items: center; }
+  .kind .bar .tr { height: 34px; background: var(--paper); border-radius: 4px; overflow: hidden; }
+  .kind .bar .fl { height: 100%; width: var(--w); border-radius: 4px; display: flex; align-items: center; padding-left: 12px; color: #fff; font-size: 15px; white-space: nowrap; }
+  .kind .bar .pc { font: 600 22px var(--mono); text-align: right; }
+  .kind .exs { display: grid; gap: 4px; }
+
+  /* Tableau des erreurs */
+  table.err td:first-child, table.err td:nth-child(2) { font-family: var(--mono); font-size: 14px; white-space: nowrap; }
+  table.err td:first-child { color: var(--accent); }
+  table.err td, table.err th { padding: 9px 10px; font-size: 15px; }
+
+  /* Prompt contre skill */
+  .pairs { display: grid; gap: 12px; }
+  .pairs .pair { margin: 0; }
+  .pair div.skill { border-color: var(--c3); }
+  .pair div.skill b { color: var(--c3); }
+
+  .closing { max-width: 680px; margin: 14vh auto 0; padding: 0 24px; }
+  .closing .pull { margin: 0 0 4vh; padding: 0; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 11vh 0 7vh; }
+    .w4, .w3, .w2 { grid-column: span 6; }
+    .card { padding: 18px; }
+    .mirror { gap: 3px; }
+    .mirror .col { grid-template-rows: 120px auto 120px; }
+    .mirror .v { font-size: 8px; }
+    .mirror .x { font-size: 9px; }
+    .hb { grid-template-columns: 1fr 3.4em; font-size: 14px; }
+    .hb .tr { grid-column: 1 / -1; grid-row: 2; }
+    .kind { grid-template-columns: 1fr; }
+    .kind .bar .fl { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<header id="bar" aria-hidden="true">
+  <span class="t">~15K prompts plus tard</span>
+  <span class="c" id="barChapter"></span>
+  <span class="p" id="barProgress"></span>
+</header>
+
+<section class="hero" id="hero" data-chapter="">
+  <div class="inner">
+    <div class="kicker">Grand format · Sous le capot</div>
+    <h1 style="font-size:clamp(40px, 5.6vw, 84px)">~15K prompts plus tard : les petits secrets d'une insight factory</h1>
+    <p class="lede">Entre février et octobre, chez Jolimoi, nous avons capturé ~15 000 questions data posées à Claude, autant de questions qui ont interrogé notre warehouse et, derrière chacune, l'intention de la personne qui la posait. Ci-dessous une rapide analyse de ce qu'elles racontent.</p>
+    <p class="by">Par Alexis Blandin <span>· 24 novembre 2026 · 5 min de lecture</span></p>
+  </div>
+</section>
+
+<main class="dash">
+
+  <div class="sec" data-chapter="Le volume"><span>01</span><h2>Le volume</h2></div>
+
+  <article class="card w6 reveal" data-chapter="Le volume">
+    <div class="lab">Questions et requêtes par mois</div>
+    <div class="num ka">×13 <small>entre février et octobre</small></div>
+    <div class="kpis">
+      <div><b>15 300</b><span><i style="background:var(--c1)"></i>questions data</span></div>
+      <div><b>3 100</b><span><i style="background:var(--accent)"></i>dont analyses HTML complètes</span></div>
+      <div><b>53 600</b><span><i style="background:var(--c2);opacity:.75"></i>requêtes SQL lancées</span></div>
+    </div>
+    <div class="mirror" id="mirror"></div>
+    <p class="cap">Questions au-dessus de l'axe, requêtes SQL en dessous, chacune sur sa propre échelle. Le pic tombe en septembre.</p>
+  </article>
+
+  <article class="card w2 reveal"><div class="lab">Par conversation</div><div class="num">1,7</div><p class="say">question en moyenne avant de passer à autre chose</p></article>
+  <article class="card w2 reveal"><div class="lab">Longueur</div><div class="num">19 <small>mots</small></div><p class="say">par question en médiane, une sur cinq sous les dix mots</p></article>
+  <article class="card w2 reveal"><div class="lab">Durée</div><div class="num">7 <small>min</small></div><p class="say">quand l'échange se prolonge, avec 4 min entre deux relances</p></article>
+
+  <div class="sec" data-chapter="Ce qu'on demande"><span>02</span><h2>Ce qu'on demande</h2></div>
+
+  <article class="card w6 reveal" data-chapter="Ce qu'on demande">
+    <div class="lab">Ce que la question attend</div>
+    <div class="num ka">60 % <small>demandent une liste, pas un chiffre</small></div>
+    <div class="kinds">
+      <div class="kind">
+        <div class="bar"><div class="tr"><div class="fl" style="--w:100%;background:var(--c1)">Une liste</div></div><span class="pc">60 %</span></div>
+        <div class="exs"><p class="ex">« Quelles vendeuses ont le plus recruté ces quatre derniers mois ? »</p><p class="ex">« Quelles commandes payées ne sont pas encore livrées, par statut ? »</p></div>
+      </div>
+      <div class="kind">
+        <div class="bar"><div class="tr"><div class="fl" style="--w:48%;background:var(--c2)">Un chiffre</div></div><span class="pc">29 %</span></div>
+        <div class="exs"><p class="ex">« Combien de vendeuses actives hier ? »</p><p class="ex">« Quel CA pour cette marque en septembre ? »</p></div>
+      </div>
+      <div class="kind">
+        <div class="bar"><div class="tr"><div class="fl" style="--w:18%;background:var(--c3)">Un effet</div></div><span class="pc">11 %</span></div>
+        <div class="exs"><p class="ex">« Ce code promo a-t-il fait revenir des clientes ? »</p></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card w3 reveal"><div class="lab">Tâches créées</div><div class="num">10 %</div><p class="say">des questions se terminent par un livrable prêt à l'emploi</p>
+    <p class="ex">« Rédige la notification d'ouverture de la billetterie, sans rien envoyer. »</p>
+    <p class="ex">« Ajoute le lien vers les produits trois mois, en HTML prêt à coller. »</p></article>
+  <article class="card w3 reveal"><div class="lab">Contexte maison</div><div class="num">4,7 %</div><p class="say">exigent de recouper Slack, Notion, Linear ou les comptes rendus de réunion, et de savoir qui fait quoi dans l'entreprise</p>
+    <p class="ex">« Qui pilote ce sujet côté logistique, et qu'a-t-on décidé au dernier point d'équipe ? »</p>
+    <p class="ex">« Va voir dans Slack et Notion ce qu'on avait décidé. »</p></article>
+
+  <article class="card w6 reveal">
+    <div class="lab">Les sujets</div>
+    <div class="hbars">
+      <div class="hb"><span>Commandes et CA</span><div class="tr"><div class="fl" style="--w:100%"></div></div><span class="pc">50 %</span></div>
+      <div class="hb"><span>Vendeuses</span><div class="tr"><div class="fl" style="--w:98%"></div></div><span class="pc">49 %</span></div>
+      <div class="hb"><span>Produits et stock</span><div class="tr"><div class="fl" style="--w:72%"></div></div><span class="pc">36 %</span></div>
+      <div class="hb"><span>Clientes</span><div class="tr"><div class="fl" style="--w:46%"></div></div><span class="pc">23 %</span></div>
+      <div class="hb"><span>Départs et activité des vendeuses</span><div class="tr"><div class="fl" style="--w:36%"></div></div><span class="pc">18 %</span></div>
+      <div class="hb"><span>Rémunération</span><div class="tr"><div class="fl" style="--w:34%"></div></div><span class="pc">17 %</span></div>
+      <div class="hb"><span>Licences et kits</span><div class="tr"><div class="fl" style="--w:18%"></div></div><span class="pc">9 %</span></div>
+      <div class="hb"><span>Notifications et application</span><div class="tr"><div class="fl" style="--w:16%"></div></div><span class="pc">8 %</span></div>
+      <div class="hb"><span>Support client</span><div class="tr"><div class="fl" style="--w:10%"></div></div><span class="pc">5 %</span></div>
+      <div class="hb"><span>Codes promo</span><div class="tr"><div class="fl" style="--w:10%"></div></div><span class="pc">5 %</span></div>
+    </div>
+    <p class="cap">Part des questions qui touchent chaque sujet. Une question peut en toucher plusieurs.</p>
+  </article>
+
+  <div class="sec" data-chapter="Comment on lui parle"><span>03</span><h2>Comment on lui parle</h2></div>
+
+  <article class="card w4 reveal" data-chapter="Comment on lui parle">
+    <div class="lab">Formulation des questions</div>
+    <div class="num ka">32 % <small>s'adressent à Claude comme à un collègue</small></div>
+    <div class="hbars">
+      <div class="hb"><span>Comme à une personne (« tu peux me sortir… »)</span><div class="tr"><div class="fl" style="--w:100%"></div></div><span class="pc">32 %</span></div>
+      <div class="hb"><span>L'envoie chercher dans un autre outil</span><div class="tr"><div class="fl" style="--w:44%"></div></div><span class="pc">14 %</span></div>
+      <div class="hb"><span>Poursuit une conversation</span><div class="tr"><div class="fl" style="--w:28%"></div></div><span class="pc">9 %</span></div>
+      <div class="hb"><span>Dit merci ou s'il te plaît</span><div class="tr"><div class="fl" style="--w:22%"></div></div><span class="pc">7 %</span></div>
+    </div>
+  </article>
+  <article class="card w2 reveal"><div class="lab">Avis</div><div class="num">0,8 %</div><p class="say">des questions demandent son avis à Claude. On lui demande des faits et des livrables, presque jamais une opinion.</p>
+    <p class="cap">Les formules comme « à ton avis » ou « qu'en penses-tu » restent quasi absentes.</p></article>
+
+  <div class="sec" data-chapter="Ce qui coince"><span>04</span><h2>Ce qui coince</h2></div>
+
+  <article class="card w4 reveal" data-chapter="Ce qui coince">
+    <div class="lab">Frustration</div>
+    <div class="num ka">3,7 % <small>de questions frustrées</small></div>
+    <div class="hbars">
+      <div class="hb"><span>Un chiffre qui ne retombe pas sur celui qu'on connaît</span><div class="tr"><div class="fl ka" style="--w:100%"></div></div><span class="pc">1<sup>re</sup></span></div>
+      <div class="hb"><span>Une donnée hors de portée de Claude</span><div class="tr"><div class="fl" style="--w:58%"></div></div><span class="pc">2<sup>e</sup></span></div>
+      <div class="hb"><span>Une erreur sur le catalogue</span><div class="tr"><div class="fl" style="--w:44%"></div></div><span class="pc">3<sup>e</sup></span></div>
+      <div class="hb"><span>Un livrable trop court</span><div class="tr"><div class="fl" style="--w:36%"></div></div><span class="pc">4<sup>e</sup></span></div>
+    </div>
+    <p class="ex">« Je comprends pas l'écart, il faut que tu m'aides à retrouver les mêmes chiffres qu'avant. »</p>
+    <p class="ex">« Comment tu peux faire ce genre d'erreur ? C'est crucial dans la stratégie. »</p>
+  </article>
+  <article class="card w2 reveal"><div class="lab">Après une pause</div><div class="num ka">6 <small>sur 10</small></div><p class="say">messages frustrés ouvrent une nouvelle conversation, après une vérification faite ailleurs</p>
+    <div class="lab" style="margin-top:14px">Conversations plus longues</div><div class="num">2,2 <small>questions</small></div><p class="say">par conversation quand l'utilisateur exprime une frustration, contre 1,7 en temps normal</p></article>
+
+  <article class="card w6 reveal">
+    <div class="lab">Colonnes inventées, puis retenues</div>
+    <div class="num">2,8 % <small>corrigées automatiquement via une boucle agentique</small></div>
+    <div class="tablewrap"><table class="err">
+      <thead><tr><th>Nom deviné</th><th>Nom réel</th><th>Erreur type</th></tr></thead>
+      <tbody>
+        <tr><td>vendeuse.created_at</td><td>validation_date</td><td>Le nom générique au lieu du nom métier</td></tr>
+        <tr><td>ca90</td><td>ca_90_jours</td><td>Une abréviation qui n'existe pas</td></tr>
+        <tr><td>activite_daily</td><td>activite</td><td>Une table quotidienne qui n'a jamais existé</td></tr>
+        <tr><td>total_vendeuses</td><td>vendeuses_actives</td><td>Une mesure renommée deux semaines plus tôt</td></tr>
+      </tbody>
+    </table></div>
+    <p class="say">La base refuse, Claude lit l'erreur, inspecte la table et relance sans que l'utilisateur le voie. Chaque correction, comme chaque règle qu'un utilisateur écrit dans son prompt, devient ensuite un snippet qui empêche l'erreur de revenir.</p>
+    <div class="pairs">
+      <div class="pair"><div class="trap"><b>Dans le prompt</b>Les packs sont virtuels, regarde ce qu'il y a dedans.</div><div class="skill"><b>Dans la skill</b>Un pack se décompose en références avant tout calcul.</div></div>
+      <div class="pair"><div class="trap"><b>Dans le prompt</b>Seulement les licences actives dans l'outil de facturation.</div><div class="skill"><b>Dans la skill</b>« Licence active » se lit dans l'outil de facturation.</div></div>
+      <div class="pair"><div class="trap"><b>Dans le prompt</b>Pourquoi septembre est toujours en prévision ?</div><div class="skill"><b>Dans la skill</b>Un mois clos bascule au réel dans toute comparaison.</div></div>
+    </div>
+  </article>
+
+  <article class="card w6 reveal"><div class="lab">Doublons</div><div class="num">1,3 %</div><p class="say">des questions posées en parallèle par plusieurs personnes, parfois trois fois de suite</p></article>
+
+</main>
+
+<footer class="end" data-chapter="Conclusion">
+  <div class="prose">
+    <p>Publié le 24 novembre 2026. Les chiffres viennent du journal que Claude tient à chaque réponse qui interroge nos données, arrondis pour la lecture. Les exemples de questions sont reformulés et anonymisés.</p>
+    <p style="margin-top:1.6em"><a href="/fr/travaux/" target="_top">← Tous les travaux</a></p>
+  </div>
+</footer>
+
+<script src="/apps/longread/longread.js"></script>
+<script>
+(() => {
+  const { $, fr } = Longread;
+  const M = ['fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct'];
+  const Q = [230, 560, 1010, 1390, 1910, 2250, 1730, 3230, 3000];
+  const HTML = Q.map(v => Math.round(v * 0.2));
+  const SQL = Q.map(v => Math.round(v * 3.5));
+  const qMax = Math.max(...Q), sMax = Math.max(...SQL), H = 0.82;
+  $('#mirror').innerHTML = Q.map((q, i) => {
+    const up = q / qMax * H * 100, html = HTML[i] / q * up, dn = SQL[i] / sMax * H * 100;
+    return `<div class="col">
+      <div class="up"><span class="v">${fr(q)}</span><div class="seg s-rest" style="height:${(up - html).toFixed(1)}%"></div><div class="seg s-html" style="height:${html.toFixed(1)}%"></div></div>
+      <span class="x">${M[i]}</span>
+      <div class="dn"><div class="seg s-sql" style="height:${dn.toFixed(1)}%"></div><span class="v">${fr(SQL[i])}</span></div>
+    </div>`;
+  }).join('');
+  Longread.init({});
+})();
+</script>
+</body>
+</html>
