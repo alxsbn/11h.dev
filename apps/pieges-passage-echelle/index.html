@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/apps/longread/longread.css">
+<script src="/assets/app-theme.js"></script>
 <script>document.documentElement.classList.add('js');</script>
 <style>
   .stack { display: flex; flex-direction: column-reverse; gap: 10px; min-height: 470px; justify-content: flex-start; }
@@ -21,7 +22,7 @@
   .blk h4 { margin: 0; font-size: 20px; font-weight: 400; display: flex; gap: 12px; align-items: baseline; }
   .blk h4 i { font-style: normal; font: 14px var(--mono); opacity: .6; }
   .blk .trap { font-size: 15px; font-style: italic; color: var(--accent); max-height: 0; overflow: hidden; transition: max-height .4s, margin .4s; }
-  .blk.cur .trap { color: #F0B9A8; }
+  .blk.cur .trap { color: color-mix(in srgb, var(--accent) 45%, var(--bg)); }
   .blk.trapon .trap { max-height: 3em; margin-top: 4px; }
   .ground { border-top: 3px solid var(--ink); padding-top: 8px; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
   .who { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 18px; margin: .4em 0 1.4em; }

@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/apps/longread/longread.css">
+<script src="/assets/app-theme.js"></script>
 <script>document.documentElement.classList.add('js');</script>
 <style>
   /* Ouverture typographique : une colonne de marcheurs, Herbie traîne derrière. */
@@ -35,8 +36,8 @@
   .cell h4 { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.2; }
   .cell .who { display: block; margin-top: 4px; font-size: 14px; line-height: 1.3; color: var(--muted); transition: color .45s; }
   .cell.agent { border-color: var(--accent); }
-  .cell.goulot { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .cell.goulot .who { color: #F6DDD3; }
+  .cell.goulot { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .cell.goulot .who { color: color-mix(in srgb, var(--on-accent) 78%, var(--accent)); }
   .badge {
     position: absolute; top: -13px; left: 50%; transform: translateX(-50%) scale(.6); opacity: 0;
     background: var(--ink); color: var(--bg); border-radius: 999px; padding: 3px 11px;
@@ -98,7 +99,7 @@
       <text class="herbie-l" x="372" y="196" text-anchor="middle">HERBIE</text>
     </svg>
   </div>
-  <div class="veil" style="background:linear-gradient(0deg, rgba(243,239,232,1) 0%, rgba(243,239,232,.95) 40%, rgba(243,239,232,0) 70%)"></div>
+  <div class="veil" style="background:linear-gradient(0deg, rgba(var(--paper-rgb),1) 0%, rgba(var(--paper-rgb),.95) 40%, rgba(var(--paper-rgb),0) 70%)"></div>
   <div class="inner">
     <div class="kicker">Grand format · Data Team Jolimoi</div>
     <h1 style="font-size:clamp(44px, 6.4vw, 96px)">Le goulot sera toujours humain</h1>

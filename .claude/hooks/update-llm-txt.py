@@ -85,8 +85,8 @@ def generate_works_section(works: list) -> str:
     """Describe the Travaux / Work page and list its entries."""
     out = ("Talks, long reads and interactive apps are listed on a separate page: "
            "https://11h.dev/fr/travaux/ (FR) and https://11h.dev/en/work/ (EN). "
-           "Talks live under `/talk/{slug}/`, long reads under `/work/{slug}/`, "
-           "apps under `/apps/{slug}/`.\n\n")
+           "Talks live under `/talk/{slug}/`, long reads and apps under `/work/{slug}/` "
+           "(the page frames the app served from `/apps/{slug}/` under the site menu).\n\n")
     if works:
         out += "Work (talks, long reads, apps):\n"
         for w in works:

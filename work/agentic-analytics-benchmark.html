@@ -1,5 +1,6 @@
 ---
-layout: none
+layout: work
+app: /apps/agentic-analytics-benchmark/
 permalink: /work/agentic-analytics-benchmark/
 sitemap: false
 work: true
@@ -12,27 +13,3 @@ excerpt_en: "Haiku, Sonnet, Opus and Fable, at every effort level, on a simple a
 header_image: /assets/images/travaux/agentic-analytics-benchmark.jpg
 header_image_alt: "Ouverture du grand format Agentic Analytics benchmark : que coûte une bonne réponse ?"
 ---
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  {% include favicon.html %}
-  <title>Agentic Analytics benchmark : que coûte une bonne réponse ?</title>
-  <meta name="description" content="Grand format : un benchmark des modèles Claude sur deux questions d'analyse, une simple et une floue.">
-  <meta property="og:title" content="Agentic Analytics benchmark : que coûte une bonne réponse ?">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://11h.dev/work/agentic-analytics-benchmark/">
-  <meta property="og:image" content="https://11h.dev/assets/images/travaux/agentic-analytics-benchmark.jpg">
-  <style>
-    html, body { margin: 0; padding: 0; height: 100%; background: #FAF9F6; overflow: hidden; }
-    /* Le grand format vit dans son propre document (apps/agentic-analytics-benchmark/),
-       affiché ici en plein écran via une iframe sans bordure. */
-    iframe#deck { position: fixed; inset: 0; width: 100vw; height: 100vh; border: 0; display: block; }
-  </style>
-</head>
-<body>
-  <iframe id="deck" src="/apps/agentic-analytics-benchmark/" title="Agentic Analytics benchmark : que coûte une bonne réponse ?" allow="fullscreen" allowfullscreen></iframe>
-  <script>document.getElementById('deck').addEventListener('load', e => e.target.contentWindow.focus());</script>
-</body>
-</html>

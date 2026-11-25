@@ -34,6 +34,14 @@
     <!-- Right: Language Toggle + Dark Mode Toggle -->
     <div class="header-right">
       {%- assign switch_url = page.alt_url -%}
+      {%- if page.work and switch_url == nil -%}
+        {%- comment -%} Un travail n'existe qu'en une langue : la bascule mène à la page Travaux de l'autre langue. {%- endcomment -%}
+        {%- if page_lang == "en" -%}
+          {%- assign switch_url = "/fr/travaux/" -%}
+        {%- else -%}
+          {%- assign switch_url = "/en/work/" -%}
+        {%- endif -%}
+      {%- endif -%}
       {%- if page.ref -%}
         {%- if page_lang == "en" -%}
           {%- assign other_lang = "fr" -%}

@@ -34,10 +34,12 @@ _posts/
 _layouts/
   home.html    # Homepage (bilingual, featured post + grid)
   post.html    # Post layout (header image, share buttons, author bio)
+  work.html    # Work frame: site header on top, the app of `app:` in a full-height iframe
+  works.html   # Travaux / Work listing (every page with `work: true`)
 _includes/
   head.html          # Minima head override
   custom-head.html   # OG tags, hreflang, Google Fonts
-  favicon.html       # Favicon links; include it in every layout: none page (work/, talk/)
+  favicon.html       # Favicon links; include it in every layout: none page
   header.html        # Nav, language toggle, dark mode toggle
   google-analytics.html
   youtube.html
@@ -45,6 +47,7 @@ _data/
   translations.yml   # UI strings (FR/EN)
 assets/
   main.scss
+  app-theme.js       # Shared light/dark theme for apps (reads localStorage.theme, follows the header toggle)
   images/            # Post images
   alexis-photos/     # Author photos
   favicon-32.png     # Square favicon (root favicon.ico holds 16/32/48)
@@ -59,6 +62,17 @@ fr/
 scripts/
   check-bilingual.sh # Verifies FR/EN post parity
 ```
+
+## Works (Travaux)
+
+Talks, long reads and apps live in two parts:
+
+- **The frame**, `work/<slug>.html` or `talk/<slug>.html`: front matter only, `layout: work`, `app: /apps/<slug>/`, `work: true` and the card fields (title, title_en, date, excerpt, excerpt_en, kind, header_image). The layout shows the site header (menu, language, RSS, theme toggle) above the app.
+- **The app**, `apps/<slug>/index.html`: a standalone page. Long reads build on `apps/longread/longread.css` and `longread.js`.
+
+Every app loads `<script src="/assets/app-theme.js"></script>` in its `<head>` and must work in both themes. The header toggle writes `localStorage.theme`; the script mirrors it on `<html data-theme>` and listens to the `storage` event, so the app inside the iframe switches live. Write colors as CSS variables with a dark block (`@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {…} }` plus `:root[data-theme="dark"] {…}`), never as hex values in rules. The longread base provides `--bg`, `--bg-rgb`, `--paper`, `--paper-rgb`, `--card`, `--ink`, `--muted`, `--line`, `--accent`, `--on-accent`, `--c1` to `--c4`. Dark values follow the site: background `#1a1a1a`, coral accent.
+
+`apps/storydeck-agentic/talk.html` is generated: edit `index.html`, `engine.js` or `cellular.js`, then run `bash apps/storydeck-agentic/build.sh` (it inlines `assets/app-theme.js`).
 
 ## Post Format
 

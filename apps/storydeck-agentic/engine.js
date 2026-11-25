@@ -7,6 +7,12 @@
 
 import { Cellular } from "./cellular.js";
 
+/* Composantes « r, g, b » d'une variable CSS du thème courant (clair/sombre). */
+function deckThemeRGB(name, fallback) {
+  const p = getComputedStyle(document.documentElement).getPropertyValue(name).split(",").map(Number);
+  return (p.length === 3 && p.every((n) => Number.isFinite(n)) ? p : fallback).join(",");
+}
+
 const fmt = {
   integer: (v) => Math.round(v).toLocaleString("fr-FR"),
   percent: (v) => v.toLocaleString("fr-FR", { maximumFractionDigits: 1 }) + " %",
@@ -718,7 +724,7 @@ const renderers = {
 
       // 2) CADRES pointillés (prescription) + légende au-dessus du 1er cadre
       ctx.setLineDash([9, 8]); ctx.lineWidth = 2.2;
-      ctx.strokeStyle = "rgba(107,93,79,.62)";
+      ctx.strokeStyle = `rgba(${deckThemeRGB("--ink-soft-rgb", [107, 93, 79])},.62)`;
       frames.forEach((f) => {
         const R = frameRect(f.id);
         roundRect(ctx, R.x, R.y, R.w, R.h, 14); ctx.stroke();
@@ -727,7 +733,7 @@ const renderers = {
       // légende « Prescription » en gris au-dessus du cadre de gauche
       if (frames.length) {
         const R0 = frameRect(frames[0].id);
-        ctx.fillStyle = "rgba(107,93,79,.7)";
+        ctx.fillStyle = `rgba(${deckThemeRGB("--ink-soft-rgb", [107, 93, 79])},.7)`;
         ctx.font = "600 " + Math.round(cv.width * 0.017) + "px 'Playfair Display',Georgia,serif";
         ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
         ctx.fillText("Prescription", R0.x + 4, R0.y - 12);
@@ -1392,11 +1398,11 @@ function drawDualMarkers(svg, labels, markers, emphasis) {
     const HOT = "#d64f7c"; // rose thème conte (var(--hot) ne se résout pas toujours dans un attr SVG)
     const g = sel.append("g").attr("class", "dual-marker").attr("opacity", 0);
     g.append("line").attr("x1", px).attr("x2", px).attr("y1", dy).attr("y2", H - m.b)
-      .attr("stroke", emphasis ? HOT : "#3a4150")
+      .style("stroke", emphasis ? HOT : "var(--marker)")
       .attr("stroke-width", emphasis ? 3 : 1).attr("stroke-dasharray", "4 3");
     g.append("path")
       .attr("d", `M ${px} ${dy - dsz} L ${px + dsz} ${dy} L ${px} ${dy + dsz} L ${px - dsz} ${dy} Z`)
-      .attr("fill", emphasis ? HOT : "#3a4150");
+      .style("fill", emphasis ? HOT : "var(--marker)");
     g.append("text").attr("x", px).attr("y", dy - dsz - 10).attr("text-anchor", "middle")
       .attr("fill", emphasis ? HOT : "var(--muted)")
       .attr("font-size", emphasis ? "26px" : "12px").attr("font-weight", emphasis ? "800" : "600")

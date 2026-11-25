@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/apps/longread/longread.css">
+<script src="/assets/app-theme.js"></script>
 <script>document.documentElement.classList.add('js');</script>
 <style>
   .pipe { display: flex; flex-direction: column; gap: 0; }
@@ -20,7 +21,7 @@
   .pnode b { font-size: 20px; font-weight: 400; }
   .pnode small { font: 13px var(--mono); color: var(--muted); text-align: right; }
   .pnode.hl { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  .pnode.hl small { color: #CFC6BC; }
+  .pnode.hl small { color: color-mix(in srgb, var(--bg) 72%, var(--ink)); }
   .pnode.off { opacity: .35; }
   .parr { text-align: center; color: var(--muted); font-size: 18px; line-height: 1.6; }
   .lesson { display: flex; align-items: baseline; gap: 14px; min-height: 64px; margin-bottom: 18px; }
@@ -161,14 +162,14 @@
 <figure class="wide reveal" style="max-width:760px">
   <div class="sizing">
     <svg viewBox="0 0 640 220" role="img" aria-label="Schéma : une grande instance pendant le full load, puis une petite instance pour le CDC continu">
-      <line x1="40" y1="180" x2="620" y2="180" stroke="#1F1B18" stroke-width="1.5"/>
-      <rect x="50" y="40" width="170" height="140" fill="#A9472F" rx="3"/>
-      <rect x="230" y="140" width="380" height="40" fill="#9C9187" rx="3"/>
-      <text x="135" y="112" text-anchor="middle" fill="#fff" font-family="Spectral, serif" font-size="18">Full load</text>
-      <text x="135" y="134" text-anchor="middle" fill="#fff" font-family="Spectral, serif" font-size="14" font-style="italic">grosse instance</text>
-      <text x="420" y="166" text-anchor="middle" fill="#fff" font-family="Spectral, serif" font-size="16">CDC continu, petite instance</text>
-      <text x="40" y="206" fill="#6E655D" font-family="Spectral, serif" font-size="14">temps →</text>
-      <text x="40" y="26" fill="#6E655D" font-family="Spectral, serif" font-size="14">taille de l'instance</text>
+      <line x1="40" y1="180" x2="620" y2="180" style="stroke:var(--ink)" stroke-width="1.5"/>
+      <rect x="50" y="40" width="170" height="140" style="fill:var(--accent)" rx="3"/>
+      <rect x="230" y="140" width="380" height="40" style="fill:var(--in)" rx="3"/>
+      <text x="135" y="112" text-anchor="middle" style="fill:var(--on-accent)" font-family="Spectral, serif" font-size="18">Full load</text>
+      <text x="135" y="134" text-anchor="middle" style="fill:var(--on-accent)" font-family="Spectral, serif" font-size="14" font-style="italic">grosse instance</text>
+      <text x="420" y="166" text-anchor="middle" style="fill:var(--on-accent)" font-family="Spectral, serif" font-size="16">CDC continu, petite instance</text>
+      <text x="40" y="206" style="fill:var(--muted)" font-family="Spectral, serif" font-size="14">temps →</text>
+      <text x="40" y="26" style="fill:var(--muted)" font-family="Spectral, serif" font-size="14">taille de l'instance</text>
     </svg>
   </div>
   <figcaption>Schéma, pas une mesure. Le stockage de l'instance, lui, ne se réduit pas.</figcaption>

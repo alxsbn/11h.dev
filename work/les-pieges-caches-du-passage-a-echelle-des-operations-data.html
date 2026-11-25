@@ -1,5 +1,6 @@
 ---
-layout: none
+layout: work
+app: /apps/pieges-passage-echelle/
 permalink: /work/les-pieges-caches-du-passage-a-echelle-des-operations-data/
 sitemap: false
 work: true
@@ -17,27 +18,3 @@ redirect_from:
   - /fr/2025/01/28/les-pieges-caches-du-passage-a-echelle-des-operations-data/
   - /en/2025/01/28/the-hidden-traps-of-scaling-data-operations-and-ho/
 ---
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  {% include favicon.html %}
-  <title>Les pièges cachés du passage à l'échelle des opérations data, et comment les surmonter</title>
-  <meta name="description" content="Grand format : les pièges du passage à l'échelle des opérations data.">
-  <meta property="og:title" content="Les pièges cachés du passage à l'échelle des opérations data, et comment les surmonter">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://11h.dev/work/les-pieges-caches-du-passage-a-echelle-des-operations-data/">
-  <meta property="og:image" content="https://11h.dev/assets/images/travaux/pieges-passage-echelle.jpg">
-  <style>
-    html, body { margin: 0; padding: 0; height: 100%; background: #FAF9F6; overflow: hidden; }
-    /* Le grand format vit dans son propre document (apps/pieges-passage-echelle/),
-       affiché ici en plein écran via une iframe sans bordure. */
-    iframe#deck { position: fixed; inset: 0; width: 100vw; height: 100vh; border: 0; display: block; }
-  </style>
-</head>
-<body>
-  <iframe id="deck" src="/apps/pieges-passage-echelle/" title="Les pièges cachés du passage à l'échelle des opérations data, et comment les surmonter" allow="fullscreen" allowfullscreen></iframe>
-  <script>document.getElementById('deck').addEventListener('load', e => e.target.contentWindow.focus());</script>
-</body>
-</html>

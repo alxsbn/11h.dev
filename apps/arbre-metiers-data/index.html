@@ -1,14 +1,6 @@
 ---
 layout: none
-work: true
-kind: app
 title: "Arbre des métiers data"
-title_en: "Data job title family tree"
-date: 2026-11-18
-excerpt: "83 intitulés de postes data, de la perforatrice des années 1950 à l'AI Engineer : un arbre généalogique interactif, avec l'histoire et les sources de chaque titre."
-excerpt_en: "83 data job titles, from the 1950s keypunch operator to the AI engineer: an interactive family tree with the history and sources of each title."
-header_image: /assets/images/travaux/arbre-metiers-data.jpg
-header_image_alt: "Arbre généalogique des métiers data, coloré par famille"
 ---
 {% raw %}
 <!doctype html>
@@ -16,6 +8,7 @@ header_image_alt: "Arbre généalogique des métiers data, coloré par famille"
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="/assets/app-theme.js"></script>
 <title>Arbre des métiers data</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Arbre généalogique des intitulés de postes data, des années 1940 à aujourd'hui.">
@@ -25,11 +18,11 @@ header_image_alt: "Arbre généalogique des métiers data, coloré par famille"
 /* Layout: one-screen app. Compact two-row toolbar, then a stage holding either the pannable graph
    (with a pinned year ruler on the left) or a sortable list; the story panel slides over the stage. */
 :root {
-  --bg: #f7f7f4;
+  --bg: #faf9f6;
   --surface: #ffffff;
-  --ink: #1f2124;
-  --muted: #676b70;
-  --rule: #dcdcd6;
+  --ink: #1f1b18;
+  --muted: #6e655d;
+  --rule: #ddd6cc;
   --edge: #8a8d91;
   --accent: #2f5fa0;
   --node: #ffffff;
@@ -47,8 +40,8 @@ header_image_alt: "Arbre généalogique des métiers data, coloré par famille"
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #15171a; --surface: #1d2024; --ink: #e7e8e9; --muted: #9a9fa5; --rule: #33373c;
-    --edge: #7d838a; --accent: #8db5ee; --node: #1f2226; --hl: #ff8a50;
+    --bg: #1a1a1a; --surface: #222120; --ink: #ede8e1; --muted: #a89f95; --rule: #3a3531;
+    --edge: #7d838a; --accent: #8db5ee; --node: #252321; --hl: #ff8a50;
   --lead: #f0a060;
   --gov: #5cc7b5;
   --de: #7fb0ee;
@@ -60,8 +53,8 @@ header_image_alt: "Arbre généalogique des métiers data, coloré par famille"
   }
 }
 :root[data-theme="dark"] {
-  --bg: #15171a; --surface: #1d2024; --ink: #e7e8e9; --muted: #9a9fa5; --rule: #33373c;
-  --edge: #7d838a; --accent: #8db5ee; --node: #1f2226; --hl: #ff8a50;
+  --bg: #1a1a1a; --surface: #222120; --ink: #ede8e1; --muted: #a89f95; --rule: #3a3531;
+  --edge: #7d838a; --accent: #8db5ee; --node: #252321; --hl: #ff8a50;
   --lead: #f0a060;
   --gov: #5cc7b5;
   --de: #7fb0ee;

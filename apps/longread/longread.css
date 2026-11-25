@@ -1,8 +1,13 @@
 /* Socle commun des grands formats 11h.dev (apps/<slug>/index.html).
    Chaque page ajoute ses propres styles de graphiques. */
 :root {
+  color-scheme: light;
   --bg: #FAF9F6;
+  --bg-rgb: 250, 249, 246;
   --paper: #F3EFE8;
+  --paper-rgb: 243, 239, 232;
+  --card: #FFFFFF;
+  --on-accent: #FFFFFF;
   --ink: #1F1B18;
   --muted: #6E655D;
   --line: #DDD6CC;
@@ -13,14 +18,36 @@
   --c2: #A86F1E;
   --c3: #4C7A47;
   --c4: #8A4F7D;
+  --code-c: #8A8076;
+  --code-s: #7B4A1F;
+  --shadow: rgba(31, 27, 24, .06);
   --serif: "Spectral", Georgia, serif;
   --mono: "JetBrains Mono", "IBM Plex Mono", Menlo, monospace;
   --vh: 100svh;
 }
+/* Thème sombre, aligné sur celui du site (fond #1a1a1a, accent corail).
+   Suit le bouton du header (data-theme, posé par /assets/app-theme.js),
+   sinon la préférence système. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #1A1A1A; --bg-rgb: 26, 26, 26; --paper: #252321; --paper-rgb: 37, 35, 33; --card: #222120; --on-accent: #1A1A1A; --ink: #EDE8E1; --muted: #A89F95;
+    --line: #3A3531; --accent: #E0806A; --mark: #4B3427; --in: #7A7168;
+    --c1: #7EA6D0; --c2: #D49B4C; --c3: #88B381; --c4: #C38DB7;
+    --code-c: #8F867C; --code-s: #D6A473; --shadow: rgba(0, 0, 0, .35);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #1A1A1A; --bg-rgb: 26, 26, 26; --paper: #252321; --paper-rgb: 37, 35, 33; --card: #222120; --on-accent: #1A1A1A; --ink: #EDE8E1; --muted: #A89F95;
+  --line: #3A3531; --accent: #E0806A; --mark: #4B3427; --in: #7A7168;
+  --c1: #7EA6D0; --c2: #D49B4C; --c3: #88B381; --c4: #C38DB7;
+  --code-c: #8F867C; --code-s: #D6A473; --shadow: rgba(0, 0, 0, .35);
+}
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  margin: 0; background: var(--bg); color: var(--ink);
+  margin: 0; background: var(--bg); transition: background-color .3s, color .3s; color: var(--ink);
   font: 20px/1.7 var(--serif); -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 4px; }
@@ -35,7 +62,7 @@ code { font-family: var(--mono); font-size: .85em; background: var(--paper); pad
   position: fixed; inset: 0 0 auto 0; z-index: 20;
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
   height: 52px; padding: 0 24px;
-  background: rgba(250,249,246,.92); backdrop-filter: blur(6px);
+  background: rgba(var(--bg-rgb),.92); backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
   font-size: 16px; transform: translateY(-100%); transition: transform .35s ease;
 }
@@ -43,6 +70,10 @@ code { font-family: var(--mono); font-size: .85em; background: var(--paper); pad
 #bar .t { font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #bar .c { color: var(--accent); white-space: nowrap; letter-spacing: .04em; }
 #bar .p { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--accent); }
+
+/* En sombre, les photos d'ouverture et de chapitre baissent d'un ton pour ne pas éblouir. */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) :is(.hero, .chapter) img { filter: brightness(.78) saturate(.92); } }
+:root[data-theme="dark"] :is(.hero, .chapter) img { filter: brightness(.78) saturate(.92); }
 
 /* Ouverture */
 .hero { position: relative; height: var(--vh); min-height: 560px; overflow: hidden; }
@@ -52,7 +83,7 @@ code { font-family: var(--mono); font-size: .85em; background: var(--paper); pad
 }
 .hero .veil {
   position: absolute; inset: 0;
-  background: linear-gradient(0deg, rgba(250,249,246,1) 0%, rgba(250,249,246,.96) 45%, rgba(250,249,246,.7) 66%, rgba(250,249,246,0) 92%);
+  background: linear-gradient(0deg, rgba(var(--bg-rgb),1) 0%, rgba(var(--bg-rgb),.96) 45%, rgba(var(--bg-rgb),.7) 66%, rgba(var(--bg-rgb),0) 92%);
 }
 .hero .inner { position: absolute; left: 0; right: 0; bottom: 0; max-width: 1100px; margin: 0 auto; padding: 0 32px 9vh; }
 .kicker { font-size: 15px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
@@ -91,7 +122,7 @@ code { font-family: var(--mono); font-size: .85em; background: var(--paper); pad
 /* Chapitres */
 .chapter { position: relative; height: 115vh; overflow: hidden; margin: 10vh 0 8vh; }
 .chapter img { transform-origin: var(--focus, 50% 50%); }
-.chapter .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(250,249,246,.97) 0%, rgba(250,249,246,.88) 38%, rgba(250,249,246,.1) 78%); }
+.chapter .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(var(--bg-rgb),.97) 0%, rgba(var(--bg-rgb),.88) 38%, rgba(var(--bg-rgb),.1) 78%); }
 .chapter .label { position: sticky; top: 0; height: var(--vh); display: flex; flex-direction: column; justify-content: center; padding: 0 8vw; }
 .chapter .num { font-size: 16px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
 .chapter h2 { font-size: clamp(46px, 7vw, 100px); line-height: 1; max-width: 900px; }
@@ -109,7 +140,7 @@ code { font-family: var(--mono); font-size: .85em; background: var(--paper); pad
   border: 1px solid var(--line); border-radius: 6px; font-size: 19px; line-height: 1.6;
   opacity: .35; transition: opacity .4s;
 }
-.step.is-active .box { opacity: 1; box-shadow: 0 6px 24px rgba(31,27,24,.06); }
+.step.is-active .box { opacity: 1; box-shadow: 0 6px 24px var(--shadow); }
 .graphic { width: 100%; max-width: 760px; }
 .panel { background: var(--paper); border-radius: 10px; padding: 40px 44px; }
 .plabel { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
@@ -121,8 +152,8 @@ pre {
   font: 15px/1.6 var(--mono); color: var(--ink); overflow-x: auto; white-space: pre;
 }
 pre .ln { display: block; padding: 0 6px; margin: 0 -6px; border-radius: 3px; transition: background-color .35s, opacity .35s; }
-pre .c { color: #8A8076; font-style: italic; }
-pre .s { color: #7B4A1F; }
+pre .c { color: var(--code-c); font-style: italic; }
+pre .s { color: var(--code-s); }
 pre .k { color: var(--accent); font-weight: 600; }
 pre .hl { background: var(--mark); }
 .graphic pre { font-size: clamp(11px, 1.05vw, 15px); }
@@ -152,7 +183,7 @@ th { font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: u
   .step { min-height: 95vh; align-items: flex-end; padding-bottom: 3vh; }
   .step:first-child { margin-top: 60vh; }
   .step:last-child { margin-bottom: 0; }
-  .step .box { opacity: 1; max-width: none; background: rgba(250,249,246,.96); padding: 16px 18px; font-size: 16px; line-height: 1.5; }
+  .step .box { opacity: 1; max-width: none; background: rgba(var(--bg-rgb),.96); padding: 16px 18px; font-size: 16px; line-height: 1.5; }
   .step:not(.is-active) .box { opacity: .9; }
   .panel { padding: 26px 22px; }
   .graphic pre { font-size: 10.5px; white-space: pre-wrap; padding: 16px; }
