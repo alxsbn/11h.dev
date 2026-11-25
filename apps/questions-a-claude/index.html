@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>~15K prompts plus tard : les petits secrets d'une insight factory</title>
-<meta name="description" content="Entre février et octobre, chez Jolimoi, nous avons capturé ~15 000 questions data posées à Claude. Sous le capot, ce qu'on demande, ce qui frustre, et pourquoi la difficulté n'est jamais le SQL.">
+<title>~10K prompts plus tard : les petits secrets d'une insight factory</title>
+<meta name="description" content="Entre février et octobre, chez Jolimoi, nous avons capturé ~10 000 questions data posées à Claude. Sous le capot, ce qu'on demande, ce qui frustre, et pourquoi la difficulté n'est jamais le SQL.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -98,7 +98,7 @@
 <body>
 
 <header id="bar" aria-hidden="true">
-  <span class="t">~15K prompts plus tard</span>
+  <span class="t">~10K prompts plus tard</span>
   <span class="c" id="barChapter"></span>
   <span class="p" id="barProgress"></span>
 </header>
@@ -106,8 +106,8 @@
 <section class="hero" id="hero" data-chapter="">
   <div class="inner">
     <div class="kicker">Grand format · Sous le capot</div>
-    <h1 style="font-size:clamp(40px, 5.6vw, 84px)">~15K prompts plus tard : les petits secrets d'une insight factory</h1>
-    <p class="lede">Entre février et octobre, chez Jolimoi, nous avons capturé ~15 000 questions data posées à Claude, autant de questions qui ont interrogé notre warehouse et, derrière chacune, l'intention de la personne qui la posait. Ci-dessous une rapide analyse de ce qu'elles racontent.</p>
+    <h1 style="font-size:clamp(40px, 5.6vw, 84px)">~10K prompts plus tard : les petits secrets d'une insight factory</h1>
+    <p class="lede">Entre février et octobre, chez Jolimoi, nous avons capturé ~10 000 questions data posées à Claude, autant de questions qui ont interrogé notre warehouse et, derrière chacune, l'intention de la personne qui la posait. Ci-dessous une rapide analyse de ce qu'elles racontent.</p>
     <p class="by">Par Alexis Blandin <span>· 24 novembre 2026 · 5 min de lecture</span></p>
   </div>
 </section>
@@ -120,9 +120,9 @@
     <div class="lab">Questions et requêtes par mois</div>
     <div class="num ka">×13 <small>entre février et octobre</small></div>
     <div class="kpis">
-      <div><b>15 300</b><span><i style="background:var(--c1)"></i>questions data</span></div>
-      <div><b>3 100</b><span><i style="background:var(--accent)"></i>dont analyses HTML complètes</span></div>
-      <div><b>53 600</b><span><i style="background:var(--c2);opacity:.75"></i>requêtes SQL lancées</span></div>
+      <div><b>10 200</b><span><i style="background:var(--c1)"></i>questions data</span></div>
+      <div><b>2 000</b><span><i style="background:var(--accent)"></i>dont analyses HTML complètes</span></div>
+      <div><b>35 700</b><span><i style="background:var(--c2);opacity:.75"></i>requêtes SQL lancées</span></div>
     </div>
     <div class="mirror" id="mirror"></div>
     <p class="cap">Questions au-dessus de l'axe, requêtes SQL en dessous, chacune sur sa propre échelle. Le pic tombe en septembre.</p>
@@ -245,7 +245,7 @@
 (() => {
   const { $, fr } = Longread;
   const M = ['fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct'];
-  const Q = [230, 560, 1010, 1390, 1910, 2250, 1730, 3230, 3000];
+  const Q = [150, 370, 670, 930, 1270, 1500, 1150, 2150, 2000];
   const HTML = Q.map(v => Math.round(v * 0.2));
   const SQL = Q.map(v => Math.round(v * 3.5));
   const qMax = Math.max(...Q), sMax = Math.max(...SQL), H = 0.82;
