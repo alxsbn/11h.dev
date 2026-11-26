@@ -15,7 +15,7 @@ Bienvenue sur mon blog personnel où j'écris sur mes passions et les projets qu
 
 Je suis curieux de l'intersection entre organisation, philosophie et technologie.
 
-Je navigue dans le paysage IT depuis plus de vingt ans. J'ai commencé par le logiciel d'entreprise, puis la digital workplace, le cloud et le DevOps. Depuis 2016, je travaille sur la data, et aujourd'hui sur l'IA. Quelques projets sont sur [GitHub](https://github.com/alxsbn).
+Je navigue dans le paysage IT depuis une vingtaine d'années. D'abord sur des sujets en rapport aux logiciels d'entreprise (ERP, ECM, etc.), puis le Digital Workplace et enfin le Cloud / DevOps ; j'œuvre depuis 2016 sur les sujets Data & AI. Vous trouverez quelques-uns de mes travaux sur [GitHub](https://github.com/alxsbn).
 
 {% include career-gantt.html %}
 
