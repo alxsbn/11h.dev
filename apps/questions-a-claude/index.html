@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>~10K prompts plus tard : les petits secrets d'une insight factory</title>
-<meta name="description" content="Entre février et octobre, chez Jolimoi, nous avons capturé ~10 000 questions data posées à Claude. Sous le capot, ce qu'on demande, ce qui frustre, et pourquoi la difficulté n'est jamais le SQL.">
+<meta name="description" content="Entre février et octobre, chez Jolimoi, nous avons capturé ~10 000 questions data posées à notre agent IA. Sous le capot, ce qu'on demande, ce qui frustre, et pourquoi la difficulté n'est jamais le SQL.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -107,7 +107,7 @@
   <div class="inner">
     <div class="kicker">Grand format · Sous le capot</div>
     <h1 style="font-size:clamp(40px, 5.6vw, 84px)">~10K prompts plus tard : les petits secrets d'une insight factory</h1>
-    <p class="lede">Entre février et octobre, chez Jolimoi, nous avons capturé ~10 000 questions data posées à Claude, autant de questions qui ont interrogé notre warehouse et, derrière chacune, l'intention de la personne qui la posait. Ci-dessous une rapide analyse de ce qu'elles racontent.</p>
+    <p class="lede">Entre février et octobre, chez Jolimoi, nous avons capturé ~10 000 questions data posées à notre agent IA d'analyse, qui ont lancé plus de 35 000 requêtes sur notre warehouse, et derrière chacune l'intention de la personne qui la posait. Ci-dessous une rapide analyse de ce qu'elles racontent.</p>
     <p class="by">Par Alexis Blandin <span>· 24 novembre 2026 · 5 min de lecture</span></p>
   </div>
 </section>
@@ -156,7 +156,7 @@
   <article class="card w3 reveal"><div class="lab">Tâches créées</div><div class="num">10 %</div><p class="say">des questions se terminent par un livrable prêt à l'emploi</p>
     <p class="ex">« Rédige la notification d'ouverture de la billetterie, sans rien envoyer. »</p>
     <p class="ex">« Ajoute le lien vers les produits trois mois, en HTML prêt à coller. »</p></article>
-  <article class="card w3 reveal"><div class="lab">Contexte maison</div><div class="num">4,7 %</div><p class="say">exigent de recouper Slack, Notion, Linear ou les comptes rendus de réunion, et de savoir qui fait quoi dans l'entreprise</p>
+  <article class="card w3 reveal"><div class="lab">Contexte maison</div><div class="num">4,7 %</div><p class="say">nécessitent des données hors core business. Il faut exploiter notre ontologie et des données provenant d'outils internes, comme Slack, Notion, Linear ou les comptes rendus de réunion.</p>
     <p class="ex">« Qui pilote ce sujet côté logistique, et qu'a-t-on décidé au dernier point d'équipe ? »</p>
     <p class="ex">« Va voir dans Slack et Notion ce qu'on avait décidé. »</p></article>
 
@@ -181,7 +181,7 @@
 
   <article class="card w4 reveal" data-chapter="Comment on lui parle">
     <div class="lab">Formulation des questions</div>
-    <div class="num ka">32 % <small>s'adressent à Claude comme à un collègue</small></div>
+    <div class="num ka">32 % <small>s'adressent à l'agent comme à un collègue</small></div>
     <div class="hbars">
       <div class="hb"><span>Comme à une personne (« tu peux me sortir… »)</span><div class="tr"><div class="fl" style="--w:100%"></div></div><span class="pc">32 %</span></div>
       <div class="hb"><span>L'envoie chercher dans un autre outil</span><div class="tr"><div class="fl" style="--w:44%"></div></div><span class="pc">14 %</span></div>
@@ -189,7 +189,7 @@
       <div class="hb"><span>Dit merci ou s'il te plaît</span><div class="tr"><div class="fl" style="--w:22%"></div></div><span class="pc">7 %</span></div>
     </div>
   </article>
-  <article class="card w2 reveal"><div class="lab">Avis</div><div class="num">0,8 %</div><p class="say">des questions demandent son avis à Claude. On lui demande des faits et des livrables, presque jamais une opinion.</p>
+  <article class="card w2 reveal"><div class="lab">Avis</div><div class="num">0,8 %</div><p class="say">des questions demandent son avis à l'agent. On lui demande des faits et des livrables, presque jamais une opinion.</p>
     <p class="cap">Les formules comme « à ton avis » ou « qu'en penses-tu » restent quasi absentes.</p></article>
 
   <div class="sec" data-chapter="Ce qui coince"><span>04</span><h2>Ce qui coince</h2></div>
@@ -199,7 +199,7 @@
     <div class="num ka">3,7 % <small>de questions frustrées</small></div>
     <div class="hbars">
       <div class="hb"><span>Un chiffre qui ne retombe pas sur celui qu'on connaît</span><div class="tr"><div class="fl ka" style="--w:100%"></div></div><span class="pc">1<sup>re</sup></span></div>
-      <div class="hb"><span>Une donnée hors de portée de Claude</span><div class="tr"><div class="fl" style="--w:58%"></div></div><span class="pc">2<sup>e</sup></span></div>
+      <div class="hb"><span>Une donnée hors de portée de l'agent</span><div class="tr"><div class="fl" style="--w:58%"></div></div><span class="pc">2<sup>e</sup></span></div>
       <div class="hb"><span>Une erreur sur le catalogue</span><div class="tr"><div class="fl" style="--w:44%"></div></div><span class="pc">3<sup>e</sup></span></div>
       <div class="hb"><span>Un livrable trop court</span><div class="tr"><div class="fl" style="--w:36%"></div></div><span class="pc">4<sup>e</sup></span></div>
     </div>
@@ -221,7 +221,7 @@
         <tr><td>total_vendeuses</td><td>vendeuses_actives</td><td>Une mesure renommée deux semaines plus tôt</td></tr>
       </tbody>
     </table></div>
-    <p class="say">La base refuse, Claude lit l'erreur, inspecte la table et relance sans que l'utilisateur le voie. Chaque correction, comme chaque règle qu'un utilisateur écrit dans son prompt, devient ensuite un snippet qui empêche l'erreur de revenir.</p>
+    <p class="say">La base refuse, l'agent lit l'erreur, inspecte la table et relance sans que l'utilisateur le voie. Chaque correction, comme chaque règle qu'un utilisateur écrit dans son prompt, devient ensuite un snippet qui empêche l'erreur de revenir.</p>
     <div class="pairs">
       <div class="pair"><div class="trap"><b>Dans le prompt</b>Les packs sont virtuels, regarde ce qu'il y a dedans.</div><div class="skill"><b>Dans la skill</b>Un pack se décompose en références avant tout calcul.</div></div>
       <div class="pair"><div class="trap"><b>Dans le prompt</b>Seulement les licences actives dans l'outil de facturation.</div><div class="skill"><b>Dans la skill</b>« Licence active » se lit dans l'outil de facturation.</div></div>
@@ -235,7 +235,7 @@
 
 <footer class="end" data-chapter="Conclusion">
   <div class="prose">
-    <p>Publié le 24 novembre 2026. Les chiffres viennent du journal que Claude tient à chaque réponse qui interroge nos données, arrondis pour la lecture. Les exemples de questions sont reformulés et anonymisés.</p>
+    <p>Publié le 24 novembre 2026. Les chiffres viennent du journal que l'agent tient à chaque réponse qui interroge nos données, arrondis pour la lecture. Les exemples de questions sont reformulés et anonymisés.</p>
     <p style="margin-top:1.6em"><a href="/fr/travaux/" target="_top">← Tous les travaux</a></p>
   </div>
 </footer>
